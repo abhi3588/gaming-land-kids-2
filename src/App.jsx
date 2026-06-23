@@ -7,6 +7,8 @@ import MathQuest from './components/games/MathQuest';
 import WordBuilder from './components/games/WordBuilder';
 import ShapeSudoku from './components/games/ShapeSudoku';
 import SparkSequence from './components/games/SparkSequence';
+import ColorMatch from './components/games/ColorMatch';
+import SumPairs from './components/games/SumPairs';
 import { playSound } from './utils/sounds';
 
 const generateBubblesList = () => 
@@ -30,11 +32,13 @@ function App() {
     { id: 'sorting', title: 'Fruit Sort', icon: '🍎', component: SortingGame, color: 'sorting', ageGroup: 'preschool', desc: 'Put fruits in correct bins!' },
     { id: 'patterns', title: 'Pattern Train', icon: '🚂', component: PatternGame, color: 'patterns', ageGroup: 'preschool', desc: 'Finish the train pattern!' },
     { id: 'counting', title: 'Star Count', icon: '⭐', component: CountingGame, color: 'counting', ageGroup: 'preschool', desc: 'Count and pop the stars!' },
+    { id: 'colormatch', title: 'Color Match', icon: '🎨', component: ColorMatch, color: 'patterns', ageGroup: 'preschool', desc: 'Match the target color!' },
     
     // Ages 6-10
     { id: 'math', title: 'Math Quest', icon: '🎈', component: MathQuest, color: 'math', ageGroup: 'junior', desc: 'Solve math equations to pop balloons!' },
     { id: 'word', title: 'Word Builder', icon: '✏️', component: WordBuilder, color: 'word', ageGroup: 'junior', desc: 'Spell words for cute emojis!' },
     { id: 'sudoku', title: 'Shape Sudoku', icon: '🧩', component: ShapeSudoku, color: 'sudoku', ageGroup: 'junior', desc: 'Solve logic animal grids!' },
+    { id: 'sumpairs', title: 'Sum Pairs', icon: '🔢', component: SumPairs, color: 'math', ageGroup: 'junior', desc: 'Pick two tiles that add up to the target!' },
     { id: 'sequence', title: 'Spark Sequence', icon: '⚡', component: SparkSequence, color: 'sequence', ageGroup: 'junior', desc: 'Repeat the light & sound patterns!' }
   ];
 
