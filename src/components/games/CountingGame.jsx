@@ -48,28 +48,17 @@ const CountingGame = ({ onBack }) => {
         </p>
       </div>
 
-      <div style={{ 
-        position: 'relative', 
-        width: '100%', 
-        height: '400px', 
-        background: '#0a192f', 
-        borderRadius: '20px',
-        overflow: 'hidden',
-        boxShadow: '0 0 50px rgba(76, 201, 240, 0.2)'
-      }}>
+      <div className="counting-area">
         {data.stars.map(star => (
           <div
             key={star.id}
+            className="star"
             onClick={() => handleStarClick(star.id)}
             style={{
-              position: 'absolute',
               left: `${star.x}%`,
               top: `${star.y}%`,
-              fontSize: '3rem',
-              cursor: 'pointer',
               opacity: star.popped ? 0 : 1,
               transform: star.popped ? 'scale(2)' : 'scale(1)',
-              transition: 'all 0.3s ease-out',
               pointerEvents: star.popped ? 'none' : 'auto'
             }}
           >

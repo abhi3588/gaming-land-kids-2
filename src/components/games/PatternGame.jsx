@@ -42,21 +42,20 @@ const PatternGame = ({ onBack }) => {
   return (
     <div className="game-view pop-in">
       <h2>Pattern Train</h2>
-      <div style={{ fontSize: '4rem', display: 'flex', justifyContent: 'center', gap: '1rem', margin: '3rem 0' }}>
+      <div className="pattern-sequence">
         {data.pattern.map((s, i) => <div key={i} className="pop-in">{s}</div>)}
-        <div className="shake" style={{ border: '4px dashed #ccc', border_radius: '15px', width: '80px', height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>?</div>
+        <div className="pattern-missing shake">?</div>
       </div>
 
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-accent)' }}>{data.message}</p>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem' }}>
+      <div className="pattern-options">
         {data.options.map((shape, i) => (
           <button
             key={i}
-            className="btn"
-            style={{ fontSize: '3rem', padding: '1rem', background: 'white' }}
+            className="btn pattern-option"
             onClick={() => handleOptionClick(shape)}
           >
             {shape}

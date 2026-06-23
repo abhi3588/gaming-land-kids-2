@@ -195,7 +195,7 @@ const ShapeSudoku = ({ onBack }) => {
   };
 
   return (
-    <div className="game-view pop-in" style={{ maxWidth: '600px', margin: '0 auto' }}>
+    <div className="game-view pop-in">
       <h2>Shape Sudoku</h2>
       <p style={{ textAlign: 'center', margin: '-0.5rem 0 1.5rem', color: '#666' }}>
         Place shapes so they don't repeat in any row, column, or 2x2 grid! 🧩

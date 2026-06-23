@@ -346,6 +346,59 @@ header {
   transform: scale(0.9);
 }
 
+.counting-area {
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+  aspect-ratio: 4 / 3;
+  max-height: 460px;
+  background: #0a192f;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 50px rgba(76, 201, 240, 0.2);
+}
+
+.counting-area .star {
+  position: absolute;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  cursor: pointer;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.pattern-sequence {
+  font-size: clamp(3rem, 9vw, 4rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.75rem, 3vw, 1rem);
+  margin: 2.5rem 0;
+  flex-wrap: wrap;
+}
+
+.pattern-missing {
+  border: 4px dashed #ccc;
+  border-radius: 18px;
+  width: clamp(64px, 12vw, 80px);
+  height: clamp(64px, 12vw, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pattern-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem;
+}
+
+.pattern-option {
+  font-size: clamp(2rem, 5vw, 3rem);
+  padding: 0.85rem 1rem;
+  min-width: 76px;
+  background: white;
+}
+
 /* WordBuilder Game styles */
 .word-emoji-display {
   font-size: 6rem;
@@ -578,5 +631,250 @@ header {
   background: #b7e4c7;
   box-shadow: 0 0 35px #4caf50;
   transform: scale(0.96);
+}
+
+/* Responsive UI for mobile browser screens */
+header {
+  padding: 1.5rem 1rem;
+}
+
+.app-container {
+  padding: 1.5rem 1rem;
+  max-width: 100%;
+  min-height: auto;
+}
+
+.category-tabs {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.category-tab {
+  flex: 1 1 180px;
+  min-width: 0;
+  text-align: center;
+  white-space: normal;
+  padding: 0.9rem 1rem;
+}
+
+.game-view {
+  width: min(100%, 760px);
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.game-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.game-card {
+  padding: 1.5rem;
+}
+
+.game-card h2 {
+  font-size: 1.4rem;
+}
+
+.game-card p {
+  font-size: 0.98rem;
+}
+
+.game-icon {
+  font-size: 3.5rem;
+}
+
+.memory-board {
+  max-width: 100%;
+}
+
+.math-quest-area {
+  min-height: 320px;
+  max-height: 60vh;
+}
+
+.drop-zones {
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.drop-zone {
+  width: calc(50% - 0.75rem);
+  min-width: 140px;
+  min-height: 140px;
+}
+
+.word-emoji-display {
+  font-size: clamp(4.5rem, 6vw, 6rem);
+}
+
+.letter-slots-container,
+.letter-tiles-container,
+.sudoku-shelf {
+  gap: 0.85rem;
+}
+
+.letter-slot {
+  width: clamp(45px, 10vw, 60px);
+  height: clamp(45px, 10vw, 60px);
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
+}
+
+.letter-tile {
+  width: clamp(50px, 10vw, 65px);
+  height: clamp(50px, 10vw, 65px);
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
+}
+
+.sudoku-grid {
+  width: min(100%, 340px);
+}
+
+.sudoku-cell {
+  font-size: clamp(1.8rem, 2.8vw, 2.2rem);
+}
+
+.sudoku-shelf {
+  width: min(100%, 360px);
+  justify-content: center;
+}
+
+.sudoku-shelf-item {
+  width: clamp(45px, 9vw, 60px);
+  height: clamp(45px, 9vw, 60px);
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+}
+
+.spark-grid {
+  width: min(100%, 340px);
+}
+
+.spark-pad {
+  border-radius: 20px;
+}
+
+.balloon {
+  width: clamp(54px, 11vw, 70px);
+  height: clamp(64px, 12vw, 85px);
+  font-size: clamp(1.5rem, 3vw, 1.8rem);
+}
+
+@media (max-width: 900px) {
+  .game-grid {
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  }
+
+  .category-tab {
+    padding: 0.75rem 0.85rem;
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 0.9rem 1.5rem;
+  }
+
+  .memory-board {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .math-quest-area {
+    min-height: 280px;
+  }
+
+  .drop-zone {
+    width: calc(50% - 0.75rem);
+    min-height: 130px;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 1rem 0.75rem;
+  }
+
+  .app-container {
+    padding: 1rem 0.75rem;
+  }
+
+  .category-container {
+    margin: 1rem 0 1.5rem;
+  }
+
+  .category-tabs {
+    gap: 0.4rem;
+  }
+
+  .category-tab {
+    flex: 1 1 100%;
+    padding: 0.8rem 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .game-card {
+    padding: 1.25rem;
+  }
+
+  .game-card h2 {
+    font-size: 1.2rem;
+  }
+
+  .game-card p {
+    font-size: 0.9rem;
+  }
+
+  .game-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .memory-board {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .math-quest-area {
+    min-height: 240px;
+  }
+
+  .drop-zones {
+    justify-content: center;
+  }
+
+  .drop-zone {
+    width: 100%;
+  }
+
+  .letter-slots-container,
+  .letter-tiles-container,
+  .sudoku-shelf,
+  .spark-grid {
+    gap: 0.75rem;
+  }
+
+  .sudoku-grid {
+    width: 100%;
+    gap: 4px;
+  }
+
+  .sudoku-shelf {
+    flex-wrap: wrap;
+  }
+
+  .spark-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .spark-pad {
+    min-height: 130px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .btn + .btn {
+    margin-top: 0.75rem;
+  }
 }
 
