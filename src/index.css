@@ -146,6 +146,8 @@ body {
   align-items: center;
   gap: 0.5rem;
   white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .tab-btn:hover:not(.active) {
@@ -328,6 +330,8 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 4px 12px rgba(255,107,157,0.3);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .play-btn:hover { transform: scale(1.08); box-shadow: 0 6px 18px rgba(255,107,157,0.4); }
@@ -480,6 +484,8 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 4px 12px rgba(165,94,234,0.3);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .read-btn:hover { transform: scale(1.07); box-shadow: 0 6px 16px rgba(165,94,234,0.4); }
@@ -489,7 +495,7 @@ body {
   position: fixed; inset: 0;
   background: rgba(0,0,0,0.65);
   backdrop-filter: blur(6px);
-  z-index: 500;
+  z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -889,6 +895,19 @@ body {
 
 .draggable { font-size: 3rem; cursor: grab; margin: 0.5rem; }
 
+/* Touch-friendly interactive helpers */
+.draggable, .spark-pad, .tab-btn, .play-btn, .read-btn, .letter-tile, .sudoku-cell {
+  -webkit-user-select: none;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+.draggable { touch-action: none; }
+.spark-pad { min-height: 72px; min-width: 72px; border-radius: 14px; }
+.sudoku-cell { min-height: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; }
+
+.draggable.selected { outline: 4px solid rgba(0,0,0,0.08); transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+
 /* Patterns */
 .pattern-sequence {
   font-size: clamp(3rem,9vw,4rem);
@@ -997,6 +1016,56 @@ body {
 .letter-tile:active  { transform: scale(0.9); }
 .letter-tile.used    { opacity: 0.3; pointer-events: none; transform: scale(0.9); }
 
+/* ===== Responsive: Mobile-first tweaks ===== */
+@media (max-width: 720px) {
+  .app-header {
+    padding: 1rem 1rem 0.75rem;
+  }
+
+  .tab-nav { padding: 0.6rem 0.4rem 0; }
+  .tab-list { gap: 0.25rem; padding: 0.25rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tab-btn { padding: 0.6rem 1rem; font-size: 0.95rem; min-height: 44px; }
+
+  .app-container { padding: 1rem 0.85rem 2rem; }
+
+  .game-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+  .game-card { padding: 1.2rem; border-radius: 20px; }
+  .game-icon { font-size: 2.6rem; }
+
+  .stories-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+
+  .reader-modal {
+    width: 96vw;
+    max-height: 94vh;
+    border-radius: 1.25rem;
+    margin: 0 2vw;
+  }
+
+  .reader-body { padding: 1.25rem 1rem 1rem; }
+  .reader-close { width: 2.1rem; height: 2.1rem; font-size: 1rem; }
+  .reader-scene-emoji { font-size: 3.8rem; }
+
+  .play-btn, .read-btn { padding: 0.6rem 1rem; font-size: 0.98rem; min-height: 44px; }
+
+  .game-header { flex-direction: column; align-items: center; gap: 0.5rem; }
+  .progress-container { flex: 1 1 100%; margin: 0.5rem 0; }
+
+  .memory-board { max-width: 100%; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; }
+  .card-front, .card-back { font-size: 2.2rem; }
+
+  .sudoku-grid { grid-template-columns: repeat(4, minmax(40px, 1fr)); gap: 6px; }
+  .sudoku-cell { font-size: 1.1rem; padding: 0.45rem; }
+
+  .spark-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+}
+
+@media (max-width: 420px) {
+  .game-grid { grid-template-columns: 1fr; }
+  .stories-grid { grid-template-columns: 1fr; }
+  .tab-btn { padding: 0.5rem 0.8rem; font-size: 0.92rem; }
+  .app-header h1 { font-size: 1.6rem; }
+  .reader-body { padding: 1rem 0.8rem 0.9rem; }
+}
 /* ShapeSudoku */
 .sudoku-board-container { display: flex; flex-direction: column; align-items: center; margin: 2rem 0; }
 

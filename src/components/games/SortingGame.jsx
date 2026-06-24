@@ -48,6 +48,7 @@ const SortingGame = ({ onBack }) => {
   const [bins, setBins] = useState({ red: [], yellow: [], green: [], blue: [] });
   const [feedback, setFeedback] = useState('Drag each fruit into the correct color bin.');
   const [gameWon, setGameWon] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const loadLevel = (nextLevel) => {
     setLevel(nextLevel);
@@ -100,6 +101,39 @@ const SortingGame = ({ onBack }) => {
     }
   };
 
+  // Touch / tap flow: drop by selecting item then tapping a bin
+  const handleDropFromIndex = (itemIndex, binColor) => {
+    if (isNaN(itemIndex) || itemIndex < 0 || itemIndex >= draggables.length) return;
+    const item = draggables[itemIndex];
+    if (!item) return;
+
+    if (item.color === binColor) {
+      playSound('match');
+      const newDraggables = draggables.filter((_, i) => i !== itemIndex);
+      setDraggables(newDraggables);
+      setBins(prev => ({ ...prev, [binColor]: [...prev[binColor], item] }));
+      setFeedback('Nice! Keep going.');
+      setSelectedIndex(null);
+
+      if (newDraggables.length === 0) {
+        if (level === TOTAL_LEVELS) {
+          playSound('celebrate');
+          setGameWon(true);
+          return;
+        }
+        const nextLevel = level + 1;
+        setTimeout(() => {
+          playSound('celebrate');
+          loadLevel(nextLevel);
+          setFeedback(`Great job! Level ${nextLevel} starts now.`);
+        }, 700);
+      }
+    } else {
+      playSound('wrong');
+      setFeedback(`Oops! This belongs in the ${binColor.toUpperCase()} bin.`);
+    }
+  };
+
   return (
     <div className="game-view pop-in">
       <div className="game-header">
@@ -138,9 +172,14 @@ const SortingGame = ({ onBack }) => {
             {draggables.map((item, index) => (
               <div
                 key={item.id}
-                className="draggable"
+                className={`draggable ${selectedIndex === index ? 'selected' : ''}`}
                 draggable
                 onDragStart={(e) => handleDragStart(e, index)}
+                onClick={() => {
+                  // allow tap-to-select on mobile
+                  if (selectedIndex === index) setSelectedIndex(null);
+                  else { playSound('pop'); setSelectedIndex(index); }
+                }}
               >
                 {item.emoji}
               </div>
@@ -154,6 +193,7 @@ const SortingGame = ({ onBack }) => {
                 className={`drop-zone color-${color}`}
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={(e) => handleDrop(e, color)}
+                onClick={() => { if (selectedIndex !== null) handleDropFromIndex(selectedIndex, color); }}
                 style={{
                   backgroundColor: bins[color].length > 0 ? `var(--color-soft-${color})` : 'white',
                   borderColor: `var(--color-${color === 'red' ? 'secondary' : color === 'yellow' ? 'warning' : color === 'green' ? 'success' : 'primary'})`
