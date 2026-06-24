@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { playSound } from '../../utils/sounds';
 
 const SHAPES = ['🦁', '🐼', '🐸', '🐙'];
-
 const SUDOKU_BOARDS = [
   [
     [1, 2, 3, 4],
@@ -30,8 +29,11 @@ const SUDOKU_BOARDS = [
   ]
 ];
 
-// Helper functions defined outside the component for purity
-const createPuzzleData = () => {
+const TOTAL_LEVELS = 20;
+
+const getClueCount = (level) => Math.max(12 - Math.floor((level - 1) / 2), 6);
+
+const createPuzzleData = (level) => {
   const template = SUDOKU_BOARDS[Math.floor(Math.random() * SUDOKU_BOARDS.length)];
   const shuffledShapes = [...SHAPES].sort(() => Math.random() - 0.5);
   const shapeMapping = {
@@ -41,11 +43,12 @@ const createPuzzleData = () => {
     4: shuffledShapes[3]
   };
 
-  const solution = template.map(row => row.map(val => shapeMapping[val]));
-  const play = solution.map(row => row.map(val => ({ value: val, isClue: true })));
-  
+  const solution = template.map((row) => row.map((val) => shapeMapping[val]));
+  const play = solution.map((row) => row.map((val) => ({ value: val, isClue: true })));
+
+  const clueCount = getClueCount(level);
   let clearedCount = 0;
-  while (clearedCount < 8) {
+  while (clearedCount < 16 - clueCount) {
     const r = Math.floor(Math.random() * 4);
     const c = Math.floor(Math.random() * 4);
     if (play[r][c].isClue) {
@@ -53,22 +56,20 @@ const createPuzzleData = () => {
       clearedCount++;
     }
   }
+
   return play;
 };
 
 const checkSudokuRules = (grid) => {
-  // Check rows
   for (let r = 0; r < 4; r++) {
     const rowSet = new Set(grid[r]);
     if (rowSet.size !== 4 || rowSet.has(null)) return false;
   }
-  // Check columns
   for (let c = 0; c < 4; c++) {
     const colSet = new Set();
     for (let r = 0; r < 4; r++) colSet.add(grid[r][c]);
     if (colSet.size !== 4 || colSet.has(null)) return false;
   }
-  // Check quadrants
   const quads = [
     [[0, 0], [0, 1], [1, 0], [1, 1]],
     [[0, 2], [0, 3], [1, 2], [1, 3]],
@@ -85,8 +86,6 @@ const checkSudokuRules = (grid) => {
 
 const getConflicts = (grid) => {
   const conflictCells = [];
-  
-  // Check rows for duplicates
   for (let r = 0; r < 4; r++) {
     for (let c1 = 0; c1 < 4; c1++) {
       for (let c2 = c1 + 1; c2 < 4; c2++) {
@@ -96,8 +95,6 @@ const getConflicts = (grid) => {
       }
     }
   }
-
-  // Check columns for duplicates
   for (let c = 0; c < 4; c++) {
     for (let r1 = 0; r1 < 4; r1++) {
       for (let r2 = r1 + 1; r2 < 4; r2++) {
@@ -107,8 +104,6 @@ const getConflicts = (grid) => {
       }
     }
   }
-
-  // Check quadrants for duplicates
   const quads = [
     [[0, 0], [0, 1], [1, 0], [1, 1]],
     [[0, 2], [0, 3], [1, 2], [1, 3]],
@@ -126,24 +121,35 @@ const getConflicts = (grid) => {
       }
     }
   }
-
   return Array.from(new Set(conflictCells));
 };
 
 const ShapeSudoku = ({ onBack }) => {
-  // Initialize grid synchronously
-  const [playGrid, setPlayGrid] = useState(createPuzzleData);
+  const [level, setLevel] = useState(1);
+  const [playGrid, setPlayGrid] = useState(() => createPuzzleData(1));
   const [selectedShape, setSelectedShape] = useState(SHAPES[0]);
-  const [isWon, setIsWon] = useState(false);
+  const [isSolved, setIsSolved] = useState(false);
+  const [gameWon, setGameWon] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [message, setMessage] = useState('Place shapes so each row, column, and square is unique.');
 
-  const generatePuzzle = () => {
-    setIsWon(false);
+  const loadLevel = (nextLevel) => {
+    if (nextLevel > TOTAL_LEVELS) {
+      setGameWon(true);
+      return;
+    }
+    setLevel(nextLevel);
+    setPlayGrid(createPuzzleData(nextLevel));
+    setIsSolved(false);
     setErrors([]);
-    setPlayGrid(createPuzzleData());
+    setMessage(`Level ${nextLevel}: ${getClueCount(nextLevel)} clues remain.`);
   };
 
-  // Determine quadrant for shading
+  const resetGame = () => {
+    setGameWon(false);
+    loadLevel(1);
+  };
+
   const getQuadClass = (r, c) => {
     if (r < 2 && c < 2) return 'quad-a';
     if (r < 2 && c >= 2) return 'quad-b';
@@ -152,11 +158,10 @@ const ShapeSudoku = ({ onBack }) => {
   };
 
   const handleCellClick = (r, c) => {
-    if (isWon || playGrid[r][c].isClue) return;
+    if (isSolved || gameWon || playGrid[r][c].isClue) return;
 
     playSound('pop');
-
-    const newGrid = playGrid.map((row, rowIdx) => 
+    const newGrid = playGrid.map((row, rowIdx) =>
       row.map((cell, colIdx) => {
         if (rowIdx === r && colIdx === c) {
           const newValue = cell.value === selectedShape ? null : selectedShape;
@@ -172,22 +177,31 @@ const ShapeSudoku = ({ onBack }) => {
 
   const checkBoardState = (grid) => {
     const flatGrid = grid.flat();
-    const hasEmpty = flatGrid.some(cell => cell.value === null);
+    const hasEmpty = flatGrid.some((cell) => cell.value === null);
 
     if (!hasEmpty) {
-      const stringGrid = grid.map(row => row.map(cell => cell.value));
+      const stringGrid = grid.map((row) => row.map((cell) => cell.value));
       const isValid = checkSudokuRules(stringGrid);
-
       if (isValid) {
         playSound('match');
-        setIsWon(true);
-        setTimeout(() => {
-          playSound('celebrate');
-        }, 800);
+        setIsSolved(true);
+        setErrors([]);
+        if (level === TOTAL_LEVELS) {
+          setTimeout(() => {
+            playSound('celebrate');
+            setGameWon(true);
+          }, 700);
+        } else {
+          setTimeout(() => {
+            playSound('celebrate');
+            loadLevel(level + 1);
+          }, 900);
+        }
       } else {
         playSound('wrong');
         const conflictCells = getConflicts(stringGrid);
         setErrors(conflictCells);
+        setMessage('Oops! Fix the repeating shapes.');
       }
     } else {
       setErrors([]);
@@ -196,81 +210,84 @@ const ShapeSudoku = ({ onBack }) => {
 
   return (
     <div className="game-view pop-in">
-      <h2>Shape Sudoku</h2>
-      <p style={{ textAlign: 'center', margin: '-0.5rem 0 1.5rem', color: '#666' }}>
-        Place shapes so they don't repeat in any row, column, or 2x2 grid! 🧩
-      </p>
+      {gameWon ? (
+        <div className="champion-screen">
+          <div style={{ fontSize: '4rem' }}>🏆</div>
+          <h2>Sudoku Solver!</h2>
+          <p>You completed all 20 shape Sudoku levels.</p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+            <button className="btn btn-primary" onClick={resetGame}>Play Again</button>
+            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="game-header">
+            <div>Shape Sudoku</div>
+            <div>Level {level} / {TOTAL_LEVELS}</div>
+            <div>Clues: {getClueCount(level)}</div>
+            <div className="progress-container">
+              <div className="progress-bar" style={{ width: `${(level / TOTAL_LEVELS) * 100}%` }} />
+            </div>
+          </div>
 
-      {playGrid.length > 0 && (
-        <div className="sudoku-board-container">
-          <div className="sudoku-grid">
-            {playGrid.map((row, rIdx) => 
-              row.map((cell, cIdx) => {
-                const key = `${rIdx}-${cIdx}`;
-                const hasError = errors.includes(key);
-                return (
-                  <div
-                    key={key}
-                    className={`sudoku-cell ${getQuadClass(rIdx, cIdx)} ${cell.isClue ? 'clue' : ''} ${hasError ? 'shake' : ''}`}
-                    onClick={() => handleCellClick(rIdx, cIdx)}
-                    style={{
-                      border: hasError ? '3px solid var(--color-secondary)' : 'none',
-                      color: hasError ? 'var(--color-secondary)' : 'inherit',
-                    }}
-                  >
-                    {cell.value}
-                  </div>
-                );
-              })
+          <p style={{ textAlign: 'center', margin: '-0.5rem 0 1rem', color: '#666' }}>{message}</p>
+
+          <div className="sudoku-board-container">
+            <div className="sudoku-grid">
+              {playGrid.map((row, rIdx) =>
+                row.map((cell, cIdx) => {
+                  const key = `${rIdx}-${cIdx}`;
+                  const hasError = errors.includes(key);
+                  return (
+                    <div
+                      key={key}
+                      className={`sudoku-cell ${getQuadClass(rIdx, cIdx)} ${cell.isClue ? 'clue' : ''} ${hasError ? 'shake' : ''}`}
+                      onClick={() => handleCellClick(rIdx, cIdx)}
+                      style={{
+                        border: hasError ? '3px solid var(--color-secondary)' : 'none',
+                        color: hasError ? 'var(--color-secondary)' : 'inherit'
+                      }}
+                    >
+                      {cell.value}
+                    </div>
+                  );
+                })
+              )}
+            </div>
+
+            <div className="sudoku-shelf">
+              {SHAPES.map((shape) => (
+                <div
+                  key={shape}
+                  className={`sudoku-shelf-item ${selectedShape === shape ? 'active' : ''}`}
+                  onClick={() => {
+                    playSound('pop');
+                    setSelectedShape(shape);
+                  }}
+                >
+                  {shape}
+                </div>
+              ))}
+            </div>
+
+            {errors.length > 0 && (
+              <div style={{ marginTop: '1.5rem' }}>
+                <p style={{ color: 'var(--color-secondary)', fontWeight: 'bold' }}>
+                  Oops! Some shapes are repeating. Try fixing them! ❌
+                </p>
+              </div>
             )}
           </div>
 
-          {!isWon ? (
-            <>
-              <div className="sudoku-shelf">
-                {SHAPES.map(shape => (
-                  <div
-                    key={shape}
-                    className={`sudoku-shelf-item ${selectedShape === shape ? 'active' : ''}`}
-                    onClick={() => {
-                      playSound('pop');
-                      setSelectedShape(shape);
-                    }}
-                  >
-                    {shape}
-                  </div>
-                ))}
-              </div>
-              
-              <div style={{ marginTop: '1.5rem', minHeight: '24px' }}>
-                {errors.length > 0 && (
-                  <p style={{ color: 'var(--color-secondary)', fontWeight: 'bold' }}>
-                    Oops! Some shapes are repeating. Try fixing them! ❌
-                  </p>
-                )}
-              </div>
-            </>
-          ) : (
-            <div style={{ textAlign: 'center', marginTop: '2rem' }} className="pop-in">
-              <h3 style={{ color: 'var(--color-success)', fontSize: '1.8rem', marginBottom: '1rem' }}>
-                🎉 You Solved the Sudoku! 🎉
-              </h3>
-              <button className="btn btn-primary" onClick={generatePuzzle}>
-                Play Again
-              </button>
-            </div>
-          )}
-        </div>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem' }}>
+            <button className="btn" style={{ background: '#eee' }} onClick={() => loadLevel(level)}>
+              🔄 Restart Level
+            </button>
+            <button className="btn btn-primary" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+          </div>
+        </>
       )}
-
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem' }}>
-        {!isWon && (
-          <button className="btn" style={{ background: '#eee' }} onClick={generatePuzzle}>
-            🔄 Restart
-          </button>
-        )}
-        <button className="btn btn-primary" onClick={onBack}>Main Menu</button>
-      </div>
     </div>
   );
 };

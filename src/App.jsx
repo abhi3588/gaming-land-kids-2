@@ -9,6 +9,7 @@ import ShapeSudoku from './components/games/ShapeSudoku';
 import SparkSequence from './components/games/SparkSequence';
 import ColorMatch from './components/games/ColorMatch';
 import SumPairs from './components/games/SumPairs';
+import ErrorBoundary from './components/ErrorBoundary';
 import { playSound } from './utils/sounds';
 
 const generateBubblesList = () => 
@@ -56,7 +57,11 @@ function App() {
     const game = games.find(g => g.id === currentGame);
     if (!game) return null;
     const GameComponent = game.component;
-    return <GameComponent onBack={() => setCurrentGame(null)} />;
+    return (
+      <ErrorBoundary onBack={() => setCurrentGame(null)}>
+        <GameComponent onBack={() => setCurrentGame(null)} />
+      </ErrorBoundary>
+    );
   };
 
   const filteredGames = games.filter(g => g.ageGroup === activeCategory);

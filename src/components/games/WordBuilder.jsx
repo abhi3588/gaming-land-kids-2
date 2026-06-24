@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { playSound } from '../../utils/sounds';
 
-const WORD_DATABASE = [
+const WORD_LEVELS = [
   { word: 'CAT', emoji: '🐱' },
   { word: 'DOG', emoji: '🐶' },
   { word: 'FROG', emoji: '🐸' },
   { word: 'LION', emoji: '🦁' },
-  { word: 'FISH', emoji: '🐟' },
-  { word: 'BIRD', emoji: '🐦' },
   { word: 'BEAR', emoji: '🐻' },
+  { word: 'BIRD', emoji: '🐦' },
+  { word: 'FISH', emoji: '🐟' },
   { word: 'CRAB', emoji: '🦀' },
   { word: 'PANDA', emoji: '🐼' },
   { word: 'PIZZA', emoji: '🍕' },
@@ -17,13 +17,16 @@ const WORD_DATABASE = [
   { word: 'CUPCAKE', emoji: '🧁' },
   { word: 'MONKEY', emoji: '🐒' },
   { word: 'BANANA', emoji: '🍌' },
-  { word: 'FLOWER', emoji: '🌸' }
+  { word: 'FLOWER', emoji: '🌸' },
+  { word: 'APPLE', emoji: '🍎' },
+  { word: 'TIGER', emoji: '🐯' },
+  { word: 'ROCKET', emoji: '🚀' },
+  { word: 'SUNNY', emoji: '☀️' }
 ];
 
-// Helper functions defined outside the component for purity
-const shuffle = (array) => {
-  return [...array].sort(() => Math.random() - 0.5);
-};
+const TOTAL_LEVELS = 20;
+
+const shuffle = (array) => [...array].sort(() => Math.random() - 0.5);
 
 const createWordState = (question) => {
   if (!question) return { slots: [], tiles: [] };
@@ -39,12 +42,14 @@ const createWordState = (question) => {
   }
 
   let scrambled = shuffle(letters);
-  while (scrambled.join('').substring(0, word.length) === word) {
+  let retries = 0;
+  while (scrambled.join('').substring(0, word.length) === word && retries < 20) {
     scrambled = shuffle(scrambled);
+    retries++;
   }
 
   const tiles = scrambled.map((letter, idx) => ({
-    id: idx,
+    id: `${question.word}-${idx}`,
     letter,
     used: false
   }));
@@ -53,85 +58,80 @@ const createWordState = (question) => {
 };
 
 const WordBuilder = ({ onBack }) => {
-  // Initialize state synchronously using lazy initializers
-  const [db, setDb] = useState(() => shuffle(WORD_DATABASE));
-  const [wordIndex, setWordIndex] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(() => db[0]);
-  
-  const [selectedSlots, setSelectedSlots] = useState(() => {
-    const { slots } = createWordState(db[0]);
-    return slots;
-  });
-  const [scrambledTiles, setScrambledTiles] = useState(() => {
-    const { tiles } = createWordState(db[0]);
-    return tiles;
-  });
-
+  const [level, setLevel] = useState(1);
+  const [currentQuestion, setCurrentQuestion] = useState(() => WORD_LEVELS[0]);
+  const [selectedSlots, setSelectedSlots] = useState(() => createWordState(WORD_LEVELS[0]).slots);
+  const [scrambledTiles, setScrambledTiles] = useState(() => createWordState(WORD_LEVELS[0]).tiles);
   const [isCorrect, setIsCorrect] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [streak, setStreak] = useState(0);
+  const [message, setMessage] = useState('Build the word for the emoji!');
+  const [gameWon, setGameWon] = useState(false);
 
-  const initGame = () => {
-    const shuffledDb = shuffle(WORD_DATABASE);
-    setDb(shuffledDb);
-    setWordIndex(0);
-    loadWord(shuffledDb[0]);
-    setStreak(0);
-  };
+  const loadLevel = (nextLevel) => {
+    if (nextLevel > TOTAL_LEVELS) {
+      setGameWon(true);
+      return;
+    }
 
-  const loadWord = (question) => {
-    if (!question) return;
-    
-    setCurrentQuestion(question);
+    const nextQuestion = WORD_LEVELS[nextLevel - 1];
+    setLevel(nextLevel);
+    setCurrentQuestion(nextQuestion);
     setIsCorrect(false);
     setHasError(false);
+    setMessage('Build the word for the emoji!');
 
-    const { slots, tiles } = createWordState(question);
+    const { slots, tiles } = createWordState(nextQuestion);
     setSelectedSlots(slots);
     setScrambledTiles(tiles);
   };
 
+  const resetGame = () => {
+    setGameWon(false);
+    setLevel(1);
+    loadLevel(1);
+  };
+
   const handleTileClick = (tile) => {
-    if (isCorrect || tile.used) return;
+    if (isCorrect || tile.used || gameWon) return;
 
     playSound('pop');
-    
-    const emptyIdx = selectedSlots.findIndex(slot => slot === null);
+
+    const emptyIdx = selectedSlots.findIndex((slot) => slot === null);
     if (emptyIdx === -1) return;
 
     const newSlots = [...selectedSlots];
     newSlots[emptyIdx] = { letter: tile.letter, tileId: tile.id };
     setSelectedSlots(newSlots);
 
-    const newTiles = scrambledTiles.map(t => 
+    const newTiles = scrambledTiles.map((t) =>
       t.id === tile.id ? { ...t, used: true } : t
     );
     setScrambledTiles(newTiles);
 
     if (emptyIdx === selectedSlots.length - 1) {
-      const spelledWord = newSlots.map(s => s.letter).join('');
+      const spelledWord = newSlots.map((s) => s.letter).join('');
       if (spelledWord === currentQuestion.word) {
         playSound('match');
         setIsCorrect(true);
-        setStreak(streak + 1);
-        
+        setMessage('Correct! Well done!');
+
         setTimeout(() => {
-          playSound('celebrate');
-          const nextIndex = wordIndex + 1;
-          if (nextIndex < db.length) {
-            setWordIndex(nextIndex);
-            loadWord(db[nextIndex]);
+          if (level === TOTAL_LEVELS) {
+            setGameWon(true);
           } else {
-            initGame();
+            playSound('celebrate');
+            loadLevel(level + 1);
           }
-        }, 1200);
+        }, 900);
       } else {
         playSound('wrong');
         setHasError(true);
+        setMessage('Try again!');
         setTimeout(() => {
           setHasError(false);
           setSelectedSlots(Array.from({ length: currentQuestion.word.length }, () => null));
-          setScrambledTiles(scrambledTiles.map(t => ({ ...t, used: false })));
+          setScrambledTiles(scrambledTiles.map((t) => ({ ...t, used: false })));
+          setMessage('Build the word for the emoji!');
         }, 800);
       }
     }
@@ -139,11 +139,11 @@ const WordBuilder = ({ onBack }) => {
 
   const handleSlotClick = (slotIdx) => {
     const slot = selectedSlots[slotIdx];
-    if (!slot || isCorrect) return;
+    if (!slot || isCorrect || gameWon) return;
 
     playSound('pop');
 
-    const newTiles = scrambledTiles.map(t => 
+    const newTiles = scrambledTiles.map((t) =>
       t.id === slot.tileId ? { ...t, used: false } : t
     );
     setScrambledTiles(newTiles);
@@ -154,7 +154,7 @@ const WordBuilder = ({ onBack }) => {
   };
 
   const handleHint = () => {
-    if (isCorrect) return;
+    if (isCorrect || gameWon) return;
 
     playSound('pop');
 
@@ -169,43 +169,24 @@ const WordBuilder = ({ onBack }) => {
     let currentSlots = [...selectedSlots];
 
     if (existingSlot) {
-      currentTiles = currentTiles.map(t => 
+      currentTiles = currentTiles.map((t) =>
         t.id === existingSlot.tileId ? { ...t, used: false } : t
       );
       currentSlots[firstEmptyOrWrongIdx] = null;
     }
 
     const targetLetter = currentQuestion.word[firstEmptyOrWrongIdx];
-    const correctTileIdx = currentTiles.findIndex(t => t.letter === targetLetter && !t.used);
-    
+    const correctTileIdx = currentTiles.findIndex((t) => t.letter === targetLetter && !t.used);
+
     if (correctTileIdx !== -1) {
       currentTiles[correctTileIdx].used = true;
-      currentSlots[firstEmptyOrWrongIdx] = { 
-        letter: targetLetter, 
-        tileId: currentTiles[correctTileIdx].id 
+      currentSlots[firstEmptyOrWrongIdx] = {
+        letter: targetLetter,
+        tileId: currentTiles[correctTileIdx].id
       };
 
       setScrambledTiles(currentTiles);
       setSelectedSlots(currentSlots);
-
-      if (currentSlots.every(s => s !== null)) {
-        const spelledWord = currentSlots.map(s => s.letter).join('');
-        if (spelledWord === currentQuestion.word) {
-          playSound('match');
-          setIsCorrect(true);
-          setStreak(streak + 1);
-          setTimeout(() => {
-            playSound('celebrate');
-            const nextIndex = wordIndex + 1;
-            if (nextIndex < db.length) {
-              setWordIndex(nextIndex);
-              loadWord(db[nextIndex]);
-            } else {
-              initGame();
-            }
-          }, 1200);
-        }
-      }
     }
   };
 
@@ -216,16 +197,32 @@ const WordBuilder = ({ onBack }) => {
         Spell the word for the emoji! ✏️
       </p>
 
-      {currentQuestion && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ alignSelf: 'stretch', display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', padding: '0 10px', fontSize: '1.2rem', color: 'var(--color-accent)' }}>
-            <div>Streak: {streak} 🔥</div>
-            <div>Word: {wordIndex + 1}/{db.length}</div>
+      {gameWon ? (
+        <div className="champion-screen">
+          <div style={{ fontSize: '4rem' }}>🏆</div>
+          <h2>Word Master!</h2>
+          <p>You completed all 20 word-building levels.</p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+            <button className="btn btn-primary" onClick={resetGame}>Play Again</button>
+            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="game-header">
+            <div>Level {level} / {TOTAL_LEVELS}</div>
+            <div>{currentQuestion.emoji}</div>
+            <div>{currentQuestion.word.length} letters</div>
+            <div className="progress-container">
+              <div className="progress-bar" style={{ width: `${(level / TOTAL_LEVELS) * 100}%` }} />
+            </div>
           </div>
 
-          <div className="word-emoji-display pop-in">
-            {currentQuestion.emoji}
+          <div style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--color-accent)', fontWeight: 700 }}>
+            {message}
           </div>
+
+          <div className="word-emoji-display pop-in">{currentQuestion.emoji}</div>
 
           <div className={`letter-slots-container ${hasError ? 'shake' : ''}`}>
             {selectedSlots.map((slot, idx) => (
@@ -243,7 +240,7 @@ const WordBuilder = ({ onBack }) => {
             <button className="btn" style={{ background: '#ffb703', color: 'white', padding: '0.6rem 1.2rem', fontSize: '1rem' }} onClick={handleHint}>
               💡 Hint
             </button>
-            <button className="btn" style={{ background: '#cbd5e1', color: '#333', padding: '0.6rem 1.2rem', fontSize: '1rem' }} onClick={initGame}>
+            <button className="btn" style={{ background: '#cbd5e1', color: '#333', padding: '0.6rem 1.2rem', fontSize: '1rem' }} onClick={resetGame}>
               🔄 Reset
             </button>
           </div>
@@ -260,12 +257,12 @@ const WordBuilder = ({ onBack }) => {
               </button>
             ))}
           </div>
-        </div>
-      )}
 
-      <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-        <button className="btn btn-primary" onClick={onBack}>Main Menu</button>
-      </div>
+          <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+            <button className="btn btn-primary" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -1,75 +1,126 @@
 import { useState } from 'react';
 import { playSound } from '../../utils/sounds';
 
-const createLevelData = () => {
-  const target = Math.floor(Math.random() * 5) + 3;
-  const stars = Array.from({ length: target }, (_, i) => ({
-    id: i,
-    x: Math.random() * 80 + 10,
-    y: Math.random() * 60 + 10,
+const TOTAL_LEVELS = 20;
+const MAX_STARS = 16;
+
+const getTarget = (level) => Math.min(3 + Math.floor(level * 0.8), 15);
+const getTotalStars = (target) => Math.min(target + 2, MAX_STARS);
+
+const createLevelData = (level) => {
+  const target = getTarget(level);
+  const total = getTotalStars(target);
+  const stars = Array.from({ length: total }, (_, i) => ({
+    id: `${level}-${i}`,
+    x: Math.random() * 82 + 8,
+    y: Math.random() * 62 + 8,
     popped: false
   }));
-  return { target, stars, count: 0 };
+
+  return {
+    target,
+    stars,
+    count: 0,
+    level
+  };
 };
 
 const CountingGame = ({ onBack }) => {
-  const [data, setData] = useState(createLevelData);
+  const [level, setLevel] = useState(1);
+  const [data, setData] = useState(() => createLevelData(1));
+  const [message, setMessage] = useState('Pop the target number of stars!');
+  const [gameWon, setGameWon] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
-  const generateLevel = () => {
-    setData(createLevelData());
+  const loadLevel = (nextLevel) => {
+    if (nextLevel > TOTAL_LEVELS) {
+      setGameWon(true);
+      return;
+    }
+    setLevel(nextLevel);
+    setData(createLevelData(nextLevel));
+    setMessage(`Level ${nextLevel}: Pop ${getTarget(nextLevel)} stars!`);
+    setDisabled(false);
   };
 
   const handleStarClick = (id) => {
-    const star = data.stars.find(s => s.id === id);
-    if (star.popped) return;
+    if (disabled || gameWon) return;
+    const star = data.stars.find((s) => s.id === id);
+    if (!star || star.popped) return;
 
     playSound('pop');
-    const newStars = data.stars.map(s => s.id === id ? { ...s, popped: true } : s);
+    const newStars = data.stars.map((s) => (s.id === id ? { ...s, popped: true } : s));
     const newCount = data.count + 1;
-    
-    setData(prev => ({
-      ...prev,
-      stars: newStars,
-      count: newCount
-    }));
+
+    setData((prev) => ({ ...prev, stars: newStars, count: newCount }));
 
     if (newCount === data.target) {
       playSound('celebrate');
-      setTimeout(generateLevel, 1500);
+      setDisabled(true);
+      if (level === TOTAL_LEVELS) {
+        setTimeout(() => {
+          setGameWon(true);
+        }, 700);
+      } else {
+        setMessage('Well done! Next level coming up...');
+        setTimeout(() => {
+          loadLevel(level + 1);
+        }, 1000);
+      }
     }
   };
 
   return (
     <div className="game-view pop-in">
-      <h2>Star Count</h2>
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <p style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--color-warning)' }}>
-          Pop {data.target} stars! Found: {data.count}
-        </p>
-      </div>
-
-      <div className="counting-area">
-        {data.stars.map(star => (
-          <div
-            key={star.id}
-            className="star"
-            onClick={() => handleStarClick(star.id)}
-            style={{
-              left: `${star.x}%`,
-              top: `${star.y}%`,
-              opacity: star.popped ? 0 : 1,
-              transform: star.popped ? 'scale(2)' : 'scale(1)',
-              pointerEvents: star.popped ? 'none' : 'auto'
-            }}
-          >
-            ⭐
+      {gameWon ? (
+        <div className="champion-screen">
+          <div style={{ fontSize: '4rem' }}>🏆</div>
+          <h2>Star Counting Hero!</h2>
+          <p>You completed all 20 counting levels with brilliant focus.</p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+            <button className="btn btn-primary" onClick={() => loadLevel(1)}>Play Again</button>
+            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
-        ))}
-      </div>
+        </div>
+      ) : (
+        <>
+          <div className="game-header">
+            <div>Star Count</div>
+            <div>Level {level} / {TOTAL_LEVELS}</div>
+            <div>Found: {data.count}/{data.target}</div>
+            <div className="progress-container">
+              <div className="progress-bar" style={{ width: `${(level / TOTAL_LEVELS) * 100}%` }} />
+            </div>
+          </div>
 
-      <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-        <button className="btn btn-primary" onClick={onBack}>Main Menu</button>
-      </div>
+          <div style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--color-accent)', fontWeight: 700 }}>
+            {message}
+          </div>
+
+          <div className="counting-area">
+            {data.stars.map((star) => (
+              <div
+                key={star.id}
+                className="star"
+                onClick={() => handleStarClick(star.id)}
+                style={{
+                  left: `${star.x}%`,
+                  top: `${star.y}%`,
+                  opacity: star.popped ? 0 : 1,
+                  transform: star.popped ? 'scale(1.6)' : 'scale(1)',
+                  pointerEvents: star.popped ? 'none' : 'auto'
+                }}
+              >
+                ⭐
+              </div>
+            ))}
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+            <button className="btn btn-primary" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+          </div>
+        </>
+      )}
     </div>
   );
 };

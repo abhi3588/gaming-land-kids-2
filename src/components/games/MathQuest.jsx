@@ -2,49 +2,79 @@ import { useState, useEffect, useRef } from 'react';
 import { playSound } from '../../utils/sounds';
 
 const BALLOON_COLORS = [
-  '#f72585', // pink
-  '#7209b7', // purple
-  '#3f37c9', // indigo
-  '#4cc9f0', // light blue
-  '#4caf50', // green
-  '#ffb703', // yellow
-  '#f9c74f', // orange-yellow
-  '#f94144'  // coral red
+  '#f72585',
+  '#7209b7',
+  '#3f37c9',
+  '#4cc9f0',
+  '#4caf50',
+  '#ffb703',
+  '#f9c74f',
+  '#f94144'
 ];
 
-// Pure random helpers defined outside the component
+const TOTAL_LEVELS = 20;
+
 const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 const generateQuestionData = (level) => {
   let num1, num2, answer, text;
-  
-  if (level === 1) {
-    num1 = getRandomNumber(2, 10);
-    num2 = getRandomNumber(2, 10);
+
+  if (level <= 5) {
+    num1 = getRandomNumber(2, 12);
+    num2 = getRandomNumber(2, 12);
     answer = num1 + num2;
     text = `${num1} + ${num2} = ?`;
-  } else if (level === 2) {
-    num1 = getRandomNumber(6, 20);
-    num2 = getRandomNumber(2, num1 - 1);
+  } else if (level <= 10) {
+    num1 = getRandomNumber(8, 24);
+    num2 = getRandomNumber(2, num1 - 2);
     answer = num1 - num2;
     text = `${num1} - ${num2} = ?`;
-  } else {
+  } else if (level <= 15) {
     num1 = getRandomNumber(2, 9);
     num2 = getRandomNumber(2, 9);
     answer = num1 * num2;
     text = `${num1} × ${num2} = ?`;
+  } else {
+    const operations = ['+', '-', '×'];
+    const op = operations[Math.floor(Math.random() * operations.length)];
+    if (op === '+') {
+      num1 = getRandomNumber(10, 26);
+      num2 = getRandomNumber(5, 20);
+      answer = num1 + num2;
+      text = `${num1} + ${num2} = ?`;
+    } else if (op === '-') {
+      num1 = getRandomNumber(15, 30);
+      num2 = getRandomNumber(5, num1 - 5);
+      answer = num1 - num2;
+      text = `${num1} - ${num2} = ?`;
+    } else {
+      num1 = getRandomNumber(3, 12);
+      num2 = getRandomNumber(2, 8);
+      answer = num1 * num2;
+      text = `${num1} × ${num2} = ?`;
+    }
   }
+
   return { text, answer };
 };
 
 const generateBalloonsData = (correctAnswer, level) => {
   const wrongAnswers = new Set();
-  while (wrongAnswers.size < 3) {
-    let offset = getRandomNumber(-5, 5);
-    let val = correctAnswer + offset;
+  let attempts = 0;
+
+  while (wrongAnswers.size < 3 && attempts < 80) {
+    const offset = getRandomNumber(-8, 8);
+    const val = correctAnswer + offset;
     if (val !== correctAnswer && val > 0) {
       wrongAnswers.add(val);
     }
+    attempts++;
+  }
+
+  let fallback = 1;
+  while (wrongAnswers.size < 3) {
+    if (fallback !== correctAnswer) wrongAnswers.add(fallback);
+    fallback++;
   }
 
   const answersList = [correctAnswer, ...Array.from(wrongAnswers)];
@@ -53,7 +83,7 @@ const generateBalloonsData = (correctAnswer, level) => {
   return shuffledAnswers.map((value, idx) => {
     const left = 10 + idx * 22 + getRandomNumber(-3, 3);
     const bottom = -80 - getRandomNumber(0, 150);
-    const speed = 1.0 + (level * 0.2) + Math.random() * 0.4;
+    const speed = 1.0 + Math.min(level * 0.12, 3.0) + Math.random() * 0.4;
     const color = BALLOON_COLORS[Math.floor(Math.random() * BALLOON_COLORS.length)];
 
     return {
@@ -68,33 +98,42 @@ const generateBalloonsData = (correctAnswer, level) => {
   });
 };
 
+const getLevelGoal = (level) => 2 + Math.floor((level - 1) / 5);
+
 const MathQuest = ({ onBack }) => {
   const [level, setLevel] = useState(1);
   const [score, setScore] = useState(0);
+  const [progress, setProgress] = useState(0);
   const [lives, setLives] = useState(3);
   const [gameOver, setGameOver] = useState(false);
   const [gameWon, setGameWon] = useState(false);
-  
-  // Initialize state synchronously
+  const [message, setMessage] = useState('Pop the correct balloon!');
+
   const [question, setQuestion] = useState(() => generateQuestionData(1));
   const [balloons, setBalloons] = useState(() => generateBalloonsData(question.answer, 1));
-  
   const requestRef = useRef();
   const balloonsRef = useRef(balloons);
 
-  // Sync ref with state at start
   useEffect(() => {
     return () => {
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
   }, []);
 
-  const triggerNextQuestion = (nextLevel) => {
+  const loadLevel = (nextLevel) => {
+    if (nextLevel > TOTAL_LEVELS) {
+      setGameWon(true);
+      return;
+    }
+
     const qData = generateQuestionData(nextLevel);
     setQuestion(qData);
     const bData = generateBalloonsData(qData.answer, nextLevel);
     setBalloons(bData);
     balloonsRef.current = bData;
+    setLevel(nextLevel);
+    setProgress(0);
+    setMessage(`Level ${nextLevel}: Pop ${getLevelGoal(nextLevel)} correct balloons!`);
   };
 
   const triggerBalloonsRegeneration = () => {
@@ -106,18 +145,18 @@ const MathQuest = ({ onBack }) => {
   const startGame = () => {
     setLevel(1);
     setScore(0);
+    setProgress(0);
     setLives(3);
     setGameOver(false);
     setGameWon(false);
-    
     const qData = generateQuestionData(1);
     setQuestion(qData);
     const bData = generateBalloonsData(qData.answer, 1);
     setBalloons(bData);
     balloonsRef.current = bData;
+    setMessage('Pop the correct balloon!');
   };
 
-  // Frame update loop for floating balloons
   useEffect(() => {
     if (gameOver || gameWon) {
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
@@ -125,23 +164,20 @@ const MathQuest = ({ onBack }) => {
     }
 
     const animate = () => {
-      const updated = balloonsRef.current.map(b => {
+      const updated = balloonsRef.current.map((b) => {
         if (b.isPopped) return b;
-        
         let newBottom = b.bottom + b.speed;
         if (newBottom > 480) {
           newBottom = -100 - getRandomNumber(0, 80);
         }
         return { ...b, bottom: newBottom };
       });
-
       balloonsRef.current = updated;
       setBalloons(updated);
       requestRef.current = requestAnimationFrame(animate);
     };
 
     requestRef.current = requestAnimationFrame(animate);
-    
     return () => {
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
@@ -150,10 +186,10 @@ const MathQuest = ({ onBack }) => {
   const handleBalloonClick = (id, value) => {
     if (gameOver || gameWon) return;
 
-    const balloonIndex = balloonsRef.current.findIndex(b => b.id === id);
+    const balloonIndex = balloonsRef.current.findIndex((b) => b.id === id);
     if (balloonIndex === -1 || balloonsRef.current[balloonIndex].isPopped) return;
 
-    const poppedBalloons = balloonsRef.current.map(b => 
+    const poppedBalloons = balloonsRef.current.map((b) =>
       b.id === id ? { ...b, isPopped: true } : b
     );
     balloonsRef.current = poppedBalloons;
@@ -161,32 +197,38 @@ const MathQuest = ({ onBack }) => {
 
     if (value === question.answer) {
       playSound('match');
-      const newScore = score + 1;
-      setScore(newScore);
+      setScore((prev) => prev + 1);
+      setProgress((prev) => prev + 1);
 
-      if (newScore === 5 && level === 1) {
-        playSound('celebrate');
-        setLevel(2);
-        triggerNextQuestion(2);
-      } else if (newScore === 10 && level === 2) {
-        playSound('celebrate');
-        setLevel(3);
-        triggerNextQuestion(3);
-      } else if (newScore >= 15) {
-        playSound('celebrate');
-        setGameWon(true);
+      const nextProgress = progress + 1;
+      const targetGoal = getLevelGoal(level);
+      if (nextProgress >= targetGoal) {
+        if (level === TOTAL_LEVELS) {
+          setTimeout(() => {
+            setGameWon(true);
+          }, 600);
+          return;
+        }
+
+        setTimeout(() => {
+          playSound('celebrate');
+          loadLevel(level + 1);
+        }, 700);
       } else {
-        setTimeout(() => triggerNextQuestion(level), 400);
+        setMessage('Nice! Keep going.');
+        setTimeout(() => {
+          triggerBalloonsRegeneration();
+        }, 500);
       }
     } else {
       playSound('wrong');
       const newLives = lives - 1;
       setLives(newLives);
-
       if (newLives <= 0) {
         setGameOver(true);
       } else {
-        setTimeout(triggerBalloonsRegeneration, 600);
+        setMessage('Oops! Try the next balloon.');
+        setTimeout(triggerBalloonsRegeneration, 700);
       }
     }
   };
@@ -198,34 +240,27 @@ const MathQuest = ({ onBack }) => {
         Pop the correct balloon! 🎈
       </p>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', padding: '0 10px', fontSize: '1.2rem', fontWeight: 'bold' }}>
-        <div style={{ color: 'var(--color-accent)' }}>Level: {level}</div>
-        <div style={{ color: 'var(--color-success)' }}>Score: {score}/15</div>
-        <div style={{ color: 'var(--color-secondary)' }}>
-          Lives: {Array.from({ length: 3 }).map((_, i) => (
-            <span key={i} style={{ opacity: i < lives ? 1 : 0.2, marginRight: '3px' }}>❤️</span>
-          ))}
+      <div className="game-header">
+        <div>Level {level} / {TOTAL_LEVELS}</div>
+        <div>Score: {score}</div>
+        <div>Lives: {Array.from({ length: 3 }).map((_, i) => (
+          <span key={i} style={{ opacity: i < lives ? 1 : 0.3, marginRight: '3px' }}>❤️</span>
+        ))}</div>
+        <div className="progress-container">
+          <div className="progress-bar" style={{ width: `${(level / TOTAL_LEVELS) * 100}%` }} />
         </div>
       </div>
 
       {!gameOver && !gameWon ? (
         <>
-          <div style={{ 
-            textAlign: 'center', 
-            background: 'white', 
-            borderRadius: '15px', 
-            padding: '1rem', 
-            marginBottom: '1.5rem',
-            boxShadow: 'var(--shadow-soft)',
-            border: '3px solid var(--color-soft-blue)'
-          }}>
+          <div style={{ textAlign: 'center', background: 'white', borderRadius: '15px', padding: '1rem', marginBottom: '1.5rem', boxShadow: 'var(--shadow-soft)', border: '3px solid var(--color-soft-blue)' }}>
             <span style={{ fontSize: '2.5rem', fontWeight: '800', color: '#1b263b' }}>
               {question.text}
             </span>
           </div>
 
           <div className="math-quest-area">
-            {balloons.map(b => !b.isPopped && (
+            {balloons.map((b) => !b.isPopped && (
               <div
                 key={b.id}
                 className="balloon"
@@ -242,21 +277,19 @@ const MathQuest = ({ onBack }) => {
               </div>
             ))}
           </div>
+
+          <div style={{ textAlign: 'center', marginTop: '1rem', color: 'var(--color-accent)', fontWeight: 700 }}>{message}</div>
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <button className="btn btn-primary" style={{ background: '#eee', color: '#333' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+          </div>
         </>
       ) : (
-        <div style={{ 
-          textAlign: 'center', 
-          background: 'white', 
-          borderRadius: '24px', 
-          padding: '3rem 2rem', 
-          boxShadow: 'var(--shadow-pop)',
-          border: '4px solid ' + (gameWon ? 'var(--color-soft-green)' : 'var(--color-soft-pink)')
-        }}>
+        <div className="champion-screen" style={{ borderColor: gameWon ? 'var(--color-soft-green)' : 'var(--color-soft-pink)' }}>
           {gameWon ? (
             <>
               <div style={{ fontSize: '5rem', marginBottom: '1rem' }}>🏆</div>
               <h3 style={{ fontSize: '2rem', color: 'var(--color-success)', marginBottom: '1rem' }}>You Are a Math Champion!</h3>
-              <p style={{ fontSize: '1.2rem', marginBottom: '2rem', color: '#666' }}>You solved all the equations correctly!</p>
+              <p style={{ fontSize: '1.2rem', marginBottom: '2rem', color: '#666' }}>You solved all 20 levels of balloon math.</p>
             </>
           ) : (
             <>
@@ -268,14 +301,8 @@ const MathQuest = ({ onBack }) => {
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
             <button className="btn btn-primary" onClick={startGame}>Play Again</button>
-            <button className="btn" style={{ background: '#eee' }} onClick={onBack}>Main Menu</button>
+            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
-        </div>
-      )}
-
-      {!gameOver && !gameWon && (
-        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-          <button className="btn btn-primary" style={{ background: '#eee', color: '#333' }} onClick={onBack}>Main Menu</button>
         </div>
       )}
     </div>
