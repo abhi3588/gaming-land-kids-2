@@ -1,136 +1,123 @@
-import { useState } from 'react';
-import MemoryGame from './components/games/MemoryGame';
-import SortingGame from './components/games/SortingGame';
-import PatternGame from './components/games/PatternGame';
-import CountingGame from './components/games/CountingGame';
-import MathQuest from './components/games/MathQuest';
-import WordBuilder from './components/games/WordBuilder';
-import ShapeSudoku from './components/games/ShapeSudoku';
-import SparkSequence from './components/games/SparkSequence';
-import ColorMatch from './components/games/ColorMatch';
-import SumPairs from './components/games/SumPairs';
-import ErrorBoundary from './components/ErrorBoundary';
-import { playSound } from './utils/sounds';
+import { useState, useMemo } from 'react';
+import GamesTab   from './components/games/GamesTab.jsx';
+import StoriesTab from './components/stories/StoriesTab.jsx';
+import { gamesMeta, stories } from './kids-data.js';
 
-const generateBubblesList = () => 
-  Array.from({ length: 15 }).map((_, i) => ({
+const generateBubbles = () =>
+  Array.from({ length: 12 }).map((_, i) => ({
     id: i,
-    width: Math.random() * 100 + 50,
-    height: Math.random() * 100 + 50,
-    left: Math.random() * 100,
-    delay: Math.random() * 20,
-    duration: Math.random() * 10 + 10
+    width:    Math.random() * 90 + 40,
+    height:   Math.random() * 90 + 40,
+    left:     Math.random() * 100,
+    delay:    Math.random() * 20,
+    duration: Math.random() * 10 + 12,
   }));
 
-function App() {
-  const [currentGame, setCurrentGame] = useState(null);
-  const [activeCategory, setActiveCategory] = useState('preschool'); // 'preschool' (3-5) or 'junior' (6-10)
-  const [bubbles] = useState(generateBubblesList);
+const FLOATING_SHAPES = [
+  { emoji: '🌈', style: { left: '4%',  top: '22%' },  delay: 0,   dur: 7 },
+  { emoji: '☁️', style: { right: '5%', top: '14%' },  delay: 1.2, dur: 9 },
+  { emoji: '🎈', style: { left: '11%', bottom: '16%'}, delay: 0.6, dur: 8 },
+  { emoji: '⭐', style: { right: '9%', bottom: '22%'}, delay: 1.8, dur: 6 },
+  { emoji: '🦋', style: { left: '50%', top: '9%' },   delay: 0.9, dur: 10 },
+  { emoji: '🍭', style: { left: '27%', bottom: '7%'}, delay: 1.5, dur: 9 },
+  { emoji: '🎨', style: { right: '38%',top: '18%' },  delay: 0.3, dur: 8.5},
+  { emoji: '🌸', style: { right:'28%', bottom: '9%'}, delay: 2.1, dur: 7.5},
+];
 
-  const games = [
-    // Ages 3-5
-    { id: 'memory', title: 'Ocean Match', icon: '🐳', component: MemoryGame, color: 'memory', ageGroup: 'preschool', desc: 'Find matching sea friends!' },
-    { id: 'sorting', title: 'Fruit Sort', icon: '🍎', component: SortingGame, color: 'sorting', ageGroup: 'preschool', desc: 'Put fruits in correct bins!' },
-    { id: 'patterns', title: 'Pattern Train', icon: '🚂', component: PatternGame, color: 'patterns', ageGroup: 'preschool', desc: 'Finish the train pattern!' },
-    { id: 'counting', title: 'Star Count', icon: '⭐', component: CountingGame, color: 'counting', ageGroup: 'preschool', desc: 'Count and pop the stars!' },
-    { id: 'colormatch', title: 'Color Match', icon: '🎨', component: ColorMatch, color: 'patterns', ageGroup: 'preschool', desc: 'Match the target color!' },
-    
-    // Ages 6-10
-    { id: 'math', title: 'Math Quest', icon: '🎈', component: MathQuest, color: 'math', ageGroup: 'junior', desc: 'Solve math equations to pop balloons!' },
-    { id: 'word', title: 'Word Builder', icon: '✏️', component: WordBuilder, color: 'word', ageGroup: 'junior', desc: 'Spell words for cute emojis!' },
-    { id: 'sudoku', title: 'Shape Sudoku', icon: '🧩', component: ShapeSudoku, color: 'sudoku', ageGroup: 'junior', desc: 'Solve logic animal grids!' },
-    { id: 'sumpairs', title: 'Sum Pairs', icon: '🔢', component: SumPairs, color: 'math', ageGroup: 'junior', desc: 'Pick two tiles that add up to the target!' },
-    { id: 'sequence', title: 'Spark Sequence', icon: '⚡', component: SparkSequence, color: 'sequence', ageGroup: 'junior', desc: 'Repeat the light & sound patterns!' }
-  ];
+export default function App() {
+  const [activeTab, setActiveTab] = useState('games');
+  const [bubbles] = useState(generateBubbles);
 
-  const handleGameSelect = (gameId) => {
-    playSound('pop');
-    setCurrentGame(gameId);
-  };
-
-  const handleCategorySelect = (category) => {
-    playSound('pop');
-    setActiveCategory(category);
-  };
-
-  const renderGame = () => {
-    const game = games.find(g => g.id === currentGame);
-    if (!game) return null;
-    const GameComponent = game.component;
-    return (
-      <ErrorBoundary onBack={() => setCurrentGame(null)}>
-        <GameComponent onBack={() => setCurrentGame(null)} />
-      </ErrorBoundary>
-    );
-  };
-
-  const filteredGames = games.filter(g => g.ageGroup === activeCategory);
+  const gamesCount   = gamesMeta.length;
+  const storiesCount = stories.length;
 
   return (
-    <div className="app">
+    <div className="app" style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+
+      {/* ── Animated background ── */}
       <div className="bg-bubbles">
-        {bubbles.map((b) => (
-          <div 
-            key={b.id} 
-            className="bubble" 
+        {bubbles.map(b => (
+          <div
+            key={b.id}
+            className="bubble"
             style={{
               width: `${b.width}px`,
               height: `${b.height}px`,
               left: `${b.left}%`,
               animationDelay: `${b.delay}s`,
-              animationDuration: `${b.duration}s`
+              animationDuration: `${b.duration}s`,
             }}
           />
         ))}
       </div>
 
-      <header>
-        <h1>Gaming Land Kids</h1>
-        <p>Fun games to help you grow! 🌈</p>
+      {/* ── Floating decorative shapes ── */}
+      <div className="floating-shapes" aria-hidden="true">
+        {FLOATING_SHAPES.map((s, i) => (
+          <span
+            key={i}
+            className="floating-shape"
+            style={{
+              ...s.style,
+              '--delay': `${s.delay}s`,
+              '--dur':   `${s.dur}s`,
+              animationDelay:    `${s.delay}s`,
+              animationDuration: `${s.dur}s`,
+            }}
+          >
+            {s.emoji}
+          </span>
+        ))}
+      </div>
+
+      {/* ── Header ── */}
+      <header className="app-header">
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+          background: 'rgba(255,255,255,0.8)', borderRadius: '999px',
+          padding: '0.3rem 1rem', fontSize: '0.82rem', fontWeight: 700,
+          color: '#888', marginBottom: '0.5rem', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+          <span style={{ animation: 'bobble 2s ease-in-out infinite', display: 'inline-block' }}>🎈</span>
+          Welcome, little explorer!
+        </div>
+        <h1>Gaming Land 🌈</h1>
+        <p>Play fun games & read happy stories — for kids aged 3 to 10! 💛</p>
       </header>
 
-      <main className="app-container">
-        {!currentGame ? (
-          <>
-            {/* Age Category Selector */}
-            <div className="category-container pop-in">
-              <div className="category-tabs">
-                <button
-                  className={`category-tab ${activeCategory === 'preschool' ? 'active' : ''}`}
-                  onClick={() => handleCategorySelect('preschool')}
-                >
-                  👶 Little Explorers (Ages 3-5)
-                </button>
-                <button
-                  className={`category-tab ${activeCategory === 'junior' ? 'active' : ''}`}
-                  onClick={() => handleCategorySelect('junior')}
-                >
-                  🧠 Junior Genius (Ages 6-10)
-                </button>
-              </div>
-            </div>
+      {/* ── Tab Navigation ── */}
+      <div className="tab-nav">
+        <div className="tab-list" role="tablist" aria-label="App sections">
+          <button
+            role="tab"
+            aria-selected={activeTab === 'games'}
+            className={`tab-btn games${activeTab === 'games' ? ' active' : ''}`}
+            onClick={() => setActiveTab('games')}
+          >
+            🎮 Games
+            <span className="tab-count">{gamesCount}</span>
+          </button>
+          <button
+            role="tab"
+            aria-selected={activeTab === 'stories'}
+            className={`tab-btn stories${activeTab === 'stories' ? ' active' : ''}`}
+            onClick={() => setActiveTab('stories')}
+          >
+            📚 Stories
+            <span className="tab-count">{storiesCount}</span>
+          </button>
+        </div>
+      </div>
 
-            {/* Games Grid */}
-            <div className="game-grid pop-in">
-              {filteredGames.map((game) => (
-                <div 
-                  key={game.id} 
-                  className={`game-card ${game.color}`}
-                  onClick={() => handleGameSelect(game.id)}
-                >
-                  <div className="game-icon">{game.icon}</div>
-                  <h2>{game.title}</h2>
-                  <p>{game.desc}</p>
-                </div>
-              ))}
-            </div>
-          </>
-        ) : (
-          renderGame()
-        )}
+      {/* ── Tab Content ── */}
+      <main className="app-container" style={{ flex: 1, position: 'relative', zIndex: 1 }}
+        role="tabpanel" aria-label={activeTab === 'games' ? 'Games' : 'Stories'}>
+        {activeTab === 'games'   && <GamesTab   key="games"   />}
+        {activeTab === 'stories' && <StoriesTab key="stories" />}
       </main>
+
+      {/* ── Footer ── */}
+      <footer className="app-footer">
+        Made with 💖 for little learners · Gaming Land 🌈
+      </footer>
     </div>
   );
 }
-
-export default App;
