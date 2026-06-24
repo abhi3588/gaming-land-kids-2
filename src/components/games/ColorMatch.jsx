@@ -102,8 +102,8 @@ const ColorMatch = ({ onBack }) => {
             {round.options.map((c, i) => (
               <button
                 key={i}
-                className="btn"
-                style={{ background: c, width: 84, height: 84, borderRadius: 18, border: '4px solid rgba(0,0,0,0.06)' }}
+                className="btn color-option"
+                style={{ background: c }}
                 onClick={() => handlePick(c)}
               />
             ))}
