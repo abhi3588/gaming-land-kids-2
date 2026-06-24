@@ -1,15 +1,25 @@
 import { useState, useEffect, useRef } from 'react';
 import { playSound } from '../../utils/sounds';
 
-const AudioCtx = window.AudioContext || window.webkitAudioContext;
+const getAudioContextClass = () => {
+  if (typeof window === 'undefined') return null;
+  return window.AudioContext || window.webkitAudioContext || null;
+};
+
 let localAudioCtx = null;
 
 const playTone = (frequency, duration = 0.4) => {
   if (!localAudioCtx) {
-    localAudioCtx = new AudioCtx();
+    const AudioCtx = getAudioContextClass();
+    if (!AudioCtx) return;
+    try {
+      localAudioCtx = new AudioCtx();
+    } catch (err) {
+      return;
+    }
   }
   if (localAudioCtx.state === 'suspended') {
-    localAudioCtx.resume();
+    localAudioCtx.resume().catch(() => {});
   }
 
   const now = localAudioCtx.currentTime;
@@ -27,10 +37,16 @@ const playTone = (frequency, duration = 0.4) => {
 
 const playWrongBuzz = () => {
   if (!localAudioCtx) {
-    localAudioCtx = new AudioCtx();
+    const AudioCtx = getAudioContextClass();
+    if (!AudioCtx) return;
+    try {
+      localAudioCtx = new AudioCtx();
+    } catch (err) {
+      return;
+    }
   }
   if (localAudioCtx.state === 'suspended') {
-    localAudioCtx.resume();
+    localAudioCtx.resume().catch(() => {});
   }
   const now = localAudioCtx.currentTime;
   const osc = localAudioCtx.createOscillator();

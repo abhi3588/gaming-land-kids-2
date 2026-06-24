@@ -1,12 +1,14 @@
 // AudioContext is not available in all environments (e.g. SSR, restricted browsers)
-const AudioCtx = typeof window !== 'undefined'
-  ? (window.AudioContext || window.webkitAudioContext || null)
-  : null;
+const getAudioContextClass = () => {
+  if (typeof window === 'undefined') return null;
+  return window.AudioContext || window.webkitAudioContext || null;
+};
 
 let audioCtx = null;
 
 const initAudio = () => {
   try {
+    const AudioCtx = getAudioContextClass();
     if (!AudioCtx) return false; // API not supported
     if (!audioCtx) {
       audioCtx = new AudioCtx();

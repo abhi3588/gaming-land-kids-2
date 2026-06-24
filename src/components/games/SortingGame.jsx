@@ -58,13 +58,17 @@ const SortingGame = ({ onBack }) => {
   };
 
   const handleDragStart = (e, index) => {
-    e.dataTransfer.setData('itemIndex', index);
+    if (e.dataTransfer) {
+      e.dataTransfer.setData('itemIndex', index);
+    }
+    setSelectedIndex(index);
     playSound('pop');
+    setFeedback('Tap a bin to drop the selected fruit.');
   };
 
   const handleDrop = (e, binColor) => {
     e.preventDefault();
-    const itemIndex = parseInt(e.dataTransfer.getData('itemIndex'), 10);
+    const itemIndex = e.dataTransfer ? parseInt(e.dataTransfer.getData('itemIndex'), 10) : selectedIndex;
     if (isNaN(itemIndex) || itemIndex < 0 || itemIndex >= draggables.length) return;
 
     const item = draggables[itemIndex];
@@ -75,6 +79,7 @@ const SortingGame = ({ onBack }) => {
       const newDraggables = draggables.filter((_, i) => i !== itemIndex);
       setDraggables(newDraggables);
       setBins(prev => ({ ...prev, [binColor]: [...prev[binColor], item] }));
+      setSelectedIndex(null);
       setFeedback('Nice! Keep going.');
 
       if (newDraggables.length === 0) {
@@ -169,16 +174,31 @@ const SortingGame = ({ onBack }) => {
           </div>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', minHeight: '100px', margin: '2rem' }}>
+            {selectedIndex !== null && draggables[selectedIndex] ? (
+              <div style={{ width: '100%', marginBottom: '0.75rem', color: 'var(--color-secondary)', fontWeight: 700 }}>
+                Selected: {draggables[selectedIndex].emoji} — tap a bin to drop it.
+              </div>
+            ) : null}
             {draggables.map((item, index) => (
               <div
                 key={item.id}
                 className={`draggable ${selectedIndex === index ? 'selected' : ''}`}
                 draggable
+                onPointerDown={(e) => {
+                  if (e.pointerType === 'touch' || e.pointerType === 'pen' || e.pointerType === 'mouse') {
+                    handleDragStart(e, index);
+                  }
+                }}
                 onDragStart={(e) => handleDragStart(e, index)}
                 onClick={() => {
-                  // allow tap-to-select on mobile
-                  if (selectedIndex === index) setSelectedIndex(null);
-                  else { playSound('pop'); setSelectedIndex(index); }
+                  if (selectedIndex === index) {
+                    setSelectedIndex(null);
+                    setFeedback('Tap a fruit to select it, then tap a bin.');
+                  } else {
+                    setSelectedIndex(index);
+                    playSound('pop');
+                    setFeedback('Tap a bin to drop the selected fruit.');
+                  }
                 }}
               >
                 {item.emoji}
@@ -194,6 +214,7 @@ const SortingGame = ({ onBack }) => {
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={(e) => handleDrop(e, color)}
                 onClick={() => { if (selectedIndex !== null) handleDropFromIndex(selectedIndex, color); }}
+                onPointerUp={() => { if (selectedIndex !== null) handleDropFromIndex(selectedIndex, color); }}
                 style={{
                   backgroundColor: bins[color].length > 0 ? `var(--color-soft-${color})` : 'white',
                   borderColor: `var(--color-${color === 'red' ? 'secondary' : color === 'yellow' ? 'warning' : color === 'green' ? 'success' : 'primary'})`
