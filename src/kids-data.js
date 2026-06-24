@@ -1,11 +1,13 @@
 // ===== Stories Data (from Codebase 1) =====
+const publicImage = (filename) => `${import.meta.env.BASE_URL}${filename}`;
+
 export const stories = [
   {
     id: 'bunny-shares',
     title: 'Benny the Bunny Learns to Share',
     subtitle: 'A meadow tale about kindness',
     emoji: '🐰',
-    coverImage: '/images/story-bunny.jpg',
+    coverImage: publicImage('images/story-bunny.jpg'),
     ageRange: '3-6',
     minutesToRead: 3,
     moral: 'Sharing makes our hearts grow bigger and our smiles brighter.',
@@ -44,7 +46,7 @@ export const stories = [
     title: 'Lily, the Little Star',
     subtitle: 'A bedtime tale about being yourself',
     emoji: '⭐',
-    coverImage: '/images/story-star.jpg',
+    coverImage: publicImage('images/story-star.jpg'),
     ageRange: '3-6',
     minutesToRead: 3,
     moral: "You don't have to be the biggest to shine. Just be yourself!",
