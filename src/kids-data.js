@@ -158,6 +158,84 @@ export const stories = [
       },
     ],
   },
+  {
+    id: 'tilly-turtle',
+    title: 'Tilly the Tiny Turtle',
+    subtitle: 'A pond tale about never giving up',
+    emoji: '🐢',
+    coverImage: null,
+    ageRange: '3-6',
+    minutesToRead: 3,
+    moral: 'Keep going — every small step brings you closer to your dream.',
+    moralEmoji: '💪',
+    gradient: 'linear-gradient(135deg, #1dd1a1, #54a0ff)',
+    scenes: [
+      {
+        emoji: '🐢🏔️',
+        heading: 'The Big Rock',
+        text: "Tilly the Turtle wanted to climb the big rock at the edge of the pond. All the other animals had done it. But Tilly's short little legs made it so very hard.",
+      },
+      {
+        emoji: '😓',
+        heading: 'Slip and Slide',
+        text: "She tried once — and slid back down. She tried again — and slipped. 'Maybe I just can't do it,' she sighed, tucking her head into her shell.",
+      },
+      {
+        emoji: '🐸💬',
+        heading: "Frog's Good Advice",
+        text: "Froggy hopped over with a big smile. 'Don't look at the top, Tilly,' he said kindly. 'Just look at the very next little step in front of you.'",
+      },
+      {
+        emoji: '🐢✨',
+        heading: 'One Step at a Time',
+        text: 'Tilly took one tiny step. Then another. She did not look up. She did not look down. Just the next step. And the next. And the next.',
+      },
+      {
+        emoji: '🌅🐢',
+        heading: 'The View from the Top',
+        text: "When Tilly finally looked up, she was at the very top! The whole pond sparkled below her. 'I did it!' she cheered. 'One small step at a time!'",
+      },
+    ],
+  },
+  {
+    id: 'max-missing-smile',
+    title: "Max and the Missing Smile",
+    subtitle: 'A neighbourly tale about kindness',
+    emoji: '🐻',
+    coverImage: null,
+    ageRange: '3-6',
+    minutesToRead: 3,
+    moral: 'A small act of kindness can change someone\'s whole day.',
+    moralEmoji: '🤝',
+    gradient: 'linear-gradient(135deg, #ff9f43, #ff6b9d)',
+    scenes: [
+      {
+        emoji: '🐻😐',
+        heading: 'Max Notices Something',
+        text: "Max the little bear was walking to school when he saw his neighbour, old Mrs Hen, sitting quietly on her step. She was not smiling. She was not singing. She just sat very still.",
+      },
+      {
+        emoji: '🤔💭',
+        heading: 'Something Felt Wrong',
+        text: "Max thought about walking past. He was already a little late. But something stopped him. He had never seen Mrs Hen so quiet before.",
+      },
+      {
+        emoji: '🐻💬',
+        heading: 'Just Three Words',
+        text: "Max walked up to her gate. 'Are you okay?' he asked softly. Mrs Hen looked up, surprised. Her eyes went warm. 'My flowers wouldn't grow today,' she said with a little sigh.",
+      },
+      {
+        emoji: '🌸🐻',
+        heading: 'Helping Hands',
+        text: "Max did not know much about flowers, but he knew about trying. Together they watered every pot and planted three new seeds. They talked and laughed the whole time.",
+      },
+      {
+        emoji: '😊🌺',
+        heading: 'The Smile Came Back',
+        text: "When Max left for school, Mrs Hen was singing again. He had given nothing but his time — and it turned out that was everything she needed.",
+      },
+    ],
+  },
 ];
 
 // ===== Games Metadata =====
@@ -170,12 +248,16 @@ export const gamesMeta = [
   { id: 'sorting',   title: 'Fruit Sort',     icon: '🍎', color: 'sorting',  ageGroup: 'preschool', desc: 'Put fruits in correct bins!' },
   { id: 'patterns',  title: 'Pattern Train',  icon: '🚂', color: 'patterns', ageGroup: 'preschool', desc: 'Finish the train pattern!' },
   { id: 'counting',  title: 'Star Count',     icon: '⭐', color: 'counting', ageGroup: 'preschool', desc: 'Count and pop the stars!' },
-  { id: 'colormatch',title: 'Color Match',    icon: '🎨', color: 'patterns', ageGroup: 'preschool', desc: 'Match the target color!' },
+  { id: 'colormatch',   title: 'Color Match',    icon: '🎨', color: 'patterns',     ageGroup: 'preschool', desc: 'Match the target color!' },
+  { id: 'animalsounds', title: 'Animal Sounds',  icon: '🐶', color: 'animalsounds', ageGroup: 'preschool', desc: 'Tap the sound each animal makes!' },
+  { id: 'shapefinder',  title: 'Shape Finder',   icon: '🔷', color: 'shapefinder',  ageGroup: 'preschool', desc: 'Find the matching shape!' },
+  { id: 'oddoneout',    title: 'Odd One Out',     icon: '🐸', color: 'oddoneout',    ageGroup: 'preschool', desc: 'Tap the one that does not belong!' },
 
   // Ages 6-10 (junior)
-  { id: 'math',      title: 'Math Quest',     icon: '🎈', color: 'math',     ageGroup: 'junior',    desc: 'Solve math equations to pop balloons!' },
-  { id: 'word',      title: 'Word Builder',   icon: '✏️', color: 'word',     ageGroup: 'junior',    desc: 'Spell words for cute emojis!' },
-  { id: 'sudoku',    title: 'Shape Sudoku',   icon: '🧩', color: 'sudoku',   ageGroup: 'junior',    desc: 'Solve logic animal grids!' },
-  { id: 'sumpairs',  title: 'Sum Pairs',      icon: '🔢', color: 'math',     ageGroup: 'junior',    desc: 'Pick two tiles that add up to the target!' },
-  { id: 'sequence',  title: 'Spark Sequence', icon: '⚡', color: 'sequence', ageGroup: 'junior',    desc: 'Repeat the light & sound patterns!' },
+  { id: 'math',         title: 'Math Quest',     icon: '🎈', color: 'math',         ageGroup: 'junior',    desc: 'Solve math equations to pop balloons!' },
+  { id: 'word',         title: 'Word Builder',   icon: '✏️', color: 'word',         ageGroup: 'junior',    desc: 'Spell words for cute emojis!' },
+  { id: 'sudoku',       title: 'Shape Sudoku',   icon: '🧩', color: 'sudoku',       ageGroup: 'junior',    desc: 'Solve logic animal grids!' },
+  { id: 'sumpairs',     title: 'Sum Pairs',      icon: '🔢', color: 'math',         ageGroup: 'junior',    desc: 'Pick two tiles that add up to the target!' },
+  { id: 'sequence',     title: 'Spark Sequence', icon: '⚡', color: 'sequence',     ageGroup: 'junior',    desc: 'Repeat the light & sound patterns!' },
+  { id: 'wordscramble', title: 'Word Scramble',  icon: '🔤', color: 'wordscramble', ageGroup: 'junior',    desc: 'Unscramble the letters to find the word!' },
 ];

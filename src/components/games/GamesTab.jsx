@@ -14,18 +14,26 @@ import ShapeSudoku   from '../games/ShapeSudoku.jsx';
 import SparkSequence from '../games/SparkSequence.jsx';
 import ColorMatch    from '../games/ColorMatch.jsx';
 import SumPairs      from '../games/SumPairs.jsx';
+import AnimalSounds  from '../games/AnimalSounds.jsx';
+import WordScramble  from '../games/WordScramble.jsx';
+import ShapeFinder   from '../games/ShapeFinder.jsx';
+import OddOneOut     from '../games/OddOneOut.jsx';
 
 const COMPONENT_MAP = {
-  memory:     MemoryGame,
-  sorting:    SortingGame,
-  patterns:   PatternGame,
-  counting:   CountingGame,
-  math:       MathQuest,
-  word:       WordBuilder,
-  sudoku:     ShapeSudoku,
-  sequence:   SparkSequence,
-  colormatch: ColorMatch,
-  sumpairs:   SumPairs,
+  memory:       MemoryGame,
+  sorting:      SortingGame,
+  patterns:     PatternGame,
+  counting:     CountingGame,
+  math:         MathQuest,
+  word:         WordBuilder,
+  sudoku:       ShapeSudoku,
+  sequence:     SparkSequence,
+  colormatch:   ColorMatch,
+  sumpairs:     SumPairs,
+  animalsounds: AnimalSounds,
+  wordscramble: WordScramble,
+  shapefinder:  ShapeFinder,
+  oddoneout:    OddOneOut,
 };
 
 export default function GamesTab() {
