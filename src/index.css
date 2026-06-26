@@ -1619,3 +1619,141 @@ body {
   .odd-grid { gap: 0.6rem; max-width: 300px; }
   .odd-btn  { border-radius: 16px; padding: 0.55rem; }
 }
+
+/* ===== Hero Power Match (preschool, superhero) ===== */
+.game-card.heropowermatch {
+  border-color: #FFD93D;
+  background: linear-gradient(145deg, #fff 60%, #fffbdf);
+}
+
+.hero-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.hero-emoji {
+  font-size: clamp(5rem, 18vw, 8rem);
+  line-height: 1;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.13));
+  animation: bobble 2.5s ease-in-out infinite;
+}
+
+.hero-name {
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  font-weight: 800;
+  color: #555;
+  letter-spacing: 0.04em;
+}
+
+.hero-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.hero-power-btn {
+  background: #fff;
+  border: 3px solid #FFD93D;
+  border-radius: 16px;
+  font-family: inherit;
+  font-size: clamp(0.88rem, 2.8vw, 1.05rem);
+  font-weight: 700;
+  color: #444;
+  padding: 0.9rem 0.6rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.15s, box-shadow 0.15s;
+  min-height: 60px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hero-power-btn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 7px 18px rgba(0,0,0,0.13);
+}
+
+.hero-power-btn:disabled { cursor: default; opacity: 0.85; }
+.hero-power-btn.hero-correct { border-color: #1dd1a1; background: #e8fdf3; }
+.hero-power-btn.hero-wrong   { border-color: #ff6b6b; background: #fff0f0; }
+
+@media (max-width: 600px) {
+  .hero-options { gap: 0.6rem; }
+  .hero-power-btn { font-size: 0.88rem; padding: 0.75rem 0.4rem; min-height: 54px; }
+}
+
+/* ===== Save the City (preschool, superhero) ===== */
+.game-card.savethecity {
+  border-color: #FF6B6B;
+  background: linear-gradient(145deg, #fff 60%, #fff0f0);
+}
+
+.city-danger-box {
+  background: linear-gradient(135deg, #fff0f0, #fff8e1);
+  border: 3px solid #FF6B6B;
+  border-radius: 20px;
+  padding: 1rem 1.1rem;
+  margin: 0.5rem 0 1.25rem;
+  text-align: center;
+}
+
+.city-danger-text {
+  font-size: clamp(1.05rem, 3.5vw, 1.3rem);
+  font-weight: 800;
+  color: #c0392b;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.city-hint {
+  font-size: clamp(0.9rem, 2.8vw, 1rem);
+  color: #666;
+  font-weight: 600;
+}
+
+.city-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.city-hero-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  background: #fff;
+  border: 3px solid #e0e0e0;
+  border-radius: 18px;
+  padding: 0.75rem 0.4rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.city-hero-btn:hover:not(:disabled) {
+  transform: scale(1.07);
+  box-shadow: 0 7px 18px rgba(0,0,0,0.14);
+  border-color: #FF6B6B;
+}
+
+.city-hero-btn:disabled { cursor: default; opacity: 0.85; }
+.city-hero-btn.city-correct { border-color: #1dd1a1; background: #e8fdf3; transform: scale(1.1); }
+.city-hero-btn.city-wrong   { border-color: #ff6b6b; background: #fff0f0; }
+
+.city-hero-emoji { font-size: clamp(2.2rem, 7vw, 3rem); line-height: 1; }
+.city-hero-name  { font-size: clamp(0.65rem, 2vw, 0.8rem); font-weight: 700; color: #555; text-align: center; line-height: 1.2; }
+
+@media (max-width: 480px) {
+  .city-hero-grid { gap: 0.5rem; max-width: 340px; }
+  .city-hero-btn  { padding: 0.6rem 0.3rem; border-radius: 14px; }
+}

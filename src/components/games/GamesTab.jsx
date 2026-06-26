@@ -16,8 +16,10 @@ import ColorMatch    from '../games/ColorMatch.jsx';
 import SumPairs      from '../games/SumPairs.jsx';
 import AnimalSounds  from '../games/AnimalSounds.jsx';
 import WordScramble  from '../games/WordScramble.jsx';
-import ShapeFinder   from '../games/ShapeFinder.jsx';
-import OddOneOut     from '../games/OddOneOut.jsx';
+import ShapeFinder     from '../games/ShapeFinder.jsx';
+import OddOneOut       from '../games/OddOneOut.jsx';
+import HeroPowerMatch  from '../games/HeroPowerMatch.jsx';
+import SaveTheCity     from '../games/SaveTheCity.jsx';
 
 const COMPONENT_MAP = {
   memory:       MemoryGame,
@@ -32,8 +34,10 @@ const COMPONENT_MAP = {
   sumpairs:     SumPairs,
   animalsounds: AnimalSounds,
   wordscramble: WordScramble,
-  shapefinder:  ShapeFinder,
-  oddoneout:    OddOneOut,
+  shapefinder:    ShapeFinder,
+  oddoneout:      OddOneOut,
+  heropowermatch: HeroPowerMatch,
+  savethecity:    SaveTheCity,
 };
 
 export default function GamesTab() {

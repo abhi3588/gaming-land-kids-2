@@ -236,6 +236,84 @@ export const stories = [
       },
     ],
   },
+  {
+    id: 'iris-saves-the-day',
+    title: 'Ice Queen Iris Saves the Day',
+    subtitle: 'A superhero tale about staying calm',
+    emoji: '🧊',
+    coverImage: null,
+    ageRange: '3-6',
+    minutesToRead: 3,
+    moral: 'When everyone panics, staying calm is a superpower all its own.',
+    moralEmoji: '❄️',
+    gradient: 'linear-gradient(135deg, #74b9ff, #a29bfe)',
+    scenes: [
+      {
+        emoji: '🏙️☀️',
+        heading: 'A Beautiful Morning',
+        text: "It was a warm and sunny morning in Sunshine City. Ice Queen Iris was having her favourite breakfast — a big bowl of blueberry ice cream — when her superhero watch started blinking.",
+      },
+      {
+        emoji: '🔥😱',
+        heading: 'Danger at the Playground!',
+        text: "'FIRE at the playground!' the watch beeped. Iris looked out the window. Thick orange flames were leaping from the old oak tree beside the swings. Children were running and shouting.",
+      },
+      {
+        emoji: '🧊💨',
+        heading: 'Iris Flies into Action',
+        text: "Iris took a deep breath. She did not panic. She flew to the playground in three quick seconds. 'Everyone stand back and stay calm!' she called in her clear, steady voice.",
+      },
+      {
+        emoji: '❄️🌊',
+        heading: 'A Wave of Ice',
+        text: "Iris stretched out both hands and sent a shimmering wave of frosty ice across the flames. WHOOOOSH! The fire hissed, crackled… and went out. The oak tree was covered in glittery snowflakes.",
+      },
+      {
+        emoji: '🎉🧊',
+        heading: 'The Coolest Hero',
+        text: "The children cheered. 'You saved the oak tree, Iris!' a little girl shouted. Iris smiled. 'Remember — when things get scary, take one deep breath first. Calm is the coolest superpower of all.'",
+      },
+    ],
+  },
+  {
+    id: 'flash-frankie-lost-puppy',
+    title: "Flash Frankie and the Lost Puppy",
+    subtitle: 'A speedy tale about never giving up',
+    emoji: '⚡',
+    coverImage: null,
+    ageRange: '3-6',
+    minutesToRead: 3,
+    moral: 'Never give up — even small acts of kindness done quickly can change everything.',
+    moralEmoji: '🐾',
+    gradient: 'linear-gradient(135deg, #ffeaa7, #fd79a8)',
+    scenes: [
+      {
+        emoji: '⚡🏃',
+        heading: 'The Fastest Kid in the City',
+        text: "Flash Frankie could run faster than a racing car. In fact, he was so fast that people only ever saw a little yellow blur zooming past. He loved using his speed to help others.",
+      },
+      {
+        emoji: '🐶😢',
+        heading: 'A Tiny Whimper',
+        text: "One afternoon, Frankie heard a tiny whimper near the park gates. A small brown puppy was sitting alone, looking very scared. Its lead was tangled around a bush and it could not get free.",
+      },
+      {
+        emoji: '⚡🗺️',
+        heading: 'A Race Against Sunset',
+        text: "Frankie untangled the puppy straight away. But there was no name tag on its collar! The sun was starting to set. Frankie knew he had to find the owner before dark.",
+      },
+      {
+        emoji: '⚡🏘️',
+        heading: 'Zooming Through the Streets',
+        text: "Frankie zipped up and down every street in Sunshine City, showing everyone the puppy. Door after door, no one knew who it belonged to. But Frankie did not stop. He never gave up.",
+      },
+      {
+        emoji: '🐶🏡❤️',
+        heading: 'Home at Last',
+        text: "On the very last street, a little boy burst out of a house crying. 'Biscuit! You're safe!' He hugged the puppy tight and then looked up at Frankie. 'Thank you for not giving up on him.' Frankie grinned. 'I never do.'",
+      },
+    ],
+  },
 ];
 
 // ===== Games Metadata =====
@@ -252,6 +330,8 @@ export const gamesMeta = [
   { id: 'animalsounds', title: 'Animal Sounds',  icon: '🐶', color: 'animalsounds', ageGroup: 'preschool', desc: 'Tap the sound each animal makes!' },
   { id: 'shapefinder',  title: 'Shape Finder',   icon: '🔷', color: 'shapefinder',  ageGroup: 'preschool', desc: 'Find the matching shape!' },
   { id: 'oddoneout',    title: 'Odd One Out',     icon: '🐸', color: 'oddoneout',    ageGroup: 'preschool', desc: 'Tap the one that does not belong!' },
+  { id: 'heropowermatch', title: 'Hero Power Match', icon: '⚡', color: 'heropowermatch', ageGroup: 'preschool', desc: 'Match each hero to their superpower!' },
+  { id: 'savethecity',   title: 'Save the City',    icon: '🏙️', color: 'savethecity',   ageGroup: 'preschool', desc: 'Pick the right hero to save the day!' },
 
   // Ages 6-10 (junior)
   { id: 'math',         title: 'Math Quest',     icon: '🎈', color: 'math',         ageGroup: 'junior',    desc: 'Solve math equations to pop balloons!' },
