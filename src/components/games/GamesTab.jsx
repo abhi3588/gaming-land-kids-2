@@ -20,6 +20,10 @@ import ShapeFinder     from '../games/ShapeFinder.jsx';
 import OddOneOut       from '../games/OddOneOut.jsx';
 import HeroPowerMatch  from '../games/HeroPowerMatch.jsx';
 import SaveTheCity     from '../games/SaveTheCity.jsx';
+import HeroSpellQuest  from '../games/HeroSpellQuest.jsx';
+import HeroTrivia      from '../games/HeroTrivia.jsx';
+import RhymeTime       from '../games/RhymeTime.jsx';
+import MathNinja       from '../games/MathNinja.jsx';
 
 const COMPONENT_MAP = {
   memory:       MemoryGame,
@@ -38,6 +42,10 @@ const COMPONENT_MAP = {
   oddoneout:      OddOneOut,
   heropowermatch: HeroPowerMatch,
   savethecity:    SaveTheCity,
+  herospellquest: HeroSpellQuest,
+  herotrivia:     HeroTrivia,
+  rhymetime:      RhymeTime,
+  mathninja:      MathNinja,
 };
 
 export default function GamesTab() {

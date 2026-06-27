@@ -1757,3 +1757,281 @@ body {
   .city-hero-grid { gap: 0.5rem; max-width: 340px; }
   .city-hero-btn  { padding: 0.6rem 0.3rem; border-radius: 14px; }
 }
+
+/* ===== Hero Spell Quest (junior, superhero) ===== */
+.game-card.herospellquest {
+  border-color: #c0392b;
+  background: linear-gradient(145deg, #fff 60%, #fff0ef);
+}
+
+.hero-tile {
+  background: linear-gradient(145deg, #c0392b, #e74c3c) !important;
+  color: #fff !important;
+  border-color: #922b21 !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.hero-tile:hover:not(:disabled) {
+  background: linear-gradient(145deg, #e74c3c, #c0392b) !important;
+  transform: translateY(-4px) scale(1.08) !important;
+}
+
+.hero-tile.used {
+  background: #ccc !important;
+  border-color: #bbb !important;
+}
+
+/* ===== Hero Trivia (junior, superhero) ===== */
+.game-card.herotrivia {
+  border-color: #8e44ad;
+  background: linear-gradient(145deg, #fff 60%, #f9f0ff);
+}
+
+.trivia-card {
+  background: linear-gradient(135deg, #f9f0ff, #ffeaa7);
+  border: 3px solid #d1a7f5;
+  border-radius: 22px;
+  padding: 1.1rem 1.2rem;
+  margin: 0.5rem 0 1.25rem;
+  text-align: center;
+}
+
+.trivia-emoji {
+  font-size: clamp(2.8rem, 9vw, 4rem);
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+
+.trivia-question {
+  font-size: clamp(1.05rem, 3.2vw, 1.25rem);
+  font-weight: 800;
+  color: #4a235a;
+  line-height: 1.4;
+}
+
+.trivia-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.trivia-btn {
+  background: #fff;
+  border: 3px solid #d1a7f5;
+  border-radius: 16px;
+  font-family: inherit;
+  font-size: clamp(0.9rem, 2.8vw, 1.05rem);
+  font-weight: 700;
+  color: #444;
+  padding: 0.9rem 0.6rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  min-height: 58px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.trivia-btn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.04);
+  border-color: #8e44ad;
+  box-shadow: 0 7px 18px rgba(142,68,173,0.2);
+}
+
+.trivia-btn:disabled { cursor: default; opacity: 0.85; }
+.trivia-btn.trivia-correct { border-color: #1dd1a1; background: #e8fdf3; color: #1a7a60; }
+.trivia-btn.trivia-wrong   { border-color: #ff6b6b; background: #fff0f0; color: #c0392b; }
+
+@media (max-width: 600px) {
+  .trivia-options { gap: 0.55rem; }
+  .trivia-btn { font-size: 0.88rem; padding: 0.75rem 0.4rem; min-height: 52px; }
+}
+
+/* ===== Rhyme Time (junior) ===== */
+.game-card.rhymetime {
+  border-color: #fd79a8;
+  background: linear-gradient(145deg, #fff 60%, #fff0f7);
+}
+
+.rhyme-target {
+  text-align: center;
+  margin: 0.5rem 0 1.5rem;
+  background: linear-gradient(135deg, #fd79a8, #e84393);
+  border-radius: 24px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 6px 20px rgba(253,121,168,0.35);
+}
+
+.rhyme-target-word {
+  font-size: clamp(2.4rem, 9vw, 4rem);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.rhyme-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.rhyme-btn {
+  background: #fff;
+  border: 3px solid #fdcfe8;
+  border-radius: 16px;
+  font-family: inherit;
+  font-size: clamp(1rem, 3.2vw, 1.2rem);
+  font-weight: 800;
+  color: #444;
+  padding: 1rem 0.6rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  min-height: 60px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  letter-spacing: 0.05em;
+}
+
+.rhyme-btn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.04);
+  border-color: #fd79a8;
+  box-shadow: 0 7px 18px rgba(253,121,168,0.25);
+}
+
+.rhyme-btn:disabled { cursor: default; opacity: 0.85; }
+.rhyme-btn.rhyme-correct { border-color: #1dd1a1; background: #e8fdf3; color: #1a7a60; }
+.rhyme-btn.rhyme-wrong   { border-color: #ff6b6b; background: #fff0f0; color: #c0392b; }
+
+@media (max-width: 600px) {
+  .rhyme-options { gap: 0.6rem; }
+  .rhyme-btn { padding: 0.8rem 0.4rem; font-size: 0.95rem; }
+}
+
+/* ===== Math Ninja (junior, timed) ===== */
+.game-card.mathninja {
+  border-color: #2d3436;
+  background: linear-gradient(145deg, #fff 60%, #f0f0f0);
+}
+
+.ninja-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.ninja-score {
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  font-weight: 900;
+  color: #2d3436;
+}
+
+.ninja-streak {
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  font-weight: 800;
+  color: #e17055;
+  animation: pop 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+
+.ninja-timer {
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  font-weight: 900;
+  transition: color 0.5s;
+}
+
+.ninja-timer-bar-bg {
+  width: 100%;
+  height: 10px;
+  background: #eee;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.ninja-timer-bar {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 1s linear, background 0.5s;
+}
+
+.ninja-question-card {
+  background: linear-gradient(135deg, #2d3436, #636e72);
+  border-radius: 24px;
+  padding: 1.4rem 1.2rem;
+  text-align: center;
+  margin-bottom: 1.25rem;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  transition: background 0.15s;
+}
+
+.ninja-question-card.correct { background: linear-gradient(135deg, #00b894, #1dd1a1); }
+.ninja-question-card.wrong   { background: linear-gradient(135deg, #d63031, #ff7675); }
+
+.ninja-question {
+  font-size: clamp(2rem, 8vw, 3.2rem);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.ninja-level-badge {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.08em;
+}
+
+.ninja-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.ninja-btn {
+  background: #fff;
+  border: 3px solid #b2bec3;
+  border-radius: 16px;
+  font-family: inherit;
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  font-weight: 900;
+  color: #2d3436;
+  padding: 0.9rem 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.09);
+  transition: transform 0.12s, border-color 0.12s;
+  min-height: 62px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ninja-btn:hover:not(:disabled) {
+  transform: scale(1.06);
+  border-color: #2d3436;
+}
+
+.ninja-btn:disabled { cursor: default; opacity: 0.8; }
+.ninja-btn.ninja-correct { border-color: #1dd1a1; background: #e8fdf3; color: #1a7a60; }
+.ninja-btn.ninja-wrong   { border-color: #ff6b6b; background: #fff0f0; color: #c0392b; }
+
+@media (max-width: 600px) {
+  .ninja-options { gap: 0.6rem; }
+  .ninja-btn { font-size: 1.1rem; padding: 0.75rem 0.4rem; min-height: 56px; }
+  .ninja-question { font-size: clamp(1.7rem, 7vw, 2.5rem); }
+}
