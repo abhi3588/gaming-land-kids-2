@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { playSound } from '../../utils/sounds';
 
 const ROUNDS = [
@@ -30,9 +30,9 @@ const buildOptions = (round) =>
 const TOTAL_LEVELS = 20;
 
 const RhymeTime = ({ onBack }) => {
-  const [order]      = useState(() => Array.from({ length: TOTAL_LEVELS }, () => ROUNDS[Math.floor(Math.random() * ROUNDS.length)]));
+  const [order, setOrder]           = useState([]);
   const [index, setIndex]           = useState(0);
-  const [options, setOptions]       = useState(() => buildOptions(Array.from({ length: TOTAL_LEVELS }, () => ROUNDS[Math.floor(Math.random() * ROUNDS.length)])[0]));
+  const [options, setOptions]       = useState([]);
   const [picked, setPicked]         = useState(null);
   const [feedback, setFeedback]     = useState('');
   const [feedbackType, setFeedbackType] = useState('');
@@ -42,14 +42,22 @@ const RhymeTime = ({ onBack }) => {
   const current = order[index];
 
   const resetGame = useCallback(() => {
+    const newOrder = Array.from({ length: TOTAL_LEVELS }, () => ROUNDS[Math.floor(Math.random() * ROUNDS.length)]);
+    setOrder(newOrder);
     setIndex(0);
-    setOptions(buildOptions(order[0]));
+    setOptions(buildOptions(newOrder[0]));
     setPicked(null);
     setFeedback('');
     setFeedbackType('');
     setScore(0);
     setGameWon(false);
-  }, [order]);
+  }, []);
+
+  useEffect(() => {
+    resetGame();
+  }, [resetGame]);
+
+  if (order.length === 0 || options.length === 0) return null;
 
   const handlePick = (opt) => {
     if (picked) return;
