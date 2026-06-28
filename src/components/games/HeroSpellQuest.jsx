@@ -3,8 +3,8 @@ import { playSound } from '../../utils/sounds';
 
 const HEROES = [
   { word: 'HULK',      emoji: '💚', clue: 'He smashes things when he gets angry!' },
-  { word: 'THOR',      emoji: '⚡', clue: 'He wields a magical hammer called Mjolnir!' },
-  { word: 'FLASH',     emoji: '🏃', clue: 'He is the fastest superhero alive!' },
+  { word: 'THOR',      emoji: '🔨', clue: 'He wields a magical hammer called Mjolnir!' },
+  { word: 'FLASH',     emoji: '⚡', clue: 'He is the fastest superhero alive!' },
   { word: 'BATMAN',    emoji: '🦇', clue: 'The Dark Knight who protects Gotham City!' },
   { word: 'VENOM',     emoji: '🕸️', clue: 'An alien creature that bonds with a human!' },
   { word: 'IRONMAN',   emoji: '🦾', clue: 'A genius who built a powerful armored suit!' },
