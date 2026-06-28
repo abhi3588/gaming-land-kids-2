@@ -26,6 +26,8 @@ import RhymeTime       from '../games/RhymeTime.jsx';
 import MathNinja       from '../games/MathNinja.jsx';
 import WhatComesNext   from '../games/WhatComesNext.jsx';
 import BigOrSmall      from '../games/BigOrSmall.jsx';
+import MemoryMatrix    from '../games/MemoryMatrix.jsx';
+import OperatorQuest   from '../games/OperatorQuest.jsx';
 
 const COMPONENT_MAP = {
   memory:       MemoryGame,
@@ -50,6 +52,8 @@ const COMPONENT_MAP = {
   mathninja:      MathNinja,
   whatcomesnext:  WhatComesNext,
   bigorsmall:     BigOrSmall,
+  memorymatrix:   MemoryMatrix,
+  operatorquest:  OperatorQuest,
 };
 
 export default function GamesTab() {
