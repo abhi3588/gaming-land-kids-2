@@ -314,6 +314,84 @@ export const stories = [
       },
     ],
   },
+  {
+    id: 'pip-finds-a-friend',
+    title: 'Pip the Penguin Finds a Friend',
+    subtitle: 'An icy tale about saying hello',
+    emoji: '🐧',
+    coverImage: null,
+    ageRange: '3-6',
+    minutesToRead: 3,
+    moral: 'Making a new friend starts with one brave hello.',
+    moralEmoji: '👋',
+    gradient: 'linear-gradient(135deg, #74b9ff, #00cec9)',
+    scenes: [
+      {
+        emoji: '🐧❄️',
+        heading: 'All Alone on the Ice',
+        text: "Pip the little penguin lived on a big, snowy iceberg. All day long he watched the other penguins slide and play together. But Pip always stayed at the edge, too shy to join in.",
+      },
+      {
+        emoji: '😔🌊',
+        heading: 'Wishing for a Friend',
+        text: "'I wish I had someone to play with,' Pip whispered to the waves. The waves just splashed back quietly. Pip sighed and drew a sad face in the snow with his flipper.",
+      },
+      {
+        emoji: '🐧💛',
+        heading: 'A Yellow Scarf Goes By',
+        text: "One morning, a new penguin waddled past wearing a bright yellow scarf. She tripped on the ice and landed with a PLOP! right in front of Pip. They looked at each other. Then they both burst out laughing.",
+      },
+      {
+        emoji: '⛸️🎉',
+        heading: 'Sliding Together',
+        text: "'I am Luna,' she said. 'I just moved here and I don't know anyone.' Pip's heart leapt. 'I am Pip!' he said. 'I know a really good sliding hill.' 'Show me!' said Luna. And off they went.",
+      },
+      {
+        emoji: '🐧🐧🌟',
+        heading: 'Two Is Better Than One',
+        text: "From that day on, Pip and Luna slid and splashed and sang every single day. Pip smiled to himself. All it had taken was one brave hello — and his whole world had changed.",
+      },
+    ],
+  },
+  {
+    id: 'zara-zebra-stripes',
+    title: "Zara's Wonderful Stripes",
+    subtitle: 'A savanna story about being unique',
+    emoji: '🦓',
+    coverImage: null,
+    ageRange: '3-6',
+    minutesToRead: 3,
+    moral: 'What makes you different is what makes you wonderful.',
+    moralEmoji: '🌈',
+    gradient: 'linear-gradient(135deg, #fdcb6e, #e17055)',
+    scenes: [
+      {
+        emoji: '🦓😟',
+        heading: 'Too Many Stripes',
+        text: "Zara the Zebra had more stripes than any other zebra on the savanna. Some went zigzag. Some went sideways. Some even curled into little swirls. The other animals giggled when they saw her.",
+      },
+      {
+        emoji: '🦁💬',
+        heading: 'Feeling Different',
+        text: "'Why can't I just look normal?' Zara asked the old lion, Leo. He opened one sleepy eye. 'Normal?' he rumbled. 'Show me two blades of grass that are exactly the same and then we'll talk.'",
+      },
+      {
+        emoji: '🌩️🦓',
+        heading: 'The Storm Comes',
+        text: "That afternoon, a huge thunderstorm rolled across the savanna. All the animals scattered in a panic. The herd got split up and lost in the thick brown dust.",
+      },
+      {
+        emoji: '🔍✨',
+        heading: 'Stripes to the Rescue',
+        text: "Zara stood up tall. Her swirly, zigzag stripes caught the lightning flash in a way no other zebra's could. 'Follow Zara's stripes!' the animals called. Every single one of them found their way safely home.",
+      },
+      {
+        emoji: '🦓🌟',
+        heading: 'The Most Wonderful Stripes',
+        text: "That evening, the herd nuzzled Zara warmly. 'Your stripes saved us,' they said. Zara looked down at her swirly, zigzag, curly stripes — and for the very first time, she thought they were the most wonderful stripes in the world.",
+      },
+    ],
+  },
 ];
 
 // ===== Games Metadata =====
