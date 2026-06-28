@@ -20,9 +20,10 @@ const ROUNDS = [
 ];
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+const TOTAL_LEVELS = 20;
 
 const BigOrSmall = ({ onBack }) => {
-  const [order]  = useState(() => shuffle([...ROUNDS]));
+  const [order]  = useState(() => Array.from({ length: TOTAL_LEVELS }, () => ROUNDS[Math.floor(Math.random() * ROUNDS.length)]));
   const [index, setIndex]               = useState(0);
   const [picked, setPicked]             = useState(null);
   const [feedback, setFeedback]         = useState('');
@@ -33,7 +34,7 @@ const BigOrSmall = ({ onBack }) => {
   const current   = order[index];
   const askSmall  = current.question.includes('SMALLER');
   const correctId = askSmall ? current.smaller : current.bigger;
-  const TOTAL     = order.length;
+  const TOTAL     = TOTAL_LEVELS;
 
   const resetGame = useCallback(() => {
     setIndex(0);

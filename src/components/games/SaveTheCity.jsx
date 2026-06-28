@@ -74,9 +74,10 @@ const ROUNDS = [
 ];
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+const TOTAL_LEVELS = 20;
 
 const SaveTheCity = ({ onBack }) => {
-  const [order] = useState(() => shuffle([...ROUNDS]));
+  const [order] = useState(() => Array.from({ length: TOTAL_LEVELS }, () => ROUNDS[Math.floor(Math.random() * ROUNDS.length)]));
   const [levelIndex, setLevelIndex] = useState(0);
   const [picked, setPicked] = useState(null);
   const [feedback, setFeedback] = useState('');
@@ -86,7 +87,7 @@ const SaveTheCity = ({ onBack }) => {
   const [heroOptions] = useState(() => shuffle([...HEROES]));
 
   const current = order[levelIndex];
-  const TOTAL = order.length;
+  const TOTAL = TOTAL_LEVELS;
 
   const resetGame = useCallback(() => {
     setLevelIndex(0);

@@ -235,12 +235,12 @@ const MathQuest = ({ onBack }) => {
 
   return (
     <div className="game-view pop-in">
-      <h2>Math Quest</h2>
-      <p style={{ textAlign: 'center', margin: '-0.5rem 0 1.5rem', color: '#666' }}>
+      <p style={{ textAlign: 'center', margin: '0 0 1.5rem', color: '#666' }}>
         Pop the correct balloon! 🎈
       </p>
 
       <div className="game-header">
+        <div>Math Quest</div>
         <div>Level {level} / {TOTAL_LEVELS}</div>
         <div>Score: {score}</div>
         <div>Lives: {Array.from({ length: 3 }).map((_, i) => (

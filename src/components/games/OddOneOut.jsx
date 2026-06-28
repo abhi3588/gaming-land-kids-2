@@ -20,9 +20,13 @@ const ROUNDS = [
 ];
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+const TOTAL_LEVELS = 20;
 
 const OddOneOut = ({ onBack }) => {
-  const [order] = useState(() => shuffle([...ROUNDS]));
+  const [order] = useState(() => Array.from({ length: TOTAL_LEVELS }, () => {
+    const q = ROUNDS[Math.floor(Math.random() * ROUNDS.length)];
+    return { ...q, items: shuffle([...q.items]) };
+  }));
   const [levelIndex, setLevelIndex] = useState(0);
   const [picked, setPicked] = useState(null);
   const [feedback, setFeedback] = useState('');
@@ -31,7 +35,7 @@ const OddOneOut = ({ onBack }) => {
   const [score, setScore] = useState(0);
 
   const current = order[levelIndex];
-  const TOTAL = order.length;
+  const TOTAL = TOTAL_LEVELS;
 
   const resetGame = useCallback(() => {
     setLevelIndex(0);

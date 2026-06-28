@@ -14,18 +14,18 @@ const HEROES = [
   { name: 'Robo Rex',      emoji: '🤖',  power: 'Laser beams! 🔴',      wrong: ['Magic lasso! 🌀', 'Freezes things! ❄️', 'Super speed! 💨'] },
 ];
 
-const TOTAL_ROUNDS = HEROES.length;
+const TOTAL_ROUNDS = 20;
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-const buildRound = (index) => {
-  const hero = HEROES[index];
+const buildRound = () => {
+  const hero = HEROES[Math.floor(Math.random() * HEROES.length)];
   const options = shuffle([hero.power, ...hero.wrong.slice(0, 3)]);
   return { hero, options };
 };
 
 const HeroPowerMatch = ({ onBack }) => {
   const [level, setLevel] = useState(1);
-  const [round, setRound] = useState(() => buildRound(0));
+  const [round, setRound] = useState(() => buildRound());
   const [feedback, setFeedback] = useState('');
   const [feedbackType, setFeedbackType] = useState('');
   const [gameWon, setGameWon] = useState(false);
@@ -34,7 +34,7 @@ const HeroPowerMatch = ({ onBack }) => {
 
   const resetGame = useCallback(() => {
     setLevel(1);
-    setRound(buildRound(0));
+    setRound(buildRound());
     setFeedback('');
     setFeedbackType('');
     setGameWon(false);
@@ -56,7 +56,7 @@ const HeroPowerMatch = ({ onBack }) => {
         } else {
           const next = level + 1;
           setLevel(next);
-          setRound(buildRound(next - 1));
+          setRound(buildRound());
           setFeedback('');
           setFeedbackType('');
           setAnswered(false);

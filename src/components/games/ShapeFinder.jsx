@@ -12,12 +12,12 @@ const SHAPES = [
   { name: 'Cloud',    emoji: '☁️',  color: '#A0C4FF' },
 ];
 
-const TOTAL_ROUNDS = 16;
+const TOTAL_ROUNDS = 20;
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-const buildRound = (shapeIndex) => {
-  const target = SHAPES[shapeIndex];
+const buildRound = () => {
+  const target = SHAPES[Math.floor(Math.random() * SHAPES.length)];
   const distractors = shuffle(SHAPES.filter((s) => s.name !== target.name)).slice(0, 3);
   const options = shuffle([target, ...distractors]);
   return { target, options };
@@ -25,7 +25,7 @@ const buildRound = (shapeIndex) => {
 
 const ShapeFinder = ({ onBack }) => {
   const [level, setLevel] = useState(1);
-  const [round, setRound] = useState(() => buildRound(0));
+  const [round, setRound] = useState(() => buildRound());
   const [feedback, setFeedback] = useState('');
   const [feedbackType, setFeedbackType] = useState('');
   const [gameWon, setGameWon] = useState(false);
@@ -34,7 +34,7 @@ const ShapeFinder = ({ onBack }) => {
 
   const resetGame = useCallback(() => {
     setLevel(1);
-    setRound(buildRound(0));
+    setRound(buildRound());
     setFeedback('');
     setFeedbackType('');
     setGameWon(false);
@@ -57,7 +57,7 @@ const ShapeFinder = ({ onBack }) => {
         } else {
           const nextLevel = level + 1;
           setLevel(nextLevel);
-          setRound(buildRound((nextLevel - 1) % SHAPES.length));
+          setRound(buildRound());
           setFeedback('');
           setFeedbackType('');
           setAnswered(false);

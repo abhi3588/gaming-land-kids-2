@@ -59,9 +59,9 @@ const createWordState = (question) => {
 
 const WordBuilder = ({ onBack }) => {
   const [level, setLevel] = useState(1);
-  const [currentQuestion, setCurrentQuestion] = useState(() => WORD_LEVELS[0]);
-  const [selectedSlots, setSelectedSlots] = useState(() => createWordState(WORD_LEVELS[0]).slots);
-  const [scrambledTiles, setScrambledTiles] = useState(() => createWordState(WORD_LEVELS[0]).tiles);
+  const [currentQuestion, setCurrentQuestion] = useState(() => WORD_LEVELS[Math.floor(Math.random() * WORD_LEVELS.length)]);
+  const [selectedSlots, setSelectedSlots] = useState(() => createWordState(currentQuestion).slots);
+  const [scrambledTiles, setScrambledTiles] = useState(() => createWordState(currentQuestion).tiles);
   const [isCorrect, setIsCorrect] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [message, setMessage] = useState('Build the word for the emoji!');
@@ -73,7 +73,7 @@ const WordBuilder = ({ onBack }) => {
       return;
     }
 
-    const nextQuestion = WORD_LEVELS[nextLevel - 1];
+    const nextQuestion = WORD_LEVELS[Math.floor(Math.random() * WORD_LEVELS.length)];
     setLevel(nextLevel);
     setCurrentQuestion(nextQuestion);
     setIsCorrect(false);
@@ -192,8 +192,7 @@ const WordBuilder = ({ onBack }) => {
 
   return (
     <div className="game-view pop-in">
-      <h2>Word Builder</h2>
-      <p style={{ textAlign: 'center', margin: '-0.5rem 0 1.5rem', color: '#666' }}>
+      <p style={{ textAlign: 'center', margin: '0 0 1.5rem', color: '#666' }}>
         Spell the word for the emoji! ✏️
       </p>
 
@@ -210,8 +209,8 @@ const WordBuilder = ({ onBack }) => {
       ) : (
         <>
           <div className="game-header">
+            <div>Word Builder</div>
             <div>Level {level} / {TOTAL_LEVELS}</div>
-            <div>{currentQuestion.emoji}</div>
             <div>{currentQuestion.word.length} letters</div>
             <div className="progress-container">
               <div className="progress-bar" style={{ width: `${(level / TOTAL_LEVELS) * 100}%` }} />

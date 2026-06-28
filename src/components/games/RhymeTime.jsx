@@ -27,12 +27,12 @@ const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 const buildOptions = (round) =>
   shuffle([round.correct, ...round.wrong.slice(0, 3)]);
 
-const TOTAL = ROUNDS.length;
+const TOTAL_LEVELS = 20;
 
 const RhymeTime = ({ onBack }) => {
-  const [order]      = useState(() => shuffle([...ROUNDS]));
+  const [order]      = useState(() => Array.from({ length: TOTAL_LEVELS }, () => ROUNDS[Math.floor(Math.random() * ROUNDS.length)]));
   const [index, setIndex]           = useState(0);
-  const [options, setOptions]       = useState(() => buildOptions(shuffle([...ROUNDS])[0]));
+  const [options, setOptions]       = useState(() => buildOptions(Array.from({ length: TOTAL_LEVELS }, () => ROUNDS[Math.floor(Math.random() * ROUNDS.length)])[0]));
   const [picked, setPicked]         = useState(null);
   const [feedback, setFeedback]     = useState('');
   const [feedbackType, setFeedbackType] = useState('');
@@ -65,7 +65,7 @@ const RhymeTime = ({ onBack }) => {
       setFeedbackType('wrong');
     }
     setTimeout(() => {
-      if (index + 1 >= TOTAL) {
+      if (index + 1 >= TOTAL_LEVELS) {
         setGameWon(true);
       } else {
         const next = index + 1;
@@ -84,7 +84,7 @@ const RhymeTime = ({ onBack }) => {
         <div className="champion-screen">
           <div style={{ fontSize: '4rem' }}>🎵</div>
           <h2>Rhyme Master!</h2>
-          <p>You got <strong>{score}</strong> out of <strong>{TOTAL}</strong> rhymes correct!</p>
+          <p>You got <strong>{score}</strong> out of <strong>{TOTAL_LEVELS}</strong> rhymes correct!</p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <button className="btn btn-primary" onClick={resetGame}>Play Again</button>
             <button className="btn" style={{ background: '#eee' }} onClick={() => typeof onBack === 'function' && onBack()}>Main Menu</button>
@@ -94,10 +94,10 @@ const RhymeTime = ({ onBack }) => {
         <>
           <div className="game-header">
             <div>Rhyme Time</div>
-            <div>Round {index + 1} / {TOTAL}</div>
+            <div>Round {index + 1} / {TOTAL_LEVELS}</div>
             <div>Score: {score}</div>
             <div className="progress-container">
-              <div className="progress-bar" style={{ width: `${(index / TOTAL) * 100}%` }} />
+              <div className="progress-bar" style={{ width: `${(index / TOTAL_LEVELS) * 100}%` }} />
             </div>
           </div>
 

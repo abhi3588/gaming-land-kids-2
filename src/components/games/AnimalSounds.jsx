@@ -19,11 +19,12 @@ const ANIMALS = [
   { name: 'Rooster',  emoji: '🐓', sound: 'Cock-a-doodle-doo!', wrong: ['Quack!', 'Moo!', 'Baa!'] },
 ];
 
-const TOTAL_LEVELS = ANIMALS.length;
+const TOTAL_LEVELS = 20;
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-const buildRound = (animalIndex) => {
+const buildRound = () => {
+  const animalIndex = Math.floor(Math.random() * ANIMALS.length);
   const animal = ANIMALS[animalIndex];
   const options = shuffle([animal.sound, ...animal.wrong.slice(0, 3)]);
   return { animal, options };
@@ -31,7 +32,7 @@ const buildRound = (animalIndex) => {
 
 const AnimalSounds = ({ onBack }) => {
   const [level, setLevel] = useState(1);
-  const [round, setRound] = useState(() => buildRound(0));
+  const [round, setRound] = useState(() => buildRound());
   const [feedback, setFeedback] = useState('');
   const [feedbackType, setFeedbackType] = useState('');
   const [gameWon, setGameWon] = useState(false);
@@ -40,7 +41,7 @@ const AnimalSounds = ({ onBack }) => {
 
   const resetGame = useCallback(() => {
     setLevel(1);
-    setRound(buildRound(0));
+    setRound(buildRound());
     setFeedback('');
     setFeedbackType('');
     setGameWon(false);
@@ -62,7 +63,7 @@ const AnimalSounds = ({ onBack }) => {
         } else {
           const nextLevel = level + 1;
           setLevel(nextLevel);
-          setRound(buildRound(nextLevel - 1));
+          setRound(buildRound());
           setFeedback('');
           setFeedbackType('');
           setAnswered(false);

@@ -28,16 +28,19 @@ const scrambleWord = (word) => {
   return shuffled;
 };
 
-const buildRound = (heroObj) => ({
-  ...heroObj,
-  tiles: scrambleWord(heroObj.word).map((letter, i) => ({ letter, id: i, used: false })),
-});
+const buildRound = () => {
+  const heroObj = HEROES[Math.floor(Math.random() * HEROES.length)];
+  return {
+    ...heroObj,
+    tiles: scrambleWord(heroObj.word).map((letter, i) => ({ letter, id: i, used: false })),
+  };
+};
 
-const TOTAL_LEVELS = HEROES.length;
+const TOTAL_LEVELS = 20;
 
 const HeroSpellQuest = ({ onBack }) => {
   const [levelIndex, setLevelIndex] = useState(0);
-  const [round, setRound] = useState(() => buildRound(HEROES[0]));
+  const [round, setRound] = useState(() => buildRound());
   const [selected, setSelected] = useState([]);
   const [feedback, setFeedback] = useState('');
   const [feedbackType, setFeedbackType] = useState('');
@@ -54,7 +57,7 @@ const HeroSpellQuest = ({ onBack }) => {
 
   const resetGame = useCallback(() => {
     setLevelIndex(0);
-    setRound(buildRound(HEROES[0]));
+    setRound(buildRound());
     setSelected([]);
     setFeedback('');
     setFeedbackType('');
@@ -87,7 +90,7 @@ const HeroSpellQuest = ({ onBack }) => {
           } else {
             const next = levelIndex + 1;
             setLevelIndex(next);
-            setRound(buildRound(HEROES[next]));
+            setRound(buildRound());
           }
         }, 1000);
       } else {

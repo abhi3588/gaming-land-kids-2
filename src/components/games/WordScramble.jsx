@@ -29,16 +29,19 @@ const scrambleWord = (word) => {
   return shuffled;
 };
 
-const buildRound = (wordObj) => ({
-  ...wordObj,
-  tiles: scrambleWord(wordObj.word).map((letter, i) => ({ letter, id: i, used: false })),
-});
+const buildRound = () => {
+  const wordObj = WORDS[Math.floor(Math.random() * WORDS.length)];
+  return {
+    ...wordObj,
+    tiles: scrambleWord(wordObj.word).map((letter, i) => ({ letter, id: i, used: false })),
+  };
+};
 
-const TOTAL_LEVELS = WORDS.length;
+const TOTAL_LEVELS = 20;
 
 const WordScramble = ({ onBack }) => {
   const [levelIndex, setLevelIndex] = useState(0);
-  const [round, setRound] = useState(() => buildRound(WORDS[0]));
+  const [round, setRound] = useState(() => buildRound());
   const [selected, setSelected] = useState([]);
   const [feedback, setFeedback] = useState('');
   const [feedbackType, setFeedbackType] = useState('');
@@ -55,7 +58,7 @@ const WordScramble = ({ onBack }) => {
 
   const resetGame = useCallback(() => {
     setLevelIndex(0);
-    setRound(buildRound(WORDS[0]));
+    setRound(buildRound());
     setSelected([]);
     setFeedback('');
     setFeedbackType('');
@@ -88,7 +91,7 @@ const WordScramble = ({ onBack }) => {
           } else {
             const next = levelIndex + 1;
             setLevelIndex(next);
-            setRound(buildRound(WORDS[next]));
+            setRound(buildRound());
           }
         }, 1000);
       } else {

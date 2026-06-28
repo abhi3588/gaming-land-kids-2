@@ -101,9 +101,13 @@ const QUESTIONS = [
 ];
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+const TOTAL_LEVELS = 20;
 
 const HeroTrivia = ({ onBack }) => {
-  const [questions] = useState(() => shuffle([...QUESTIONS]));
+  const [questions] = useState(() => Array.from({ length: TOTAL_LEVELS }, () => {
+    const q = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
+    return { ...q, options: shuffle([...q.options]) };
+  }));
   const [index, setIndex]               = useState(0);
   const [wrongPicks, setWrongPicks]     = useState([]);
   const [solved, setSolved]             = useState(false);
@@ -112,7 +116,7 @@ const HeroTrivia = ({ onBack }) => {
   const [score, setScore]               = useState(0);
   const [gameWon, setGameWon]           = useState(false);
 
-  const TOTAL = questions.length;
+  const TOTAL = TOTAL_LEVELS;
   const current = questions[index];
 
   const resetGame = useCallback(() => {
@@ -153,9 +157,9 @@ const HeroTrivia = ({ onBack }) => {
     }
   };
 
-  const grade = score >= 14 ? '🏆 Superhero Master!' :
-                score >= 11 ? '🥇 Hero Expert!' :
-                score >= 8  ? '🥈 Hero Fan!' :
+  const grade = score >= 18 ? '🏆 Superhero Master!' :
+                score >= 14 ? '🥇 Hero Expert!' :
+                score >= 10  ? '🥈 Hero Fan!' :
                               '🥉 Hero Trainee!';
 
   return (

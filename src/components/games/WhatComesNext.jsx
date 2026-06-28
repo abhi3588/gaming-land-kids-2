@@ -24,13 +24,18 @@ const ROUNDS = [
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-const buildRounds = () =>
-  shuffle([...ROUNDS]).map((r) => ({
-    ...r,
-    opts: shuffle([r.answer, ...r.wrong.slice(0, 3)]),
-  }));
+const TOTAL_LEVELS = 20;
 
-const TOTAL = ROUNDS.length;
+const buildRounds = () =>
+  Array.from({ length: TOTAL_LEVELS }, () => {
+    const r = ROUNDS[Math.floor(Math.random() * ROUNDS.length)];
+    return {
+      ...r,
+      opts: shuffle([r.answer, ...r.wrong.slice(0, 3)]),
+    };
+  });
+
+const TOTAL = TOTAL_LEVELS;
 
 const WhatComesNext = ({ onBack }) => {
   const [rounds, setRounds]         = useState(buildRounds);
