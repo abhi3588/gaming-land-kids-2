@@ -104,19 +104,21 @@ const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
 const HeroTrivia = ({ onBack }) => {
   const [questions] = useState(() => shuffle([...QUESTIONS]));
-  const [index, setIndex] = useState(0);
-  const [picked, setPicked] = useState(null);
-  const [feedback, setFeedback] = useState('');
+  const [index, setIndex]               = useState(0);
+  const [wrongPicks, setWrongPicks]     = useState([]);
+  const [solved, setSolved]             = useState(false);
+  const [feedback, setFeedback]         = useState('');
   const [feedbackType, setFeedbackType] = useState('');
-  const [score, setScore] = useState(0);
-  const [gameWon, setGameWon] = useState(false);
+  const [score, setScore]               = useState(0);
+  const [gameWon, setGameWon]           = useState(false);
 
   const TOTAL = questions.length;
   const current = questions[index];
 
   const resetGame = useCallback(() => {
     setIndex(0);
-    setPicked(null);
+    setWrongPicks([]);
+    setSolved(false);
     setFeedback('');
     setFeedbackType('');
     setScore(0);
@@ -124,30 +126,31 @@ const HeroTrivia = ({ onBack }) => {
   }, []);
 
   const handlePick = (option) => {
-    if (picked) return;
-    setPicked(option);
+    if (solved || wrongPicks.includes(option)) return;
 
     if (option === current.answer) {
       playSound('match');
       setFeedback('🎉 Correct! You know your heroes!');
       setFeedbackType('correct');
+      setSolved(true);
       setScore((s) => s + 1);
+      setTimeout(() => {
+        if (index + 1 >= TOTAL) {
+          setGameWon(true);
+        } else {
+          setIndex((i) => i + 1);
+          setWrongPicks([]);
+          setSolved(false);
+          setFeedback('');
+          setFeedbackType('');
+        }
+      }, 1000);
     } else {
       playSound('wrong');
-      setFeedback(`Not quite! The answer is "${current.answer}" 💡`);
+      setWrongPicks((prev) => [...prev, option]);
+      setFeedback('❌ Not right — that button is locked! Keep trying!');
       setFeedbackType('wrong');
     }
-
-    setTimeout(() => {
-      if (index + 1 >= TOTAL) {
-        setGameWon(true);
-      } else {
-        setIndex((i) => i + 1);
-        setPicked(null);
-        setFeedback('');
-        setFeedbackType('');
-      }
-    }, 1200);
   };
 
   const grade = score >= 14 ? '🏆 Superhero Master!' :
@@ -192,14 +195,19 @@ const HeroTrivia = ({ onBack }) => {
 
           <div className="trivia-options">
             {current.options.map((opt) => {
+              const isWrong   = wrongPicks.includes(opt);
+              const isCorrect = solved && opt === current.answer;
               let cls = 'trivia-btn';
-              if (picked === opt) {
-                cls += opt === current.answer ? ' trivia-correct' : ' trivia-wrong';
-              } else if (picked && opt === current.answer) {
-                cls += ' trivia-correct';
-              }
+              if (isCorrect) cls += ' trivia-correct';
+              else if (isWrong) cls += ' trivia-wrong';
               return (
-                <button key={opt} className={cls} onClick={() => handlePick(opt)} disabled={!!picked}>
+                <button
+                  key={opt}
+                  className={cls}
+                  onClick={() => handlePick(opt)}
+                  disabled={isWrong || solved}
+                  title={isWrong ? 'Already tried!' : ''}
+                >
                   {opt}
                 </button>
               );

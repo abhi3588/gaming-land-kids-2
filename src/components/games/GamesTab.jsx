@@ -24,6 +24,8 @@ import HeroSpellQuest  from '../games/HeroSpellQuest.jsx';
 import HeroTrivia      from '../games/HeroTrivia.jsx';
 import RhymeTime       from '../games/RhymeTime.jsx';
 import MathNinja       from '../games/MathNinja.jsx';
+import WhatComesNext   from '../games/WhatComesNext.jsx';
+import BigOrSmall      from '../games/BigOrSmall.jsx';
 
 const COMPONENT_MAP = {
   memory:       MemoryGame,
@@ -46,6 +48,8 @@ const COMPONENT_MAP = {
   herotrivia:     HeroTrivia,
   rhymetime:      RhymeTime,
   mathninja:      MathNinja,
+  whatcomesnext:  WhatComesNext,
+  bigorsmall:     BigOrSmall,
 };
 
 export default function GamesTab() {

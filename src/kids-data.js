@@ -330,8 +330,10 @@ export const gamesMeta = [
   { id: 'animalsounds', title: 'Animal Sounds',  icon: '🐶', color: 'animalsounds', ageGroup: 'preschool', desc: 'Tap the sound each animal makes!' },
   { id: 'shapefinder',  title: 'Shape Finder',   icon: '🔷', color: 'shapefinder',  ageGroup: 'preschool', desc: 'Find the matching shape!' },
   { id: 'oddoneout',    title: 'Odd One Out',     icon: '🐸', color: 'oddoneout',    ageGroup: 'preschool', desc: 'Tap the one that does not belong!' },
-  { id: 'heropowermatch', title: 'Hero Power Match', icon: '⚡', color: 'heropowermatch', ageGroup: 'preschool', desc: 'Match each hero to their superpower!' },
-  { id: 'savethecity',   title: 'Save the City',    icon: '🏙️', color: 'savethecity',   ageGroup: 'preschool', desc: 'Pick the right hero to save the day!' },
+  { id: 'heropowermatch',  title: 'Hero Power Match',  icon: '⚡', color: 'heropowermatch',  ageGroup: 'preschool', desc: 'Match each hero to their superpower!' },
+  { id: 'savethecity',    title: 'Save the City',     icon: '🏙️', color: 'savethecity',    ageGroup: 'preschool', desc: 'Pick the right hero to save the day!' },
+  { id: 'whatcomesnext',  title: 'What Comes Next?',  icon: '🔮', color: 'whatcomesnext',  ageGroup: 'preschool', desc: 'Spot the pattern and pick what comes next!' },
+  { id: 'bigorsmall',     title: 'Big or Small?',     icon: '📏', color: 'bigorsmall',     ageGroup: 'preschool', desc: 'Which one is bigger or smaller?' },
 
   // Ages 6-10 (junior)
   { id: 'herospellquest', title: 'Hero Spell Quest', icon: '🦸', color: 'herospellquest', ageGroup: 'junior', desc: 'Spell superhero names letter by letter!' },
