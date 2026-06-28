@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export default function StoryReader({ story, open, onClose }) {
+export default function StoryReader({ story, open, onClose, lang = 'en' }) {
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState(1);
   const [animKey, setAnimKey] = useState(0);
@@ -64,15 +64,15 @@ export default function StoryReader({ story, open, onClose }) {
 
         {/* Body */}
         <div className="reader-body" key={animKey} style={{ animation: 'pop-in 0.35s ease both' }}>
-          {isCover  && <CoverPage  story={story} />}
-          {scene    && <ScenePage  scene={scene} />}
-          {isMoral  && <MoralPage  story={story} />}
+          {isCover  && <CoverPage  story={story} lang={lang} />}
+          {scene    && <ScenePage  scene={scene} lang={lang} />}
+          {isMoral  && <MoralPage  story={story} lang={lang} />}
         </div>
 
         {/* Nav */}
         <div className="reader-nav">
           <button className="reader-nav-btn" onClick={goPrev} disabled={page === 0}>
-            ← Back
+            ← {lang === 'hi' ? 'पीछे' : 'Back'}
           </button>
 
           <div className="reader-dots">
@@ -88,11 +88,11 @@ export default function StoryReader({ story, open, onClose }) {
 
           {page < totalPages - 1 ? (
             <button className="reader-nav-btn" onClick={goNext}>
-              Next →
+              {lang === 'hi' ? 'आगे' : 'Next'} →
             </button>
           ) : (
             <button className="reader-nav-btn" onClick={() => { setPage(0); setAnimKey(k => k + 1); }}>
-              🔄 Again
+              🔄 {lang === 'hi' ? 'फिर से' : 'Again'}
             </button>
           )}
         </div>
@@ -101,7 +101,9 @@ export default function StoryReader({ story, open, onClose }) {
   );
 }
 
-function CoverPage({ story }) {
+function CoverPage({ story, lang }) {
+  const agesLabel = lang === 'hi' ? `📖 उम्र ${story.ageRange} के लिए एक कहानी` : `📖 A Story for Ages ${story.ageRange}`;
+  const tapNextLabel = lang === 'hi' ? '✨ कहानी शुरू करने के लिए आगे पर टैप करें →' : '✨ Tap Next to start the story →';
   return (
     <>
       <div style={{ fontSize: '5rem', marginBottom: '0.75rem', filter: 'drop-shadow(0 6px 14px rgba(0,0,0,0.2))' }}>
@@ -113,7 +115,7 @@ function CoverPage({ story }) {
         padding: '0.25rem 0.9rem', borderRadius: '999px',
         fontSize: '0.8rem', fontWeight: 700, color: 'white', marginBottom: '1rem',
       }}>
-        📖 A Story for Ages {story.ageRange}
+        {agesLabel}
       </span>
       <h2 style={{ fontSize: 'clamp(1.4rem,4vw,2rem)', fontWeight: 700, color: 'white',
         textShadow: '0 2px 8px rgba(0,0,0,0.2)', lineHeight: 1.2, maxWidth: 500 }}>
@@ -137,7 +139,7 @@ function CoverPage({ story }) {
       )}
 
       <p style={{ marginTop: '1.5rem', color: 'rgba(255,255,255,0.9)', fontWeight: 600, fontSize: '0.95rem' }}>
-        ✨ Tap Next to start the story →
+        {tapNextLabel}
       </p>
     </>
   );
@@ -161,7 +163,9 @@ function ScenePage({ scene }) {
   );
 }
 
-function MoralPage({ story }) {
+function MoralPage({ story, lang }) {
+  const moralLabel = lang === 'hi' ? '💛 कहानी की सीख' : '💛 The Moral of the Story';
+  const endLabel = lang === 'hi' ? 'समाप्त। बहुत बढ़िया पढ़ा! 🌟' : 'The End. Great job reading! 🌟';
   return (
     <>
       <div style={{ fontSize: '4.5rem', marginBottom: '0.75rem',
@@ -174,7 +178,7 @@ function MoralPage({ story }) {
         padding: '0.4rem 1.1rem', borderRadius: '999px',
         fontSize: '0.85rem', fontWeight: 700, color: 'white', marginBottom: '1.25rem',
       }}>
-        💛 The Moral of the Story
+        {moralLabel}
       </span>
 
       <div className="reader-moral-card">
@@ -191,7 +195,7 @@ function MoralPage({ story }) {
       </div>
 
       <p style={{ marginTop: '1.5rem', color: 'rgba(255,255,255,0.9)', fontWeight: 600 }}>
-        The End. Great job reading! 🌟
+        {endLabel}
       </p>
     </>
   );

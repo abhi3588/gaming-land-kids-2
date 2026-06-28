@@ -1,7 +1,8 @@
 import { stories } from './components/stories/data/index.js';
+import { storiesHindi } from './components/stories/data-hindi/index.js';
 
 // ===== Stories Data =====
-export { stories };
+export { stories, storiesHindi };
 
 // ===== Games Metadata =====
 // (actual game components live in src/components/games/)

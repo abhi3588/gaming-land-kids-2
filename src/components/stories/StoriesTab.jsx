@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { stories } from '../../kids-data.js';
+import { stories as defaultStories } from '../../kids-data.js';
 import StoryReader from './StoryReader.jsx';
 
-export default function StoriesTab() {
+export default function StoriesTab({ storiesList = defaultStories, lang = 'en' }) {
   const [activeStory, setActiveStory] = useState(null);
   const [readerOpen, setReaderOpen]   = useState(false);
 
@@ -11,20 +11,24 @@ export default function StoriesTab() {
     setReaderOpen(true);
   };
 
+  const headerTitle = lang === 'hi' ? '📖 सोने के समय की कहानियाँ' : '📖 Bedtime Story Corner';
+  const headerSub = lang === 'hi' ? 'तस्वीरों के साथ कहानियाँ पढ़ें! ✨' : 'Tap a story to read along with pictures! ✨';
+
   return (
     <div>
       <div className="section-header">
-        <h2>📖 Bedtime Story Corner</h2>
-        <p>Tap a story to read along with pictures! ✨</p>
+        <h2>{headerTitle}</h2>
+        <p>{headerSub}</p>
       </div>
 
       <div className="stories-grid">
-        {stories.map((story, i) => (
+        {storiesList.map((story, i) => (
           <StoryCard
             key={story.id}
             story={story}
             index={i}
             onOpen={() => openStory(story)}
+            lang={lang}
           />
         ))}
       </div>
@@ -33,12 +37,19 @@ export default function StoriesTab() {
         story={activeStory}
         open={readerOpen}
         onClose={() => setReaderOpen(false)}
+        lang={lang}
       />
     </div>
   );
 }
 
-function StoryCard({ story, onOpen }) {
+function StoryCard({ story, onOpen, lang }) {
+  const agesLabel = lang === 'hi' ? `उम्र ${story.ageRange}` : `Ages ${story.ageRange}`;
+  const minReadLabel = lang === 'hi' ? 'मिनट' : 'min read';
+  const pagesLabel = lang === 'hi' ? 'पेज' : 'pages';
+  const moralLabel = lang === 'hi' ? '❤️ सीख' : '❤️ Moral';
+  const readBtnLabel = lang === 'hi' ? '📖 कहानी पढ़ें →' : '📖 Read Story →';
+
   return (
     <div className="story-card" onClick={onOpen} role="button" tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && onOpen()}
@@ -59,7 +70,7 @@ function StoryCard({ story, onOpen }) {
         )}
         <div className="story-cover-overlay" />
         <span className="story-emoji-badge">{story.emoji}</span>
-        <span className="story-age-badge">Ages {story.ageRange}</span>
+        <span className="story-age-badge">{agesLabel}</span>
       </div>
 
       {/* Body */}
@@ -68,20 +79,20 @@ function StoryCard({ story, onOpen }) {
         <p className="subtitle">{story.subtitle}</p>
 
         <div className="story-meta">
-          <span>🕐 {story.minutesToRead} min read</span>
-          <span>📄 {story.scenes.length} pages</span>
+          <span>🕐 {story.minutesToRead} {minReadLabel}</span>
+          <span>📄 {story.scenes.length} {pagesLabel}</span>
         </div>
 
         <div className="story-moral">
           <span className="moral-emoji">{story.moralEmoji}</span>
           <div>
-            <span className="moral-label">❤️ Moral</span>
+            <span className="moral-label">{moralLabel}</span>
             <span className="moral-text">{story.moral}</span>
           </div>
         </div>
 
         <button className="read-btn" onClick={(e) => { e.stopPropagation(); onOpen(); }}>
-          📖 Read Story →
+          {readBtnLabel}
         </button>
       </div>
     </div>
