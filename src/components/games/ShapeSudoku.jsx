@@ -33,9 +33,18 @@ const TOTAL_LEVELS = 20;
 
 const getClueCount = (level) => Math.max(12 - Math.floor((level - 1) / 2), 6);
 
+const createPRNG = (seed) => {
+  let currentSeed = seed;
+  return () => {
+    let x = Math.sin(currentSeed++) * 10000;
+    return x - Math.floor(x);
+  };
+};
+
 const createPuzzleData = (level) => {
-  const template = SUDOKU_BOARDS[Math.floor(Math.random() * SUDOKU_BOARDS.length)];
-  const shuffledShapes = [...SHAPES].sort(() => Math.random() - 0.5);
+  const prng = createPRNG(level * 100);
+  const template = SUDOKU_BOARDS[Math.floor(prng() * SUDOKU_BOARDS.length)];
+  const shuffledShapes = [...SHAPES].sort(() => prng() - 0.5);
   const shapeMapping = {
     1: shuffledShapes[0],
     2: shuffledShapes[1],
@@ -49,8 +58,8 @@ const createPuzzleData = (level) => {
   const clueCount = getClueCount(level);
   let clearedCount = 0;
   while (clearedCount < 16 - clueCount) {
-    const r = Math.floor(Math.random() * 4);
-    const c = Math.floor(Math.random() * 4);
+    const r = Math.floor(prng() * 4);
+    const c = Math.floor(prng() * 4);
     if (play[r][c].isClue) {
       play[r][c] = { value: null, isClue: false };
       clearedCount++;

@@ -3,7 +3,16 @@ import { playSound } from '../../utils/sounds';
 
 const TOTAL_LEVELS = 20;
 
+const createPRNG = (seed) => {
+  let currentSeed = seed;
+  return () => {
+    let x = Math.sin(currentSeed++) * 10000;
+    return x - Math.floor(x);
+  };
+};
+
 const createLevelData = (level) => {
+  const prng = createPRNG(level * 100);
   const isHard = level > 10;
   const gridSize = isHard ? 4 : 3;
   const totalCells = gridSize * gridSize;
@@ -18,7 +27,7 @@ const createLevelData = (level) => {
 
   const cells = Array.from({ length: totalCells }, (_, i) => i);
   // Shuffle and pick targetCount cells
-  const shuffled = [...cells].sort(() => Math.random() - 0.5);
+  const shuffled = [...cells].sort(() => prng() - 0.5);
   const targets = shuffled.slice(0, targetCount);
 
   return { gridSize, totalCells, targets };

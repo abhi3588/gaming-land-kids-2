@@ -7,7 +7,11 @@ const COLORS = [
   '#6BCB77', // green
   '#4D96FF', // blue
   '#C77DFF', // purple
-  '#FF9F1C'  // orange
+  '#FF9F1C', // orange
+  '#F06292', '#4DD0E1', '#81C784', '#FFB74D',
+  '#BA68C8', '#4DB6AC', '#E57373', '#64B5F6',
+  '#FF8A65', '#9575CD', '#4FC3F7', '#AED581',
+  '#FFD54F', '#7986CB'
 ];
 
 const TOTAL_LEVELS = 20;
@@ -15,10 +19,10 @@ const TOTAL_LEVELS = 20;
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
 const buildRound = (level) => {
-  const shuffled = shuffle(COLORS);
-  const target = shuffled[0];
+  const target = COLORS[level - 1];
+  const availableDistractors = COLORS.filter(c => c !== target);
   const optionCount = Math.min(3 + Math.floor(level / 5), 6);
-  const distractors = shuffle(shuffled.slice(1)).slice(0, optionCount - 1);
+  const distractors = shuffle(availableDistractors).slice(0, optionCount - 1);
   const options = shuffle([target, ...distractors]);
   return { target, options };
 };

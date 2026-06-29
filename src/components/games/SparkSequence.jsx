@@ -69,7 +69,11 @@ const PADS = [
   { id: 3, colorClass: 'green', freq: 349.23 }
 ];
 
-const getRandomPadIndex = () => Math.floor(Math.random() * PADS.length);
+const getDeterministicPadIndex = (level) => {
+  let x = Math.sin(level * 1000) * 10000;
+  return Math.floor((x - Math.floor(x)) * PADS.length);
+};
+
 const TOTAL_LEVELS = 20;
 
 const SparkSequence = ({ onBack }) => {
@@ -139,7 +143,7 @@ const SparkSequence = ({ onBack }) => {
     setGameWon(false);
     setScore(0);
     setLevel(1);
-    const startSeq = [getRandomPadIndex()];
+    const startSeq = [getDeterministicPadIndex(1)];
     setSequence(startSeq);
     setUserSequence([]);
     setMessage('Watch the pattern!');
@@ -148,7 +152,7 @@ const SparkSequence = ({ onBack }) => {
 
   const advanceSequence = () => {
     const nextLevel = level + 1;
-    const nextSequence = [...sequence, getRandomPadIndex()];
+    const nextSequence = [...sequence, getDeterministicPadIndex(nextLevel)];
     setSequence(nextSequence);
     setUserSequence([]);
     setLevel(nextLevel);

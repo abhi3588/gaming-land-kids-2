@@ -12,20 +12,30 @@ const HEROES = [
   { name: 'Shield Stella', emoji: '🛡️',  power: 'Magic shield! 🛡️',    wrong: ['Controls weather! ⛈️', 'Super strength! 💪', 'Super speed! 💨'] },
   { name: 'Wonder Wendy',  emoji: '🌟',  power: 'Magic lasso! 🌀',      wrong: ['Magic shield! 🛡️', 'Can fly! ✈️', 'Controls metal! 🔩'] },
   { name: 'Robo Rex',      emoji: '🤖',  power: 'Laser beams! 🔴',      wrong: ['Magic lasso! 🌀', 'Freezes things! ❄️', 'Super speed! 💨'] },
+  { name: 'Aqua Andy',     emoji: '🌊',  power: 'Talks to fish! 🐟',    wrong: ['Shoots webs! 🕸️', 'Can fly! ✈️', 'Super speed! 💨'] },
+  { name: 'Bat Bob',       emoji: '🦇',  power: 'Rich gadgets! 🦇',     wrong: ['Controls metal! 🔩', 'Magic lasso! 🌀', 'Laser beams! 🔴'] },
+  { name: 'Super Sally',   emoji: '🦸‍♀️', power: 'Laser vision! 👀',     wrong: ['Shoots webs! 🕸️', 'Magic shield! 🛡️', 'Freezes things! ❄️'] },
+  { name: 'Wolf Wayne',    emoji: '🐺',  power: 'Sharp claws! 🔪',      wrong: ['Can fly! ✈️', 'Controls weather! ⛈️', 'Super speed! 💨'] },
+  { name: 'Cyclops Cy',    emoji: '🔴',  power: 'Optic blast! 💥',      wrong: ['Talks to fish! 🐟', 'Super strength! 💪', 'Shoots webs! 🕸️'] },
+  { name: 'Hulk Harry',    emoji: '💚',  power: 'Gamma smash! 🟢',      wrong: ['Magic lasso! 🌀', 'Controls metal! 🔩', 'Super speed! 💨'] },
+  { name: 'Panther Pat',   emoji: '🐾',  power: 'Vibranium suit! 🐈',   wrong: ['Can fly! ✈️', 'Talks to fish! 🐟', 'Freezes things! ❄️'] },
+  { name: 'Iron Izzy',     emoji: '🦾',  power: 'Robot armor! 🤖',      wrong: ['Controls weather! ⛈️', 'Super strength! 💪', 'Shoots webs! 🕸️'] },
+  { name: 'Thor Tom',      emoji: '🔨',  power: 'Magic hammer! 🔨',     wrong: ['Rich gadgets! 🦇', 'Magic lasso! 🌀', 'Laser beams! 🔴'] },
+  { name: 'Ant Andy',      emoji: '🐜',  power: 'Shrinks tiny! 🐜',     wrong: ['Magic hammer! 🔨', 'Talks to fish! 🐟', 'Super strength! 💪'] },
 ];
 
 const TOTAL_ROUNDS = 20;
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-const buildRound = () => {
-  const hero = HEROES[Math.floor(Math.random() * HEROES.length)];
+const buildRound = (level) => {
+  const hero = HEROES[level - 1];
   const options = shuffle([hero.power, ...hero.wrong.slice(0, 3)]);
   return { hero, options };
 };
 
 const HeroPowerMatch = ({ onBack }) => {
   const [level, setLevel] = useState(1);
-  const [round, setRound] = useState(() => buildRound());
+  const [round, setRound] = useState(() => buildRound(1));
   const [feedback, setFeedback] = useState('');
   const [feedbackType, setFeedbackType] = useState('');
   const [gameWon, setGameWon] = useState(false);
@@ -34,7 +44,7 @@ const HeroPowerMatch = ({ onBack }) => {
 
   const resetGame = useCallback(() => {
     setLevel(1);
-    setRound(buildRound());
+    setRound(buildRound(1));
     setFeedback('');
     setFeedbackType('');
     setGameWon(false);
@@ -56,7 +66,7 @@ const HeroPowerMatch = ({ onBack }) => {
         } else {
           const next = level + 1;
           setLevel(next);
-          setRound(buildRound());
+          setRound(buildRound(next));
           setFeedback('');
           setFeedbackType('');
           setAnswered(false);

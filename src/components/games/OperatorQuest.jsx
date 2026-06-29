@@ -3,7 +3,16 @@ import { playSound } from '../../utils/sounds';
 
 const TOTAL_LEVELS = 20;
 
+const createPRNG = (seed) => {
+  let currentSeed = seed;
+  return () => {
+    let x = Math.sin(currentSeed++) * 10000;
+    return x - Math.floor(x);
+  };
+};
+
 const createRound = (level) => {
+  const prng = createPRNG(level * 50);
   const isMultiplication = level > 12;
   const isSubtraction = level > 6 && !isMultiplication;
 
@@ -13,19 +22,19 @@ const createRound = (level) => {
 
   if (isMultiplication) {
     operator = '×';
-    num1 = Math.floor(Math.random() * 10) + 1;
-    num2 = Math.floor(Math.random() * 10) + 1;
+    num1 = Math.floor(prng() * 10) + 1;
+    num2 = Math.floor(prng() * 10) + 1;
     answer = num1 * num2;
   } else if (isSubtraction) {
     operator = '-';
-    num1 = Math.floor(Math.random() * 20) + 5;
-    num2 = Math.floor(Math.random() * num1); // Ensure positive result
+    num1 = Math.floor(prng() * 20) + 5;
+    num2 = Math.floor(prng() * num1); // Ensure positive result
     answer = num1 - num2;
   } else {
     // Addition (levels 1-6)
     operator = '+';
-    num1 = Math.floor(Math.random() * 15) + 1;
-    num2 = Math.floor(Math.random() * 15) + 1;
+    num1 = Math.floor(prng() * 15) + 1;
+    num2 = Math.floor(prng() * 15) + 1;
     answer = num1 + num2;
   }
 

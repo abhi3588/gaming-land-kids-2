@@ -9,15 +9,27 @@ const SHAPES = [
   { name: 'Square',   emoji: '🟦', color: '#6BCB77' },
   { name: 'Diamond',  emoji: '🔷', color: '#4CC9F0' },
   { name: 'Moon',     emoji: '🌙', color: '#FF9F1C' },
-  { name: 'Cloud',    emoji: '☁️',  color: '#A0C4FF' },
+  { name: 'Cloud',    emoji: '☁️', color: '#A0C4FF' },
+  { name: 'Cross',    emoji: '➕', color: '#ff5252' },
+  { name: 'Arrow',    emoji: '➡️', color: '#34ace0' },
+  { name: 'Sun',      emoji: '☀️', color: '#ffb142' },
+  { name: 'Drop',     emoji: '💧', color: '#706fd3' },
+  { name: 'Leaf',     emoji: '🍃', color: '#33d9b2' },
+  { name: 'Snow',     emoji: '❄️', color: '#82ccdd' },
+  { name: 'Spark',    emoji: '⚡', color: '#feca57' },
+  { name: 'Fire',     emoji: '🔥', color: '#ff793f' },
+  { name: 'Umbrella', emoji: '☂️', color: '#b33939' },
+  { name: 'Bell',     emoji: '🔔', color: '#cd6133' },
+  { name: 'Key',      emoji: '🔑', color: '#ccae62' },
+  { name: 'Hexagon',  emoji: '⬡', color: '#10ac84' }
 ];
 
 const TOTAL_ROUNDS = 20;
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-const buildRound = () => {
-  const target = SHAPES[Math.floor(Math.random() * SHAPES.length)];
+const buildRound = (level) => {
+  const target = SHAPES[level - 1];
   const distractors = shuffle(SHAPES.filter((s) => s.name !== target.name)).slice(0, 3);
   const options = shuffle([target, ...distractors]);
   return { target, options };
@@ -25,7 +37,7 @@ const buildRound = () => {
 
 const ShapeFinder = ({ onBack }) => {
   const [level, setLevel] = useState(1);
-  const [round, setRound] = useState(() => buildRound());
+  const [round, setRound] = useState(() => buildRound(1));
   const [feedback, setFeedback] = useState('');
   const [feedbackType, setFeedbackType] = useState('');
   const [gameWon, setGameWon] = useState(false);
@@ -34,7 +46,7 @@ const ShapeFinder = ({ onBack }) => {
 
   const resetGame = useCallback(() => {
     setLevel(1);
-    setRound(buildRound());
+    setRound(buildRound(1));
     setFeedback('');
     setFeedbackType('');
     setGameWon(false);
@@ -57,7 +69,7 @@ const ShapeFinder = ({ onBack }) => {
         } else {
           const nextLevel = level + 1;
           setLevel(nextLevel);
-          setRound(buildRound());
+          setRound(buildRound(nextLevel));
           setFeedback('');
           setFeedbackType('');
           setAnswered(false);

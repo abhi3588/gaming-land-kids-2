@@ -20,6 +20,8 @@ const ROUNDS = [
   { word: 'BLUE',  correct: 'GLUE',  wrong: ['RED', 'GREEN', 'PINK']  },
   { word: 'PLAY',  correct: 'DAY',   wrong: ['NIGHT', 'WORK', 'REST'] },
   { word: 'CLOCK', correct: 'ROCK',  wrong: ['TIME', 'BELL', 'TICK']  },
+  { word: 'SUN',   correct: 'BUN',   wrong: ['MOON', 'HOT', 'SKY']    },
+  { word: 'BOX',   correct: 'FOX',   wrong: ['CAT', 'TOY', 'WOOD']    },
 ];
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
@@ -42,7 +44,7 @@ const RhymeTime = ({ onBack }) => {
   const current = order[index];
 
   const resetGame = useCallback(() => {
-    const newOrder = Array.from({ length: TOTAL_LEVELS }, () => ROUNDS[Math.floor(Math.random() * ROUNDS.length)]);
+    const newOrder = ROUNDS;
     setOrder(newOrder);
     setIndex(0);
     setOptions(buildOptions(newOrder[0]));

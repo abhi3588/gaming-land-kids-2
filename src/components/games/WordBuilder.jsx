@@ -20,7 +20,7 @@ const WORD_LEVELS = [
   { word: 'FLOWER', emoji: '🌸' },
   { word: 'APPLE', emoji: '🍎' },
   { word: 'TIGER', emoji: '🐯' },
-  { word: 'ROCKET', emoji: '🚀' },
+  { word: 'TRAIN', emoji: '🚂' },
   { word: 'SUNNY', emoji: '☀️' }
 ];
 
@@ -59,9 +59,9 @@ const createWordState = (question) => {
 
 const WordBuilder = ({ onBack }) => {
   const [level, setLevel] = useState(1);
-  const [currentQuestion, setCurrentQuestion] = useState(() => WORD_LEVELS[Math.floor(Math.random() * WORD_LEVELS.length)]);
-  const [selectedSlots, setSelectedSlots] = useState(() => createWordState(currentQuestion).slots);
-  const [scrambledTiles, setScrambledTiles] = useState(() => createWordState(currentQuestion).tiles);
+  const [currentQuestion, setCurrentQuestion] = useState(() => WORD_LEVELS[0]);
+  const [selectedSlots, setSelectedSlots] = useState(() => createWordState(WORD_LEVELS[0]).slots);
+  const [scrambledTiles, setScrambledTiles] = useState(() => createWordState(WORD_LEVELS[0]).tiles);
   const [isCorrect, setIsCorrect] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [message, setMessage] = useState('Build the word for the emoji!');
@@ -73,7 +73,7 @@ const WordBuilder = ({ onBack }) => {
       return;
     }
 
-    const nextQuestion = WORD_LEVELS[Math.floor(Math.random() * WORD_LEVELS.length)];
+    const nextQuestion = WORD_LEVELS[nextLevel - 1];
     setLevel(nextLevel);
     setCurrentQuestion(nextQuestion);
     setIsCorrect(false);

@@ -17,16 +17,18 @@ const ROUNDS = [
   { question: "Which one is NOT in a farm?",  items: ['🐄','🐔','🐖','🦈'], odd: '🦈' },
   { question: "Which one is NOT a sport?",    items: ['⚽','🏀','🍦','🎾'], odd: '🍦' },
   { question: "Which one is NOT a tool?",     items: ['🔨','🪛','✂️','🌸'], odd: '🌸' },
+  { question: "Which one is NOT a letter?",   items: ['A','B','7','C'], odd: '7' },
+  { question: "Which one is NOT a bug?",      items: ['🐜','🕷️','🦋','🐘'], odd: '🐘' },
+  { question: "Which one is NOT cold?",       items: ['🧊','⛄','❄️','🔥'], odd: '🔥' },
+  { question: "Which one is NOT sweet?",      items: ['🎂','🍫','🍭','🍋'], odd: '🍋' },
+  { question: "Which one is NOT red?",        items: ['🍎','🍓','🍅','🍌'], odd: '🍌' }
 ];
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 const TOTAL_LEVELS = 20;
 
 const OddOneOut = ({ onBack }) => {
-  const [order] = useState(() => Array.from({ length: TOTAL_LEVELS }, () => {
-    const q = ROUNDS[Math.floor(Math.random() * ROUNDS.length)];
-    return { ...q, items: shuffle([...q.items]) };
-  }));
+  const [order] = useState(() => ROUNDS.map(q => ({ ...q, items: shuffle([...q.items]) })));
   const [levelIndex, setLevelIndex] = useState(0);
   const [picked, setPicked] = useState(null);
   const [feedback, setFeedback] = useState('');

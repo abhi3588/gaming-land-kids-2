@@ -4,10 +4,19 @@ import { playSound } from '../../utils/sounds';
 const EMOJIS = ['🐳', '🐙', '🐢', '🐠', '🦀', '🐬', '🐚', '🐋'];
 const TOTAL_LEVELS = 20;
 
-const shuffle = (array) => [...array].sort(() => Math.random() - 0.5);
 const getPairCount = (level) => Math.min(2 + Math.floor((level - 1) / 3), 8);
 
+const createPRNG = (seed) => {
+  let currentSeed = seed;
+  return () => {
+    let x = Math.sin(currentSeed++) * 10000;
+    return x - Math.floor(x);
+  };
+};
+
 const createCards = (level) => {
+  const prng = createPRNG(level * 50);
+  const shuffle = (array) => [...array].sort(() => prng() - 0.5);
   const pairCount = getPairCount(level);
   const selected = shuffle(EMOJIS).slice(0, pairCount);
   const duplicates = selected.flatMap((emoji, index) => [

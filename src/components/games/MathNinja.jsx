@@ -2,9 +2,18 @@ import { useState, useCallback } from 'react';
 import { playSound } from '../../utils/sounds';
 
 const TOTAL_LEVELS = 20;
-const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+const createPRNG = (seed) => {
+  let currentSeed = seed;
+  return () => {
+    let x = Math.sin(currentSeed++) * 10000;
+    return x - Math.floor(x);
+  };
+};
 
 const generateQuestion = (levelNum) => {
+  const prng = createPRNG(levelNum * 10);
+  const rand = (min, max) => Math.floor(prng() * (max - min + 1)) + min;
   const level = levelNum < 5 ? 'easy' : levelNum < 12 ? 'medium' : 'hard';
   let a, b, op, answer;
 
@@ -31,7 +40,7 @@ const generateQuestion = (levelNum) => {
     if (w !== answer && w >= 0) wrongSet.add(w);
   }
   const wrongs = [...wrongSet];
-  const options = [...wrongs, answer].sort(() => Math.random() - 0.5);
+  const options = [...wrongs, answer].sort(() => prng() - 0.5);
 
   return { a, b, op, answer, options, level };
 };

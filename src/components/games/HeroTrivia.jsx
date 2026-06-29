@@ -98,14 +98,18 @@ const QUESTIONS = [
     options: ['Webs', 'Lasers', 'Fire', 'Ice'],
     answer: 'Webs',
   },
+  { q: "What is Captain America's weapon?", emoji: '🛡️', options: ['Shield', 'Sword', 'Gun', 'Hammer'], answer: 'Shield' },
+  { q: 'Who is a walking tree?', emoji: '🌳', options: ['Groot', 'Hulk', 'Beast', 'Swamp Thing'], answer: 'Groot' },
+  { q: 'What magic word transforms Billy Batson?', emoji: '⚡', options: ['Shazam', 'Abracadabra', 'Hocus Pocus', 'Alakazam'], answer: 'Shazam' },
+  { q: 'Which superhero is an Amazonian princess?', emoji: '🌟', options: ['Wonder Woman', 'Black Widow', 'Supergirl', 'Batgirl'], answer: 'Wonder Woman' }
 ];
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 const TOTAL_LEVELS = 20;
 
 const HeroTrivia = ({ onBack }) => {
-  const [questions] = useState(() => Array.from({ length: TOTAL_LEVELS }, () => {
-    const q = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
+  const [questions] = useState(() => Array.from({ length: TOTAL_LEVELS }, (_, i) => {
+    const q = QUESTIONS[i];
     return { ...q, options: shuffle([...q.options]) };
   }));
   const [index, setIndex]               = useState(0);

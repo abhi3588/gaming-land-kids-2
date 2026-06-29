@@ -14,9 +14,17 @@ const BALLOON_COLORS = [
 
 const TOTAL_LEVELS = 20;
 
-const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const createPRNG = (seed) => {
+  let currentSeed = seed;
+  return () => {
+    let x = Math.sin(currentSeed++) * 10000;
+    return x - Math.floor(x);
+  };
+};
 
 const generateQuestionData = (level) => {
+  const prng = createPRNG(level * 100);
+  const getRandomNumber = (min, max) => Math.floor(prng() * (max - min + 1)) + min;
   let num1, num2, answer, text;
 
   if (level <= 5) {
@@ -36,7 +44,7 @@ const generateQuestionData = (level) => {
     text = `${num1} × ${num2} = ?`;
   } else {
     const operations = ['+', '-', '×'];
-    const op = operations[Math.floor(Math.random() * operations.length)];
+    const op = operations[Math.floor(prng() * operations.length)];
     if (op === '+') {
       num1 = getRandomNumber(10, 26);
       num2 = getRandomNumber(5, 20);
@@ -59,6 +67,8 @@ const generateQuestionData = (level) => {
 };
 
 const generateBalloonsData = (correctAnswer, level) => {
+  const prng = createPRNG(level * 200);
+  const getRandomNumber = (min, max) => Math.floor(prng() * (max - min + 1)) + min;
   const wrongAnswers = new Set();
   let attempts = 0;
 
@@ -78,13 +88,13 @@ const generateBalloonsData = (correctAnswer, level) => {
   }
 
   const answersList = [correctAnswer, ...Array.from(wrongAnswers)];
-  const shuffledAnswers = answersList.sort(() => Math.random() - 0.5);
+  const shuffledAnswers = answersList.sort(() => prng() - 0.5);
 
   return shuffledAnswers.map((value, idx) => {
     const left = 10 + idx * 22 + getRandomNumber(-3, 3);
     const bottom = -80 - getRandomNumber(0, 150);
-    const speed = 1.0 + Math.min(level * 0.12, 3.0) + Math.random() * 0.4;
-    const color = BALLOON_COLORS[Math.floor(Math.random() * BALLOON_COLORS.length)];
+    const speed = 1.0 + Math.min(level * 0.12, 3.0) + prng() * 0.4;
+    const color = BALLOON_COLORS[Math.floor(prng() * BALLOON_COLORS.length)];
 
     return {
       id: idx,
@@ -168,7 +178,7 @@ const MathQuest = ({ onBack }) => {
         if (b.isPopped) return b;
         let newBottom = b.bottom + b.speed;
         if (newBottom > 480) {
-          newBottom = -100 - getRandomNumber(0, 80);
+          newBottom = -100 - (Math.random() * 80);
         }
         return { ...b, bottom: newBottom };
       });

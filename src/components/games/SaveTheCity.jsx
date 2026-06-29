@@ -71,13 +71,21 @@ const ROUNDS = [
     answer: 'frankie',
     hint:   'Who is fast enough to get there in seconds?',
   },
+  { danger: '🌋 A volcano is erupting near town!', answer: 'iris', hint: 'Who can freeze the lava?' },
+  { danger: '🏦 Robbers are escaping in a fast car!', answer: 'frankie', hint: 'Who can catch up to them in a flash?' },
+  { danger: '🌪️ A tornado is throwing cars around!', answer: 'max', hint: 'Who can catch the metal cars mid-air?' },
+  { danger: '🎢 The roller coaster is stuck upside down!', answer: 'sam', hint: 'Who can fly up and rescue the riders?' },
+  { danger: '🐘 Zoo animals have escaped their cages!', answer: 'stevie', hint: 'Who can trap them safely with sticky webs?' },
+  { danger: '🚇 A subway tunnel has collapsed!', answer: 'smash', hint: 'Who is strong enough to lift the rubble?' },
+  { danger: '🛸 Aliens are attacking from the sky!', answer: 'sam', hint: 'Who can fly up and fight them?' },
+  { danger: '💣 A ticking bomb is hidden in a vault!', answer: 'max', hint: 'Who can pull it out through the metal door?' }
 ];
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 const TOTAL_LEVELS = 20;
 
 const SaveTheCity = ({ onBack }) => {
-  const [order] = useState(() => Array.from({ length: TOTAL_LEVELS }, () => ROUNDS[Math.floor(Math.random() * ROUNDS.length)]));
+  const [order] = useState(() => ROUNDS);
   const [levelIndex, setLevelIndex] = useState(0);
   const [picked, setPicked] = useState(null);
   const [feedback, setFeedback] = useState('');

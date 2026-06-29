@@ -17,13 +17,17 @@ const ROUNDS = [
   { question: 'Which one is BIGGER? 🔍', a: { emoji:'🦒', label:'Giraffe'  }, b: { emoji:'🐑', label:'Sheep'    }, bigger: 'a' },
   { question: 'Which one is SMALLER? 🔍',a: { emoji:'🚀', label:'Rocket'   }, b: { emoji:'🔭', label:'Telescope'}, bigger: 'a', smaller: 'b' },
   { question: 'Which one is BIGGER? 🔍', a: { emoji:'🦈', label:'Shark'    }, b: { emoji:'🐠', label:'Fish'     }, bigger: 'a' },
+  { question: 'Which one is SMALLER? 🔍',a: { emoji:'🐻', label:'Bear'     }, b: { emoji:'🐝', label:'Bee'      }, bigger: 'a', smaller: 'b' },
+  { question: 'Which one is BIGGER? 🔍', a: { emoji:'🚢', label:'Ship'     }, b: { emoji:'🛶', label:'Canoe'    }, bigger: 'a' },
+  { question: 'Which one is SMALLER? 🔍',a: { emoji:'🦖', label:'T-Rex'    }, b: { emoji:'🦎', label:'Lizard'   }, bigger: 'a', smaller: 'b' },
+  { question: 'Which one is BIGGER? 🔍', a: { emoji:'🏙️', label:'City'     }, b: { emoji:'🏠', label:'House'    }, bigger: 'a' },
+  { question: 'Which one is SMALLER? 🔍',a: { emoji:'🐘', label:'Elephant' }, b: { emoji:'🐈', label:'Cat'      }, bigger: 'a', smaller: 'b' }
 ];
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 const TOTAL_LEVELS = 20;
 
 const BigOrSmall = ({ onBack }) => {
-  const [order]  = useState(() => Array.from({ length: TOTAL_LEVELS }, () => ROUNDS[Math.floor(Math.random() * ROUNDS.length)]));
   const [index, setIndex]               = useState(0);
   const [picked, setPicked]             = useState(null);
   const [feedback, setFeedback]         = useState('');
@@ -31,7 +35,7 @@ const BigOrSmall = ({ onBack }) => {
   const [score, setScore]               = useState(0);
   const [gameWon, setGameWon]           = useState(false);
 
-  const current   = order[index];
+  const current   = ROUNDS[index];
   const askSmall  = current.question.includes('SMALLER');
   const correctId = askSmall ? current.smaller : current.bigger;
   const TOTAL     = TOTAL_LEVELS;

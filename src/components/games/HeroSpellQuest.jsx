@@ -14,6 +14,14 @@ const HEROES = [
   { word: 'SUPERMAN',  emoji: '🦸', clue: 'He flies, has laser vision, and is super strong!' },
   { word: 'WOLVERINE', emoji: '🐺', clue: 'He has razor-sharp claws and heals super fast!' },
   { word: 'SPIDERMAN', emoji: '🕷️', clue: 'He swings through New York City on webs!' },
+  { word: 'SUPERGIRL', emoji: '🦸‍♀️', clue: 'She is Superman\'s cousin from Krypton!' },
+  { word: 'BATGIRL',   emoji: '🦇', clue: 'A hero from Gotham who fights crime at night!' },
+  { word: 'ROBIN',     emoji: '🔴', clue: 'He is Batman\'s loyal sidekick!' },
+  { word: 'CAPTAIN',   emoji: '🛡️', clue: 'He carries a vibranium shield!' },
+  { word: 'DEADPOOL',  emoji: '⚔️', clue: 'He talks a lot and has two sharp swords!' },
+  { word: 'SHAZAM',    emoji: '⚡', clue: 'He says a magic word to get his powers!' },
+  { word: 'GROOT',     emoji: '🌳', clue: 'He is a walking tree who only says his name!' },
+  { word: 'WONDER',    emoji: '🌟', clue: 'She has a magic lasso and bulletproof bracelets!' },
 ];
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
@@ -28,8 +36,8 @@ const scrambleWord = (word) => {
   return shuffled;
 };
 
-const buildRound = () => {
-  const heroObj = HEROES[Math.floor(Math.random() * HEROES.length)];
+const buildRound = (level) => {
+  const heroObj = HEROES[level - 1];
   return {
     ...heroObj,
     tiles: scrambleWord(heroObj.word).map((letter, i) => ({ letter, id: i, used: false })),
@@ -40,7 +48,7 @@ const TOTAL_LEVELS = 20;
 
 const HeroSpellQuest = ({ onBack }) => {
   const [levelIndex, setLevelIndex] = useState(0);
-  const [round, setRound] = useState(() => buildRound());
+  const [round, setRound] = useState(() => buildRound(1));
   const [selected, setSelected] = useState([]);
   const [feedback, setFeedback] = useState('');
   const [feedbackType, setFeedbackType] = useState('');
@@ -57,7 +65,7 @@ const HeroSpellQuest = ({ onBack }) => {
 
   const resetGame = useCallback(() => {
     setLevelIndex(0);
-    setRound(buildRound());
+    setRound(buildRound(1));
     setSelected([]);
     setFeedback('');
     setFeedbackType('');
@@ -90,7 +98,7 @@ const HeroSpellQuest = ({ onBack }) => {
           } else {
             const next = levelIndex + 1;
             setLevelIndex(next);
-            setRound(buildRound());
+            setRound(buildRound(next + 1));
           }
         }, 1000);
       } else {

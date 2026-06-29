@@ -3,10 +3,19 @@ import { playSound } from '../../utils/sounds';
 
 const TOTAL_LEVELS = 20;
 
-const getRandomNumber = (min = 1, max = 18) => Math.floor(Math.random() * (max - min + 1)) + min;
-const shuffle = (array) => [...array].sort(() => Math.random() - 0.5);
+const createPRNG = (seed) => {
+  let currentSeed = seed;
+  return () => {
+    let x = Math.sin(currentSeed++) * 10000;
+    return x - Math.floor(x);
+  };
+};
 
 const createRound = (level) => {
+  const prng = createPRNG(level * 10);
+  const getRandomNumber = (min, max) => Math.floor(prng() * (max - min + 1)) + min;
+  const shuffle = (array) => [...array].sort(() => prng() - 0.5);
+
   const tileCount = Math.min(6 + Math.floor((level - 1) / 2), 14);
   const first = getRandomNumber(1, Math.min(10 + level, 25));
   const second = getRandomNumber(1, Math.min(10 + level, 25));

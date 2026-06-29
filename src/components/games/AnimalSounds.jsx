@@ -17,22 +17,26 @@ const ANIMALS = [
   { name: 'Monkey',   emoji: '🐵', sound: 'Ooh-ooh!',wrong: ['Woof!', 'Hoot!', 'Moo!'] },
   { name: 'Bee',      emoji: '🐝', sound: 'Buzz!',   wrong: ['Hiss!', 'Quack!', 'Ribbit!'] },
   { name: 'Rooster',  emoji: '🐓', sound: 'Cock-a-doodle-doo!', wrong: ['Quack!', 'Moo!', 'Baa!'] },
+  { name: 'Mouse',    emoji: '🐭', sound: 'Squeak!', wrong: ['Roar!', 'Moo!', 'Baa!'] },
+  { name: 'Bear',     emoji: '🐻', sound: 'Grrr!',   wrong: ['Meow!', 'Quack!', 'Oink!'] },
+  { name: 'Bird',     emoji: '🐦', sound: 'Tweet!',  wrong: ['Roar!', 'Moo!', 'Hiss!'] },
+  { name: 'Wolf',     emoji: '🐺', sound: 'Howl!',   wrong: ['Quack!', 'Ribbit!', 'Baa!'] },
+  { name: 'Turkey',   emoji: '🦃', sound: 'Gobble!', wrong: ['Moo!', 'Woof!', 'Meow!'] }
 ];
 
 const TOTAL_LEVELS = 20;
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-const buildRound = () => {
-  const animalIndex = Math.floor(Math.random() * ANIMALS.length);
-  const animal = ANIMALS[animalIndex];
+const buildRound = (level) => {
+  const animal = ANIMALS[level - 1];
   const options = shuffle([animal.sound, ...animal.wrong.slice(0, 3)]);
   return { animal, options };
 };
 
 const AnimalSounds = ({ onBack }) => {
   const [level, setLevel] = useState(1);
-  const [round, setRound] = useState(() => buildRound());
+  const [round, setRound] = useState(() => buildRound(1));
   const [feedback, setFeedback] = useState('');
   const [feedbackType, setFeedbackType] = useState('');
   const [gameWon, setGameWon] = useState(false);
@@ -41,7 +45,7 @@ const AnimalSounds = ({ onBack }) => {
 
   const resetGame = useCallback(() => {
     setLevel(1);
-    setRound(buildRound());
+    setRound(buildRound(1));
     setFeedback('');
     setFeedbackType('');
     setGameWon(false);
@@ -63,7 +67,7 @@ const AnimalSounds = ({ onBack }) => {
         } else {
           const nextLevel = level + 1;
           setLevel(nextLevel);
-          setRound(buildRound());
+          setRound(buildRound(nextLevel));
           setFeedback('');
           setFeedbackType('');
           setAnswered(false);

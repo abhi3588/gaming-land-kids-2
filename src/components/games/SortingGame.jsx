@@ -25,18 +25,21 @@ const generateLevelItems = (level) => {
   const itemCount = Math.min(4 + Math.floor((level - 1) / 2), 14);
   const pool = [];
 
-  BIN_COLORS.forEach(color => {
+  BIN_COLORS.forEach((color, i) => {
     const colorItems = ITEMS.filter(item => item.color === color);
-    const choice = colorItems[Math.floor(Math.random() * colorItems.length)];
+    const choice = colorItems[(level + i) % colorItems.length];
     pool.push(choice);
   });
 
+  let extraIdx = level;
   while (pool.length < itemCount) {
-    const extra = ITEMS[Math.floor(Math.random() * ITEMS.length)];
+    const extra = ITEMS[extraIdx % ITEMS.length];
     pool.push(extra);
+    extraIdx++;
   }
 
-  return getShuffled(pool).map((item, index) => ({
+  const sortedPool = [...pool].sort((a, b) => (a.emoji.charCodeAt(0) * level) % 3 - 1);
+  return sortedPool.map((item, index) => ({
     ...item,
     id: `${level}-${index}`
   }));

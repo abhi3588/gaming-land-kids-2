@@ -17,6 +17,11 @@ const WORDS = [
   { word: 'HOUSE',   hint: '🏠', clue: 'Where your family lives' },
   { word: 'TRAIN',   hint: '🚂', clue: 'Travels on tracks, choo choo!' },
   { word: 'CLOUD',   hint: '☁️', clue: 'Floats in the sky and brings rain' },
+  { word: 'BOAT',    hint: '⛵', clue: 'Floats on the water' },
+  { word: 'SHOE',    hint: '👟', clue: 'You wear it on your foot' },
+  { word: 'BEAR',    hint: '🐻', clue: 'Large furry animal in the woods' },
+  { word: 'MILK',    hint: '🥛', clue: 'White drink from a cow' },
+  { word: 'BOOK',    hint: '📖', clue: 'You read its pages' }
 ];
 
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
@@ -29,8 +34,8 @@ const scrambleWord = (word) => {
   return shuffled;
 };
 
-const buildRound = () => {
-  const wordObj = WORDS[Math.floor(Math.random() * WORDS.length)];
+const buildRound = (level) => {
+  const wordObj = WORDS[level - 1];
   return {
     ...wordObj,
     tiles: scrambleWord(wordObj.word).map((letter, i) => ({ letter, id: i, used: false })),
@@ -41,7 +46,7 @@ const TOTAL_LEVELS = 20;
 
 const WordScramble = ({ onBack }) => {
   const [levelIndex, setLevelIndex] = useState(0);
-  const [round, setRound] = useState(() => buildRound());
+  const [round, setRound] = useState(() => buildRound(1));
   const [selected, setSelected] = useState([]);
   const [feedback, setFeedback] = useState('');
   const [feedbackType, setFeedbackType] = useState('');
@@ -58,7 +63,7 @@ const WordScramble = ({ onBack }) => {
 
   const resetGame = useCallback(() => {
     setLevelIndex(0);
-    setRound(buildRound());
+    setRound(buildRound(1));
     setSelected([]);
     setFeedback('');
     setFeedbackType('');
@@ -91,7 +96,7 @@ const WordScramble = ({ onBack }) => {
           } else {
             const next = levelIndex + 1;
             setLevelIndex(next);
-            setRound(buildRound());
+            setRound(buildRound(next + 1));
           }
         }, 1000);
       } else {

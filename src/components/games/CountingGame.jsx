@@ -7,13 +7,19 @@ const MAX_STARS = 16;
 const getTarget = (level) => Math.min(3 + Math.floor(level * 0.8), 15);
 const getTotalStars = (target) => Math.min(target + 2, MAX_STARS);
 
+const createPRNG = (seed) => () => {
+  let x = Math.sin(seed++) * 10000;
+  return x - Math.floor(x);
+};
+
 const createLevelData = (level) => {
+  const prng = createPRNG(level * 10);
   const target = getTarget(level);
   const total = getTotalStars(target);
   const stars = Array.from({ length: total }, (_, i) => ({
     id: `${level}-${i}`,
-    x: Math.random() * 82 + 8,
-    y: Math.random() * 62 + 8,
+    x: prng() * 82 + 8,
+    y: prng() * 62 + 8,
     popped: false
   }));
 

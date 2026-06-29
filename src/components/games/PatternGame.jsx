@@ -4,9 +4,18 @@ import { playSound } from '../../utils/sounds';
 const shapes = ['🔴', '🔵', '⭐', '💎', '🍀'];
 const TOTAL_LEVELS = 20;
 
-const shuffle = (array) => [...array].sort(() => Math.random() - 0.5);
+const createPRNG = (seed) => {
+  let currentSeed = seed;
+  return () => {
+    let x = Math.sin(currentSeed++) * 10000;
+    return x - Math.floor(x);
+  };
+};
 
 const createPatternData = (level) => {
+  const prng = createPRNG(level * 50);
+  const shuffle = (array) => [...array].sort(() => prng() - 0.5);
+
   const symbolCount = Math.min(2 + Math.floor((level - 1) / 6), shapes.length);
   const patternLength = Math.min(4 + Math.floor((level - 1) / 5), 6);
   const optionCount = Math.min(2 + Math.floor(level / 6), 4);
