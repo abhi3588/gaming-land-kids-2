@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { stories as defaultStories } from '../../kids-data.js';
+import { stories, storiesHindi } from '../../kids-data.js';
+import { playSound } from '../../utils/sounds.js';
 import StoryReader from './StoryReader.jsx';
 
-export default function StoriesTab({ storiesList = defaultStories, lang = 'en' }) {
+export default function StoriesTab() {
+  const [activeCategory, setActiveCategory] = useState('en');
   const [activeStory, setActiveStory] = useState(null);
   const [readerOpen, setReaderOpen]   = useState(false);
 
@@ -10,6 +12,9 @@ export default function StoriesTab({ storiesList = defaultStories, lang = 'en' }
     setActiveStory(story);
     setReaderOpen(true);
   };
+
+  const lang = activeCategory;
+  const currentStories = lang === 'hi' ? storiesHindi : stories;
 
   const headerTitle = lang === 'hi' ? '📖 सोने के समय की कहानियाँ' : '📖 Bedtime Story Corner';
   const headerSub = lang === 'hi' ? 'तस्वीरों के साथ कहानियाँ पढ़ें! ✨' : 'Tap a story to read along with pictures! ✨';
@@ -21,8 +26,25 @@ export default function StoriesTab({ storiesList = defaultStories, lang = 'en' }
         <p>{headerSub}</p>
       </div>
 
+      <div className="category-container pop-in">
+        <div className="category-tabs">
+          <button
+            className={`category-tab${activeCategory === 'en' ? ' active' : ''}`}
+            onClick={() => { playSound('pop'); setActiveCategory('en'); }}
+          >
+            📚 Stories (English) · {stories.length}
+          </button>
+          <button
+            className={`category-tab${activeCategory === 'hi' ? ' active' : ''}`}
+            onClick={() => { playSound('pop'); setActiveCategory('hi'); }}
+          >
+            📚 Stories (Hindi) · {storiesHindi.length}
+          </button>
+        </div>
+      </div>
+
       <div className="stories-grid">
-        {storiesList.map((story, i) => (
+        {currentStories.map((story, i) => (
           <StoryCard
             key={story.id}
             story={story}
