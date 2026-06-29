@@ -28,7 +28,7 @@ const createLevelData = (level) => {
 const CountingGame = ({ onBack }) => {
   const [level, setLevel] = useState(1);
   const [data, setData] = useState(() => createLevelData(1));
-  const [message, setMessage] = useState('Pop the target number of stars!');
+  const [message, setMessage] = useState(`Level 1: Pop ${getTarget(1)} stars!`);
   const [gameWon, setGameWon] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
