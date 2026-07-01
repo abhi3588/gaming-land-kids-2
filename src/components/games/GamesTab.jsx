@@ -28,6 +28,8 @@ import WhatComesNext   from '../games/WhatComesNext.jsx';
 import BigOrSmall      from '../games/BigOrSmall.jsx';
 import MemoryMatrix    from '../games/MemoryMatrix.jsx';
 import OperatorQuest   from '../games/OperatorQuest.jsx';
+import AlphabetMatch   from '../games/AlphabetMatch.jsx';
+import FruitFinder     from '../games/FruitFinder.jsx';
 
 const COMPONENT_MAP = {
   memory:       MemoryGame,
@@ -54,6 +56,8 @@ const COMPONENT_MAP = {
   bigorsmall:     BigOrSmall,
   memorymatrix:   MemoryMatrix,
   operatorquest:  OperatorQuest,
+  alphabetmatch:  AlphabetMatch,
+  fruitfinder:    FruitFinder,
 };
 
 export default function GamesTab() {

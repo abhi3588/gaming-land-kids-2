@@ -22,6 +22,8 @@ export const gamesMeta = [
   { id: 'savethecity',    title: 'Save the City',     icon: '🏙️', color: 'savethecity',    ageGroup: 'preschool', desc: 'Pick the right hero to save the day!' },
   { id: 'whatcomesnext',  title: 'What Comes Next?',  icon: '🔮', color: 'whatcomesnext',  ageGroup: 'preschool', desc: 'Spot the pattern and pick what comes next!' },
   { id: 'bigorsmall',     title: 'Big or Small?',     icon: '📏', color: 'bigorsmall',     ageGroup: 'preschool', desc: 'Which one is bigger or smaller?' },
+  { id: 'alphabetmatch',  title: 'Alphabet Match',    icon: '🔠', color: 'word',           ageGroup: 'preschool', desc: 'Match the uppercase letter to the lowercase!' },
+  { id: 'fruitfinder',    title: 'Fruit Finder',      icon: '🍎', color: 'sorting',        ageGroup: 'preschool', desc: 'Find the hidden fruit!' },
 
   // Ages 6-10 (junior)
   { id: 'herospellquest', title: 'Hero Spell Quest', icon: '🦸', color: 'herospellquest', ageGroup: 'junior', desc: 'Spell superhero names letter by letter!' },

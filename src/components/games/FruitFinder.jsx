@@ -1,0 +1,185 @@
+import { useState, useCallback } from 'react';
+import { playSound } from '../../utils/sounds';
+
+const FRUITS = [
+  { name: 'Apple', emoji: '🍎' },
+  { name: 'Banana', emoji: '🍌' },
+  { name: 'Orange', emoji: '🍊' },
+  { name: 'Grapes', emoji: '🍇' },
+  { name: 'Strawberry', emoji: '🍓' },
+  { name: 'Watermelon', emoji: '🍉' },
+  { name: 'Cherry', emoji: '🍒' },
+  { name: 'Pineapple', emoji: '🍍' },
+  { name: 'Mango', emoji: '🥭' },
+  { name: 'Peach', emoji: '🍑' },
+  { name: 'Pear', emoji: '🍐' },
+  { name: 'Kiwi', emoji: '🥝' },
+  { name: 'Lemon', emoji: '🍋' },
+  { name: 'Blueberry', emoji: '🫐' },
+  { name: 'Coconut', emoji: '🥥' },
+  { name: 'Melon', emoji: '🍈' }
+];
+
+const createPRNG = (seed) => {
+  let currentSeed = seed;
+  return () => {
+    let x = Math.sin(currentSeed++) * 10000;
+    return x - Math.floor(x);
+  };
+};
+
+const TOTAL_LEVELS = 20;
+
+const buildRound = (level) => {
+  const prng = createPRNG(level * 99);
+  const shuffle = (array) => [...array].sort(() => prng() - 0.5);
+
+  const targetIndex = Math.floor(prng() * FRUITS.length);
+  const target = FRUITS[targetIndex];
+
+  // Options count from 2 up to 8
+  const optionCount = Math.min(2 + Math.floor((level - 1) / 3), 8);
+
+  const availableDistractors = FRUITS.filter(f => f.name !== target.name);
+  const distractors = shuffle(availableDistractors).slice(0, optionCount - 1);
+  
+  const options = shuffle([target, ...distractors]);
+
+  return { target, options };
+};
+
+const FruitFinder = ({ onBack }) => {
+  const [level, setLevel] = useState(1);
+  const [round, setRound] = useState(() => buildRound(1));
+  const [feedback, setFeedback] = useState('Tap the right fruit!');
+  const [gameWon, setGameWon] = useState(false);
+  const [picked, setPicked] = useState(null);
+
+  const nextRound = useCallback((nextLevel) => {
+    setRound(buildRound(nextLevel));
+  }, []);
+
+  const handlePick = (fruit) => {
+    if (gameWon || (picked && fruit.name === round.target.name)) return;
+
+    if (fruit.name === round.target.name) {
+      playSound('match');
+      setPicked(fruit.name);
+      if (level === TOTAL_LEVELS) {
+        setFeedback('Amazing! You found them all!');
+        setTimeout(() => {
+          setGameWon(true);
+        }, 800);
+        return;
+      }
+
+      setFeedback('Great job! Level up!');
+      setTimeout(() => {
+        setLevel((prev) => {
+          const nextLevel = prev + 1;
+          nextRound(nextLevel);
+          return nextLevel;
+        });
+        setFeedback('Tap the right fruit!');
+        setPicked(null);
+      }, 800);
+    } else {
+      playSound('wrong');
+      setFeedback('Oops, try again!');
+      setPicked(fruit.name);
+      setTimeout(() => {
+        setPicked(null);
+        setFeedback('Tap the right fruit!');
+      }, 800);
+    }
+  };
+
+  return (
+    <div className="game-view pop-in">
+      {gameWon ? (
+        <div className="champion-screen">
+          <div style={{ fontSize: '4rem' }}>🏆</div>
+          <h2>Fruit Master!</h2>
+          <p>You completed all 20 fruit levels.</p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+            <button className="btn btn-primary" onClick={() => {
+              setLevel(1);
+              setGameWon(false);
+              setFeedback('Tap the right fruit!');
+              nextRound(1);
+              setPicked(null);
+            }}>
+              Play Again
+            </button>
+            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+              Main Menu
+            </button>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="game-header">
+            <div>Fruit Finder</div>
+            <div>Level {level} / {TOTAL_LEVELS}</div>
+            <div className="progress-container">
+              <div className="progress-bar" style={{ width: `${(level / TOTAL_LEVELS) * 100}%` }} />
+            </div>
+          </div>
+
+          <p style={{ textAlign: 'center', margin: '-0.5rem 0 1rem', color: '#666' }}>{feedback}</p>
+
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', margin: '1.5rem 0' }}>
+            <div style={{ 
+              fontSize: '2rem', 
+              fontWeight: 'bold', 
+              color: 'var(--color-primary)',
+              background: '#fff',
+              padding: '1rem 2rem',
+              borderRadius: '20px',
+              boxShadow: 'var(--shadow-soft)'
+            }}>
+              Find the <span style={{ fontSize: '2.5rem', margin: '0 0.5rem' }}>{round.target.emoji}</span> {round.target.name}!
+            </div>
+          </div>
+
+          <div className="fruit-options" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1.5rem', marginTop: '2rem' }}>
+            {round.options.map((fruit, i) => {
+              let isWrong = picked === fruit.name && fruit.name !== round.target.name;
+              let isCorrect = picked === fruit.name && fruit.name === round.target.name;
+              
+              return (
+                <button
+                  key={i}
+                  className={`btn ${isWrong ? 'shake' : ''}`}
+                  style={{ 
+                    fontSize: '4rem', 
+                    padding: '1rem',
+                    background: isCorrect ? '#1dd1a1' : isWrong ? '#ffb7b2' : 'white',
+                    border: '4px solid',
+                    borderColor: isCorrect ? '#1dd1a1' : isWrong ? '#ff6b6b' : '#eee',
+                    borderRadius: '50%',
+                    width: '100px',
+                    height: '100px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: 'var(--shadow-soft)'
+                  }}
+                  onClick={() => handlePick(fruit)}
+                >
+                  {fruit.emoji}
+                </button>
+              );
+            })}
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+            <button className="btn btn-primary" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default FruitFinder;
