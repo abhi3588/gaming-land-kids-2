@@ -5,6 +5,11 @@ import { storiesHindi } from './components/stories/data-hindi/index.js';
 export { stories, storiesHindi };
 
 // ===== Rhymes Data =====
+const getPublicAssetUrl = (assetPath) => {
+  const normalizedPath = assetPath.replace(/^\//, '');
+  return `${import.meta.env.BASE_URL}${normalizedPath}`;
+};
+
 export const rhymes = [
   {
     id: 'mycycle',
@@ -12,7 +17,7 @@ export const rhymes = [
     icon: '🚲',
     color: 'memory',
     desc: 'Watch the fun ride!',
-    videoUrl: '/video/MyCycle.mp4'
+    videoUrl: getPublicAssetUrl('video/MyCycle.mp4')
   }
 ];
 
