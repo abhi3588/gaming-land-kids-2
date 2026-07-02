@@ -256,6 +256,7 @@ body {
   max-width: 760px;
   margin: 0 auto;
   align-items: stretch;
+  width: 100%;
 }
 
 .game-card {
