@@ -34,6 +34,14 @@ export const rhymes = [
     color: 'memory',
     desc: 'Watch the mighty elephant stomp!',
     videoUrl: getPublicAssetUrl('video/MightyElephant.mp4')
+  },
+  {
+    id: 'littleplant',
+    title: 'Little Plant',
+    icon: '🌱',
+    color: 'patterns',
+    desc: 'Watch the little plant grow!',
+    videoUrl: getPublicAssetUrl('video/LittlePlant.mp4')
   }
 ];
 
