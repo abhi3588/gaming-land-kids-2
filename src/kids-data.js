@@ -18,6 +18,14 @@ export const rhymes = [
     color: 'memory',
     desc: 'Watch the fun ride!',
     videoUrl: getPublicAssetUrl('video/MyCycle.mp4')
+  },
+  {
+    id: 'fingerstosnap',
+    title: 'Fingers to Snap',
+    icon: '🖐️',
+    color: 'word',
+    desc: 'Watch the fun finger snaps!',
+    videoUrl: getPublicAssetUrl('video/FingersToSnap.mp4')
   }
 ];
 

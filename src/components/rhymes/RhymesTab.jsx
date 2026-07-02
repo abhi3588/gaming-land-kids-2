@@ -26,7 +26,7 @@ export default function RhymesTab() {
         <p>Watch, sing, and dance along with your favorite rhymes! 🎈</p>
       </div>
 
-      <div className="game-grid pop-in" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <div className="game-grid pop-in rhymes-grid">
         {rhymes.map((rhyme) => (
           <RhymeCard key={rhyme.id} rhyme={rhyme} onSelect={handleSelect} />
         ))}
@@ -38,7 +38,7 @@ export default function RhymesTab() {
 function RhymeCard({ rhyme, onSelect }) {
   return (
     <div
-      className={`game-card ${rhyme.color || 'word'}`}
+      className={`game-card rhyme-card ${rhyme.color || 'word'}`}
       onClick={() => onSelect(rhyme.id)}
       role="button"
       tabIndex={0}
