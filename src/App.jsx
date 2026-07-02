@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react';
 import GamesTab   from './components/games/GamesTab.jsx';
 import StoriesTab from './components/stories/StoriesTab.jsx';
-import { gamesMeta, stories } from './kids-data.js';
+import RhymesTab from './components/rhymes/RhymesTab.jsx';
+import { gamesMeta, stories, rhymes } from './kids-data.js';
 
 const generateBubbles = () =>
   Array.from({ length: 12 }).map((_, i) => ({
@@ -30,6 +31,7 @@ export default function App() {
 
   const gamesCount   = gamesMeta.length;
   const storiesCount = stories.length;
+  const rhymesCount  = rhymes.length;
 
   return (
     <div className="app" style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -104,6 +106,16 @@ export default function App() {
             📚 Stories
             <span className="tab-count">{storiesCount}</span>
           </button>
+          <button
+            role="tab"
+            aria-selected={activeTab === 'rhymes'}
+            className={`tab-btn stories${activeTab === 'rhymes' ? ' active' : ''}`}
+            onClick={() => setActiveTab('rhymes')}
+            style={{ '--tab-color': 'var(--color-secondary)' }}
+          >
+            🎵 Rhymes
+            <span className="tab-count">{rhymesCount}</span>
+          </button>
         </div>
       </div>
 
@@ -112,6 +124,7 @@ export default function App() {
         role="tabpanel" aria-label={activeTab === 'games' ? 'Games' : 'Stories'}>
         {activeTab === 'games'   && <GamesTab   key="games"   />}
         {activeTab === 'stories' && <StoriesTab key="stories" />}
+        {activeTab === 'rhymes'  && <RhymesTab  key="rhymes"  />}
       </main>
 
       {/* ── Footer ── */}

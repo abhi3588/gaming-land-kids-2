@@ -4,6 +4,18 @@ import { storiesHindi } from './components/stories/data-hindi/index.js';
 // ===== Stories Data =====
 export { stories, storiesHindi };
 
+// ===== Rhymes Data =====
+export const rhymes = [
+  {
+    id: 'mycycle',
+    title: 'My Cycle',
+    icon: '🚲',
+    color: 'memory',
+    desc: 'Watch the fun ride!',
+    videoUrl: '/video/MyCycle.mp4'
+  }
+];
+
 // ===== Games Metadata =====
 // (actual game components live in src/components/games/)
 // This is used by the game grid in the Games tab.
