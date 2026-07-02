@@ -26,6 +26,14 @@ export const rhymes = [
     color: 'word',
     desc: 'Watch the fun finger snaps!',
     videoUrl: getPublicAssetUrl('video/FingersToSnap.mp4')
+  },
+  {
+    id: 'mightyelephant',
+    title: 'Mighty Elephant',
+    icon: '🐘',
+    color: 'memory',
+    desc: 'Watch the mighty elephant stomp!',
+    videoUrl: getPublicAssetUrl('video/MightyElephant.mp4')
   }
 ];
 
