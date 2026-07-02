@@ -22,8 +22,8 @@ export default function RhymesTab() {
   return (
     <div>
       <div className="section-header">
-        <h2>🎵 Sing Along with Rhymes</h2>
-        <p>Watch, sing, and dance along with your favorite rhymes! 🎈</p>
+        <h2>🎵 Rhymes Time</h2>
+        <p>Tap a rhyme and enjoy! 🎈</p>
       </div>
 
       <div className="game-grid pop-in rhymes-grid">
