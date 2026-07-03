@@ -42,6 +42,22 @@ export const rhymes = [
     color: 'patterns',
     desc: 'Watch the little plant grow!',
     videoUrl: getPublicAssetUrl('video/LittlePlant.mp4')
+  },
+  {
+    id: 'beehive',
+    title: 'Beehive',
+    icon: '🐝',
+    color: 'sorting',
+    desc: 'Watch the buzzing beehive!',
+    videoUrl: getPublicAssetUrl('video/Beehive.mp4')
+  },
+  {
+    id: 'number12345',
+    title: '12345',
+    icon: '🔢',
+    color: 'counting',
+    desc: 'Count along from 1 to 5!',
+    videoUrl: getPublicAssetUrl('video/12345.mp4')
   }
 ];
 
