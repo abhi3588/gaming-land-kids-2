@@ -76,6 +76,7 @@ export const funActivities = [
     steps: [
       'Pick a rainbow color.',
       'Find one object that matches it.',
+      'Line up all objects in rainbow order.',
       'Say each color name out loud.'
     ]
   },
@@ -84,6 +85,7 @@ export const funActivities = [
     title: 'Story Dice',
     icon: '\u{1F3B2}',
     color: 'word',
+    ageRange: '4-10',
     time: '15 min',
     desc: 'Roll picture prompts and make a short story.',
     materials: ['Paper', 'Pencil or crayons', 'A regular dice'],
@@ -92,6 +94,7 @@ export const funActivities = [
       'Roll the dice three times.',
       'Use the three pictures in a short story.',
       'Act out your favorite part.'
+    ]
   },
   {
     id: 'shape-collage',
@@ -100,6 +103,7 @@ export const funActivities = [
     color: 'shapefinder',
     ageRange: '3-8',
     time: '20 min',
+    desc: 'Create a picture using cut paper shapes.',
     materials: ['Colored paper', 'Safety scissors', 'Glue stick'],
     steps: [
       'Cut circles, squares, triangles, and rectangles.',
@@ -108,6 +112,7 @@ export const funActivities = [
       'Name every shape in your picture.'
     ]
   },
+  {
     id: 'breathing-star',
     title: 'Breathing Star',
     icon: '\u2B50',
