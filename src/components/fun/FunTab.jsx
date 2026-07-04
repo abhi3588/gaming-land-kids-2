@@ -1,5 +1,7 @@
 ﻿import { useState } from 'react';
 import { funActivities } from '../../kids-data.js';
+
+import { getActivityImageUrl } from '../../assets/activityImages.js';
 import { playSound } from '../../utils/sounds.js';
 
 export default function FunTab() {
@@ -26,8 +28,8 @@ export default function FunTab() {
 
       <div className="game-grid rhymes-grid pop-in">
         {funActivities.map((activity) => (
-          <ActivityCard key={activity.id} activity={activity} onSelect={handleSelect} />
-        ))}
+            <ActivityCard key={activity.id} activity={activity} onSelect={handleSelect} />
+          ))}
       </div>
     </div>
   );
@@ -45,56 +47,69 @@ function ActivityCard({ activity, onSelect }) {
     >
       <span className="game-icon">{activity.icon}</span>
       <h2>{activity.title}</h2>
+      <div className="activity-subtitle">Ages {activity.ageRange} · {activity.time}</div>
       <p className="game-desc">{activity.desc}</p>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '0.6rem', marginTop: '0.8rem' }}>
-        <span style={{ fontSize: '0.9rem', color: '#666', fontWeight: 700, alignSelf: 'center' }}>Ages {activity.ageRange}</span>
-        <span style={{ fontSize: '0.85rem', color: '#999', alignSelf: 'center' }}>{activity.time}</span>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '0.6rem', marginTop: '0.6rem' }}>
+        <button className="play-btn" onClick={(e) => { e.stopPropagation(); onSelect(activity.id); }}>
+          Try This
+        </button>
       </div>
-      <button className="play-btn" onClick={(e) => { e.stopPropagation(); onSelect(activity.id); }}>
-        Try This
-      </button>
     </div>
   );
 }
 
 function ActivityDetail({ activity, onBack }) {
+  const imgSrc = getActivityImageUrl(activity.id);
   return (
-    <div className="game-view pop-in" style={{ padding: '1rem' }}>
-      <div className={`game-card ${activity.color}`} style={{ textAlign: 'left', maxWidth: 900, margin: '0 auto' }}>
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '0.8rem', flexWrap: 'wrap' }}>
-          <span className="game-icon" style={{ marginBottom: 0 }}>{activity.icon}</span>
-          <div>
-            <h2 style={{ marginBottom: '0.25rem' }}>{activity.title}</h2>
-            <div style={{ fontSize: '0.95rem', color: '#666', fontWeight: 700 }}>
-              Ages {activity.ageRange} · {activity.time}
+    <div className="game-view pop-in">
+      <div className="page-wrapper">
+        <div className="activity-detail-grid">
+          <div className={`activity-text-card game-card ${activity.color}`}>
+            <div className="activity-text-header">
+              <h2>{activity.title}</h2>
+              <div className="activity-subtitle">Ages {activity.ageRange} · {activity.time}</div>
             </div>
+
+            <div className="activity-text-content">
+              <p className="activity-main-desc">{activity.desc}</p>
+
+              <div className="fun-detail-columns">
+                <section>
+                  <h3>Materials</h3>
+                  <ul>
+                    {activity.materials.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </section>
+
+                <section>
+                  <h3>Steps</h3>
+                  <ol>
+                    {activity.steps.map((step) => (
+                      <li key={step}>{step}</li>
+                    ))}
+                  </ol>
+                </section>
+              </div>
+            </div>
+
+            {/* back button moved below both cards for consistency */}
+          </div>
+
+          <div className={`activity-image-card game-card ${activity.color}`}>
+            {imgSrc ? (
+              <img className="activity-img large" src={imgSrc} alt={activity.title} loading="lazy" />
+            ) : (
+              <div className="image-placeholder">
+                <span className="game-icon large-emoji">{activity.icon}</span>
+              </div>
+            )}
           </div>
         </div>
 
-        <p style={{ color: '#666', marginBottom: '1rem' }}>{activity.desc}</p>
-
-        <div className="fun-detail-columns" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
-          <section>
-            <h3>Materials</h3>
-            <ul>
-              {activity.materials.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </section>
-
-          <section>
-            <h3>Steps</h3>
-            <ol>
-              {activity.steps.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ol>
-          </section>
-        </div>
-
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.25rem' }}>
-          <button className="btn-back" onClick={onBack}>
+        <div className="detail-back-container">
+          <button className="btn btn-primary" onClick={onBack}>
             ← Back to Fun
           </button>
         </div>
