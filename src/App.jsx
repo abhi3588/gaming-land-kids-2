@@ -2,7 +2,8 @@ import { useState, useMemo } from 'react';
 import GamesTab   from './components/games/GamesTab.jsx';
 import StoriesTab from './components/stories/StoriesTab.jsx';
 import RhymesTab from './components/rhymes/RhymesTab.jsx';
-import { gamesMeta, stories, rhymes } from './kids-data.js';
+import FunTab from './components/fun/FunTab.jsx';
+import { gamesMeta, stories, rhymes, funActivities } from './kids-data.js';
 
 const generateBubbles = () =>
   Array.from({ length: 12 }).map((_, i) => ({
@@ -32,6 +33,7 @@ export default function App() {
   const gamesCount   = gamesMeta.length;
   const storiesCount = stories.length;
   const rhymesCount  = rhymes.length;
+  const funCount     = funActivities.length;
 
   return (
     <div className="app" style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -109,12 +111,21 @@ export default function App() {
           <button
             role="tab"
             aria-selected={activeTab === 'rhymes'}
-            className={`tab-btn stories${activeTab === 'rhymes' ? ' active' : ''}`}
+            className={`tab-btn rhymes${activeTab === 'rhymes' ? ' active' : ''}`}
             onClick={() => setActiveTab('rhymes')}
             style={{ '--tab-color': 'var(--color-secondary)' }}
           >
             🎵 Rhymes
             <span className="tab-count">{rhymesCount}</span>
+          </button>
+          <button
+            role="tab"
+            aria-selected={activeTab === 'fun'}
+            className={`tab-btn fun${activeTab === 'fun' ? ' active' : ''}`}
+            onClick={() => setActiveTab('fun')}
+          >
+            🎉 Fun
+            <span className="tab-count">{funCount}</span>
           </button>
         </div>
       </div>
@@ -125,6 +136,7 @@ export default function App() {
         {activeTab === 'games'   && <GamesTab   key="games"   />}
         {activeTab === 'stories' && <StoriesTab key="stories" />}
         {activeTab === 'rhymes'  && <RhymesTab  key="rhymes"  />}
+        {activeTab === 'fun'     && <FunTab     key="fun"     />}
       </main>
 
       {/* ── Footer ── */}

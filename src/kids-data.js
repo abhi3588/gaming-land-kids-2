@@ -61,6 +61,102 @@ export const rhymes = [
   }
 ];
 
+// ===== Fun Activity Data =====
+// Hands-on activities that are different from the playable game components.
+export const funActivities = [
+  {
+    id: 'rainbow-hunt',
+    title: 'Rainbow Hunt',
+    icon: '\u{1F308}',
+    color: 'patterns',
+    ageRange: '3-7',
+    time: '10 min',
+    desc: 'Find one safe object for each rainbow color.',
+    materials: ['A basket or tray', 'Color cards or crayons'],
+    steps: [
+      'Pick a rainbow color.',
+      'Find one object that matches it.',
+      'Say each color name out loud.'
+    ]
+  },
+  {
+    id: 'story-dice',
+    title: 'Story Dice',
+    icon: '\u{1F3B2}',
+    color: 'word',
+    time: '15 min',
+    desc: 'Roll picture prompts and make a short story.',
+    materials: ['Paper', 'Pencil or crayons', 'A regular dice'],
+    steps: [
+      'Draw six tiny pictures, one for each dice number.',
+      'Roll the dice three times.',
+      'Use the three pictures in a short story.',
+      'Act out your favorite part.'
+  },
+  {
+    id: 'shape-collage',
+    title: 'Shape Collage',
+    icon: '\u2702\uFE0F',
+    color: 'shapefinder',
+    ageRange: '3-8',
+    time: '20 min',
+    materials: ['Colored paper', 'Safety scissors', 'Glue stick'],
+    steps: [
+      'Cut circles, squares, triangles, and rectangles.',
+      'Choose what you want to build.',
+      'Arrange the shapes before gluing.',
+      'Name every shape in your picture.'
+    ]
+  },
+    id: 'breathing-star',
+    title: 'Breathing Star',
+    icon: '\u2B50',
+    color: 'counting',
+    ageRange: '3-10',
+    time: '5 min',
+    desc: 'Trace a star while practicing calm breaths.',
+    materials: ['Paper', 'Crayon or marker'],
+    steps: [
+      'Draw a big star.',
+      'Trace up one side while breathing in.',
+      'Trace down the next side while breathing out.',
+      'Go around the star three times.'
+    ]
+  },
+  {
+    id: 'kitchen-band',
+    title: 'Kitchen Band',
+    icon: '\u{1F941}',
+    color: 'rhymetime',
+    ageRange: '3-9',
+    time: '12 min',
+    desc: 'Make soft rhythms using safe kitchen items.',
+    materials: ['Spoons', 'Plastic bowls', 'Rice in a closed container'],
+    steps: [
+      'Choose three safe sound makers.',
+      'Make a slow beat, then a fast beat.',
+      'Copy each other in a rhythm round.',
+      'Finish with a quiet ending sound.'
+    ]
+  },
+  {
+    id: 'kindness-coupons',
+    title: 'Kindness Coupons',
+    icon: '\u{1F48C}',
+    color: 'sorting',
+    ageRange: '5-10',
+    time: '18 min',
+    desc: 'Make small coupons for kind actions at home.',
+    materials: ['Paper strips', 'Crayons', 'A small envelope'],
+    steps: [
+      'Cut paper into six small coupons.',
+      'Write or draw one kind action on each.',
+      'Decorate the coupons.',
+      'Give one coupon to someone today.'
+    ]
+  }
+];
+
 // ===== Games Metadata =====
 // (actual game components live in src/components/games/)
 // This is used by the game grid in the Games tab.
