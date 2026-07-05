@@ -182,6 +182,8 @@ export const gamesMeta = [
   { id: 'bigorsmall',     title: 'Big or Small?',     icon: '📏', color: 'bigorsmall',     ageGroup: 'preschool', desc: 'Which one is bigger or smaller?' },
   { id: 'alphabetmatch',  title: 'Alphabet Match',    icon: '🔠', color: 'word',           ageGroup: 'preschool', desc: 'Match the uppercase letter to the lowercase!' },
   { id: 'fruitfinder',    title: 'Fruit Finder',      icon: '🍎', color: 'sorting',        ageGroup: 'preschool', desc: 'Find the hidden fruit!' },
+  { id: 'shadowmatch',    title: 'Shadow Match',      icon: '👤', color: 'shadowmatch',    ageGroup: 'preschool', desc: 'Find the shadow that matches!' },
+  { id: 'oppositematch',  title: 'Opposite Match',    icon: '🔄', color: 'oppositematch',  ageGroup: 'preschool', desc: 'Pick the opposite word!' },
 
   // Ages 6-10 (junior)
   { id: 'herospellquest', title: 'Hero Spell Quest', icon: '🦸', color: 'herospellquest', ageGroup: 'junior', desc: 'Spell superhero names letter by letter!' },
