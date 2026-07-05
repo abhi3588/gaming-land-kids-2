@@ -32,6 +32,8 @@ import AlphabetMatch   from '../games/AlphabetMatch.jsx';
 import FruitFinder     from '../games/FruitFinder.jsx';
 import ShadowMatch     from '../games/ShadowMatch.jsx';
 import OppositeMatch   from '../games/OppositeMatch.jsx';
+import NumberMatch     from '../games/NumberMatch.jsx';
+import MissingNumber   from '../games/MissingNumber.jsx';
 
 const COMPONENT_MAP = {
   memory:       MemoryGame,
@@ -62,6 +64,8 @@ const COMPONENT_MAP = {
   fruitfinder:    FruitFinder,
   shadowmatch:    ShadowMatch,
   oppositematch:  OppositeMatch,
+  numbermatch:   NumberMatch,
+  missingnumber: MissingNumber,
 };
 
 export default function GamesTab() {

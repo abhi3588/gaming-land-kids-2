@@ -184,6 +184,8 @@ export const gamesMeta = [
   { id: 'fruitfinder',    title: 'Fruit Finder',      icon: '🍎', color: 'sorting',        ageGroup: 'preschool', desc: 'Find the hidden fruit!' },
   { id: 'shadowmatch',    title: 'Shadow Match',      icon: '👤', color: 'shadowmatch',    ageGroup: 'preschool', desc: 'Find the shadow that matches!' },
   { id: 'oppositematch',  title: 'Opposite Match',    icon: '🔄', color: 'oppositematch',  ageGroup: 'preschool', desc: 'Pick the opposite word!' },
+  { id: 'numbermatch',    title: 'Number Match',      icon: '🔢', color: 'counting',        ageGroup: 'preschool', desc: 'Match the number to the dots!' },
+  { id: 'missingnumber',  title: 'Missing Number',    icon: '❓', color: 'patterns',        ageGroup: 'preschool', desc: 'Find the missing number in the sequence!' },
 
   // Ages 6-10 (junior)
   { id: 'herospellquest', title: 'Hero Spell Quest', icon: '🦸', color: 'herospellquest', ageGroup: 'junior', desc: 'Spell superhero names letter by letter!' },
