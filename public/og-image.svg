@@ -1,0 +1,11 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="36" fill="#FDF2FF"/>
+  <circle cx="930" cy="170" r="110" fill="#FFCF5C"/>
+  <circle cx="270" cy="180" r="92" fill="#8B5CF6" opacity="0.18"/>
+  <rect x="160" y="150" width="880" height="330" rx="30" fill="#FFFFFF" stroke="#E9D5FF" stroke-width="4"/>
+  <text x="220" y="255" font-family="Verdana, Arial, sans-serif" font-size="54" font-weight="700" fill="#7C3AED">Gaming Land Kids</text>
+  <text x="220" y="325" font-family="Verdana, Arial, sans-serif" font-size="34" fill="#5B21B6">Fun educational games, stories &amp; rhymes</text>
+  <text x="220" y="378" font-family="Verdana, Arial, sans-serif" font-size="28" fill="#8B5CF6">Learning through play for curious little minds</text>
+  <circle cx="870" cy="390" r="78" fill="#34D399" opacity="0.2"/>
+  <text x="835" y="410" font-size="70">🌈</text>
+</svg>
