@@ -76,25 +76,9 @@ export default function App() {
 
       {/* ── Header ── */}
       <header className="app-header">
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-          background: 'rgba(255,255,255,0.8)', borderRadius: '999px',
-          padding: '0.3rem 1rem', fontSize: '0.82rem', fontWeight: 700,
-          color: '#888', marginBottom: '0.5rem', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
-          <span style={{ animation: 'bobble 2s ease-in-out infinite', display: 'inline-block' }}>🎈</span>
-          A magical place for joyful learning
-        </div>
         <h1>Gaming Land Kids</h1>
-        <p>Explore premium educational games, bedtime stories, nursery rhymes, and joyful learning activities for children ages 3 to 10. 💛</p>
-        <p style={{ maxWidth: '760px', margin: '0.65rem auto 0', fontSize: '1rem', color: '#6a4f8a' }}>
-          A beautifully crafted space where little minds grow through play, imagination, and discovery.
-        </p>
+        <p>Educational games, stories, rhymes & activities for ages 3-10 💛</p>
       </header>
-
-      <section aria-label="Learning through play" style={{ maxWidth: '860px', margin: '0 auto 1.25rem', padding: '0 1rem', position: 'relative', zIndex: 1 }}>
-        <p style={{ margin: 0, fontSize: '0.98rem', lineHeight: 1.6, color: '#5a4b76', textAlign: 'center' }}>
-          Enjoy a colorful mix of educational games, story time, rhymes, and creative challenges designed to make early learning feel magical.
-        </p>
-      </section>
 
       {/* ── Tab Navigation ── */}
       <div className="tab-nav">
@@ -150,7 +134,12 @@ export default function App() {
 
       {/* ── Footer ── */}
       <footer className="app-footer">
-        Made with 💖 for little learners · Free educational games, stories, rhymes, and activities for kids
+        <div style={{ marginBottom: '0.5rem' }}>
+          Made with 💖 for little learners
+        </div>
+        <div style={{ fontSize: '0.85rem', color: '#999', maxWidth: '700px', margin: '0 auto', lineHeight: 1.5 }}>
+          A magical place for joyful learning featuring 30+ educational games, bedtime stories, nursery rhymes, and creative activities for children ages 3-10.
+        </div>
       </footer>
     </div>
   );
