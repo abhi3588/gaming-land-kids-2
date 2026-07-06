@@ -137,7 +137,7 @@ const SolarSystemExplorer = ({ onBack }) => {
             <button className="btn btn-primary" onClick={handleReset}>
               Explore Again
             </button>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+            <button className="btn"  onClick={() => { if (typeof onBack === 'function') onBack(); }}>
               Back to Science
             </button>
           </div>
@@ -177,31 +177,18 @@ const SolarSystemExplorer = ({ onBack }) => {
               return (
                 <button
                   key={planetId}
-                  className={`btn ${isSelected && !isCorrect ? 'shake' : ''}`}
-                  style={{ 
-                    fontSize: '3rem', 
-                    fontWeight: 'bold',
-                    padding: '1.5rem 2rem',
-                    background: isSelected && isCorrect ? '#1dd1a1' : isSelected && !isCorrect ? '#ff6b6b' : 'white',
-                    color: isSelected ? 'white' : 'var(--color-accent)',
-                    border: '4px solid',
-                    borderColor: isSelected && isCorrect ? '#1dd1a1' : isSelected && !isCorrect ? '#ff6b6b' : '#eee',
-                    borderRadius: '16px',
-                    boxShadow: 'var(--shadow-soft)',
-                    minWidth: '120px',
-                    transition: 'all 0.2s ease'
-                  }}
+                  className={`quiz-option-btn${isSelected && isCorrect ? ' quiz-correct' : isSelected && !isCorrect ? ' quiz-wrong shake' : ''}`}
                   onClick={() => handleOption(planetId)}
                   disabled={selectedOption !== null}
                 >
-                  <div>{planet.emoji}</div>
-                  <div style={{ fontSize: '1rem', marginTop: '0.5rem' }}>{planet.name}</div>
+                  <span className="quiz-emoji">{planet.emoji}</span>
+                  <span>{planet.name}</span>
                 </button>
               );
             })}
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+          <div className="detail-back-container">
             <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
               Back to Science
             </button>

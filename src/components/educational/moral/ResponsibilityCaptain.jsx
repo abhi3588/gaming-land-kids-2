@@ -143,7 +143,7 @@ const ResponsibilityCaptain = ({ onBack }) => {
             <button className="btn btn-primary" onClick={handleReset}>
               Play Again
             </button>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+            <button className="btn"  onClick={() => { if (typeof onBack === 'function') onBack(); }}>
               Back to Moral Education
             </button>
           </div>
@@ -189,21 +189,7 @@ const ResponsibilityCaptain = ({ onBack }) => {
               return (
                 <button
                   key={option.id}
-                  className={`btn ${isSelected && !isCorrect ? 'shake' : ''}`}
-                  style={{ 
-                    fontSize: '1.1rem', 
-                    fontWeight: 'bold',
-                    padding: '1.5rem 2rem',
-                    background: isSelected && isCorrect ? '#1dd1a1' : isSelected && !isCorrect ? '#ff6b6b' : 'white',
-                    color: isSelected ? 'white' : 'var(--color-accent)',
-                    border: '4px solid',
-                    borderColor: isSelected && isCorrect ? '#1dd1a1' : isSelected && !isCorrect ? '#ff6b6b' : '#eee',
-                    borderRadius: '16px',
-                    boxShadow: 'var(--shadow-soft)',
-                    minWidth: '200px',
-                    maxWidth: '300px',
-                    transition: 'all 0.2s ease'
-                  }}
+                  className={`quiz-option-btn quiz-text-btn${isSelected && isCorrect ? ' quiz-correct' : isSelected && !isCorrect ? ' quiz-wrong shake' : ''}`}
                   onClick={() => handleOption(option)}
                   disabled={selectedOption !== null}
                 >
@@ -213,7 +199,7 @@ const ResponsibilityCaptain = ({ onBack }) => {
             })}
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+          <div className="detail-back-container">
             <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
               Back to Moral Education
             </button>

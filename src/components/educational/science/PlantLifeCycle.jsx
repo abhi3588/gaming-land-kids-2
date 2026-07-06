@@ -47,7 +47,7 @@ const PlantLifeCycle = ({ onBack }) => {
             <button className="btn btn-primary" onClick={handleReset}>
               Learn Again
             </button>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+            <button className="btn"  onClick={() => { if (typeof onBack === 'function') onBack(); }}>
               Back to Science
             </button>
           </div>
@@ -102,7 +102,7 @@ const PlantLifeCycle = ({ onBack }) => {
             </button>
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+          <div className="detail-back-container">
             <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
               Back to Science
             </button>
