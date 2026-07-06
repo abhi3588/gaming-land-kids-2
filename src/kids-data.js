@@ -1,5 +1,13 @@
 import { stories } from './components/stories/data/index.js';
 import { storiesHindi } from './components/stories/data-hindi/index.js';
+import PlantLifeCycle from './components/educational/science/PlantLifeCycle.jsx';
+import WeatherWatcher from './components/educational/science/WeatherWatcher.jsx';
+import SolarSystemExplorer from './components/educational/science/SolarSystemExplorer.jsx';
+import BodyPartsBuilder from './components/educational/science/BodyPartsBuilder.jsx';
+import TruthDetective from './components/educational/moral/TruthDetective.jsx';
+import KindnessHelper from './components/educational/moral/KindnessHelper.jsx';
+import RespectRanger from './components/educational/moral/RespectRanger.jsx';
+import ResponsibilityCaptain from './components/educational/moral/ResponsibilityCaptain.jsx';
 
 // ===== Stories Data =====
 export { stories, storiesHindi };
@@ -159,6 +167,86 @@ export const funActivities = [
       'Decorate the coupons.',
       'Give one coupon to someone today.'
     ]
+  }
+];
+
+// ===== Science Activities Data =====
+export const scienceActivities = [
+  {
+    id: 'plant-lifecycle',
+    title: 'Plant Life Cycle',
+    icon: '🌱',
+    color: 'patterns',
+    ageRange: '3-10',
+    desc: 'Learn how plants grow from seeds to flowers!',
+    component: PlantLifeCycle
+  },
+  {
+    id: 'weather-watcher',
+    title: 'Weather Watcher',
+    icon: '🌤️',
+    color: 'counting',
+    ageRange: '3-10',
+    desc: 'Match the weather to what you should wear!',
+    component: WeatherWatcher
+  },
+  {
+    id: 'solar-system',
+    title: 'Solar System Explorer',
+    icon: '🪐',
+    color: 'memory',
+    ageRange: '3-10',
+    desc: 'Explore planets in our solar system!',
+    component: SolarSystemExplorer
+  },
+  {
+    id: 'body-parts',
+    title: 'Body Parts Builder',
+    icon: '🧍',
+    color: 'patterns',
+    ageRange: '3-10',
+    desc: 'Learn about your amazing body!',
+    component: BodyPartsBuilder
+  }
+];
+
+// ===== Moral Activities Data =====
+export const moralActivities = [
+  {
+    id: 'truth-detective',
+    title: 'Truth Detective',
+    icon: '🔍',
+    color: 'patterns',
+    ageRange: '3-10',
+    desc: 'Learn why honesty is important!',
+    component: TruthDetective
+  },
+  {
+    id: 'kindness-helper',
+    title: 'Kindness Helper',
+    icon: '💝',
+    color: 'word',
+    ageRange: '3-10',
+    desc: 'Practice being kind to others!',
+    component: KindnessHelper
+  },
+  {
+    id: 'respect-ranger',
+    title: 'Respect Ranger',
+    icon: '🎖️',
+    color: 'counting',
+    ageRange: '3-10',
+    desc: 'Learn to show respect to everyone!',
+    component: RespectRanger
+  },
+  {
+    id: 'responsibility-captain',
+    title: 'Responsibility Captain',
+    icon: '🌟',
+    color: 'sorting',
+    ageRange: '3-10',
+    desc: 'Practice being responsible!',
+    component: ResponsibilityCaptain
   }
 ];
 

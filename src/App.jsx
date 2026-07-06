@@ -3,7 +3,8 @@ import GamesTab   from './components/games/GamesTab.jsx';
 import StoriesTab from './components/stories/StoriesTab.jsx';
 import RhymesTab from './components/rhymes/RhymesTab.jsx';
 import FunTab from './components/fun/FunTab.jsx';
-import { gamesMeta, stories, rhymes, funActivities } from './kids-data.js';
+import EducationalTab from './components/educational/EducationalTab.jsx';
+import { gamesMeta, stories, rhymes, funActivities, scienceActivities, moralActivities } from './kids-data.js';
 
 const generateBubbles = () =>
   Array.from({ length: 12 }).map((_, i) => ({
@@ -34,6 +35,7 @@ export default function App() {
   const storiesCount = stories.length;
   const rhymesCount  = rhymes.length;
   const funCount     = funActivities.length;
+  const educationalCount = scienceActivities.length + moralActivities.length;
 
   return (
     <div className="app" style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -120,6 +122,15 @@ export default function App() {
             🎉 Fun
             <span className="tab-count">{funCount}</span>
           </button>
+          <button
+            role="tab"
+            aria-selected={activeTab === 'educational'}
+            className={`tab-btn educational${activeTab === 'educational' ? ' active' : ''}`}
+            onClick={() => setActiveTab('educational')}
+          >
+            🧪 Educational
+            <span className="tab-count">{educationalCount}</span>
+          </button>
         </div>
       </div>
 
@@ -130,6 +141,7 @@ export default function App() {
         {activeTab === 'stories' && <StoriesTab key="stories" />}
         {activeTab === 'rhymes'  && <RhymesTab  key="rhymes"  />}
         {activeTab === 'fun'     && <FunTab     key="fun"     />}
+        {activeTab === 'educational' && <EducationalTab key="educational" />}
       </main>
 
       {/* ── Footer ── */}
