@@ -1,10 +1,12 @@
 import { useState, useMemo } from 'react';
-import GamesTab   from './components/games/GamesTab.jsx';
-import StoriesTab from './components/stories/StoriesTab.jsx';
-import RhymesTab from './components/rhymes/RhymesTab.jsx';
-import FunTab from './components/fun/FunTab.jsx';
+import GamesTab       from './components/games/GamesTab.jsx';
+import StoriesTab     from './components/stories/StoriesTab.jsx';
+import RhymesTab      from './components/rhymes/RhymesTab.jsx';
+import FunTab         from './components/fun/FunTab.jsx';
 import EducationalTab from './components/educational/EducationalTab.jsx';
+import QuizTab        from './components/quiz/QuizTab.jsx';
 import { gamesMeta, stories, rhymes, funActivities, scienceActivities, moralActivities } from './kids-data.js';
+import { QUIZ_CATEGORIES } from './components/quiz/quiz-data.js';
 
 const generateBubbles = () =>
   Array.from({ length: 12 }).map((_, i) => ({
@@ -31,11 +33,12 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('games');
   const [bubbles] = useState(generateBubbles);
 
-  const gamesCount   = gamesMeta.length;
-  const storiesCount = stories.length;
-  const rhymesCount  = rhymes.length;
-  const funCount     = funActivities.length;
+  const gamesCount       = gamesMeta.length;
+  const storiesCount     = stories.length;
+  const rhymesCount      = rhymes.length;
+  const funCount         = funActivities.length;
   const educationalCount = scienceActivities.length + moralActivities.length;
+  const quizCount        = QUIZ_CATEGORIES.length;
 
   return (
     <div className="app" style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -131,17 +134,27 @@ export default function App() {
             🧪 Educational
             <span className="tab-count">{educationalCount}</span>
           </button>
+          <button
+            role="tab"
+            aria-selected={activeTab === 'quiz'}
+            className={`tab-btn quiz${activeTab === 'quiz' ? ' active' : ''}`}
+            onClick={() => setActiveTab('quiz')}
+          >
+            📝 Quiz
+            <span className="tab-count">{quizCount}</span>
+          </button>
         </div>
       </div>
 
       {/* ── Tab Content ── */}
       <main className="app-container" style={{ flex: 1, position: 'relative', zIndex: 1 }}
         role="tabpanel" aria-label={activeTab === 'games' ? 'Games' : 'Stories'}>
-        {activeTab === 'games'   && <GamesTab   key="games"   />}
-        {activeTab === 'stories' && <StoriesTab key="stories" />}
-        {activeTab === 'rhymes'  && <RhymesTab  key="rhymes"  />}
-        {activeTab === 'fun'     && <FunTab     key="fun"     />}
+        {activeTab === 'games'       && <GamesTab       key="games"       />}
+        {activeTab === 'stories'     && <StoriesTab     key="stories"     />}
+        {activeTab === 'rhymes'      && <RhymesTab      key="rhymes"      />}
+        {activeTab === 'fun'         && <FunTab         key="fun"         />}
         {activeTab === 'educational' && <EducationalTab key="educational" />}
+        {activeTab === 'quiz'        && <QuizTab        key="quiz"        />}
       </main>
 
       {/* ── Footer ── */}

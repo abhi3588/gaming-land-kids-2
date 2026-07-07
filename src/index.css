@@ -198,6 +198,12 @@ body {
   box-shadow: 0 4px 18px rgba(165,94,234,0.35);
 }
 
+.tab-btn.quiz.active {
+  background: linear-gradient(135deg, var(--candy-orange), var(--candy-red));
+  color: white;
+  box-shadow: 0 4px 18px rgba(255,159,67,0.4);
+}
+
 .tab-count {
   background: rgba(255,255,255,0.3);
   border-radius: 999px;
@@ -685,7 +691,92 @@ body {
     min-width: 100%;
   }
 }
+/* ===== Quiz Activity Layout ===== */
+.quiz-question-area {
+  text-align: center;
+  margin: 2rem 0 1rem;
+  padding: 0 1rem;
+}
 
+.quiz-big-emoji {
+  font-size: clamp(5rem, 18vw, 8rem);
+  margin-bottom: 1rem;
+  animation: pop-in 0.4s ease;
+  line-height: 1;
+}
+
+.quiz-question-text {
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  color: var(--text-heading);
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.quiz-feedback {
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 0.65rem 1.25rem;
+  border-radius: 12px;
+  display: inline-block;
+  margin-top: 0.5rem;
+  animation: pop-in 0.3s ease;
+}
+.quiz-feedback-correct { background: rgba(29,209,161,0.15); color: #16a085; }
+.quiz-feedback-wrong   { background: rgba(255,107,107,0.12); color: #c0392b; }
+
+/* 2-column grid for 4 options */
+.quiz-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-width: 640px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.quiz-option-text {
+  flex-direction: row;
+  min-width: unset;
+  max-width: unset;
+  flex: unset;
+  width: 100%;
+  font-size: clamp(0.9rem, 2.8vw, 1.1rem);
+  padding: 0.85rem 1rem;
+  text-align: center;
+  border-radius: 14px;
+  border: 3px solid #eee;
+}
+
+/* Score bar inside champion screen */
+.quiz-score-bar-container {
+  width: 100%;
+  max-width: 360px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  height: 14px;
+  overflow: hidden;
+  margin: 0 auto 0.25rem;
+}
+.quiz-score-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--candy-green), var(--candy-blue));
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+
+@media (max-width: 480px) {
+  .quiz-options-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+    padding: 0 0.5rem;
+  }
+  .quiz-option-text {
+    font-size: 0.85rem;
+    padding: 0.7rem 0.5rem;
+    border-radius: 10px;
+  }
+}
 
 .story-card {
   background: white;
