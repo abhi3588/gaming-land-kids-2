@@ -89,8 +89,8 @@ const NumberMatch = ({ onBack }) => {
     for (let i = 0; i < count; i++) {
       dots.push(
         <span key={i} style={{ 
-          fontSize: '2rem', 
-          margin: '0.3rem',
+          fontSize: 'clamp(1.2rem, 5vw, 2rem)', 
+          margin: '0.2rem',
           display: 'inline-block'
         }}>
           ⚫
@@ -155,16 +155,18 @@ const NumberMatch = ({ onBack }) => {
                   key={i}
                   className={`btn ${isWrong ? 'shake' : ''}`}
                   style={{ 
-                    fontSize: '1.5rem', 
+                    fontSize: 'clamp(1.1rem, 4vw, 1.5rem)', 
                     fontWeight: 'bold',
-                    padding: '1rem 2rem',
+                    padding: 'clamp(0.5rem, 2vw, 1rem) clamp(1rem, 3vw, 2rem)',
                     background: isCorrect ? '#1dd1a1' : isWrong ? '#ff6b6b' : 'white',
                     color: isCorrect || isWrong ? 'white' : 'var(--color-accent)',
                     border: '4px solid',
                     borderColor: isCorrect ? '#1dd1a1' : isWrong ? '#ff6b6b' : '#eee',
                     borderRadius: '16px',
                     boxShadow: 'var(--shadow-soft)',
-                    minWidth: '120px'
+                    minWidth: 'clamp(80px, 20vw, 120px)',
+                    flex: '1 1 auto',
+                    maxWidth: '45%'
                   }}
                   onClick={() => handlePick(number)}
                 >
