@@ -32,6 +32,22 @@ export const QUIZ_CATEGORIES = [
     color: 'memory',
     desc: 'Can you name all these wonderful animals? Let\'s find out!',
     ageRange: '3–8'
+  },
+  {
+    id: 'colors',
+    title: 'Colors',
+    icon: '🎨',
+    color: 'patterns',
+    desc: 'Match colors to cute objects and name them correctly!',
+    ageRange: '3–6'
+  },
+  {
+    id: 'vehicles',
+    title: 'Vehicles',
+    icon: '🚗',
+    color: 'counting',
+    desc: 'Identify different vehicles and modes of transport!',
+    ageRange: '3–8'
   }
 ];
 
@@ -102,6 +118,40 @@ export const QUIZ_DATA = {
       { id: 'frog', emoji: '🐸', question: 'Which animal starts life as a tadpole?', answer: 'Frog', options: ['Toad', 'Frog', 'Salamander', 'Newt'] },
       { id: 'penguin', emoji: '🐧', question: 'Which bird cannot fly but loves to swim in cold places?', answer: 'Penguin', options: ['Ostrich', 'Penguin', 'Emu', 'Kiwi'] },
       { id: 'butterfly', emoji: '🦋', question: 'Which beautiful insect starts life as a caterpillar?', answer: 'Butterfly', options: ['Moth', 'Dragonfly', 'Bee', 'Butterfly'] }
+    ]
+  },
+  colors: {
+    title: 'Colors Quiz',
+    completionEmoji: '🎨',
+    completionMessage: 'You\'re a color genius! 🌈',
+    questions: [
+      { id: 'red', emoji: '🍒', question: 'What color is this sweet cherry?', answer: 'Red', options: ['Blue', 'Green', 'Red', 'Yellow'] },
+      { id: 'yellow', emoji: '🍌', question: 'What color is this ripe banana?', answer: 'Yellow', options: ['Purple', 'Yellow', 'Pink', 'Orange'] },
+      { id: 'blue', emoji: '🐳', question: 'What color is this friendly whale?', answer: 'Blue', options: ['Green', 'Brown', 'Black', 'Blue'] },
+      { id: 'green', emoji: '🐸', question: 'What color is this jumping frog?', answer: 'Green', options: ['Red', 'Orange', 'Green', 'White'] },
+      { id: 'orange', emoji: '🍊', question: 'What color is this juicy orange?', answer: 'Orange', options: ['Yellow', 'Orange', 'Pink', 'Purple'] },
+      { id: 'pink', emoji: '🦩', question: 'What color is this tall flamingo?', answer: 'Pink', options: ['Pink', 'Blue', 'Green', 'Brown'] },
+      { id: 'purple', emoji: '🍇', question: 'What color are these sweet grapes?', answer: 'Purple', options: ['White', 'Yellow', 'Purple', 'Red'] },
+      { id: 'brown', emoji: '🐻', question: 'What color is this cute teddy bear?', answer: 'Brown', options: ['Blue', 'Black', 'Orange', 'Brown'] },
+      { id: 'white', emoji: '☃️', question: 'What color is this cold snowman?', answer: 'White', options: ['Green', 'White', 'Purple', 'Pink'] },
+      { id: 'black', emoji: '🐈‍⬛', question: 'What color is this little cat?', answer: 'Black', options: ['Red', 'Yellow', 'Blue', 'Black'] }
+    ]
+  },
+  vehicles: {
+    title: 'Vehicles Quiz',
+    completionEmoji: '🚗',
+    completionMessage: 'You\'re a transportation expert! 🚀',
+    questions: [
+      { id: 'car', emoji: '🚗', question: 'What vehicle is this that drives on roads?', answer: 'Car', options: ['Bicycle', 'Train', 'Car', 'Boat'] },
+      { id: 'airplane', emoji: '✈️', question: 'What vehicle flies high up in the sky?', answer: 'Airplane', options: ['Ship', 'Helicopter', 'Tractor', 'Airplane'] },
+      { id: 'train', emoji: '🚂', question: 'What vehicle travels on tracks and goes choo-choo?', answer: 'Train', options: ['Train', 'Car', 'Bus', 'Submarine'] },
+      { id: 'ship', emoji: '🚢', question: 'What large vehicle travels across deep oceans?', answer: 'Ship', options: ['Rocket', 'Bicycle', 'Ship', 'Helicopter'] },
+      { id: 'bicycle', emoji: '🚲', question: 'What vehicle has two wheels and pedaling pedals?', answer: 'Bicycle', options: ['Motorcycle', 'Bicycle', 'Car', 'Train'] },
+      { id: 'helicopter', emoji: '🚁', question: 'What vehicle flies using spinning blades on top?', answer: 'Helicopter', options: ['Airplane', 'Hot Air Balloon', 'Rocket', 'Helicopter'] },
+      { id: 'rocket', emoji: '🚀', question: 'What powerful vehicle travels into outer space?', answer: 'Rocket', options: ['Submarine', 'Rocket', 'Train', 'Bus'] },
+      { id: 'fireengine', emoji: '🚒', question: 'What red vehicle helps firefighters put out fires?', answer: 'Fire Engine', options: ['Ambulance', 'Police Car', 'Fire Engine', 'Tractor'] },
+      { id: 'schoolbus', emoji: '🚌', question: 'What yellow vehicle takes children to school?', answer: 'School Bus', options: ['School Bus', 'Truck', 'Airplane', 'Car'] },
+      { id: 'tractor', emoji: '🚜', question: 'What vehicle does a farmer use on a field?', answer: 'Tractor', options: ['Bicycle', 'Boat', 'Submarine', 'Tractor'] }
     ]
   }
 };
