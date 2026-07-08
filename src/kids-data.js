@@ -4,10 +4,14 @@ import PlantLifeCycle from './components/educational/science/PlantLifeCycle.jsx'
 import WeatherWatcher from './components/educational/science/WeatherWatcher.jsx';
 import SolarSystemExplorer from './components/educational/science/SolarSystemExplorer.jsx';
 import BodyPartsBuilder from './components/educational/science/BodyPartsBuilder.jsx';
+import WaterCycleExplorer from './components/educational/science/WaterCycleExplorer.jsx';
+import DinosaurAge from './components/educational/science/DinosaurAge.jsx';
 import TruthDetective from './components/educational/moral/TruthDetective.jsx';
 import KindnessHelper from './components/educational/moral/KindnessHelper.jsx';
 import RespectRanger from './components/educational/moral/RespectRanger.jsx';
 import ResponsibilityCaptain from './components/educational/moral/ResponsibilityCaptain.jsx';
+import HonestyHero from './components/educational/moral/HonestyHero.jsx';
+import GratitudeGarden from './components/educational/moral/GratitudeGarden.jsx';
 
 // ===== Stories Data =====
 export { stories, storiesHindi };
@@ -207,6 +211,24 @@ export const scienceActivities = [
     ageRange: '3-10',
     desc: 'Learn about your amazing body!',
     component: BodyPartsBuilder
+  },
+  {
+    id: 'water-cycle',
+    title: 'Water Cycle Explorer',
+    icon: '💧',
+    color: 'sorting',
+    ageRange: '3-10',
+    desc: 'Learn how water cycles around the Earth!',
+    component: WaterCycleExplorer
+  },
+  {
+    id: 'dino-age',
+    title: 'Dinosaur Age Explorer',
+    icon: '🦕',
+    color: 'counting',
+    ageRange: '3-10',
+    desc: 'Travel back in time to the age of dinosaurs!',
+    component: DinosaurAge
   }
 ];
 
@@ -247,6 +269,24 @@ export const moralActivities = [
     ageRange: '3-10',
     desc: 'Practice being responsible!',
     component: ResponsibilityCaptain
+  },
+  {
+    id: 'honesty-hero',
+    title: 'Honesty Hero',
+    icon: '💎',
+    color: 'patterns',
+    ageRange: '3-10',
+    desc: 'Find out what it means to be an honesty hero!',
+    component: HonestyHero
+  },
+  {
+    id: 'gratitude-garden',
+    title: 'Gratitude Garden',
+    icon: '🌻',
+    color: 'word',
+    ageRange: '3-10',
+    desc: 'Grow a beautiful garden of gratitude!',
+    component: GratitudeGarden
   }
 ];
 
