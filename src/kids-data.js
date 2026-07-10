@@ -187,6 +187,38 @@ export const funActivities = [
       'Decorate the coupons.',
       'Give one coupon to someone today.'
     ]
+  },
+  {
+    id: 'nature-journal',
+    title: 'Nature Journal',
+    icon: '🌿',
+    color: 'patterns',
+    ageRange: '4-10',
+    time: '20 min',
+    desc: 'Step outside and draw what you find in nature!',
+    materials: ['A blank notebook or folded paper', 'Pencils and crayons', 'A magnifying glass (optional)'],
+    steps: [
+      'Go to a garden, park, or look out a window.',
+      'Pick one thing you notice — a leaf, bird, cloud, or flower.',
+      'Draw it carefully and color it.',
+      'Write or dictate one sentence about what you saw.'
+    ]
+  },
+  {
+    id: 'sock-puppet-show',
+    title: 'Sock Puppet Show',
+    icon: '🧦',
+    color: 'word',
+    ageRange: '3-9',
+    time: '25 min',
+    desc: 'Make silly sock puppets and put on your own show!',
+    materials: ['Old socks', 'Googly eyes or paper dots', 'Glue or tape', 'Markers or felt scraps'],
+    steps: [
+      'Slip a sock on your hand and decide on your character.',
+      'Stick on eyes and draw a mouth or hair.',
+      'Give your puppet a name and a funny voice.',
+      'Create a short story and perform it for the family!'
+    ]
   }
 ];
 

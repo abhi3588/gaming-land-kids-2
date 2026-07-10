@@ -6,6 +6,8 @@ export const ACTIVITY_IMAGES = {
   'breathing-star': 'images/Fun-BreathingStar.png',
   'kitchen-band': 'images/Fun-KitchenBand.png',
   'kindness-coupons': 'images/Fun-KindnessCoupons.png',
+  'nature-journal': 'images/Nature_Journal.png',
+  'sock-puppet-show': 'images/Sock_Puppet_Show.png',
 };
 
 export function getActivityImageUrl(id) {
