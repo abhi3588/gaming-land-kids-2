@@ -5,6 +5,7 @@ import RhymesTab      from './components/rhymes/RhymesTab.jsx';
 import FunTab         from './components/fun/FunTab.jsx';
 import EducationalTab from './components/educational/EducationalTab.jsx';
 import QuizTab        from './components/quiz/QuizTab.jsx';
+import PuzzleTab      from './components/puzzle/PuzzleTab.jsx';
 import { gamesMeta, stories, rhymes, funActivities, scienceActivities, moralActivities } from './kids-data.js';
 import { QUIZ_CATEGORIES } from './components/quiz/quiz-data.js';
 
@@ -39,6 +40,7 @@ export default function App() {
   const funCount         = funActivities.length;
   const educationalCount = scienceActivities.length + moralActivities.length;
   const quizCount        = QUIZ_CATEGORIES.length;
+  const puzzleCount      = 6;
 
   return (
     <div className="app" style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -143,6 +145,15 @@ export default function App() {
             📝 Quiz
             <span className="tab-count">{quizCount}</span>
           </button>
+          <button
+            role="tab"
+            aria-selected={activeTab === 'puzzle'}
+            className={`tab-btn puzzle${activeTab === 'puzzle' ? ' active' : ''}`}
+            onClick={() => setActiveTab('puzzle')}
+          >
+            🧩 Puzzle
+            <span className="tab-count">{puzzleCount}</span>
+          </button>
         </div>
       </div>
 
@@ -155,6 +166,7 @@ export default function App() {
         {activeTab === 'fun'         && <FunTab         key="fun"         />}
         {activeTab === 'educational' && <EducationalTab key="educational" />}
         {activeTab === 'quiz'        && <QuizTab        key="quiz"        />}
+        {activeTab === 'puzzle'      && <PuzzleTab      key="puzzle"      />}
       </main>
 
       {/* ── Footer ── */}
