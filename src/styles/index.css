@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap');
+@import './tokens.css';
+@import './reset.css';
+@import './animations.css';
+@import './layout.css';
+@import './components.css';
+@import './puzzle.css';
+@import './games.css';
+@import './utilities.css';
+@import './responsive.css';

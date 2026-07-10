@@ -1,0 +1,659 @@
+/* ===== Puzzle Styles ===== */
+.puzzle-feedback {
+  text-align: center;
+  margin: 0 auto 1.25rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  color: #3a3a3a;
+  background: rgba(255,255,255,0.85);
+  box-shadow: var(--shadow-soft);
+  max-width: 700px;
+}
+
+.puzzle-board-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.puzzle-preview {
+  display: grid;
+  place-items: center;
+  width: 300px;
+  height: 300px;
+  max-width: 100%;
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  font-size: clamp(3.2rem, 8vw, 5rem);
+  color: white;
+}
+
+.puzzle-grid {
+  display: grid;
+  gap: 6px;
+  width: 300px;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.puzzle-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.puzzle-cell {
+  border: none;
+  border-radius: 16px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.35), 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.puzzle-drop-zone {
+  background: rgba(255,255,255,0.55);
+  border: 2px dashed rgba(0,0,0,0.12);
+  cursor: pointer;
+}
+
+.puzzle-drop-zone.filled {
+  background: rgba(255,255,255,0.65);
+}
+
+.puzzle-drop-zone.highlight {
+  outline: 3px dashed var(--candy-orange);
+  background: rgba(255, 196, 140, 0.55);
+}
+
+.puzzle-drop-zone:not(.filled):hover {
+  background: rgba(255, 224, 196, 0.85);
+}
+
+.puzzle-slot-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  font-weight: 800;
+}
+
+.puzzle-tray {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 1.25rem;
+}
+
+.puzzle-piece {
+  width: 90px;
+  height: 90px;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: grab;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+}
+
+.puzzle-piece.selected {
+  outline: 4px solid var(--candy-orange);
+  transform: scale(1.04);
+}
+
+.puzzle-piece-content {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.puzzle-piece-emoji {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300%;
+  height: 300%;
+  display: grid;
+  place-items: center;
+  font-size: 9rem;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.puzzle-slide-tile {
+  padding: 0;
+  cursor: pointer;
+}
+
+.puzzle-cell-empty {
+  background: rgba(255,255,255,0.45);
+}
+
+.connect-dots-board {
+  position: relative;
+  width: min(100%, 560px);
+  aspect-ratio: 1;
+  margin: 1rem auto 0;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.dot-node {
+  position: absolute;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  color: #444;
+  font-weight: 800;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.16);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.dot-node.connected { background: var(--candy-green); color: white; }
+.dot-node.active { outline: 4px solid #ff9f43; }
+.dot-node.shake { animation: shake 0.3s ease-in-out; }
+
+.dot-line {
+  position: absolute;
+  height: 6px;
+  background: rgba(255,255,255,0.95);
+  transform-origin: left center;
+  border-radius: var(--radius-pill);
+}
+
+.connect-dots-reveal {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: 800;
+  background: rgba(0,0,0,0.12);
+}
+
+.maze-grid {
+  display: grid;
+  gap: 0.28rem;
+  max-width: min(92vw, 520px);
+  margin: 1rem auto 0;
+}
+
+.maze-cell {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 8px;
+  min-height: 34px;
+  padding: 0;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.maze-cell.wall { background: #ffc9c9; }
+.maze-cell.path { background: #c8f7d4; }
+.maze-cell.start { background: #a8d8ff; box-shadow: 0 0 0 3px rgba(168,216,255,0.5); }
+.maze-cell.goal {
+  background: #ffe08a;
+  box-shadow: 0 0 0 3px rgba(255,224,138,0.6), 0 0 14px rgba(255,224,138,0.85);
+}
+.maze-cell.player {
+  background: #c9a8ff;
+  transform: scale(1.06);
+  box-shadow: 0 0 0 3px rgba(201,168,255,0.75);
+}
+
+.maze-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.1rem;
+  margin: 1.1rem auto 0;
+  font-weight: 700;
+  color: #3a3a3a;
+}
+.maze-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.maze-chip {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  display: inline-block;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+.maze-chip.start { background: #a8d8ff; }
+.maze-chip.player { background: #c9a8ff; }
+.maze-chip.goal { background: #ffe08a; }
+.maze-chip.wall { background: #ffc9c9; }
+.maze-chip.path { background: #c8f7d4; }
+
+.spot-difference-board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.spot-scene {
+  background: rgba(255,255,255,0.86);
+  border-radius: 24px;
+  padding: 0.7rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.spot-scene h3 {
+  text-align: center;
+  margin-bottom: 0.7rem;
+  color: var(--text-muted);
+}
+
+.spot-scene-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  min-height: 300px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fef3c7, #fce7f3);
+}
+
+.spot-item {
+  position: absolute;
+  border: none;
+  background: transparent;
+  font-size: 2.6rem;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.spot-item:not(.found):hover {
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.spot-item.found {
+  filter: drop-shadow(0 0 0.3rem rgba(29,209,161,0.8));
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.shape-fit-board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.shape-fit-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.shape-fit-side-title {
+  text-align: center;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.shape-fit-options,
+.shape-fit-slots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.shape-fit-option,
+.shape-fit-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 134px;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 18px;
+  background: white;
+  box-shadow: var(--shadow-soft);
+  font-family: inherit;
+  font-weight: 700;
+  color: #444;
+  cursor: pointer;
+}
+
+.shape-fit-option span:first-child,
+.shape-fit-slot span:first-child {
+  font-size: 3.2rem;
+  line-height: 1;
+}
+
+.shape-fit-option.selected {
+  outline: 4px solid var(--candy-orange);
+}
+
+.shape-fit-option.done {
+  opacity: 0.7;
+}
+
+.shape-fit-slot.filled {
+  background: linear-gradient(135deg, #d1fae5, #bfdbfe);
+}
+
+/* ===== Game sub-components (kept from CB2) ===== */
+.btn {
+  padding: 0.9rem 1.8rem;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+}
+
+.btn:active { transform: translateY(2px); box-shadow: none; }
+.btn-primary { background: var(--candy-blue); color: white; }
+
+.btn-back {
+  background: var(--candy-blue);
+  color: white;
+  border: none;
+  padding: 0.9rem 1.8rem;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 1.1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+}
+
+.btn-back::before {
+  content: "← ";
+}
+
+.btn-back:hover {
+  background: var(--candy-blue);
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(0,0,0,0.1);
+}
+
+/* Align champion screen secondary button styling with primary back buttons */
+.champion-screen button:not(.btn-primary) {
+  background: var(--candy-blue) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.15) !important;
+}
+
+.champion-screen button:not(.btn-primary)::before {
+  content: "← ";
+}
+
+.champion-screen button:not(.btn-primary):hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(0,0,0,0.1) !important;
+}
+
+/* Game header / progress kept from CB2 */
+.game-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: rgba(255,255,255,0.85);
+  padding: 1rem 1.25rem;
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.game-header div { font-weight: 800; min-width: 110px; }
+
+.progress-container {
+  flex: 1 1 100%;
+  background: #e2e8f0;
+  border-radius: var(--radius-pill);
+  height: 12px;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--candy-blue), var(--candy-purple));
+  transition: width 0.4s ease;
+}
+
+.level-banner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: white;
+  border: 2px solid var(--candy-blue);
+  color: var(--candy-blue);
+  font-weight: 800;
+  border-radius: var(--radius-pill);
+  padding: 0.8rem 1.2rem;
+  box-shadow: var(--shadow-soft);
+  animation: pop-in 0.35s ease;
+  margin: 1rem auto 1.5rem;
+}
+
+.champion-screen {
+  text-align: center;
+  background: white;
+  border-radius: 28px;
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow-pop);
+  border: 4px solid var(--soft-green);
+}
+
+.champion-screen h2,
+.champion-screen h3 { margin-bottom: 1rem; }
+.champion-screen p { color: var(--text-muted); margin-bottom: 1.5rem; }
+
+.game-view {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 0.75rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Memory board */
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.card { aspect-ratio: 1; perspective: 1000px; cursor: pointer; }
+
+.card-inner {
+  position: relative;
+  width: 100%; height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner { transform: rotateY(180deg); }
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%; height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.card-back  { background: white; border: 4px solid var(--soft-blue); }
+.card-front { background: var(--soft-blue); transform: rotateY(180deg); }
+
+/* Sorting */
+.drop-zones {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.drop-zone {
+  width: 150px; height: 150px;
+  border: 4px dashed #ccc;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.draggable { font-size: 3rem; cursor: grab; margin: 0.5rem; }
+
+/* Touch-friendly interactive helpers */
+.draggable, .spark-pad, .tab-btn, .play-btn, .read-btn, .letter-tile, .sudoku-cell {
+  -webkit-user-select: none;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+.draggable { touch-action: none; }
+.spark-pad { min-height: 72px; min-width: 72px; border-radius: 14px; }
+.sudoku-cell { min-height: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; }
+
+.draggable.selected { outline: 4px solid rgba(0,0,0,0.08); transform: scale(1.05); box-shadow: var(--shadow-card); }
+
+/* Patterns */
+.pattern-sequence {
+  font-size: clamp(3rem,9vw,4rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.75rem,3vw,1rem);
+  margin: 2.5rem 0;
+  flex-wrap: wrap;
+}
+
+.pattern-missing {
+  border: 4px dashed #ccc;
+  border-radius: 18px;
+  width: clamp(64px,12vw,80px);
+  height: clamp(64px,12vw,80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pattern-options { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.9rem; }
+.pattern-option { font-size: clamp(2rem,5vw,3rem); padding: 0.85rem 1rem; min-width: 76px; background: white; }
+
+/* MathQuest */
+.math-quest-area {
+  position: relative;
+  width: 100%; height: 480px;
+  background: linear-gradient(to bottom, #0d1b2a, #1b263b);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
+}
+
+.balloon {
+  position: absolute;
+  width: 70px; height: 85px;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; font-weight: 800; color: white;
+  cursor: pointer; user-select: none;
+  box-shadow: inset -5px -5px 15px rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.15);
+  transition: transform 0.1s;
+}
+
+.balloon::before {
+  content: "";
+  position: absolute; bottom: -6px; left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 8px solid currentColor;
+}
+
+.balloon::after {
+  content: "";
+  position: absolute; bottom: -36px; left: 50%;
+  width: 2px; height: 30px;
+  background-color: rgba(255,255,255,0.4);
+  transform: translateX(-50%);
+}
+
+.balloon:active { transform: scale(0.9); }
+
+/* Counting */
+.counting-area {
+  position: relative; width: 100%;
+  min-height: 320px; aspect-ratio: 4/3; max-height: 460px;
+  background: #0a192f; border-radius: 20px; overflow: hidden;
+  box-shadow: 0 0 50px rgba(76,201,240,0.2);
+}
+
+.counting-area .star {
+  position: absolute;
+  font-size: clamp(2.2rem,4vw,3rem);
+  cursor: pointer;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* WordBuilder */
+.word-emoji-display { font-size: clamp(4.5rem,6vw,6rem); margin: 1rem 0; text-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+
+.letter-slots-container { display: flex; justify-content: center; gap: 1rem; margin: 2rem 0; flex-wrap: wrap; }
+
+.letter-slot {
+  width: clamp(45px,10vw,60px); height: clamp(45px,10vw,60px);
+  border-bottom: 5px solid #ddd;
+  display: flex; align-items: center; justify-content: center;
+  font-size: clamp(1.8rem,3vw,2.2rem); font-weight: 800;
+  color: var(--candy-purple); transition: all 0.2s; cursor: pointer;
+}
+
+.letter-slot.filled  { border-bottom-color: var(--candy-purple); animation: pop-in 0.2s cubic-bezier(0.175,0.885,0.32,1.275); }
+.letter-slot.error   { border-bottom-color: var(--candy-pink); color: var(--candy-pink); }
+
+.letter-tiles-container { display: flex; justify-content: center; gap: 1rem; margin-top: 3rem; flex-wrap: wrap; }
+
+.letter-tile {
+  background: white; border: 4px solid var(--soft-blue); box-shadow: var(--shadow-soft);
+  width: clamp(50px,10vw,65px); height: clamp(50px,10vw,65px);
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: clamp(1.6rem,2.5vw,2rem); font-weight: 800;
+  cursor: pointer; transition: all 0.2s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+
+.letter-tile:hover   { transform: translateY(-5px); box-shadow: var(--shadow-pop); }
+.letter-tile:active  { transform: scale(0.9); }
+.letter-tile.used    { opacity: 0.3; pointer-events: none; transform: scale(0.9); }
+

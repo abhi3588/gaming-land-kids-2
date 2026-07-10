@@ -104,7 +104,7 @@ const MazePuzzle = ({ puzzle, onBack }) => {
               <button
                 key={`${rowIndex}-${colIndex}`}
                 type="button"
-                className={getCellClass(rowIndex, colIndex)}
+                className={`${getCellClass(rowIndex, colIndex)} flex-center`}
                 onClick={() => tryMove(rowIndex, colIndex)}
                 aria-label={`Maze cell row ${rowIndex + 1} column ${colIndex + 1}`}
               >

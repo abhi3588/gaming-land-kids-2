@@ -1,0 +1,55 @@
+/* ===== Design Tokens — Candy Palette ===== */
+:root {
+  /* Brand colors */
+  --candy-pink:    #ff6b9d;
+  --candy-orange:  #ff9f43;
+  --candy-yellow:  #feca57;
+  --candy-green:   #1dd1a1;
+  --candy-teal:    #00d2d3;
+  --candy-purple:  #a55eea;
+  --candy-red:     #ee5253;
+  --candy-blue:    #54a0ff;
+
+  /* Soft palette (from CB2) */
+  --soft-blue:   #B2EBF2;
+  --soft-pink:   #FFB7B2;
+  --soft-green:  #B2F2BB;
+  --soft-yellow: #FFFFB2;
+
+  /* Backgrounds */
+  --bg-primary:   #f0f9ff;
+  --bg-cream:     #fffbf0;
+
+  /* Typography */
+  --font-main:  'Fredoka', 'Outfit', ui-rounded, 'Comic Sans MS', sans-serif;
+
+  /* Shadows */
+  --shadow-soft: 0 10px 25px rgba(0,0,0,0.05);
+  --shadow-pop:  0 15px 35px rgba(0,0,0,0.10);
+  --shadow-card: 0 8px 20px rgba(0,0,0,0.08);
+  --shadow-btn-pink: 0 6px 18px rgba(255,107,157,0.4);
+  --shadow-btn-purple: 0 4px 15px rgba(165,94,234,0.35);
+
+  --text-heading: #2d2d2d;
+  --text-body: #333;
+  --text-muted: #555;
+  --text-secondary: #777;
+  --surface-card: #fff;
+  --surface-soft: #f5f5f5;
+  --white: #fff;
+
+  /* Radii */
+  --radius-lg:    30px;
+  --radius-md:    20px;
+  --radius-sm:    12px;
+  --radius-pill:  999px;
+  --radius-round: 50%;
+
+  /* Breakpoints (standardized scale) */
+  --bp-sm:  576px;
+  --bp-md:  768px;
+  --bp-lg:  992px;
+  --bp-xl:  1200px;
+  --bp-xxl: 1400px;
+}
+
