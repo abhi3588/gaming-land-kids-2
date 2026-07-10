@@ -70,6 +70,22 @@ export const rhymes = [
     color: 'counting',
     desc: 'Count along from 1 to 5!',
     videoUrl: getPublicAssetUrl('video/12345.mp4')
+  },
+  {
+    id: 'topsyturvyzoo',
+    title: 'Topsy Turvy Zoo',
+    icon: '🦒',
+    color: 'sorting',
+    desc: 'Step inside a silly, upside-down zoo!',
+    videoUrl: getPublicAssetUrl('video/Topsy Turvy Zoo.mp4')
+  },
+  {
+    id: 'cloud',
+    title: 'Cloud',
+    icon: '☁️',
+    color: 'patterns',
+    desc: 'Watch soft clouds float across the blue sky!',
+    videoUrl: getPublicAssetUrl('video/Cloud.mp4')
   }
 ];
 
