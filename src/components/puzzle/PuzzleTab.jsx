@@ -1,41 +1,58 @@
-import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { PUZZLE_CATEGORIES, PUZZLE_DATA } from './puzzle-data.js';
 import { playSound } from '../../utils/sounds.js';
 import ErrorBoundary from '../ErrorBoundary.jsx';
+import { useItemSEO } from '../../utils/useSEO.jsx';
+
+function PuzzleSEO() {
+  const { id } = useParams();
+  const puzzle = PUZZLE_CATEGORIES.find((p) => p.id === id);
+  return useItemSEO('puzzle', puzzle);
+}
 
 export default function PuzzleTab() {
-  const [activeId, setActiveId] = useState(null);
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  const handleSelect = (id) => {
-    playSound('pop');
-    setActiveId(id);
-  };
+  if (id) {
+    const category = PUZZLE_CATEGORIES.find((p) => p.id === id);
 
-  if (activeId) {
-    const puzzle = PUZZLE_DATA[activeId];
+    if (!category) {
+      return (
+        <div className="section-header">
+          <h2>Puzzle not found</h2>
+          <p>Sorry, we couldn't find that puzzle.</p>
+          <button className="btn" style={{ marginTop: '1rem' }} onClick={() => navigate('/puzzle')}>
+            Back to Puzzles
+          </button>
+        </div>
+      );
+    }
+
+    const puzzle = { ...category, ...PUZZLE_DATA[id] };
     const PuzzleComponent = puzzle.component;
 
     return (
-      <ErrorBoundary onBack={() => setActiveId(null)}>
+      <ErrorBoundary onBack={() => navigate('/puzzle')}>
+        <PuzzleSEO />
         <PuzzleComponent
           puzzle={puzzle}
-          onBack={() => setActiveId(null)}
+          onBack={() => navigate('/puzzle')}
         />
       </ErrorBoundary>
     );
   }
+
+  const handleSelect = (puzzleId) => {
+    playSound('pop');
+    navigate('/puzzle/' + puzzleId);
+  };
 
   return (
     <div>
       <div className="section-header">
         <h2>🧩 Puzzle Palace</h2>
         <p>Choose a magical challenge and let your little genius shine.</p>
-      </div>
-
-      <div className="puzzle-hero-card pop-in">
-        <div className="puzzle-hero-badge">✨ Brain Boost</div>
-        <h3>Mini challenges, big smiles</h3>
-        <p>Each puzzle is designed to feel cozy, playful, and rewarding while building focus, memory, and problem-solving.</p>
       </div>
 
       <div className="educational-grid pop-in" style={{ marginTop: '1rem' }}>
@@ -58,7 +75,7 @@ function PuzzleCard({ category, onSelect }) {
       aria-label={`Start ${category.title} puzzle`}
     >
       <span className="game-icon">{category.icon}</span>
-      <h2>{category.title}</h2>
+      <h3>{category.title}</h3>
       <div className="activity-subtitle">Ages {category.ageRange} · 5 Levels</div>
       <p className="game-desc">{category.desc}</p>
       <div style={{ display: 'flex', justifyContent: 'center', gap: '0.6rem', marginTop: '0.6rem' }}>

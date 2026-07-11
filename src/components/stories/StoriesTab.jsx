@@ -1,24 +1,62 @@
-import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useItemSEO } from '../../utils/useSEO.jsx';
 import { stories, storiesHindi } from '../../kids-data.js';
 import { playSound } from '../../utils/sounds.js';
 import StoryReader from './StoryReader.jsx';
 
-export default function StoriesTab() {
-  const [activeCategory, setActiveCategory] = useState('en');
-  const [activeStory, setActiveStory] = useState(null);
-  const [readerOpen, setReaderOpen]   = useState(false);
+export default function StoriesTab({ lang = 'en' }) {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  const openStory = (story) => {
-    setActiveStory(story);
-    setReaderOpen(true);
+  const basePath = '/stories' + (lang === 'hi' ? '/hi' : '');
+  const list = lang === 'hi' ? storiesHindi : stories;
+  const story = id ? list.find((s) => s.id === id) : null;
+
+  const openStory = (s) => {
+    playSound('pop');
+    navigate(basePath + '/' + s.id);
   };
-
-  const lang = activeCategory;
-  const currentStories = lang === 'hi' ? storiesHindi : stories;
 
   const headerTitle = lang === 'hi' ? '📖 सोने के समय की कहानियाँ' : '📖 Bedtime Story Corner';
   const headerSub = lang === 'hi' ? 'तस्वीरों के साथ कहानियाँ पढ़ें! ✨' : 'Tap a story to read along with pictures! ✨';
 
+  // Story reader (route: /stories[/hi]/:id)
+  if (id && story) {
+    return (
+      <>
+        <StorySEO lang={lang} />
+        <StoryReader
+          story={story}
+          open={true}
+          onClose={() => navigate(basePath)}
+          lang={lang}
+        />
+      </>
+    );
+  }
+
+  // Story id present but no matching story
+  if (id && !story) {
+    return (
+      <div>
+        <div className="section-header">
+          <h2>{headerTitle}</h2>
+          <p>{headerSub}</p>
+        </div>
+        <div className="category-container pop-in" style={{ textAlign: 'center', padding: '2rem' }}>
+          <p style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>📚 Story not found</p>
+          <button
+            className="read-btn"
+            onClick={() => navigate(basePath)}
+          >
+            ← {lang === 'hi' ? 'कहानियों पर वापस' : 'Back to stories'}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // List view (default)
   return (
     <div>
       <div className="section-header">
@@ -29,14 +67,14 @@ export default function StoriesTab() {
       <div className="category-container pop-in">
         <div className="category-tabs">
           <button
-            className={`category-tab${activeCategory === 'en' ? ' active' : ''}`}
-            onClick={() => { playSound('pop'); setActiveCategory('en'); }}
+            className={`category-tab${lang === 'en' ? ' active' : ''}`}
+            onClick={() => { playSound('pop'); navigate('/stories'); }}
           >
             📚 Stories (English) · {stories.length}
           </button>
           <button
-            className={`category-tab${activeCategory === 'hi' ? ' active' : ''}`}
-            onClick={() => { playSound('pop'); setActiveCategory('hi'); }}
+            className={`category-tab${lang === 'hi' ? ' active' : ''}`}
+            onClick={() => { playSound('pop'); navigate('/stories/hi'); }}
           >
             📚 Stories (Hindi) · {storiesHindi.length}
           </button>
@@ -44,7 +82,7 @@ export default function StoriesTab() {
       </div>
 
       <div className="stories-grid">
-        {currentStories.map((story, i) => (
+        {list.map((story, i) => (
           <StoryCard
             key={story.id}
             story={story}
@@ -54,13 +92,6 @@ export default function StoriesTab() {
           />
         ))}
       </div>
-
-      <StoryReader
-        story={activeStory}
-        open={readerOpen}
-        onClose={() => setReaderOpen(false)}
-        lang={lang}
-      />
     </div>
   );
 }
@@ -119,4 +150,12 @@ function StoryCard({ story, onOpen, lang }) {
       </div>
     </div>
   );
+}
+
+// Per-item SEO for the open story reader (returns null when no story matches).
+function StorySEO({ lang }) {
+  const { id } = useParams();
+  const list = lang === 'hi' ? storiesHindi : stories;
+  const story = list.find((s) => s.id === id);
+  return useItemSEO('story', story, { lang });
 }

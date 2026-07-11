@@ -1,22 +1,42 @@
-import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { rhymes } from '../../kids-data.js';
 import VideoPlayer from './VideoPlayer.jsx';
+import { useItemSEO } from '../../utils/useSEO.jsx';
+
+function RhymeSEO() {
+  const { id } = useParams();
+  const rhyme = rhymes.find((r) => r.id === id);
+  return useItemSEO('rhyme', rhyme);
+}
 
 export default function RhymesTab() {
-  const [activeRhymeId, setActiveRhymeId] = useState(null);
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const handleSelect = (id) => {
-    setActiveRhymeId(id);
+    navigate('/rhymes/' + id);
   };
 
   const handleBack = () => {
-    setActiveRhymeId(null);
+    navigate('/rhymes');
   };
 
-  if (activeRhymeId) {
-    const rhyme = rhymes.find((r) => r.id === activeRhymeId);
-    if (!rhyme) return null;
-    return <VideoPlayer rhyme={rhyme} onBack={handleBack} />;
+  if (id) {
+    const rhyme = rhymes.find((r) => r.id === id);
+    if (!rhyme) {
+      return (
+        <div className="section-header">
+          <h2>Rhyme not found</h2>
+          <button className="play-btn" onClick={handleBack}>← Back to Rhymes</button>
+        </div>
+      );
+    }
+    return (
+      <>
+        <RhymeSEO />
+        <VideoPlayer rhyme={rhyme} onBack={handleBack} />
+      </>
+    );
   }
 
   return (
@@ -46,7 +66,7 @@ function RhymeCard({ rhyme, onSelect }) {
       aria-label={`Watch ${rhyme.title}`}
     >
       <span className="game-icon">{rhyme.icon}</span>
-      <h2>{rhyme.title}</h2>
+      <h3>{rhyme.title}</h3>
       <p>{rhyme.desc}</p>
       <button className="play-btn" onClick={(e) => { e.stopPropagation(); onSelect(rhyme.id); }}>
         ▶ Play

@@ -1,21 +1,37 @@
-﻿import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { funActivities } from '../../kids-data.js';
+import { useItemSEO } from '../../utils/useSEO.jsx';
 
 import { getActivityImageUrl } from '../../assets/activityImages.js';
 import { playSound } from '../../utils/sounds.js';
 
 export default function FunTab() {
-  const [activeActivityId, setActiveActivityId] = useState(null);
-  const activeActivity = funActivities.find((activity) => activity.id === activeActivityId);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const activeActivity = funActivities.find((activity) => activity.id === id);
 
-  const handleSelect = (id) => {
+  const handleSelect = (activityId) => {
     playSound('pop');
-    setActiveActivityId(id);
+    navigate('/fun/' + activityId);
   };
 
-  if (activeActivity) {
+  if (id) {
+    if (!activeActivity) {
+      return (
+        <div className="game-view pop-in">
+          <div className="page-wrapper">
+            <div className="detail-back-container">
+              <h2>Activity not found</h2>
+              <button className="btn btn-primary" onClick={() => navigate('/fun')}>
+                ← Back to Fun
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
-      <ActivityDetail activity={activeActivity} onBack={() => setActiveActivityId(null)} />
+      <ActivityDetail activity={activeActivity} onBack={() => navigate('/fun')} />
     );
   }
 
@@ -46,7 +62,7 @@ function ActivityCard({ activity, onSelect }) {
       aria-label={`Open ${activity.title} activity`}
     >
       <span className="game-icon">{activity.icon}</span>
-      <h2>{activity.title}</h2>
+      <h3>{activity.title}</h3>
       <div className="activity-subtitle">Ages {activity.ageRange} · {activity.time}</div>
       <p className="game-desc">{activity.desc}</p>
       <div style={{ display: 'flex', justifyContent: 'center', gap: '0.6rem', marginTop: '0.6rem' }}>
@@ -61,59 +77,68 @@ function ActivityCard({ activity, onSelect }) {
 function ActivityDetail({ activity, onBack }) {
   const imgSrc = getActivityImageUrl(activity.id);
   return (
-    <div className="game-view pop-in">
-      <div className="page-wrapper">
-        <div className="activity-detail-grid">
-          <div className={`activity-text-card game-card ${activity.color}`}>
-            <div className="activity-text-header">
-              <h2>{activity.title}</h2>
-              <div className="activity-subtitle">Ages {activity.ageRange} · {activity.time}</div>
+    <>
+      <FunSEO />
+      <div className="game-view pop-in">
+        <div className="page-wrapper">
+          <div className="activity-detail-grid">
+            <div className={`activity-text-card game-card ${activity.color}`}>
+              <div className="activity-text-header">
+                <h2>{activity.title}</h2>
+                <div className="activity-subtitle">Ages {activity.ageRange} · {activity.time}</div>
+              </div>
+
+              <div className="activity-text-content">
+                <p className="activity-main-desc">{activity.desc}</p>
+
+                <div className="fun-detail-columns">
+                  <section>
+                    <h3>Materials</h3>
+                    <ul>
+                      {activity.materials.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </section>
+
+                  <section>
+                    <h3>Steps</h3>
+                    <ol>
+                      {activity.steps.map((step) => (
+                        <li key={step}>{step}</li>
+                      ))}
+                    </ol>
+                  </section>
+                </div>
+              </div>
+
+              {/* back button moved below both cards for consistency */}
             </div>
 
-            <div className="activity-text-content">
-              <p className="activity-main-desc">{activity.desc}</p>
-
-              <div className="fun-detail-columns">
-                <section>
-                  <h3>Materials</h3>
-                  <ul>
-                    {activity.materials.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </section>
-
-                <section>
-                  <h3>Steps</h3>
-                  <ol>
-                    {activity.steps.map((step) => (
-                      <li key={step}>{step}</li>
-                    ))}
-                  </ol>
-                </section>
-              </div>
+            <div className={`activity-image-card game-card ${activity.color}`}>
+              {imgSrc ? (
+                <img className="activity-img large" src={imgSrc} alt={activity.title} loading="lazy" />
+              ) : (
+                <div className="image-placeholder">
+                  <span className="game-icon large-emoji">{activity.icon}</span>
+                </div>
+              )}
             </div>
-
-            {/* back button moved below both cards for consistency */}
           </div>
 
-          <div className={`activity-image-card game-card ${activity.color}`}>
-            {imgSrc ? (
-              <img className="activity-img large" src={imgSrc} alt={activity.title} loading="lazy" />
-            ) : (
-              <div className="image-placeholder">
-                <span className="game-icon large-emoji">{activity.icon}</span>
-              </div>
-            )}
+          <div className="detail-back-container">
+            <button className="btn btn-primary" onClick={onBack}>
+              ← Back to Fun
+            </button>
           </div>
-        </div>
-
-        <div className="detail-back-container">
-          <button className="btn btn-primary" onClick={onBack}>
-            ← Back to Fun
-          </button>
         </div>
       </div>
-    </div>
+    </>
   );
+}
+
+function FunSEO() {
+  const { id } = useParams();
+  const activity = funActivities.find((a) => a.id === id);
+  return useItemSEO('fun', activity);
 }

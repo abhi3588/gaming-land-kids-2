@@ -1,7 +1,16 @@
 import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { gamesMeta } from '../../kids-data.js';
 import { playSound } from '../../utils/sounds.js';
+import { useItemSEO } from '../../utils/useSEO.jsx';
 import ErrorBoundary from '../ErrorBoundary.jsx';
+
+// Injects per-game SEO (title/canonical/JSON-LD) for the active route.
+function GameSEO() {
+  const { id } = useParams();
+  const game = gamesMeta.find((g) => g.id === id);
+  return useItemSEO('game', game);
+}
 
 // Lazy-load game components
 import MemoryGame    from '../games/MemoryGame.jsx';
@@ -69,16 +78,19 @@ const COMPONENT_MAP = {
 };
 
 export default function GamesTab() {
-  const [currentGame, setCurrentGame]     = useState(null);
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState('preschool');
 
-  const handleSelect = (id) => {
+  const currentGame = id || null;
+
+  const handleSelect = (gameId) => {
     playSound('pop');
-    setCurrentGame(id);
+    navigate(`/games/${gameId}`);
   };
 
   const handleBack = () => {
-    setCurrentGame(null);
+    navigate('/games');
   };
 
   const handleCategory = (cat) => {
@@ -101,6 +113,7 @@ export default function GamesTab() {
     }
     return (
       <ErrorBoundary onBack={handleBack}>
+        <GameSEO />
         <GameComponent onBack={handleBack} />
       </ErrorBoundary>
     );
@@ -113,7 +126,6 @@ export default function GamesTab() {
   return (
     <div>
       <div className="section-header">
-        <h2>🎮 Pick a Game to Play</h2>
         <p>Tap any card and let the fun begin! 🎉</p>
       </div>
 
@@ -156,7 +168,7 @@ function GameCard({ game, onSelect }) {
       aria-label={`Play ${game.title}`}
     >
       <span className="game-icon">{game.icon}</span>
-      <h2>{game.title}</h2>
+      <h3>{game.title}</h3>
       <p>{game.desc}</p>
       <button className="play-btn" onClick={(e) => { e.stopPropagation(); onSelect(game.id); }}>
         ▶ Play

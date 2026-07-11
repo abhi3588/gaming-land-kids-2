@@ -117,10 +117,10 @@ function CoverPage({ story, lang }) {
       }}>
         {agesLabel}
       </span>
-      <h2 style={{ fontSize: 'clamp(1.4rem,4vw,2rem)', fontWeight: 700, color: 'white',
+      <h3 style={{ fontSize: 'clamp(1.4rem,4vw,2rem)', fontWeight: 700, color: 'white',
         textShadow: '0 2px 8px rgba(0,0,0,0.2)', lineHeight: 1.2, maxWidth: 500 }}>
         {story.title}
-      </h2>
+      </h3>
       <p style={{ marginTop: '0.4rem', color: 'rgba(255,255,255,0.9)', fontWeight: 500 }}>
         {story.subtitle}
       </p>
