@@ -126,6 +126,7 @@ export default function GamesTab() {
   return (
     <div>
       <div className="section-header">
+        <h2>🎮 Games Corner</h2>
         <p>Tap any card and let the fun begin! 🎉</p>
       </div>
 
