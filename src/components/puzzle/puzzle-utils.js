@@ -108,8 +108,8 @@ export const getSpotDifferenceScene = (level) => {
   const left = baseEmojis.map((emoji, index) => ({
     id: index,
     emoji,
-    x: 10 + (index % 4) * 22,
-    y: 15 + Math.floor(index / 4) * 35,
+    x: 15 + (index % 4) * 23.33,
+    y: 30 + Math.floor(index / 4) * 40,
   }));
 
   const diffIndices = shuffleArray([0, 1, 2, 3, 4, 5, 6, 7], prng).slice(0, 3);
