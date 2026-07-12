@@ -5,6 +5,7 @@ import {
   TOTAL_LEVELS,
   createPRNG,
   getThemeForLevel,
+  getPieceBackgroundStyle,
   shuffleArray,
 } from './puzzle-utils';
 
@@ -101,17 +102,8 @@ const JigsawPuzzle = ({ puzzle, onBack }) => {
   const renderPieceContent = (row, col) => (
     <div
       className="puzzle-piece-content"
-      style={{ background: theme.gradient }}
-    >
-      <span
-        className="puzzle-piece-emoji"
-        style={{
-          transform: `translate(calc(${(-col / 3) * 100}% ), calc(${(-row / 3) * 100}% ))`,
-        }}
-      >
-        {theme.emoji}
-      </span>
-    </div>
+      style={getPieceBackgroundStyle(theme, row, col)}
+    />
   );
 
   return (

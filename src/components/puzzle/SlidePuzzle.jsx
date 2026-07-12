@@ -4,6 +4,7 @@ import {
   GRID_SIZE,
   TOTAL_LEVELS,
   createSolvableSlideBoard,
+  getPieceBackgroundStyle,
   getThemeForLevel,
   isSlideSolved,
 } from './puzzle-utils';
@@ -74,16 +75,10 @@ const SlidePuzzle = ({ puzzle, onBack }) => {
         onClick={() => tryMove(index)}
         aria-label={`Slide tile ${value + 1}`}
       >
-        <div className="puzzle-piece-content" style={{ background: theme.gradient }}>
-          <span
-            className="puzzle-piece-emoji"
-            style={{
-              transform: `translate(calc(${(-col / 3) * 100}% ), calc(${(-row / 3) * 100}% ))`,
-            }}
-          >
-            {theme.emoji}
-          </span>
-        </div>
+        <div
+          className="puzzle-piece-content"
+          style={getPieceBackgroundStyle(theme, row, col)}
+        />
       </button>
     );
   };

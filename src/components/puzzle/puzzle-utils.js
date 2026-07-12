@@ -19,6 +19,32 @@ export const createPRNG = (seed) => {
 
 export const getThemeForLevel = (level) => PUZZLE_THEMES[(level - 1) % PUZZLE_THEMES.length];
 
+// Builds a single "solution" image (gradient + the animal emoji) as an
+// inline SVG data URI. Every puzzle piece uses THIS same image, sliced
+// via background-position, so the 9 pieces reassemble into the picture.
+const buildSolutionImage = (theme) => {
+  const colors = theme.gradient.match(/#[0-9a-fA-F]{3,6}/g) || ['#ff9f43', '#ff6b9d'];
+  const c0 = colors[0];
+  const c1 = colors[1] || c0;
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>`
+    + `<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>`
+    + `<stop offset='0' stop-color='${c0}'/><stop offset='1' stop-color='${c1}'/></linearGradient></defs>`
+    + `<rect width='100' height='100' fill='url(#g)'/>`
+    + `<text x='50' y='56' font-size='74' text-anchor='middle' dominant-baseline='central'>${theme.emoji}</text>`
+    + `</svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+};
+
+// Returns the styles to render ONE piece of the jigsaw: the full solution
+// image, scaled to 3x the piece and offset so this (row,col) cell
+// reveals exactly its third. background-position % is exact for this.
+export const getPieceBackgroundStyle = (theme, row, col) => ({
+  backgroundImage: buildSolutionImage(theme),
+  backgroundSize: '300% 300%',
+  backgroundPosition: `${col === 0 ? '0%' : col === 1 ? '50%' : '100%'} ${row === 0 ? '0%' : row === 1 ? '50%' : '100%'}`,
+  backgroundRepeat: 'no-repeat',
+});
+
 export const shuffleArray = (array, prng = Math.random) => {
   const copy = [...array];
   for (let i = copy.length - 1; i > 0; i -= 1) {

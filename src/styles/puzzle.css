@@ -33,7 +33,7 @@
 }
 
 .puzzle-grid {
-  --piece: clamp(72px, 22vw, 100px);
+  --piece: clamp(80px, 26vw, 110px);
   --gap: 6px;
   display: grid;
   gap: var(--gap);
@@ -87,7 +87,7 @@
 }
 
 .puzzle-tray {
-  --piece: clamp(72px, 22vw, 90px);
+  --piece: clamp(72px, 24vw, 96px);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -113,24 +113,12 @@
 .puzzle-piece-content {
   width: 100%;
   height: 100%;
-  display: grid;
-  place-items: center;
+  display: block;
   position: relative;
   overflow: hidden;
-}
-
-.puzzle-piece-emoji {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 300%;
-  height: 300%;
-  display: grid;
-  place-items: center;
-  font-size: calc(var(--piece) * 3);
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
+  background-repeat: no-repeat;
+  background-position: 0% 0%;
+  background-size: 300% 300%;
 }
 
 .puzzle-slide-tile {
