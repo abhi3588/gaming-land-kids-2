@@ -17,7 +17,7 @@ import GratitudeGarden from './components/educational/moral/GratitudeGarden.jsx'
 export { stories, storiesHindi };
 
 // ===== Rhymes Data =====
-const getPublicAssetUrl = (assetPath) => {
+export const getPublicAssetUrl = (assetPath) => {
   const normalizedPath = assetPath.replace(/^\//, '');
   return `${import.meta.env.BASE_URL}${normalizedPath}`;
 };

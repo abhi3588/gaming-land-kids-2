@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useItemSEO } from '../../utils/useSEO.jsx';
-import { stories, storiesHindi } from '../../kids-data.js';
+import { stories, storiesHindi, getPublicAssetUrl } from '../../kids-data.js';
 import { playSound } from '../../utils/sounds.js';
 import StoryReader from './StoryReader.jsx';
 
@@ -113,7 +113,7 @@ function StoryCard({ story, onOpen, lang }) {
         {story.coverImage ? (
           <div
             className="story-cover-bg"
-            style={{ backgroundImage: `url(${story.coverImage})` }}
+            style={{ backgroundImage: `url(${getPublicAssetUrl(story.coverImage)})` }}
           />
         ) : (
           <div

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { getPublicAssetUrl } from '../../kids-data.js';
 
 export default function StoryReader({ story, open, onClose, lang = 'en' }) {
   const [page, setPage] = useState(0);
@@ -127,7 +128,7 @@ function CoverPage({ story, lang }) {
 
       {story.coverImage ? (
         <div className="reader-cover-img">
-          <img src={story.coverImage} alt={`Illustration for ${story.title}`} />
+          <img src={getPublicAssetUrl(story.coverImage)} alt={`Illustration for ${story.title}`} />
         </div>
       ) : (
         <div style={{
