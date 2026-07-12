@@ -197,6 +197,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>/gaming-land-kids-2/games/coincounter</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/games/timeteller</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>/gaming-land-kids-2/stories/bunny-shares</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>

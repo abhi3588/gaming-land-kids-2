@@ -376,4 +376,6 @@ export const gamesMeta = [
   { id: 'wordscramble', title: 'Word Scramble',  icon: '🔤', color: 'wordscramble', ageGroup: 'junior',    desc: 'Unscramble the letters to find the word!' },
   { id: 'memorymatrix', title: 'Memory Matrix',  icon: '🧠', color: 'memory',       ageGroup: 'junior',    desc: 'Memorize the lit tiles on the grid!' },
   { id: 'operatorquest',title: 'Operator Quest', icon: '➕', color: 'math',         ageGroup: 'junior',    desc: 'Find the missing math sign!' },
+  { id: 'coincounter', title: 'Coin Counter',   icon: '🪙', color: 'coincounter',   ageGroup: 'junior',    desc: 'Count the coins and pick the total!' },
+  { id: 'timeteller',  title: 'Time Teller',    icon: '🕒', color: 'timeteller',    ageGroup: 'junior',    desc: 'Read the clock and pick the time!' },
 ];

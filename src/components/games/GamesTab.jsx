@@ -43,6 +43,8 @@ import ShadowMatch     from '../games/ShadowMatch.jsx';
 import OppositeMatch   from '../games/OppositeMatch.jsx';
 import NumberMatch     from '../games/NumberMatch.jsx';
 import MissingNumber   from '../games/MissingNumber.jsx';
+import CoinCounter     from '../games/CoinCounter.jsx';
+import TimeTeller      from '../games/TimeTeller.jsx';
 
 const COMPONENT_MAP = {
   memory:       MemoryGame,
@@ -75,6 +77,8 @@ const COMPONENT_MAP = {
   oppositematch:  OppositeMatch,
   numbermatch:   NumberMatch,
   missingnumber: MissingNumber,
+  coincounter:   CoinCounter,
+  timeteller:    TimeTeller,
 };
 
 export default function GamesTab() {
