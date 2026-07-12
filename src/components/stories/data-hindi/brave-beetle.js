@@ -3,7 +3,7 @@ const story = {
   title: 'बहादुर छोटा भृंग ब्रूनो',
   subtitle: 'साहस के बारे में एक बगीचे की कहानी',
   emoji: '🐞',
-  coverImage: null,
+  coverImage: 'images/story-brave-beetle.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'बहादुर होने का मतलब है कोशिश करना, तब भी जब आप डरे हुए हों।',

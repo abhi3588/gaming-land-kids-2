@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" role="img" aria-label="Tilly the Tiny Turtle cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1dd1a1"/>
+      <stop offset="1" stop-color="#54a0ff"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.3" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="750" fill="url(#bg)"/>
+  <rect width="1000" height="750" fill="url(#glow)"/>
+  <!-- water -->
+  <path d="M0 560 Q200 530 400 560 T800 560 T1000 550 V750 H0 Z" fill="#54a0ff" opacity="0.5"/>
+  <g stroke="#ffffff" stroke-width="6" opacity="0.5" fill="none" stroke-linecap="round">
+    <path d="M120 650 q30 -20 60 0"/>
+    <path d="M420 690 q30 -20 60 0"/>
+    <path d="M760 650 q30 -20 60 0"/>
+  </g>
+  <!-- big rock -->
+  <path d="M780 600 q-40 -160 90 -170 q120 0 100 170 Z" fill="#8395a7" opacity="0.7"/>
+  <!-- lily pad -->
+  <g transform="translate(160 600)">
+    <circle r="60" fill="#10ac84" opacity="0.75"/>
+    <path d="M0 0 L60 -8 A60 60 0 0 1 40 50 Z" fill="#1dd1a1" opacity="0.55"/>
+    <circle cx="0" cy="0" r="14" fill="#ff9ff3"/>
+  </g>
+  <!-- central badge -->
+  <circle cx="500" cy="370" r="175" fill="#ffffff" opacity="0.18"/>
+  <circle cx="500" cy="370" r="150" fill="#ffffff" opacity="0.14"/>
+  <text x="500" y="375" font-size="240" text-anchor="middle" dominant-baseline="central" font-family="'Segoe UI Emoji','Noto Color Emoji','Apple Color Emoji',sans-serif">🐢</text>
+</svg>

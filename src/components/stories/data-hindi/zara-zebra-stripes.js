@@ -3,7 +3,7 @@ const story = {
   title: 'ज़ारा की अद्भुत धारियाँ',
   subtitle: 'अद्वितीय होने के बारे में एक सवाना कहानी',
   emoji: '🦓',
-  coverImage: null,
+  coverImage: 'images/story-zara-zebra-stripes.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'जो आपको अलग बनाता है, वही आपको अद्भुत बनाता है।',

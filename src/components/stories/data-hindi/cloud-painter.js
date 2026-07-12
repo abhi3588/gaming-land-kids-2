@@ -3,7 +3,7 @@ const story = {
   title: 'क्लियो द क्लाउड पेंटर',
   subtitle: 'रचनात्मकता के बारे में एक आकाश साहसिक',
   emoji: '☁️',
-  coverImage: null,
+  coverImage: 'images/story-cloud-painter.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'आपकी कल्पना पूरी दुनिया को और रंगीन बना सकती है।',

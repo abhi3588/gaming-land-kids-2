@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" role="img" aria-label="Sammy Squirrel's Sharing Secret cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f39c12"/>
+      <stop offset="1" stop-color="#e67e22"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.3" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="750" fill="url(#bg)"/>
+  <rect width="1000" height="750" fill="url(#glow)"/>
+  <!-- tree -->
+  <g transform="translate(820 470)">
+    <rect x="-14" y="0" width="28" height="180" rx="10" fill="#8d5524"/>
+    <circle cx="0" cy="-30" r="80" fill="#10ac84" opacity="0.7"/>
+    <circle cx="-50" cy="10" r="55" fill="#10ac84" opacity="0.6"/>
+    <circle cx="50" cy="10" r="55" fill="#0e9c79" opacity="0.6"/>
+  </g>
+  <!-- acorns -->
+  <g>
+    <g transform="translate(150 560)" fill="#8d5524">
+      <ellipse cx="0" cy="0" rx="26" ry="32"/>
+      <path d="M-30 -10 q30 -34 60 0 Z" fill="#a0522d"/>
+    </g>
+    <g transform="translate(210 640)" fill="#8d5524">
+      <ellipse cx="0" cy="0" rx="22" ry="28"/>
+      <path d="M-26 -8 q26 -30 52 0 Z" fill="#a0522d"/>
+    </g>
+  </g>
+  <!-- leaf -->
+  <path d="M300 200 q40 -50 90 -20 q-20 50 -90 20 Z" fill="#10ac84" opacity="0.7"/>
+  <!-- central badge -->
+  <circle cx="500" cy="375" r="175" fill="#ffffff" opacity="0.2"/>
+  <circle cx="500" cy="375" r="150" fill="#ffffff" opacity="0.15"/>
+  <text x="500" y="380" font-size="240" text-anchor="middle" dominant-baseline="central" font-family="'Segoe UI Emoji','Noto Color Emoji','Apple Color Emoji',sans-serif">🐿️</text>
+</svg>

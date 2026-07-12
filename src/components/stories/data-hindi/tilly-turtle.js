@@ -3,7 +3,7 @@ const story = {
   title: 'नन्ही कछुआ टिली',
   subtitle: 'कभी हार न मानने के बारे में एक तालाब की कहानी',
   emoji: '🐢',
-  coverImage: null,
+  coverImage: 'images/story-tilly-turtle.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'चलते रहें - हर छोटा कदम आपको आपके सपने के करीब लाता है।',

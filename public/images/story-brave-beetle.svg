@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" role="img" aria-label="Bruno the Brave Little Beetle cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1dd1a1"/>
+      <stop offset="1" stop-color="#54a0ff"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.3" cy="0.25" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="750" fill="url(#bg)"/>
+  <rect width="1000" height="750" fill="url(#glow)"/>
+  <!-- sun -->
+  <circle cx="850" cy="130" r="62" fill="#fff3b0" opacity="0.9"/>
+  <g stroke="#fff3b0" stroke-width="8" stroke-linecap="round" opacity="0.8">
+    <line x1="850" y1="30" x2="850" y2="0"/>
+    <line x1="950" y1="130" x2="1000" y2="130"/>
+    <line x1="922" y1="58" x2="958" y2="22"/>
+    <line x1="922" y1="202" x2="958" y2="238"/>
+  </g>
+  <!-- grass -->
+  <path d="M0 620 Q150 580 320 612 T640 612 T1000 600 V750 H0 Z" fill="#10ac84" opacity="0.55"/>
+  <path d="M0 670 Q200 640 420 668 T820 666 T1000 660 V750 H0 Z" fill="#0e9c79" opacity="0.6"/>
+  <!-- sunflower -->
+  <g transform="translate(140 560)">
+    <rect x="-6" y="0" width="12" height="120" rx="6" fill="#0e9c79"/>
+    <g fill="#ffd32a">
+      <ellipse cx="0" cy="-34" rx="16" ry="40"/>
+      <ellipse cx="0" cy="34" rx="16" ry="40"/>
+      <ellipse cx="-34" cy="0" rx="40" ry="16"/>
+      <ellipse cx="34" cy="0" rx="40" ry="16"/>
+      <ellipse cx="-24" cy="-24" rx="38" ry="14" transform="rotate(45)"/>
+      <ellipse cx="24" cy="24" rx="38" ry="14" transform="rotate(45)"/>
+      <ellipse cx="24" cy="-24" rx="38" ry="14" transform="rotate(-45)"/>
+      <ellipse cx="-24" cy="24" rx="38" ry="14" transform="rotate(-45)"/>
+    </g>
+    <circle cx="0" cy="0" r="28" fill="#8d5524"/>
+  </g>
+  <!-- central badge -->
+  <circle cx="500" cy="370" r="175" fill="#ffffff" opacity="0.18"/>
+  <circle cx="500" cy="370" r="150" fill="#ffffff" opacity="0.14"/>
+  <text x="500" y="375" font-size="240" text-anchor="middle" dominant-baseline="central" font-family="'Segoe UI Emoji','Noto Color Emoji','Apple Color Emoji',sans-serif">🐞</text>
+</svg>

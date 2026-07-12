@@ -3,7 +3,7 @@ const story = {
   title: 'उल्लू ओलिवर ने सुनना सीखा',
   subtitle: 'सुनने के बारे में एक जंगल की कहानी',
   emoji: '🦉',
-  coverImage: null,
+  coverImage: 'images/story-oliver-owl.svg',
   ageRange: '4-8',
   minutesToRead: 4,
   moral: 'सुनना उतना ही महत्वपूर्ण है जितना बोलना।',

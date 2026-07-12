@@ -3,7 +3,7 @@ const story = {
   title: 'सैमी गिलहरी का साझा करने का रहस्य',
   subtitle: 'साझा करने की खुशी के बारे में एक कहानी',
   emoji: '🐿️',
-  coverImage: null,
+  coverImage: 'images/story-sammy-squirrel.svg',
   ageRange: '4-8',
   minutesToRead: 4,
   moral: 'दूसरों के साथ साझा करने से हर किसी का दिन उज्जवल हो जाता है।',

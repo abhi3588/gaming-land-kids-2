@@ -3,7 +3,7 @@ const story = {
   title: 'पिप द पेंग्विन को एक दोस्त मिला',
   subtitle: 'नमस्ते कहने के बारे में एक बर्फीली कहानी',
   emoji: '🐧',
-  coverImage: null,
+  coverImage: 'images/story-pip-finds-a-friend.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'एक नया दोस्त बनाना एक बहादुर नमस्ते से शुरू होता है।',

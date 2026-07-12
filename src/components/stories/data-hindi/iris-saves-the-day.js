@@ -3,7 +3,7 @@ const story = {
   title: 'आइस क्वीन आइरिस ने दिन बचाया',
   subtitle: 'शांत रहने के बारे में एक सुपरहीरो की कहानी',
   emoji: '🧊',
-  coverImage: null,
+  coverImage: 'images/story-iris-saves-the-day.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'जब हर कोई घबराता है, तो शांत रहना अपने आप में एक महाशक्ति है।',

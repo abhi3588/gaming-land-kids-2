@@ -3,7 +3,7 @@ const story = {
   title: 'Bruno the Brave Little Beetle',
   subtitle: 'A garden story about courage',
   emoji: '🐞',
-  coverImage: null,
+  coverImage: 'images/story-brave-beetle.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'Being brave means trying even when you feel scared.',

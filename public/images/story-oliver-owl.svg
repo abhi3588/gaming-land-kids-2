@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" role="img" aria-label="Oliver the Owl Learns to Listen cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a29bfe"/>
+      <stop offset="1" stop-color="#6c5ce7"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.3" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="750" fill="url(#bg)"/>
+  <rect width="1000" height="750" fill="url(#glow)"/>
+  <!-- moon -->
+  <circle cx="840" cy="160" r="58" fill="#fff3b0" opacity="0.9"/>
+  <circle cx="862" cy="148" r="58" fill="#6c5ce7" opacity="0.6"/>
+  <!-- stars -->
+  <g fill="#fff" opacity="0.9">
+    <path d="M170 150 l8 22 l22 8 l-22 8 l-8 22 l-8 -22 l-22 -8 l22 -8 Z"/>
+    <path d="M300 240 l5 14 l14 5 l-14 5 l-5 14 l-5 -14 l-14 -5 l14 -5 Z"/>
+    <path d="M120 320 l5 14 l14 5 l-14 5 l-5 14 l-5 -14 l-14 -5 l14 -5 Z"/>
+  </g>
+  <!-- branch -->
+  <path d="M0 600 q260 -40 520 0 q260 40 520 0" fill="none" stroke="#4b3b8f" stroke-width="16" opacity="0.5"/>
+  <g fill="#4b3b8f" opacity="0.5">
+    <ellipse cx="220" cy="596" rx="36" ry="16"/>
+    <ellipse cx="780" cy="596" rx="36" ry="16"/>
+  </g>
+  <!-- central badge -->
+  <circle cx="500" cy="370" r="175" fill="#ffffff" opacity="0.2"/>
+  <circle cx="500" cy="370" r="150" fill="#ffffff" opacity="0.15"/>
+  <text x="500" y="375" font-size="240" text-anchor="middle" dominant-baseline="central" font-family="'Segoe UI Emoji','Noto Color Emoji','Apple Color Emoji',sans-serif">🦉</text>
+</svg>

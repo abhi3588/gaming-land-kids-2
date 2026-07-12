@@ -3,7 +3,7 @@ const story = {
   title: "Max and the Missing Smile",
   subtitle: 'A neighbourly tale about kindness',
   emoji: '🐻',
-  coverImage: null,
+  coverImage: 'images/story-max-missing-smile.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'A small act of kindness can change someone\'s whole day.',

@@ -3,7 +3,7 @@ const story = {
   title: "Zara's Wonderful Stripes",
   subtitle: 'A savanna story about being unique',
   emoji: '🦓',
-  coverImage: null,
+  coverImage: 'images/story-zara-zebra-stripes.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'What makes you different is what makes you wonderful.',

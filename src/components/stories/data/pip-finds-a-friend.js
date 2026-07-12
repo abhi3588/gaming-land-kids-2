@@ -3,7 +3,7 @@ const story = {
   title: 'Pip the Penguin Finds a Friend',
   subtitle: 'An icy tale about saying hello',
   emoji: '🐧',
-  coverImage: null,
+  coverImage: 'images/story-pip-finds-a-friend.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'Making a new friend starts with one brave hello.',

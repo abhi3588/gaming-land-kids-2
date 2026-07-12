@@ -3,7 +3,7 @@ const story = {
   title: 'Oliver the Owl Learns to Listen',
   subtitle: 'A forest story about listening',
   emoji: '🦉',
-  coverImage: null,
+  coverImage: 'images/story-oliver-owl.svg',
   ageRange: '4-8',
   minutesToRead: 4,
   moral: 'Listening is just as important as talking.',

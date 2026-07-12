@@ -3,7 +3,7 @@ const story = {
   title: 'Cleo the Cloud Painter',
   subtitle: 'A sky adventure about creativity',
   emoji: '☁️',
-  coverImage: null,
+  coverImage: 'images/story-cloud-painter.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'Your imagination can make the whole world more colourful.',

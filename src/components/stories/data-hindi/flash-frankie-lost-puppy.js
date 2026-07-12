@@ -3,7 +3,7 @@ const story = {
   title: 'फ्लैश फ्रेंकी और खोया हुआ पिल्ला',
   subtitle: 'कभी हार न मानने के बारे में एक तेज कहानी',
   emoji: '⚡',
-  coverImage: null,
+  coverImage: 'images/story-flash-frankie-lost-puppy.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'कभी हार न मानें - यहाँ तक कि जल्दी से किए गए दयालुता के छोटे कार्य भी सब कुछ बदल सकते हैं।',

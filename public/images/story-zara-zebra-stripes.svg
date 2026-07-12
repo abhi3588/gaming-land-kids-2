@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" role="img" aria-label="Zara's Wonderful Stripes cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdcb6e"/>
+      <stop offset="1" stop-color="#e17055"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.3" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="750" fill="url(#bg)"/>
+  <rect width="1000" height="750" fill="url(#glow)"/>
+  <!-- sun -->
+  <circle cx="840" cy="150" r="66" fill="#fff3b0" opacity="0.9"/>
+  <g stroke="#fff3b0" stroke-width="8" stroke-linecap="round" opacity="0.8">
+    <line x1="840" y1="48" x2="840" y2="16"/>
+    <line x1="942" y1="150" x2="974" y2="150"/>
+    <line x1="912" y1="78" x2="940" y2="50"/>
+  </g>
+  <!-- grass -->
+  <path d="M0 610 Q200 580 420 610 T840 608 T1000 600 V750 H0 Z" fill="#10ac84" opacity="0.5"/>
+  <g stroke="#0e9c79" stroke-width="8" stroke-linecap="round" opacity="0.55">
+    <path d="M120 660 q-10 -40 6 -70"/>
+    <path d="M150 660 q10 -36 -4 -64"/>
+    <path d="M860 660 q-10 -40 6 -70"/>
+  </g>
+  <!-- stripe band -->
+  <g fill="#ffffff" opacity="0.25">
+    <rect x="40" y="420" width="20" height="180" rx="10" transform="rotate(12 50 510)"/>
+    <rect x="80" y="420" width="20" height="180" rx="10" transform="rotate(12 90 510)"/>
+    <rect x="120" y="420" width="20" height="180" rx="10" transform="rotate(12 130 510)"/>
+  </g>
+  <!-- central badge -->
+  <circle cx="500" cy="375" r="175" fill="#ffffff" opacity="0.2"/>
+  <circle cx="500" cy="375" r="150" fill="#ffffff" opacity="0.15"/>
+  <text x="500" y="380" font-size="240" text-anchor="middle" dominant-baseline="central" font-family="'Segoe UI Emoji','Noto Color Emoji','Apple Color Emoji',sans-serif">🦓</text>
+</svg>

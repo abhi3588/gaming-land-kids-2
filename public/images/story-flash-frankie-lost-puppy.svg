@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" role="img" aria-label="Flash Frankie and the Lost Puppy cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffeaa7"/>
+      <stop offset="1" stop-color="#fd79a8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.3" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="750" fill="url(#bg)"/>
+  <rect width="1000" height="750" fill="url(#glow)"/>
+  <!-- motion lines -->
+  <g stroke="#ffffff" stroke-width="9" stroke-linecap="round" opacity="0.7">
+    <line x1="120" y1="220" x2="300" y2="220"/>
+    <line x1="90" y1="270" x2="260" y2="270"/>
+    <line x1="140" y1="320" x2="320" y2="320"/>
+  </g>
+  <!-- lightning bolts -->
+  <g fill="#fff">
+    <path d="M820 180 l-40 70 l26 0 l-34 76 l64 -86 l-26 0 l34 -60 Z"/>
+    <path d="M880 360 l-26 46 l16 0 l-22 50 l42 -56 l-16 0 l22 -40 Z" opacity="0.85"/>
+  </g>
+  <!-- paw print -->
+  <g transform="translate(170 600)" fill="#fff" opacity="0.85">
+    <circle cx="0" cy="0" r="14"/>
+    <circle cx="-26" cy="-22" r="9"/><circle cx="-6" cy="-34" r="9"/><circle cx="16" cy="-32" r="9"/><circle cx="30" cy="-18" r="9"/>
+  </g>
+  <!-- central badge -->
+  <circle cx="500" cy="375" r="175" fill="#ffffff" opacity="0.22"/>
+  <circle cx="500" cy="375" r="150" fill="#ffffff" opacity="0.16"/>
+  <text x="500" y="380" font-size="240" text-anchor="middle" dominant-baseline="central" font-family="'Segoe UI Emoji','Noto Color Emoji','Apple Color Emoji',sans-serif">⚡</text>
+</svg>

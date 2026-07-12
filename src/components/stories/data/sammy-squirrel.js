@@ -3,7 +3,7 @@ const story = {
   title: 'Sammy Squirrel\'s Sharing Secret',
   subtitle: 'A tale about the joy of sharing',
   emoji: '🐿️',
-  coverImage: null,
+  coverImage: 'images/story-sammy-squirrel.svg',
   ageRange: '4-8',
   minutesToRead: 4,
   moral: 'Sharing with others makes everyone\'s day brighter.',

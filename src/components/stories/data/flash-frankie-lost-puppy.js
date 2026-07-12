@@ -3,7 +3,7 @@ const story = {
   title: 'Flash Frankie and the Lost Puppy',
   subtitle: 'A speedy tale about never giving up',
   emoji: '⚡',
-  coverImage: null,
+  coverImage: 'images/story-flash-frankie-lost-puppy.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'Never give up — even small acts of kindness done quickly can change everything.',

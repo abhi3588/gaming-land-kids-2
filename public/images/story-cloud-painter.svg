@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" role="img" aria-label="Cleo the Cloud Painter cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#54a0ff"/>
+      <stop offset="1" stop-color="#feca57"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.7" cy="0.25" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="750" fill="url(#bg)"/>
+  <rect width="1000" height="750" fill="url(#glow)"/>
+  <!-- rainbow -->
+  <g fill="none" stroke-width="14" opacity="0.85">
+    <path d="M120 600 A280 280 0 0 1 680 600" stroke="#ff6b9d"/>
+    <path d="M150 600 A250 250 0 0 1 650 600" stroke="#feca57"/>
+    <path d="M180 600 A220 220 0 0 1 620 600" stroke="#1dd1a1"/>
+    <path d="M210 600 A190 190 0 0 1 590 600" stroke="#54a0ff"/>
+  </g>
+  <!-- paint swirl -->
+  <path d="M740 210 q60 -60 120 0 q-30 50 -90 30 q40 30 60 -20" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="800" cy="170" r="10" fill="#ff6b9d"/>
+  <circle cx="870" cy="220" r="10" fill="#1dd1a1"/>
+  <!-- little clouds -->
+  <g fill="#ffffff" opacity="0.85">
+    <ellipse cx="250" cy="200" rx="55" ry="32"/>
+    <ellipse cx="300" cy="190" rx="45" ry="28"/>
+    <ellipse cx="205" cy="190" rx="40" ry="25"/>
+  </g>
+  <!-- central badge -->
+  <circle cx="500" cy="375" r="175" fill="#ffffff" opacity="0.2"/>
+  <circle cx="500" cy="375" r="150" fill="#ffffff" opacity="0.15"/>
+  <text x="500" y="380" font-size="240" text-anchor="middle" dominant-baseline="central" font-family="'Segoe UI Emoji','Noto Color Emoji','Apple Color Emoji',sans-serif">☁️</text>
+</svg>

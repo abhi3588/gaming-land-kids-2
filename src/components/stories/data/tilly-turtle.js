@@ -3,7 +3,7 @@ const story = {
   title: 'Tilly the Tiny Turtle',
   subtitle: 'A pond tale about never giving up',
   emoji: '🐢',
-  coverImage: null,
+  coverImage: 'images/story-tilly-turtle.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'Keep going — every small step brings you closer to your dream.',

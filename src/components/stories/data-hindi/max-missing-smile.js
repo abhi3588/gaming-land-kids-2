@@ -3,7 +3,7 @@ const story = {
   title: 'मैक्स और खोई हुई मुस्कान',
   subtitle: 'दयालुता के बारे में एक पड़ोस की कहानी',
   emoji: '🐻',
-  coverImage: null,
+  coverImage: 'images/story-max-missing-smile.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'दयालुता का एक छोटा सा कार्य किसी का पूरा दिन बदल सकता है।',

@@ -3,7 +3,7 @@ const story = {
   title: 'Ice Queen Iris Saves the Day',
   subtitle: 'A superhero tale about staying calm',
   emoji: '🧊',
-  coverImage: null,
+  coverImage: 'images/story-iris-saves-the-day.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'When everyone panics, staying calm is a superpower all its own.',
