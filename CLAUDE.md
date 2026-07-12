@@ -29,7 +29,7 @@ npm run preview    # serve the production build
 npm run lint       # eslint
 ```
 
-Note: `postbuild` (in `scripts/postbuild.mjs`) generates `sitemap.xml` (105 URLs),
+Note: `postbuild` (in `scripts/postbuild.mjs`) generates `sitemap.xml` (107 URLs),
 `robots.txt`, and copies `dist/index.html` -> `dist/404.html` (SPA deep-link fallback).
 The base URL is `/gaming-land-kids-2/` in production (see `vite.config.js`).
 
@@ -178,7 +178,7 @@ gradient background**. Rules live in two places:
   from `src/utils/useSEO.jsx`, backed by `getItemSEO` / schema factories in `src/utils/seo.js`.
 - **GitHub Pages subpath:** never hardcode a domain. All URLs derive from `BASE_URL` /
   `SITE_ORIGIN` in `src/seoConfig.js` (built from `import.meta.env.BASE_URL`). `sitemap.xml`
-  is generated from the content data (`scripts/generate-sitemap.mjs`) — **105 URLs**.
+  is generated from the content data (`scripts/generate-sitemap.mjs`) — **107 URLs**.
 - Stories support `hreflang` (EN + HI) alternates.
 
 ---

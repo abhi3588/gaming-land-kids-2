@@ -48,6 +48,22 @@ export const QUIZ_CATEGORIES = [
     color: 'counting',
     desc: 'Identify different vehicles and modes of transport!',
     ageRange: '3–8'
+  },
+  {
+    id: 'birds',
+    title: 'Birds',
+    icon: '🐦',
+    color: 'sky',
+    desc: 'Spot and name amazing birds — from tiny chicks to proud peacocks!',
+    ageRange: '3–8'
+  },
+  {
+    id: 'vegetables',
+    title: 'Vegetables',
+    icon: '🥕',
+    color: 'garden',
+    desc: 'Name healthy veggies — from crunchy carrots to leafy greens!',
+    ageRange: '3–9'
   }
 ];
 
@@ -152,6 +168,40 @@ export const QUIZ_DATA = {
       { id: 'fireengine', emoji: '🚒', question: 'What red vehicle helps firefighters put out fires?', answer: 'Fire Engine', options: ['Ambulance', 'Police Car', 'Fire Engine', 'Tractor'] },
       { id: 'schoolbus', emoji: '🚌', question: 'What yellow vehicle takes children to school?', answer: 'School Bus', options: ['School Bus', 'Truck', 'Airplane', 'Car'] },
       { id: 'tractor', emoji: '🚜', question: 'What vehicle does a farmer use on a field?', answer: 'Tractor', options: ['Bicycle', 'Boat', 'Submarine', 'Tractor'] }
+    ]
+  },
+  birds: {
+    title: 'Bird Quiz',
+    completionEmoji: '🐦',
+    completionMessage: 'You\'re a bird expert! 🦉',
+    questions: [
+      { id: 'bird', emoji: '🐦', question: 'Which animal has feathers and can fly?', answer: 'Bird', options: ['Bird', 'Bat', 'Bee', 'Butterfly'] },
+      { id: 'eagle', emoji: '🦅', question: 'Which bird is known as the king of the sky?', answer: 'Eagle', options: ['Hawk', 'Crow', 'Eagle', 'Owl'] },
+      { id: 'owl', emoji: '🦉', question: 'Which bird is awake at night and calls "hoot"?', answer: 'Owl', options: ['Parrot', 'Duck', 'Owl', 'Sparrow'] },
+      { id: 'parrot', emoji: '🦜', question: 'Which colorful bird can copy your words?', answer: 'Parrot', options: ['Crow', 'Pigeon', 'Robin', 'Parrot'] },
+      { id: 'duck', emoji: '🦆', question: 'Which bird says "quack"?', answer: 'Duck', options: ['Goose', 'Duck', 'Swan', 'Heron'] },
+      { id: 'swan', emoji: '🦢', question: 'Which graceful white bird glides on lakes?', answer: 'Swan', options: ['Swan', 'Goose', 'Crane', 'Pelican'] },
+      { id: 'chick', emoji: '🐤', question: 'What do we call a baby chicken?', answer: 'Chick', options: ['Duckling', 'Chick', 'Cygnet', 'Kitten'] },
+      { id: 'goose', emoji: '🪿', question: 'Which bird flies in a V and says "honk"?', answer: 'Goose', options: ['Duck', 'Swan', 'Goose', 'Crow'] },
+      { id: 'rooster', emoji: '🐓', question: 'Which bird wakes us with "cock-a-doodle-doo"?', answer: 'Rooster', options: ['Hen', 'Turkey', 'Rooster', 'Peacock'] },
+      { id: 'peacock', emoji: '🦚', question: 'Which bird shows off a big fan of feathers?', answer: 'Peacock', options: ['Turkey', 'Pheasant', 'Ostrich', 'Peacock'] }
+    ]
+  },
+  vegetables: {
+    title: 'Vegetable Quiz',
+    completionEmoji: '🥕',
+    completionMessage: 'You eat your veggies like a pro! 🥦',
+    questions: [
+      { id: 'carrot', emoji: '🥕', question: 'Which vegetable is long and orange?', answer: 'Carrot', options: ['Radish', 'Carrot', 'Corn', 'Banana'] },
+      { id: 'broccoli', emoji: '🥦', question: 'Which green vegetable looks like tiny trees?', answer: 'Broccoli', options: ['Broccoli', 'Cabbage', 'Lettuce', 'Spinach'] },
+      { id: 'tomato', emoji: '🍅', question: 'Which red vegetable is often called a fruit?', answer: 'Tomato', options: ['Apple', 'Tomato', 'Pepper', 'Cherry'] },
+      { id: 'cucumber', emoji: '🥒', question: 'Which green vegetable is pickled into pickles?', answer: 'Cucumber', options: ['Zucchini', 'Celery', 'Cucumber', 'Bean'] },
+      { id: 'corn', emoji: '🌽', question: 'Which yellow vegetable do we eat at a barbecue?', answer: 'Corn', options: ['Corn', 'Carrot', 'Potato', 'Pea'] },
+      { id: 'potato', emoji: '🥔', question: 'Which brown vegetable grows underground?', answer: 'Potato', options: ['Onion', 'Potato', 'Turnip', 'Radish'] },
+      { id: 'onion', emoji: '🧅', question: 'Which vegetable makes you cry when you cut it?', answer: 'Onion', options: ['Garlic', 'Leek', 'Onion', 'Shallot'] },
+      { id: 'lettuce', emoji: '🥬', question: 'Which leafy green vegetable goes in salads?', answer: 'Lettuce', options: ['Cabbage', 'Spinach', 'Lettuce', 'Kale'] },
+      { id: 'pepper', emoji: '🫑', question: 'Which vegetable can be green, red, or yellow and is crunchy?', answer: 'Pepper', options: ['Chili', 'Pepper', 'Tomato', 'Carrot'] },
+      { id: 'eggplant', emoji: '🍆', question: 'Which purple vegetable is shaped like an egg?', answer: 'Eggplant', options: ['Plum', 'Beet', 'Eggplant', 'Grape'] }
     ]
   }
 };

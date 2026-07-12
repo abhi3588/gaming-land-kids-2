@@ -247,6 +247,8 @@
 .game-card.word     { border-color: var(--candy-pink);  background: linear-gradient(145deg, var(--white) 60%, #fdf0f6); }
 .game-card.sudoku   { border-color: var(--candy-green); background: linear-gradient(145deg, var(--white) 60%, #edfaf4); }
 .game-card.sequence { border-color: var(--candy-yellow);background: linear-gradient(145deg, var(--white) 60%, #fffde0); }
+.game-card.sky     { border-color: var(--candy-blue);  background: linear-gradient(145deg, var(--white) 60%, #edf5ff); }
+.game-card.garden  { border-color: var(--candy-green); background: linear-gradient(145deg, var(--white) 60%, #edfaf4); }
 
 .game-icon {
   font-size: 3.5rem;
