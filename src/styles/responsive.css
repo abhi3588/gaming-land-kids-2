@@ -86,12 +86,29 @@
   .spot-difference-board {
     grid-template-columns: 1fr;
   }
+  /* Shape Fit: keep the two sides side-by-side (left/right) on mobile instead
+     of stacking them, and shrink the pieces so the whole board fits the
+     viewport without forcing vertical scrolling. */
   .shape-fit-board {
-    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
   }
+  .shape-fit-side { gap: 0.45rem; }
+  .shape-fit-side-title { font-size: 0.95rem; }
   .shape-fit-options,
-  .shape-fit-slots {
-    grid-template-columns: 1fr;
+  .shape-fit-slots { gap: 0.45rem; }
+  .shape-fit-option,
+  .shape-fit-slot {
+    min-height: clamp(56px, 14vw, 84px);
+    padding: 0.4rem;
+  }
+  .shape-fit-option span:first-child,
+  .shape-fit-slot span:first-child {
+    font-size: clamp(1.7rem, 5.5vw, 2.4rem);
+  }
+  .shape-fit-option span:last-child,
+  .shape-fit-slot span:last-child {
+    font-size: 0.74rem;
   }
 }
 
