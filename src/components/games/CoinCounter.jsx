@@ -13,10 +13,14 @@ const createPRNG = (seed) => {
   };
 };
 
-const SMALL_COINS = [1, 2, 5, 10, 20];
-const ALL_COINS = [1, 2, 5, 10, 20, 50, 100, 200];
+// Indian rupee denominations. Small values are minted as coins, larger ones
+// are printed as notes — so kids learn to recognise both.
+const COINS = [1, 2, 5, 10];
+const ALL_MONEY = [1, 2, 5, 10, 20, 50, 100];
 
-const formatMoney = (v) => (v >= 100 ? `£${(v / 100).toFixed(2)}` : `${v}p`);
+// ₹1–₹10 circulate as coins in India; ₹20 and above are shown as notes here.
+const isNote = (v) => v >= 20;
+const formatMoney = (v) => `₹${v}`;
 
 const optionCountFor = (level) => Math.min(3 + Math.floor((level - 1) / 4), 6);
 
@@ -24,8 +28,8 @@ const generateQuestion = (levelNum) => {
   const prng = createPRNG(levelNum * GAME_SEED + 13);
   const randInt = (min, max) => Math.floor(prng() * (max - min + 1)) + min;
 
-  // More coin types and more coins as levels increase.
-  const set = levelNum < 8 ? SMALL_COINS : ALL_COINS;
+  // More denomination types and more pieces of money as levels increase.
+  const set = levelNum < 8 ? COINS : ALL_MONEY;
   const coinCount = Math.min(2 + Math.floor((levelNum - 1) / 3), 7);
   const coins = Array.from({ length: coinCount }, () => set[randInt(0, set.length - 1)]);
   const total = coins.reduce((a, b) => a + b, 0);
@@ -101,7 +105,7 @@ const CoinCounter = ({ onBack }) => {
         <div className="champion-screen">
           <div style={{ fontSize: '4rem' }}>🪙</div>
           <h2>Coin Champion!</h2>
-          <p>You counted every coin across all {TOTAL_LEVELS} levels! 🏆</p>
+          <p>You counted all the rupees — coins and notes — across {TOTAL_LEVELS} levels! 🏆</p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginTop: '1.5rem' }}>
             <button className="btn btn-primary" onClick={resetGame}>Play Again</button>
             <button className="btn" style={{ background: '#eee' }} onClick={() => typeof onBack === 'function' && onBack()}>Main Menu</button>
@@ -119,9 +123,13 @@ const CoinCounter = ({ onBack }) => {
           </div>
 
           <div className="coin-row">
-            {question.coins.map((c, i) => (
-              <span key={i} className="coin-pill">{formatMoney(c)}</span>
-            ))}
+            {question.coins.map((c, i) =>
+              isNote(c) ? (
+                <span key={i} className={`money-note note-${c}`}>{formatMoney(c)}</span>
+              ) : (
+                <span key={i} className="coin-pill">{formatMoney(c)}</span>
+              )
+            )}
           </div>
 
           <div className="choice-options">

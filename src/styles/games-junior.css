@@ -360,6 +360,26 @@
   box-shadow: 0 3px 8px rgba(0,0,0,0.12);
 }
 
+/* Indian rupee banknotes (₹20+) — shown as rounded rectangles, distinct from coins */
+.money-note {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: clamp(58px, 15vw, 76px);
+  height: clamp(40px, 11vw, 52px);
+  padding: 0 0.5rem;
+  border-radius: 10px;
+  font-weight: 900;
+  font-size: clamp(0.85rem, 3.2vw, 1.05rem);
+  border: 2px solid rgba(0,0,0,0.15);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.14), inset 0 0 0 2px rgba(255,255,255,0.35);
+  letter-spacing: 0.02em;
+}
+
+.money-note.note-20  { background: linear-gradient(135deg, #e6f0a8, #b6c34f); color: #4a4a12; }
+.money-note.note-50  { background: linear-gradient(135deg, #8ecae6, #219ebc); color: #073b4c; }
+.money-note.note-100 { background: linear-gradient(135deg, #d8b4f0, #9b5de5); color: #3b1466; }
+
 .clock-wrap {
   display: grid;
   place-items: center;

@@ -29,7 +29,7 @@ npm run preview    # serve the production build
 npm run lint       # eslint
 ```
 
-Note: `postbuild` (in `scripts/postbuild.mjs`) generates `sitemap.xml` (103 URLs),
+Note: `postbuild` (in `scripts/postbuild.mjs`) generates `sitemap.xml` (105 URLs),
 `robots.txt`, and copies `dist/index.html` -> `dist/404.html` (SPA deep-link fallback).
 The base URL is `/gaming-land-kids-2/` in production (see `vite.config.js`).
 
@@ -122,6 +122,13 @@ gradient background**. Rules live in two places:
 - `src/styles/games-hero.css` — superhero family: `heropowermatch, savethecity, herospellquest, herotrivia`.
 - `src/styles/games-junior.css` — junior word/math/choice tokens: `wordscramble, rhymetime, mathninja,
   coincounter, timeteller`.
+  - **Coin Counter** (`CoinCounter.jsx`) & **Time Teller** (`TimeTeller.jsx`) are the two newest games.
+    They share the same "choice" answer UI (`.choice-options` / `.choice-btn` / `.choice-correct` /
+    `.choice-wrong`) and a 20-level deterministic-puzzle structure driven by a seeded `createPRNG`
+    (each level always yields the same puzzle/clock). Coin Counter sums **Indian rupees**: ₹1–₹10 render
+    as `.coin-pill` coins and ₹20+ as `.money-note` banknotes; answers/values use `₹` formatting
+    (`formatMoney`). Time Teller draws an inline SVG `.clock-face` and asks the child to pick the matching
+    `H:MM`; minute granularity widens with level (o'clock/half-hour → quarter hours → 5-minute steps).
 
 > **Rule:** any `color` value used in data MUST have a corresponding `.game-card.<token>` rule,
 > or that card renders with a plain white border (visually inconsistent). When adding a new
@@ -166,7 +173,7 @@ gradient background**. Rules live in two places:
   from `src/utils/useSEO.jsx`, backed by `getItemSEO` / schema factories in `src/utils/seo.js`.
 - **GitHub Pages subpath:** never hardcode a domain. All URLs derive from `BASE_URL` /
   `SITE_ORIGIN` in `src/seoConfig.js` (built from `import.meta.env.BASE_URL`). `sitemap.xml`
-  is generated from the content data (`scripts/generate-sitemap.mjs`) — **103 URLs**.
+  is generated from the content data (`scripts/generate-sitemap.mjs`) — **105 URLs**.
 - Stories support `hreflang` (EN + HI) alternates.
 
 ---
