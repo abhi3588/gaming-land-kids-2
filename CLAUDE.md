@@ -71,7 +71,7 @@ Tab views are **lazy-loaded** in `App.jsx` for smaller initial bundle.
 src/
   App.jsx, main.jsx, router-config.js, kids-data.js, ScrollToTop.jsx
   ErrorBoundary.jsx
-  styles/            tokens, layout, components, games-{classic,preschool,hero,junior}, puzzle, animations,
+  styles/            tokens, layout, components, games-{shared,classic,preschool,hero,junior}, puzzle, animations,
                      reset, utilities, responsive  (imported last = wins)
   utils/            sounds.js, seoConfig.js, seo.js, useSEO.jsx
   assets/           hero.png, activityImages.js, *.svg
@@ -129,6 +129,11 @@ gradient background**. Rules live in two places:
     as `.coin-pill` coins and ₹20+ as `.money-note` banknotes; answers/values use `₹` formatting
     (`formatMoney`). Time Teller draws an inline SVG `.clock-face` and asks the child to pick the matching
     `H:MM`; minute granularity widens with level (o'clock/half-hour → quarter hours → 5-minute steps).
+- `src/styles/games-shared.css` — game-wide chrome (`.game-view`, `.game-header`, `.btn`,
+  `.champion-screen`, progress/level banners) plus the interactive styles for the classic games whose
+  `.game-card.<token>` gradient lives in `layout.css` (Memory, Sorting, Patterns, Counting, Word, MathQuest).
+- `src/styles/puzzle.css` — the six puzzle games only (Jigsaw, Slide, Connect-the-Dots, Maze,
+  Spot-the-Difference, Shape Fit). Kept separate from `games-shared.css` so each file is single-purpose.
 
 > **Rule:** any `color` value used in data MUST have a corresponding `.game-card.<token>` rule,
 > or that card renders with a plain white border (visually inconsistent). When adding a new
