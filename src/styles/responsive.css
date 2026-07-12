@@ -73,10 +73,6 @@
 }
 
 @media (max-width: 576px) {
-  .puzzle-piece {
-    width: 74px;
-    height: 74px;
-  }
   .shape-fit-options,
   .shape-fit-slots {
     grid-template-columns: 1fr;
