@@ -1,0 +1,215 @@
+/* ===== Games: superhero family (heropowermatch, savethecity, herospellquest, herotrivia) ===== */
+
+/* Hero Power Match */
+.game-card.heropowermatch {
+  border-color: #FFD93D;
+  background: linear-gradient(145deg, var(--white) 60%, #fffbdf);
+}
+
+.hero-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.hero-emoji {
+  font-size: clamp(5rem, 18vw, 8rem);
+  line-height: 1;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.13));
+  animation: bobble 2.5s ease-in-out infinite;
+}
+
+.hero-name {
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.hero-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.hero-power-btn {
+  background: var(--white);
+  border: 3px solid #FFD93D;
+  border-radius: 16px;
+  font-family: inherit;
+  font-size: clamp(0.88rem, 2.8vw, 1.05rem);
+  font-weight: 700;
+  color: #444;
+  padding: 0.9rem 0.6rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.15s, box-shadow 0.15s;
+  min-height: 60px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hero-power-btn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 7px 18px rgba(0,0,0,0.13);
+}
+
+.hero-power-btn:disabled { cursor: default; opacity: 0.85; }
+.hero-power-btn.hero-correct { border-color: var(--candy-green); background: #e8fdf3; }
+.hero-power-btn.hero-wrong   { border-color: #ff6b6b; background: #fff0f0; }
+
+/* Save the City */
+.game-card.savethecity {
+  border-color: #FF6B6B;
+  background: linear-gradient(145deg, var(--white) 60%, #fff0f0);
+}
+
+.city-danger-box {
+  background: linear-gradient(135deg, #fff0f0, #fff8e1);
+  border: 3px solid #FF6B6B;
+  border-radius: 20px;
+  padding: 1rem 1.1rem;
+  margin: 0.5rem 0 1.25rem;
+  text-align: center;
+}
+
+.city-danger-text {
+  font-size: clamp(1.05rem, 3.5vw, 1.3rem);
+  font-weight: 800;
+  color: #c0392b;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.city-hint {
+  font-size: clamp(0.9rem, 2.8vw, 1rem);
+  color: #666;
+  font-weight: 600;
+}
+
+.city-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.city-hero-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--white);
+  border: 3px solid #e0e0e0;
+  border-radius: 18px;
+  padding: 0.75rem 0.4rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.city-hero-btn:hover:not(:disabled) {
+  transform: scale(1.07);
+  box-shadow: 0 7px 18px rgba(0,0,0,0.14);
+  border-color: #FF6B6B;
+}
+
+.city-hero-btn:disabled { cursor: default; opacity: 0.85; }
+.city-hero-btn.city-correct { border-color: var(--candy-green); background: #e8fdf3; transform: scale(1.1); }
+.city-hero-btn.city-wrong   { border-color: #ff6b6b; background: #fff0f0; }
+
+.city-hero-emoji { font-size: clamp(2.2rem, 7vw, 3rem); line-height: 1; }
+.city-hero-name  { font-size: clamp(0.65rem, 2vw, 0.8rem); font-weight: 700; color: var(--text-muted); text-align: center; line-height: 1.2; }
+
+/* Hero Spell Quest */
+.game-card.herospellquest {
+  border-color: #c0392b;
+  background: linear-gradient(145deg, var(--white) 60%, #fff0ef);
+}
+
+.hero-tile {
+  background: linear-gradient(145deg, #c0392b, #e74c3c) !important;
+  color: var(--white) !important;
+  border-color: #922b21 !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.hero-tile:hover:not(:disabled) {
+  background: linear-gradient(145deg, #e74c3c, #c0392b) !important;
+  transform: translateY(-4px) scale(1.08) !important;
+}
+
+.hero-tile.used {
+  background: #ccc !important;
+  border-color: #bbb !important;
+}
+
+/* Hero Trivia */
+.game-card.herotrivia {
+  border-color: #8e44ad;
+  background: linear-gradient(145deg, var(--white) 60%, #f9f0ff);
+}
+
+.trivia-card {
+  background: linear-gradient(135deg, #f9f0ff, #ffeaa7);
+  border: 3px solid #d1a7f5;
+  border-radius: 22px;
+  padding: 1.1rem 1.2rem;
+  margin: 0.5rem 0 1.25rem;
+  text-align: center;
+}
+
+.trivia-emoji {
+  font-size: clamp(2.8rem, 9vw, 4rem);
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+
+.trivia-question {
+  font-size: clamp(1.05rem, 3.2vw, 1.25rem);
+  font-weight: 800;
+  color: #4a235a;
+  line-height: 1.4;
+}
+
+.trivia-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.trivia-btn {
+  background: var(--white);
+  border: 3px solid #d1a7f5;
+  border-radius: 16px;
+  font-family: inherit;
+  font-size: clamp(0.9rem, 2.8vw, 1.05rem);
+  font-weight: 700;
+  color: #444;
+  padding: 0.9rem 0.6rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  min-height: 58px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.trivia-btn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.04);
+  border-color: #8e44ad;
+  box-shadow: 0 7px 18px rgba(142,68,173,0.2);
+}
+
+.trivia-btn:disabled { cursor: default; opacity: 0.85; }
+.trivia-btn.trivia-correct { border-color: var(--candy-green); background: #e8fdf3; color: #1a7a60; }
+.trivia-btn.trivia-wrong   { border-color: #ff6b6b; background: #fff0f0; color: #c0392b; }

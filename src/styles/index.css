@@ -6,6 +6,9 @@
 @import './layout.css';
 @import './components.css';
 @import './puzzle.css';
-@import './games.css';
+@import './games-classic.css';
+@import './games-preschool.css';
+@import './games-hero.css';
+@import './games-junior.css';
 @import './utilities.css';
 @import './responsive.css';

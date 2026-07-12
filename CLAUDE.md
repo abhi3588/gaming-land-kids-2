@@ -71,7 +71,7 @@ Tab views are **lazy-loaded** in `App.jsx` for smaller initial bundle.
 src/
   App.jsx, main.jsx, router-config.js, kids-data.js, ScrollToTop.jsx
   ErrorBoundary.jsx
-  styles/            tokens, layout, components, games, puzzle, animations,
+  styles/            tokens, layout, components, games-{classic,preschool,hero,junior}, puzzle, animations,
                      reset, utilities, responsive  (imported last = wins)
   utils/            sounds.js, seoConfig.js, seo.js, useSEO.jsx
   assets/           hero.png, activityImages.js, *.svg
@@ -114,9 +114,14 @@ Every card carries a `color` field (e.g. `'memory'`, `'patterns'`, `'shapfit'`).
 becomes a CSS class `game-card.<token>`, and a rule defines a matching **border color + soft
 gradient background**. Rules live in two places:
 - `src/styles/layout.css` — `memory, sorting, patterns, counting, math, word, sudoku, sequence`.
-- `src/styles/games.css` — the remaining per-game tokens (`animalsounds, bigorsmall, heropowermatch,
-  herospellquest, herotrivia, mathninja, oddoneout, oppositematch, rhymetime, savethecity,
-  shadowmatch, shapefinder, whatcomesnext, wordscramble`).
+- `src/styles/games-classic.css` — interactive styles for the four foundational games whose card
+  tokens live in `layout.css`: `sudoku` (ShapeSudoku), `sequence` (SparkSequence), `patterns`
+  (ColorMatch), `math` (SumPairs).
+- `src/styles/games-preschool.css` — preschool recognition/matching tokens: `animalsounds, bigorsmall,
+  oddoneout, oppositematch, shadowmatch, shapefinder, whatcomesnext`.
+- `src/styles/games-hero.css` — superhero family: `heropowermatch, savethecity, herospellquest, herotrivia`.
+- `src/styles/games-junior.css` — junior word/math/choice tokens: `wordscramble, rhymetime, mathninja,
+  coincounter, timeteller`.
 
 > **Rule:** any `color` value used in data MUST have a corresponding `.game-card.<token>` rule,
 > or that card renders with a plain white border (visually inconsistent). When adding a new
