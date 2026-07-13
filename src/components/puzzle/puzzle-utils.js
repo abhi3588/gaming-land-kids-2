@@ -166,3 +166,49 @@ export const getShapeFitLevel = (level) => {
   }
   return order;
 };
+
+// ===== Color Sort (ball sort) =====
+// Tubes hold colored balls; goal is to pour until each tube holds one color.
+// The level starts from a solved board and is scrambled by a sequence of
+// *reverse* pours, so the result is always solvable by replaying those pours.
+const SORT_COLORS = ['#ff6b6b', '#4dabf7', '#51cf66', '#ffd43b', '#cc5de8', '#ff922b'];
+const SORT_CAPACITY = 4;
+
+export const getColorSortLevel = (level) => {
+  const colorCount = Math.min(2 + Math.floor((level - 1) / 2), SORT_COLORS.length); // L1-2:2, L3-4:3, L5:4
+  const prng = createPRNG(level * 827);
+  const tubes = Array.from({ length: colorCount }, () => Array(SORT_CAPACITY).fill(0));
+  // Start solved: tube i is filled with color i.
+  tubes.forEach((tube, i) => { for (let k = 0; k < SORT_CAPACITY; k += 1) tube[k] = i; });
+  tubes.push([]); // one empty tube to pour into
+
+  const moves = 12 + level * 4;
+  for (let m = 0; m < moves; m += 1) {
+    const dst = Math.floor(prng() * tubes.length);
+    if (tubes[dst].length === 0) continue;
+    const ball = tubes[dst][tubes[dst].length - 1];
+    const candidates = [];
+    for (let s = 0; s < tubes.length; s += 1) {
+      if (s === dst) continue;
+      const t = tubes[s];
+      if (t.length >= SORT_CAPACITY) continue;
+      if (t.length === 0 || t[t.length - 1] === ball) candidates.push(s);
+    }
+    if (candidates.length === 0) continue;
+    const src = candidates[Math.floor(prng() * candidates.length)];
+    tubes[src].push(tubes[dst].pop());
+  }
+
+  return { tubes, colors: SORT_COLORS.slice(0, colorCount), capacity: SORT_CAPACITY };
+};
+
+// ===== Memory Match =====
+// Returns a shuffled deck of `pairs` emoji pairs for the given level.
+const MEMORY_EMOJIS = ['🍎', '🐶', '⭐', '🌈', '🚀', '🍉', '🐱', '🌸', '⚽', '🎈', '🐠', '🍔'];
+
+export const getMemoryMatchLevel = (level) => {
+  const pairs = level < 5 ? 2 + level : 8; // L1:3, L2:4, L3:5, L4:6, L5:8
+  const chosen = MEMORY_EMOJIS.slice(0, pairs);
+  const deck = shuffleArray([...chosen, ...chosen], createPRNG(level * 677));
+  return { deck, pairs };
+};

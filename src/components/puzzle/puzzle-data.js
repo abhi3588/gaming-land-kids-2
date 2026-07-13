@@ -4,6 +4,8 @@ import ConnectDotsPuzzle from './ConnectDotsPuzzle.jsx';
 import MazePuzzle from './MazePuzzle.jsx';
 import SpotDifferencePuzzle from './SpotDifferencePuzzle.jsx';
 import ShapeFitPuzzle from './ShapeFitPuzzle.jsx';
+import ColorSortPuzzle from './ColorSortPuzzle.jsx';
+import MemoryMatchPuzzle from './MemoryMatchPuzzle.jsx';
 
 export const PUZZLE_CATEGORIES = [
   {
@@ -54,6 +56,22 @@ export const PUZZLE_CATEGORIES = [
     ageRange: '3–7',
     desc: 'Match each shape to its perfect home and watch it click!',
   },
+  {
+    id: 'color-sort',
+    title: 'Color Sort',
+    icon: '🎨',
+    color: 'sequence',
+    ageRange: '4–9',
+    desc: 'Pour the balls until each tube holds just one colour!',
+  },
+  {
+    id: 'memory-match',
+    title: 'Memory Match',
+    icon: '🃏',
+    color: 'math',
+    ageRange: '3–8',
+    desc: 'Flip the cards and find the matching pairs!',
+  },
 ];
 
 export const PUZZLE_DATA = {
@@ -92,5 +110,17 @@ export const PUZZLE_DATA = {
     completionEmoji: '🔷',
     completionMessage: 'Shape superstar! Every piece fits perfectly!',
     component: ShapeFitPuzzle,
+  },
+  'color-sort': {
+    title: 'Color Sort',
+    completionEmoji: '🎨',
+    completionMessage: 'Colour genius! Every tube is perfectly sorted!',
+    component: ColorSortPuzzle,
+  },
+  'memory-match': {
+    title: 'Memory Match',
+    completionEmoji: '🃏',
+    completionMessage: 'Memory master! You found every matching pair!',
+    component: MemoryMatchPuzzle,
   },
 };
