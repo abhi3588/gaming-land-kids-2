@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import { playSound } from '../../../utils/sounds';
 
+// External, visible body parts only — arranged top to bottom so the
+// stages read like a real body being built from head to toe.
 const STAGES = [
-  { id: 'brain', emoji: '🧠', name: 'Brain', description: 'Our brain is inside our head and helps us think, learn, and feel!' },
+  { id: 'head', emoji: '👶', name: 'Head', description: 'Our head sits on top of our body and holds our face, eyes, and smile!' },
   { id: 'eyes', emoji: '👁️', name: 'Eyes', description: 'We use our eyes on our face to see all the colorful things around us!' },
   { id: 'ears', emoji: '👂', name: 'Ears', description: 'We use our ears on the side of our head to hear music, voices, and sounds!' },
   { id: 'nose', emoji: '👃', name: 'Nose', description: 'We use our nose on our face to breathe fresh air and smell flowers!' },
   { id: 'mouth', emoji: '👄', name: 'Mouth', description: 'We use our mouth to talk, smile, taste, and eat delicious food!' },
-  { id: 'lungs', emoji: '🫁', name: 'Lungs', description: 'Our lungs are inside our chest and fill with air when we take a breath!' },
-  { id: 'heart', emoji: '❤️', name: 'Heart', description: 'Our heart is inside our chest and pumps blood to keep our whole body moving!' },
-  { id: 'stomach', emoji: '🍽️', name: 'Stomach', description: 'Our stomach digests the food we eat to give us energy to play!' },
-  { id: 'hands', emoji: '🖐️', name: 'Hands', description: 'We use our hands at the end of our arms to write, draw, touch, and hold toys!' },
+  { id: 'arms', emoji: '💪', name: 'Arms', description: 'Our arms help us reach, hug, and carry the things we love!' },
+  { id: 'hands', emoji: '🤚', name: 'Hands', description: 'We use our hands at the end of our arms to write, draw, touch, and hold toys!' },
+  { id: 'tummy', emoji: '🤰', name: 'Tummy', description: 'Our tummy helps digest our food so we can grow big and strong!' },
+  { id: 'legs', emoji: '🦵', name: 'Legs', description: 'Our legs help us stand tall, walk, and run wherever we go!' },
   { id: 'feet', emoji: '👟', name: 'Feet', description: 'We use our feet at the bottom of our legs to walk, run, skip, and jump!' }
 ];
 
