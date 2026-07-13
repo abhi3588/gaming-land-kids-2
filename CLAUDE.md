@@ -29,7 +29,7 @@ npm run preview    # serve the production build
 npm run lint       # eslint
 ```
 
-Note: `postbuild` (in `scripts/postbuild.mjs`) generates `sitemap.xml` (107 URLs),
+Note: `postbuild` (in `scripts/postbuild.mjs`) generates `sitemap.xml` (109 URLs),
 `robots.txt`, and copies `dist/index.html` -> `dist/404.html` (SPA deep-link fallback).
 The base URL is `/gaming-land-kids-2/` in production (see `vite.config.js`).
 
@@ -61,7 +61,7 @@ Tab views are **lazy-loaded** in `App.jsx` for smaller initial bundle.
 | Fun | `src/components/fun/FunTab.jsx` | `funActivities` (materials/steps) |
 | Educational | `src/components/educational/EducationalTab.jsx` | `scienceActivities` + `moralActivities` (interactive components) |
 | Quiz | `src/components/quiz/QuizTab.jsx` | `QUIZ_CATEGORIES` + `QUIZ_DATA` |
-| Puzzle | `src/components/puzzle/PuzzleTab.jsx` | `PUZZLE_CATEGORIES` + `PUZZLE_DATA` (6 puzzle components) |
+| Puzzle | `src/components/puzzle/PuzzleTab.jsx` | `PUZZLE_CATEGORIES` + `PUZZLE_DATA` (8 puzzle components) |
 
 ---
 
@@ -85,7 +85,8 @@ src/
     quiz/           QuizTab, QuizActivity, quiz-data.js
     puzzle/         PuzzleTab, puzzle-data.js, puzzle-utils.js,
                     JigsawPuzzle, SlidePuzzle, ConnectDotsPuzzle,
-                    MazePuzzle, SpotDifferencePuzzle, ShapeFitPuzzle
+                    MazePuzzle, SpotDifferencePuzzle, ShapeFitPuzzle,
+                    ColorSortPuzzle, MemoryMatchPuzzle
 scripts/            postbuild.mjs, generate-sitemap.mjs
 public/             video/*.mp4 (rhymes), manifest.json, icons/, og-image.png
 ```
@@ -132,8 +133,17 @@ gradient background**. Rules live in two places:
 - `src/styles/games-shared.css` — game-wide chrome (`.game-view`, `.game-header`, `.btn`,
   `.champion-screen`, progress/level banners) plus the interactive styles for the classic games whose
   `.game-card.<token>` gradient lives in `layout.css` (Memory, Sorting, Patterns, Counting, Word, MathQuest).
-- `src/styles/puzzle.css` — the six puzzle games only (Jigsaw, Slide, Connect-the-Dots, Maze,
-  Spot-the-Difference, Shape Fit). Kept separate from `games-shared.css` so each file is single-purpose.
+- `src/styles/puzzle.css` — all eight puzzle games (Jigsaw, Slide, Connect-the-Dots, Maze,
+  Spot-the-Difference, Shape Fit, Color Sort, Memory Match). Kept separate from `games-shared.css`
+  so each file is single-purpose. The two newest puzzles:
+  - **Color Sort** (`ColorSortPuzzle.jsx`) — ball-sort: tap a tube then another to pour its top
+    balls until each tube holds one colour. Level data from `getColorSortLevel` (`puzzle-utils.js`),
+    scrambled from a solved board via *reverse* pours so it's always solvable.
+  - **Memory Match** (`MemoryMatchPuzzle.jsx`) — flip-and-match card game; level data from
+    `getMemoryMatchLevel` (3→8 pairs across 5 levels). Styles live in `.mm-board` / `.mm-card`
+    (`.mm-down` face-down, `.shown` flipped, `.matched`). **The face-down state uses `mm-down`,
+    NOT `hidden`** — do not rename it, or it collides with the global `.hidden { display:none }`
+    utility in `utilities.css` and the cards vanish (this bug was fixed on 2026-07-13).
 
 > **Rule:** any `color` value used in data MUST have a corresponding `.game-card.<token>` rule,
 > or that card renders with a plain white border (visually inconsistent). When adding a new
@@ -178,7 +188,7 @@ gradient background**. Rules live in two places:
   from `src/utils/useSEO.jsx`, backed by `getItemSEO` / schema factories in `src/utils/seo.js`.
 - **GitHub Pages subpath:** never hardcode a domain. All URLs derive from `BASE_URL` /
   `SITE_ORIGIN` in `src/seoConfig.js` (built from `import.meta.env.BASE_URL`). `sitemap.xml`
-  is generated from the content data (`scripts/generate-sitemap.mjs`) — **107 URLs**.
+  is generated from the content data (`scripts/generate-sitemap.mjs`) — **109 URLs**.
 - Stories support `hreflang` (EN + HI) alternates.
 
 ---
