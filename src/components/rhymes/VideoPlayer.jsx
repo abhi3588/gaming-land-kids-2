@@ -34,9 +34,10 @@ export default function VideoPlayer({ rhyme, onBack }) {
         marginBottom: '2rem',
         border: '6px solid var(--color-primary)'
       }}>
-        <video 
+        <video
           ref={videoRef}
-          controls 
+          controls
+          controlsList="nodownload"
           style={{ width: '100%', height: 'auto', display: 'block' }}
           src={rhyme.videoUrl}
         >
