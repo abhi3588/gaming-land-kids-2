@@ -447,6 +447,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>/gaming-land-kids-2/educational/science/magnet-magic</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/educational/science/states-of-matter</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>/gaming-land-kids-2/educational/moral/truth-detective</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -473,6 +483,16 @@
   </url>
   <url>
     <loc>/gaming-land-kids-2/educational/moral/gratitude-garden</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/educational/moral/sharing-caring</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/educational/moral/cooperation-captain</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>

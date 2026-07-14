@@ -6,12 +6,16 @@ import SolarSystemExplorer from './components/educational/science/SolarSystemExp
 import BodyPartsBuilder from './components/educational/science/BodyPartsBuilder.jsx';
 import WaterCycleExplorer from './components/educational/science/WaterCycleExplorer.jsx';
 import DinosaurAge from './components/educational/science/DinosaurAge.jsx';
+import MagnetMagic from './components/educational/science/MagnetMagic.jsx';
+import StatesOfMatter from './components/educational/science/StatesOfMatter.jsx';
 import TruthDetective from './components/educational/moral/TruthDetective.jsx';
 import KindnessHelper from './components/educational/moral/KindnessHelper.jsx';
 import RespectRanger from './components/educational/moral/RespectRanger.jsx';
 import ResponsibilityCaptain from './components/educational/moral/ResponsibilityCaptain.jsx';
 import HonestyHero from './components/educational/moral/HonestyHero.jsx';
 import GratitudeGarden from './components/educational/moral/GratitudeGarden.jsx';
+import SharingCaring from './components/educational/moral/SharingCaring.jsx';
+import CooperationCaptain from './components/educational/moral/CooperationCaptain.jsx';
 
 // ===== Stories Data =====
 export { stories, storiesHindi };
@@ -309,6 +313,24 @@ export const scienceActivities = [
     ageRange: '3-10',
     desc: 'Travel back in time to the age of dinosaurs!',
     component: DinosaurAge
+  },
+  {
+    id: 'magnet-magic',
+    title: 'Magnet Magic',
+    icon: '🧲',
+    color: 'patterns',
+    ageRange: '3-10',
+    desc: 'Sort objects into magnetic and non-magnetic!',
+    component: MagnetMagic
+  },
+  {
+    id: 'states-of-matter',
+    title: 'States of Matter',
+    icon: '🧊',
+    color: 'sorting',
+    ageRange: '3-10',
+    desc: 'Classify things as solid, liquid, or gas!',
+    component: StatesOfMatter
   }
 ];
 
@@ -367,6 +389,24 @@ export const moralActivities = [
     ageRange: '3-10',
     desc: 'Grow a beautiful garden of gratitude!',
     component: GratitudeGarden
+  },
+  {
+    id: 'sharing-caring',
+    title: 'Sharing & Caring',
+    icon: '🧸',
+    color: 'word',
+    ageRange: '3-10',
+    desc: 'Learn to share toys, snacks, and attention!',
+    component: SharingCaring
+  },
+  {
+    id: 'cooperation-captain',
+    title: 'Cooperation Captain',
+    icon: '🤝',
+    color: 'counting',
+    ageRange: '3-10',
+    desc: 'Discover the power of teamwork!',
+    component: CooperationCaptain
   }
 ];
 
