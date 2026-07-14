@@ -8,6 +8,8 @@ export const ACTIVITY_IMAGES = {
   'kindness-coupons': 'images/Fun-KindnessCoupons.png',
   'nature-journal': 'images/Nature_Journal.png',
   'sock-puppet-show': 'images/Sock_Puppet_Show.png',
+  'shadow-puppets': 'images/Fun-ShadowPuppets.png',
+  'bubble-sculptures': 'images/Fun-BubbleSculptures.png',
 };
 
 export function getActivityImageUrl(id) {

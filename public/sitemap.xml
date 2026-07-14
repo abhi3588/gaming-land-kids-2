@@ -407,6 +407,16 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>/gaming-land-kids-2/fun/shadow-puppets</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/fun/bubble-sculptures</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>/gaming-land-kids-2/educational/science/plant-lifecycle</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>

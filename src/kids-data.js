@@ -219,6 +219,38 @@ export const funActivities = [
       'Give your puppet a name and a funny voice.',
       'Create a short story and perform it for the family!'
     ]
+  },
+  {
+    id: 'shadow-puppets',
+    title: 'Shadow Puppets',
+    icon: '\u{1F526}',
+    color: 'sorting',
+    ageRange: '3-9',
+    time: '15 min',
+    desc: 'Use hands and a flashlight to make animal shadows.',
+    materials: ['A flashlight or lamp', 'A blank wall', 'Your hands'],
+    steps: [
+      'Dim the room and shine a light at the wall.',
+      'Hold your hands between the light and the wall.',
+      'Shape your fingers into animals like a bunny or bird.',
+      'Tell a short story with your shadow puppets.'
+    ]
+  },
+  {
+    id: 'bubble-sculptures',
+    title: 'Bubble Sculptures',
+    icon: '\u{1F9EC}',
+    color: 'shapefinder',
+    ageRange: '4-10',
+    time: '20 min',
+    desc: 'Blow and stack soap bubbles into cool shapes.',
+    materials: ['Soap bubble solution', 'A straw or bubble wand', 'A flat tray'],
+    steps: [
+      'Pour bubble solution onto a flat tray.',
+      'Blow gently through a straw to make a dome bubble.',
+      'Stack or connect bubbles to build a shape.',
+      'Watch how light makes rainbow colors on the bubbles.'
+    ]
   }
 ];
 
