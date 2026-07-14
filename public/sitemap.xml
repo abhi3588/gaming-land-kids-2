@@ -537,6 +537,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>/gaming-land-kids-2/puzzle/shadow-match</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/puzzle/pattern-sequence</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>/gaming-land-kids-2/quiz/fruits</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -573,6 +583,16 @@
   </url>
   <url>
     <loc>/gaming-land-kids-2/quiz/vegetables</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/quiz/insects</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/quiz/space</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

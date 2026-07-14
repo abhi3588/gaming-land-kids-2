@@ -64,6 +64,22 @@ export const QUIZ_CATEGORIES = [
     color: 'garden',
     desc: 'Name healthy veggies — from crunchy carrots to leafy greens!',
     ageRange: '3–9'
+  },
+  {
+    id: 'insects',
+    title: 'Insects',
+    icon: '🐞',
+    color: 'garden',
+    desc: 'Identify buzzy bugs and creepy-crawlies!',
+    ageRange: '3–8'
+  },
+  {
+    id: 'space',
+    title: 'Space',
+    icon: '🚀',
+    color: 'sky',
+    desc: 'Explore rockets, planets, and stars far away!',
+    ageRange: '3–9'
   }
 ];
 
@@ -202,6 +218,40 @@ export const QUIZ_DATA = {
       { id: 'lettuce', emoji: '🥬', question: 'Which leafy green vegetable goes in salads?', answer: 'Lettuce', options: ['Cabbage', 'Spinach', 'Lettuce', 'Kale'] },
       { id: 'pepper', emoji: '🫑', question: 'Which vegetable can be green, red, or yellow and is crunchy?', answer: 'Pepper', options: ['Chili', 'Pepper', 'Tomato', 'Carrot'] },
       { id: 'eggplant', emoji: '🍆', question: 'Which purple vegetable is shaped like an egg?', answer: 'Eggplant', options: ['Plum', 'Beet', 'Eggplant', 'Grape'] }
+    ]
+  },
+  insects: {
+    title: 'Insect Quiz',
+    completionEmoji: '🐞',
+    completionMessage: 'You\'re a bug expert! 🐝',
+    questions: [
+      { id: 'butterfly', emoji: '🦋', question: 'Which insect has colourful wings and starts as a caterpillar?', answer: 'Butterfly', options: ['Moth', 'Dragonfly', 'Butterfly', 'Bee'] },
+      { id: 'ladybug', emoji: '🐞', question: 'Which small red bug has black spots?', answer: 'Ladybug', options: ['Beetle', 'Ladybug', 'Ant', 'Spider'] },
+      { id: 'bee', emoji: '🐝', question: 'Which insect makes honey and has yellow stripes?', answer: 'Bee', options: ['Wasp', 'Fly', 'Bee', 'Mosquito'] },
+      { id: 'ant', emoji: '🐜', question: 'Which tiny insect loves to carry crumbs in a line?', answer: 'Ant', options: ['Ant', 'Termite', 'Beetle', 'Bug'] },
+      { id: 'spider', emoji: '🕷️', question: 'Which eight-legged crawler spins a web?', answer: 'Spider', options: ['Spider', 'Beetle', 'Cricket', 'Snail'] },
+      { id: 'beetle', emoji: '🪲', question: 'Which shiny bug has a hard shell on its back?', answer: 'Beetle', options: ['Ladybug', 'Roach', 'Beetle', 'Ant'] },
+      { id: 'snail', emoji: '🐌', question: 'Which slow crawler carries its home on its back?', answer: 'Snail', options: ['Worm', 'Slug', 'Snail', 'Caterpillar'] },
+      { id: 'caterpillar', emoji: '🐛', question: 'Which wiggly bug turns into a butterfly?', answer: 'Caterpillar', options: ['Worm', 'Caterpillar', 'Grub', 'Snail'] },
+      { id: 'mosquito', emoji: '🦟', question: 'Which buzzing bug leaves an itchy bite?', answer: 'Mosquito', options: ['Fly', 'Bee', 'Mosquito', 'Beetle'] },
+      { id: 'cricket', emoji: '🦗', question: 'Which bug chirps at night with its legs?', answer: 'Cricket', options: ['Grasshopper', 'Cricket', 'Beetle', 'Ant'] }
+    ]
+  },
+  space: {
+    title: 'Space Quiz',
+    completionEmoji: '🚀',
+    completionMessage: 'You\'re a space explorer! 🌟',
+    questions: [
+      { id: 'rocket', emoji: '🚀', question: 'What vehicle blasts off into space?', answer: 'Rocket', options: ['Airplane', 'Rocket', 'Car', 'Boat'] },
+      { id: 'moon', emoji: '🌙', question: 'What shines in the night sky and has craters?', answer: 'Moon', options: ['Sun', 'Star', 'Moon', 'Comet'] },
+      { id: 'sun', emoji: '☀️', question: 'What is the big bright star at the center of our solar system?', answer: 'Sun', options: ['Sun', 'Planet', 'Moon', 'Light'] },
+      { id: 'saturn', emoji: '🪐', question: 'Which planet is famous for its big bright rings?', answer: 'Saturn', options: ['Jupiter', 'Mars', 'Saturn', 'Earth'] },
+      { id: 'astronaut', emoji: '🧑‍🚀', question: 'Who travels to space in a special suit?', answer: 'Astronaut', options: ['Pilot', 'Astronaut', 'Scientist', 'Captain'] },
+      { id: 'star', emoji: '⭐', question: 'What twinkles far away in the night sky?', answer: 'Star', options: ['Star', 'Moon', 'Comet', 'Spark'] },
+      { id: 'earth', emoji: '🌍', question: 'Which blue and green planet is our home?', answer: 'Earth', options: ['Mars', 'Earth', 'Venus', 'Moon'] },
+      { id: 'comet', emoji: '☄️', question: 'What streaks across the sky with a glowing tail?', answer: 'Comet', options: ['Meteor', 'Comet', 'Rocket', 'Star'] },
+      { id: 'alien', emoji: '👽', question: 'What friendly being might live on another planet?', answer: 'Alien', options: ['Monster', 'Robot', 'Alien', 'Ghost'] },
+      { id: 'shooting-star', emoji: '🌠', question: 'What do we call a star that quickly falls through the sky?', answer: 'Shooting Star', options: ['Shooting Star', 'Comet', 'Spark', 'Moon'] }
     ]
   }
 };

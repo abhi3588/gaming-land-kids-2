@@ -6,6 +6,8 @@ import SpotDifferencePuzzle from './SpotDifferencePuzzle.jsx';
 import ShapeFitPuzzle from './ShapeFitPuzzle.jsx';
 import ColorSortPuzzle from './ColorSortPuzzle.jsx';
 import MemoryMatchPuzzle from './MemoryMatchPuzzle.jsx';
+import ShadowMatchPuzzle from './ShadowMatchPuzzle.jsx';
+import PatternSequencePuzzle from './PatternSequencePuzzle.jsx';
 
 export const PUZZLE_CATEGORIES = [
   {
@@ -72,6 +74,22 @@ export const PUZZLE_CATEGORIES = [
     ageRange: '3–8',
     desc: 'Flip the cards and find the matching pairs!',
   },
+  {
+    id: 'shadow-match',
+    title: 'Shadow Match',
+    icon: '👤',
+    color: 'sorting',
+    ageRange: '3–7',
+    desc: 'Match the colourful toys to their dark shadows!',
+  },
+  {
+    id: 'pattern-sequence',
+    title: 'Pattern Sequence',
+    icon: '🔀',
+    color: 'patterns',
+    ageRange: '4–8',
+    desc: 'Find out what comes next in the patterns!',
+  },
 ];
 
 export const PUZZLE_DATA = {
@@ -122,5 +140,17 @@ export const PUZZLE_DATA = {
     completionEmoji: '🃏',
     completionMessage: 'Memory master! You found every matching pair!',
     component: MemoryMatchPuzzle,
+  },
+  'shadow-match': {
+    title: 'Shadow Match',
+    completionEmoji: '👤',
+    completionMessage: 'Shadow sleuth! You matched every toy to its shadow!',
+    component: ShadowMatchPuzzle,
+  },
+  'pattern-sequence': {
+    title: 'Pattern Sequence',
+    completionEmoji: '🔀',
+    completionMessage: 'Pattern pro! You cracked every sequence!',
+    component: PatternSequencePuzzle,
   },
 };
