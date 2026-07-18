@@ -457,6 +457,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>/gaming-land-kids-2/educational/science/food-chain</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/educational/science/float-sink</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>/gaming-land-kids-2/educational/moral/truth-detective</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -493,6 +503,16 @@
   </url>
   <url>
     <loc>/gaming-land-kids-2/educational/moral/cooperation-captain</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/educational/moral/helper-matching</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/educational/moral/emotion-matcher</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>

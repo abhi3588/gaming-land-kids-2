@@ -8,6 +8,8 @@ import WaterCycleExplorer from './components/educational/science/WaterCycleExplo
 import DinosaurAge from './components/educational/science/DinosaurAge.jsx';
 import MagnetMagic from './components/educational/science/MagnetMagic.jsx';
 import StatesOfMatter from './components/educational/science/StatesOfMatter.jsx';
+import FoodChainConnect from './components/educational/science/FoodChainConnect.jsx';
+import FloatOrSink from './components/educational/science/FloatOrSink.jsx';
 import TruthDetective from './components/educational/moral/TruthDetective.jsx';
 import KindnessHelper from './components/educational/moral/KindnessHelper.jsx';
 import RespectRanger from './components/educational/moral/RespectRanger.jsx';
@@ -16,6 +18,8 @@ import HonestyHero from './components/educational/moral/HonestyHero.jsx';
 import GratitudeGarden from './components/educational/moral/GratitudeGarden.jsx';
 import SharingCaring from './components/educational/moral/SharingCaring.jsx';
 import CooperationCaptain from './components/educational/moral/CooperationCaptain.jsx';
+import HelperMatching from './components/educational/moral/HelperMatching.jsx';
+import EmotionMatcher from './components/educational/moral/EmotionMatcher.jsx';
 
 // ===== Stories Data =====
 export { stories, storiesHindi };
@@ -331,6 +335,24 @@ export const scienceActivities = [
     ageRange: '3-10',
     desc: 'Classify things as solid, liquid, or gas!',
     component: StatesOfMatter
+  },
+  {
+    id: 'food-chain',
+    title: 'Food Chain Connect',
+    icon: '🌞',
+    color: 'patterns',
+    ageRange: '3-10',
+    desc: 'Match who eats what to build a nature energy chain!',
+    component: FoodChainConnect
+  },
+  {
+    id: 'float-sink',
+    title: 'Float or Sink',
+    icon: '🌊',
+    color: 'counting',
+    ageRange: '3-10',
+    desc: 'Drop cute toys into a water tub and guess if they float or sink!',
+    component: FloatOrSink
   }
 ];
 
@@ -407,6 +429,24 @@ export const moralActivities = [
     ageRange: '3-10',
     desc: 'Discover the power of teamwork!',
     component: CooperationCaptain
+  },
+  {
+    id: 'helper-matching',
+    title: 'Helper Matching',
+    icon: '🦸',
+    color: 'memory',
+    ageRange: '3-10',
+    desc: 'Match the right tool to the community helpers who help us every day!',
+    component: HelperMatching
+  },
+  {
+    id: 'emotion-matcher',
+    title: 'Emotion Matcher',
+    icon: '😊',
+    color: 'word',
+    ageRange: '3-10',
+    desc: 'Help your animal friends match their emotions to the situation!',
+    component: EmotionMatcher
   }
 ];
 

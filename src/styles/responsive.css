@@ -411,3 +411,59 @@
     padding: 0.55rem 1rem;
   }
 }
+
+/* ===== New Educational activities — mobile auto-scale (<576px) =====
+   Keep the new Science (Food Chain, Float or Sink) and Moral (Helper
+   Matching, Emotion Matcher) interactive pieces inside the phone viewport.
+   The `.educational-grid` card list already collapses to 1 column via the
+   unified grid block above; these tweaks only shrink the in-game pieces so
+   nothing forces a horizontal scroll or a layout shift. */
+@media (max-width: 576px) {
+  /* Food Chain: smaller slots & cards so the chain wraps cleanly */
+  .fc-slots { gap: 0.3rem; }
+  .fc-slot {
+    min-width: 76px;
+    min-height: 84px;
+    padding: 0.5rem 0.3rem;
+    border-width: 3px;
+    border-radius: 14px;
+  }
+  .fc-slot-emoji { font-size: 1.8rem; }
+  .fc-slot-label { font-size: 0.7rem; }
+  .fc-slot-num { font-size: 1.1rem; }
+  .fc-arrow { font-size: 1.1rem; margin: 0 0.1rem; }
+  .fc-card {
+    min-width: 74px;
+    padding: 0.6rem 0.4rem;
+    border-width: 3px;
+    border-radius: 14px;
+  }
+  .fc-card-emoji { font-size: 2rem; }
+  .fc-card-label { font-size: 0.72rem; }
+
+  /* Float or Sink: tub stays inside the viewport, no horizontal shift */
+  .fos-tub { max-width: 100%; }
+  .fos-water { height: 250px; }
+  .fos-item-emoji { font-size: 3rem; }
+  .fos-btn { font-size: 1.1rem; min-height: 58px; }
+
+  /* Helper Matching: tighten the 2x2 helper grid & tool deck */
+  .hm-helpers { gap: 0.6rem; max-width: 100%; }
+  .hm-helper { padding: 0.8rem 0.4rem; border-radius: 16px; }
+  .hm-helper-emoji { font-size: 2.2rem; }
+  .hm-helper-slot { min-width: 48px; min-height: 48px; }
+  .hm-tool {
+    min-width: 76px;
+    padding: 0.6rem 0.4rem;
+    border-width: 3px;
+    border-radius: 14px;
+  }
+  .hm-tool-emoji { font-size: 2rem; }
+  .hm-tool-label { font-size: 0.72rem; }
+
+  /* Emotion Matcher: keep the 2x2 faces big but inside the viewport */
+  .em-faces { gap: 0.6rem; max-width: 100%; }
+  .em-face { min-height: 96px; border-radius: 16px; }
+  .em-face-emoji { font-size: 2.6rem; }
+  .em-scenario-emoji { font-size: 4rem; }
+}
