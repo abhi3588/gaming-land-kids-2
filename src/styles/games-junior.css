@@ -390,3 +390,162 @@
   height: auto;
   max-width: 240px;
 }
+
+/* ===== Math Archer ===== */
+.ma-question {
+  text-align: center;
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  font-weight: 800;
+  background: rgba(255,255,255,0.8);
+  border-radius: var(--radius-pill, 999px);
+  padding: 0.55rem 1.5rem;
+  margin: 0.5rem auto 0.75rem;
+  max-width: 360px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  letter-spacing: 0.03em;
+}
+
+.ma-area {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  height: clamp(240px, 50vw, 380px);
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #a8edea 0%, #d4f5c6 100%);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+}
+
+@keyframes slide-lr {
+  from { left: 102%; }
+  to   { left: -20%; }
+}
+
+.ma-target {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  min-width: 56px;
+  min-height: 56px;
+  padding: 0.3rem 0.4rem;
+  border-radius: 50%;
+  border: none;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.7), #6bcb77);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  cursor: pointer;
+  animation: slide-lr linear infinite;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.ma-target:active { transform: scale(0.9); }
+.ma-target.hit {
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.85), #ffd93d);
+  animation-play-state: paused;
+  transform: scale(1.18);
+  box-shadow: 0 0 0 6px rgba(255,217,61,0.45);
+}
+
+.ma-target-emoji { font-size: clamp(1.4rem, 4.5vw, 1.9rem); line-height: 1; }
+.ma-target-text  { font-size: clamp(0.95rem, 3vw, 1.25rem); font-weight: 800; color: #1a3a1a; line-height: 1; }
+
+.ma-feedback {
+  text-align: center;
+  font-size: clamp(0.9rem, 3vw, 1.05rem);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  min-height: 2rem;
+  transition: color 0.3s;
+}
+
+/* ===== Word Search ===== */
+.wsearch-board {
+  display: grid;
+  gap: clamp(3px, 1vw, 6px);
+  max-width: min(100%, 490px);
+  margin: 0.75rem auto 0.5rem;
+  padding: 0 0.5rem;
+}
+
+.wsearch-cell {
+  aspect-ratio: 1;
+  min-width: 0;
+  width: 100%;
+  font-size: clamp(0.75rem, 2.8vw, 1.05rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 8px;
+  border: 2px solid #d0d8e8;
+  background: #fff;
+  color: #334155;
+  cursor: pointer;
+  transition: transform 0.1s, border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+.wsearch-cell:active { transform: scale(0.88); }
+.wsearch-cell.sel {
+  border-color: var(--candy-orange, #ff9f1c);
+  background: rgba(255,159,28,0.12);
+  transform: scale(1.08);
+  box-shadow: 0 0 0 3px rgba(255,159,28,0.3);
+  color: #c05000;
+}
+.wsearch-cell.found {
+  /* color/background set inline per-word */
+  font-weight: 800;
+  border-width: 2px;
+  transform: none;
+}
+
+.wsearch-words {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 0.75rem;
+  margin: 0.5rem auto 0.75rem;
+  max-width: 490px;
+  padding: 0 0.5rem;
+}
+
+.wsearch-word {
+  display: inline-block;
+  font-size: clamp(0.78rem, 2.5vw, 0.95rem);
+  font-weight: 800;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill, 999px);
+  border: 2px solid #c8d4e8;
+  background: #f3f6fb;
+  color: #334155;
+  letter-spacing: 0.04em;
+  transition: opacity 0.3s, text-decoration 0.3s;
+}
+.wsearch-word.found {
+  text-decoration: line-through;
+  opacity: 0.45;
+}
+
+.wsearch-feedback {
+  text-align: center;
+  font-size: clamp(0.9rem, 3vw, 1.05rem);
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  min-height: 2rem;
+  transition: color 0.3s;
+}
+
+/* Tight screens: ensure word-search grid stays visible without horizontal scroll */
+@media (max-width: 400px) {
+  .wsearch-board { gap: 2px; padding: 0 0.25rem; }
+  .wsearch-cell  { font-size: 0.7rem; border-radius: 5px; }
+}
+

@@ -490,4 +490,8 @@ export const gamesMeta = [
   { id: 'operatorquest',title: 'Operator Quest', icon: '➕', color: 'math',         ageGroup: 'junior',    desc: 'Find the missing math sign!' },
   { id: 'coincounter', title: 'Coin Counter',   icon: '🪙', color: 'coincounter',   ageGroup: 'junior',    desc: 'Count the Indian rupees — coins & notes!' },
   { id: 'timeteller',  title: 'Time Teller',    icon: '🕒', color: 'timeteller',    ageGroup: 'junior',    desc: 'Read the clock and pick the time!' },
+  { id: 'balloon-pop', title: 'Balloon Pop',    icon: '🎈', color: 'patterns',     ageGroup: 'preschool', desc: 'Pop the correctly colored balloons as they float up!' },
+  { id: 'feed-animals', title: 'Feed the Animals', icon: '🦁', color: 'sorting',   ageGroup: 'preschool', desc: 'Feed the right food to each hungry animal friend!' },
+  { id: 'math-archer', title: 'Math Archer',    icon: '🎯', color: 'math',         ageGroup: 'junior',    desc: 'Solve equations and shoot the target with the right answer!' },
+  { id: 'word-search', title: 'Word Search',    icon: '🔍', color: 'word',         ageGroup: 'junior',    desc: 'Find all the hidden words in the letter grid!' },
 ];

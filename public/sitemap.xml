@@ -207,6 +207,26 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>/gaming-land-kids-2/games/balloon-pop</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/games/feed-animals</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/games/math-archer</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/games/word-search</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>/gaming-land-kids-2/stories/bunny-shares</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>

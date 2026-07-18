@@ -467,3 +467,29 @@
   .em-face-emoji { font-size: 2.6rem; }
   .em-scenario-emoji { font-size: 4rem; }
 }
+
+/* ===== New Games — mobile auto-scale (Balloon Pop, Feed Animals, Math Archer, Word Search) ===== */
+@media (max-width: 768px) {
+  .bp-area, .ma-area { max-width: 100%; }
+  .fa-foods { gap: 0.6rem; max-width: 100%; }
+  .wsearch-board { max-width: 96vw; }
+}
+
+@media (max-width: 480px) {
+  .bp-prompt { font-size: 1.05rem; }
+  .bp-area { height: clamp(280px, 46vh, 420px); }
+
+  .fa-foods { gap: 0.5rem; }
+  .fa-food { min-height: 76px; padding: 0.5rem 0.25rem; border-radius: 16px; }
+  .fa-food-emoji { font-size: 2.1rem; }
+  .fa-food-label { font-size: 0.72rem; }
+  .fa-speech { font-size: 1.05rem; }
+
+  .ma-question { font-size: clamp(1.6rem, 8vw, 2.2rem); }
+  .ma-area { height: clamp(260px, 42vh, 400px); }
+  .ma-target { width: clamp(56px, 17vw, 72px); height: clamp(56px, 17vw, 72px); }
+
+  .wsearch-cell { border-width: 2px; font-size: clamp(0.85rem, 4vw, 1.2rem); }
+  .wsearch-word { font-size: 0.9rem; }
+  .wsearch-words { gap: 0.4rem 0.8rem; }
+}

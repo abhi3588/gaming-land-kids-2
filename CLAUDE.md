@@ -1,7 +1,7 @@
 # CLAUDE.md — Gaming Land Kids
 
 A kid-friendly, mobile-first educational web app for children ages 3–10, featuring
-**30+ mini-games**, bedtime **stories**, nursery **rhymes**, hands-on **fun activities**,
+**34+ mini-games**, bedtime **stories**, nursery **rhymes**, hands-on **fun activities**,
 **science** & **moral** learning modules, **quizzes**, and **puzzles** — all built as a
 single-page React app with heavy SEO (per-page meta + JSON-LD) for discoverability.
 
@@ -76,7 +76,7 @@ src/
   utils/            sounds.js, seoConfig.js, seo.js, useSEO.jsx
   assets/           hero.png, activityImages.js, *.svg
   components/
-    games/          GamesTab + 30+ game components + MemoryGame etc.
+    games/          GamesTab + 34+ game components (incl. BalloonPop, FeedAnimals, MathArcher, WordSearch)
     stories/        StoriesTab, StoryReader, data/ (EN), data-hindi/ (HI)
     rhymes/         RhymesTab, VideoPlayer
     fun/            FunTab
@@ -120,16 +120,31 @@ gradient background**. Rules live in two places:
   (ColorMatch), `math` (SumPairs).
 - `src/styles/games-preschool.css` — preschool recognition/matching tokens: `animalsounds, bigorsmall,
   oddoneout, oppositematch, shadowmatch, shapefinder, whatcomesnext`.
+  New interactive game styles: `.bp-*` (BalloonPop — play area, float-up animation, balloon, prompt)
+  and `.fa-*` (FeedAnimals — stage, animal card, food buttons, speech bubble).
 - `src/styles/games-hero.css` — superhero family: `heropowermatch, savethecity, herospellquest, herotrivia`.
 - `src/styles/games-junior.css` — junior word/math/choice tokens: `wordscramble, rhymetime, mathninja,
   coincounter, timeteller`.
-  - **Coin Counter** (`CoinCounter.jsx`) & **Time Teller** (`TimeTeller.jsx`) are the two newest games.
-    They share the same "choice" answer UI (`.choice-options` / `.choice-btn` / `.choice-correct` /
-    `.choice-wrong`) and a 20-level deterministic-puzzle structure driven by a seeded `createPRNG`
-    (each level always yields the same puzzle/clock). Coin Counter sums **Indian rupees**: ₹1–₹10 render
-    as `.coin-pill` coins and ₹20+ as `.money-note` banknotes; answers/values use `₹` formatting
-    (`formatMoney`). Time Teller draws an inline SVG `.clock-face` and asks the child to pick the matching
-    `H:MM`; minute granularity widens with level (o'clock/half-hour → quarter hours → 5-minute steps).
+  New interactive game styles: `.ma-*` (MathArcher — play area, slide-lr animation, targets, question pill)
+  and `.wsearch-*` (WordSearch — letter grid, cell states sel/found, word list badges).
+  - **Coin Counter** (`CoinCounter.jsx`) & **Time Teller** (`TimeTeller.jsx`) share a 20-level
+    deterministic-puzzle structure driven by a seeded `createPRNG`. Coin Counter sums Indian rupees;
+    Time Teller draws an SVG clock face.
+  - **Balloon Pop** (`BalloonPop.jsx`) — preschool (ages 3–5). Tap the floating balloon of the named
+    colour. 20 deterministic levels; balloon speed increases and correct-colour ratio decreases.
+    Styles: `.bp-area`, `.bp-balloon` (`@keyframes float-up`), `.bp-prompt`, `.bp-feedback`.
+  - **Feed the Animals** (`FeedAnimals.jsx`) — preschool (ages 3–5). Match the correct food to each
+    hungry animal. 20 levels; levels 1–5: 4 foods/1 animal; 6–12: 5 foods/1 animal; 13–20: 6 foods/2
+    animals simultaneously. Deterministic via `createPRNG(level*131+7)`. Styles: `.fa-stage`, `.fa-animal`,
+    `.fa-bubble`, `.fa-speech`, `.fa-foods`, `.fa-food`.
+  - **Math Archer** (`MathArcher.jsx`) — junior (ages 6–10). Solve math equations; tap the moving apple
+    target carrying the correct answer. 20 deterministic levels: add-only (1–5) → add/sub (6–10) →
+    ×2–5 (11–15) → all ops/large numbers (16–20). 3–5 moving targets. Styles: `.ma-question`,
+    `.ma-area` (`@keyframes slide-lr`), `.ma-target`, `.ma-target.hit`, `.ma-feedback`.
+  - **Word Search** (`WordSearch.jsx`) — junior (ages 6–10). Tap letters in order to find hidden words.
+    20 deterministic levels (6×6 H-only → 9×9 all directions). `createPRNG(level*503+11)` seeds grid
+    placement. 4 word-tier pools (easy/medium/hard/expert). Styles: `.wsearch-board`, `.wsearch-cell`,
+    `.wsearch-cell.sel`, `.wsearch-cell.found`, `.wsearch-words`, `.wsearch-word.found`, `.wsearch-feedback`.
 - `src/styles/games-shared.css` — game-wide chrome (`.game-view`, `.game-header`, `.btn`,
   `.champion-screen`, progress/level banners) plus the interactive styles for the classic games whose
   `.game-card.<token>` gradient lives in `layout.css` (Memory, Sorting, Patterns, Counting, Word, MathQuest).
@@ -212,6 +227,26 @@ gradient background**. Rules live in two places:
 - **New fun / science / moral / quiz / puzzle:** follow the existing data shape in the relevant
   `data*.js`; for science/moral/puzzle also supply the React `component`.
 - After adding items, `npm run build` regenerates the sitemap automatically.
+
+---
+
+## Game Rules Contract (enforced for ALL games)
+
+Every game component **must** satisfy these 6 rules. Violations are bugs:
+
+1. **Exactly 20 levels.** `TOTAL_LEVELS = 20` — not 5, 8, or 15.
+2. **Unique, deterministic data per level.** Use `createPRNG(level * <prime> + <offset>)` — never call
+   `Math.random()` inside level-data generators. The same seed must always produce the same level.
+3. **Wrong answer: stop and notify; allow retry.** A wrong selection must: play `wrong` sound, show
+   a descriptive feedback message, and **not** advance the level. The child must keep trying.
+4. **Champion screen after level 20.** After completing level 20, render `<div className="champion-screen">`
+   with the game emoji, a celebration heading, score/level summary, and Play Again / Main Menu buttons.
+5. **Graduated difficulty.** Each level should be meaningfully harder than the last — more distractors,
+   faster speeds, larger numbers, bigger grids, etc. Document the tiers in a comment at the top.
+6. **Consistent mobile UI.** Use `.game-view`, `.game-header`, `.progress-container/.progress-bar`,
+   `.champion-screen`, `.btn`/`.btn-primary`/`.detail-back-container` from `games-shared.css`.
+   All interactive elements must have `min-width/height: 44px`, `touch-action: manipulation`,
+   and `-webkit-tap-highlight-color: transparent`.
 
 ---
 

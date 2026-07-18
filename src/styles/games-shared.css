@@ -312,3 +312,84 @@
 .letter-tile:hover   { transform: translateY(-5px); box-shadow: var(--shadow-pop); }
 .letter-tile:active  { transform: scale(0.9); }
 .letter-tile.used    { opacity: 0.3; pointer-events: none; transform: scale(0.9); }
+
+/* ===== Mobile-first play surfaces =====
+   Size game views to the viewport so the action area fits the screen and play
+   never requires scrolling. Every tappable control keeps a >= 44px touch
+   target to avoid fat-finger misses. */
+.game-view { min-height: 100dvh; }
+
+/* NOTE: Balloon Pop (.bp-*) and Feed the Animals (.fa-*) styles live in
+   games-preschool.css. Earlier duplicates here were removed on 2026-07-18 —
+   they leaked `top:100%` onto .bp-balloon (hiding rising balloons) and
+   `flex-direction:column` onto .fa-stage (left-aligning the animals), because
+   games-preschool.css (imported later) didn't redeclare those properties. */
+
+/* ===== Math Archer ===== */
+.ma-question {
+  text-align: center;
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  font-weight: 900;
+  color: var(--candy-purple);
+  background: white;
+  border-radius: 20px;
+  padding: 0.75rem 1rem;
+  box-shadow: var(--shadow-soft);
+  max-width: 640px;
+  margin: 0.5rem auto 1rem;
+}
+
+.ma-area {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  height: clamp(300px, 46vh, 460px);
+  background: linear-gradient(180deg, #fff7e6 0%, #ffe9c7 100%);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  touch-action: manipulation;
+}
+
+.ma-target {
+  position: absolute;
+  left: -15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: clamp(60px, 18vw, 78px);
+  height: clamp(60px, 18vw, 78px);
+  background: radial-gradient(circle at 35% 30%, #fff, #ff9a9e);
+  border: 4px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 800;
+  color: #7a2e2e;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  animation-name: ma-move;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  touch-action: manipulation;
+  transition: transform 0.1s;
+}
+
+.ma-target:active { transform: scale(0.9); }
+.ma-target.hit { animation: pop-in 0.3s ease; }
+
+.ma-target-emoji { font-size: 1.4rem; line-height: 1; }
+.ma-target-text { font-size: 1.1rem; font-weight: 900; }
+
+@keyframes ma-move {
+  from { left: -15%; }
+  to   { left: 105%; }
+}
+
+.ma-feedback { text-align: center; font-weight: 800; font-size: 1rem; margin: 1rem 0 0.5rem; }
+
+/* NOTE: Word Search (.wsearch-*) styles live in games-junior.css. An earlier
+   duplicate here was removed on 2026-07-18 — its `min-height:40px` leaked onto
+   .wsearch-cell (breaking the square aspect ratio on small grids), because
+   games-junior.css (imported later) didn't redeclare min-height. */

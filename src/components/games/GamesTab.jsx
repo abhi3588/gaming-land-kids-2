@@ -45,6 +45,10 @@ import NumberMatch     from '../games/NumberMatch.jsx';
 import MissingNumber   from '../games/MissingNumber.jsx';
 import CoinCounter     from '../games/CoinCounter.jsx';
 import TimeTeller      from '../games/TimeTeller.jsx';
+import BalloonPop      from '../games/BalloonPop.jsx';
+import FeedAnimals     from '../games/FeedAnimals.jsx';
+import MathArcher      from '../games/MathArcher.jsx';
+import WordSearch      from '../games/WordSearch.jsx';
 
 const COMPONENT_MAP = {
   memory:       MemoryGame,
@@ -79,6 +83,10 @@ const COMPONENT_MAP = {
   missingnumber: MissingNumber,
   coincounter:   CoinCounter,
   timeteller:    TimeTeller,
+  'balloon-pop':    BalloonPop,
+  'feed-animals':   FeedAnimals,
+  'math-archer':    MathArcher,
+  'word-search':    WordSearch,
 };
 
 export default function GamesTab() {
