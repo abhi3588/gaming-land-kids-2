@@ -372,3 +372,42 @@
     margin-right: auto;
   }
 }
+
+/* ===== Quiz: small phones (≤480px) =====
+   Stack the 2×2 options into a single column so longer labels never clip or
+   overlap, and shrink the emoji / question text to fit portrait & landscape
+   phone viewports without pushing the options off-screen. This block comes
+   after the 576px rules so it wins on small devices. */
+@media (max-width: 480px) {
+  .quiz-options-grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    max-width: 360px;
+    padding: 0 0.5rem;
+  }
+  .quiz-option-text {
+    font-size: 0.95rem;
+    padding: 0.8rem 0.75rem;
+    border-radius: 12px;
+  }
+  .quiz-option-btn {
+    font-size: clamp(0.82rem, 3.6vw, 1rem);
+    min-height: 52px;
+  }
+  .quiz-question-area {
+    margin: 1.25rem 0 0.75rem;
+    padding: 0 0.5rem;
+  }
+  .quiz-big-emoji {
+    font-size: clamp(3.5rem, 14vw, 5.5rem);
+    margin-bottom: 0.6rem;
+  }
+  .quiz-question-text {
+    font-size: clamp(1rem, 4.5vw, 1.3rem);
+    margin-bottom: 0.5rem;
+  }
+  .quiz-feedback {
+    font-size: 0.95rem;
+    padding: 0.55rem 1rem;
+  }
+}

@@ -80,6 +80,22 @@ export const QUIZ_CATEGORIES = [
     color: 'sky',
     desc: 'Explore rockets, planets, and stars far away!',
     ageRange: '3–9'
+  },
+  {
+    id: 'dinosaurs',
+    title: 'Dinosaur Quiz',
+    icon: '🦖',
+    color: 'sorting',
+    desc: 'Rawr! Name and spot these prehistoric giant creatures!',
+    ageRange: '4–9'
+  },
+  {
+    id: 'sea-creatures',
+    title: 'Sea Creatures',
+    icon: '🐙',
+    color: 'sky',
+    desc: 'Dive deep under the sea and find sharks, crabs, and whales!',
+    ageRange: '3–8'
   }
 ];
 
@@ -252,6 +268,40 @@ export const QUIZ_DATA = {
       { id: 'comet', emoji: '☄️', question: 'What streaks across the sky with a glowing tail?', answer: 'Comet', options: ['Meteor', 'Comet', 'Rocket', 'Star'] },
       { id: 'alien', emoji: '👽', question: 'What friendly being might live on another planet?', answer: 'Alien', options: ['Monster', 'Robot', 'Alien', 'Ghost'] },
       { id: 'shooting-star', emoji: '🌠', question: 'What do we call a star that quickly falls through the sky?', answer: 'Shooting Star', options: ['Shooting Star', 'Comet', 'Spark', 'Moon'] }
+    ]
+  },
+  dinosaurs: {
+    title: 'Dinosaur Quiz',
+    completionEmoji: '🦖',
+    completionMessage: 'You are a dino expert! Rawr! 🦕',
+    questions: [
+      { id: 'trex', emoji: '🦖', question: 'Which dinosaur was the fierce king with big sharp teeth?', answer: 'T-Rex', options: ['Stegosaurus', 'T-Rex', 'Brachiosaurus', 'Triceratops'] },
+      { id: 'triceratops', emoji: '🦏', question: 'Which dinosaur had three big horns on its face?', answer: 'Triceratops', options: ['Triceratops', 'Rhino', 'Ankylosaurus', 'Stegosaurus'] },
+      { id: 'stegosaurus', emoji: '🐉', question: 'Which dinosaur had bony plates along its back?', answer: 'Stegosaurus', options: ['Stegosaurus', 'T-Rex', 'Pterodactyl', 'Iguanodon'] },
+      { id: 'brachiosaurus', emoji: '🦕', question: 'Which giant dinosaur had a very long neck?', answer: 'Brachiosaurus', options: ['Brachiosaurus', 'Triceratops', 'Velociraptor', 'Ankylosaurus'] },
+      { id: 'pterodactyl', emoji: '🦅', question: 'Which prehistoric creature flew in the sky with wings?', answer: 'Pterodactyl', options: ['Pterodactyl', 'Eagle', 'Bat', 'Brachiosaurus'] },
+      { id: 'ankylosaurus', emoji: '🐢', question: 'Which dinosaur wore bony armor and a club tail?', answer: 'Ankylosaurus', options: ['Ankylosaurus', 'Triceratops', 'Turtle', 'Stegosaurus'] },
+      { id: 'fossils', emoji: '🦴', question: 'What do we call the hardened remains of dinosaurs we dig up?', answer: 'Fossils', options: ['Fossils', 'Bones', 'Rocks', 'Shells'] },
+      { id: 'dino-eggs', emoji: '🥚', question: 'What did baby dinosaurs hatch out of long ago?', answer: 'Dinosaur Eggs', options: ['Dinosaur Eggs', 'Nests', 'Seeds', 'Rocks'] },
+      { id: 'herbivores', emoji: '🌿', question: 'What do we call dinosaurs that ate only plants?', answer: 'Herbivores', options: ['Herbivores', 'Carnivores', 'Omnivores', 'Mammals'] },
+      { id: 'velociraptor', emoji: '🐊', question: 'Which small, fast dinosaur hunted in packs with sharp claws?', answer: 'Velociraptor', options: ['Velociraptor', 'T-Rex', 'Crocodile', 'Compsognathus'] }
+    ]
+  },
+  'sea-creatures': {
+    title: 'Sea Creatures Quiz',
+    completionEmoji: '🐙',
+    completionMessage: 'You are an ocean explorer! 🌊',
+    questions: [
+      { id: 'octopus', emoji: '🐙', question: 'Which sea animal has eight wiggly arms?', answer: 'Octopus', options: ['Octopus', 'Squid', 'Crab', 'Starfish'] },
+      { id: 'shark', emoji: '🦈', question: 'Which ocean hunter has sharp teeth and a fin on top?', answer: 'Shark', options: ['Shark', 'Dolphin', 'Whale', 'Swordfish'] },
+      { id: 'whale', emoji: '🐳', question: 'Which is the biggest animal that lives in the sea?', answer: 'Whale', options: ['Whale', 'Shark', 'Dolphin', 'Seal'] },
+      { id: 'starfish', emoji: '⭐', question: 'Which sea creature has five arms and lives on the seabed?', answer: 'Starfish', options: ['Starfish', 'Jellyfish', 'Crab', 'Snail'] },
+      { id: 'crab', emoji: '🦀', question: 'Which sea animal walks sideways with claws?', answer: 'Crab', options: ['Crab', 'Lobster', 'Shrimp', 'Octopus'] },
+      { id: 'seahorse', emoji: '🐴', question: 'Which tiny sea creature looks like a little horse?', answer: 'Seahorse', options: ['Seahorse', 'Horse', 'Dolphin', 'Eel'] },
+      { id: 'jellyfish', emoji: '🪼', question: 'Which sea creature drifts with soft, stinging tentacles?', answer: 'Jellyfish', options: ['Jellyfish', 'Squid', 'Coral', 'Octopus'] },
+      { id: 'dolphin', emoji: '🐬', question: 'Which smart, friendly sea animal loves to leap and click?', answer: 'Dolphin', options: ['Dolphin', 'Shark', 'Whale', 'Seal'] },
+      { id: 'sea-turtle', emoji: '🐢', question: 'Which shelled reptile swims slowly in the ocean?', answer: 'Sea Turtle', options: ['Sea Turtle', 'Tortoise', 'Frog', 'Crab'] },
+      { id: 'fish', emoji: '🐠', question: 'Which colorful sea animal has scales and breathes through gills?', answer: 'Fish', options: ['Fish', 'Whale', 'Dolphin', 'Shrimp'] }
     ]
   }
 };

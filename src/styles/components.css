@@ -68,16 +68,23 @@
   transition: all 0.2s ease;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  /* Responsive sizing */
-  font-size: clamp(0.85rem, 3vw, 1.1rem);
+  /* Responsive sizing — viewport-relative so it adapts to any phone width */
+  font-size: clamp(0.85rem, 2.8vw, 1.1rem);
   padding: clamp(0.6rem, 2vw, 1.2rem) clamp(0.75rem, 2.5vw, 1.5rem);
   min-width: clamp(80px, 22vw, 140px);
+  min-height: 56px;
   max-width: clamp(130px, 35vw, 220px);
   flex: 1 1 clamp(80px, 22vw, 140px);
   box-sizing: border-box;
   border: 4px solid #eee;
   background: white;
   color: var(--text-heading);
+  /* Never crop long labels — let them wrap and grow vertically */
+  text-align: center;
+  line-height: 1.3;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .quiz-option-btn .quiz-emoji {
@@ -90,18 +97,26 @@
   box-shadow: var(--shadow-pop);
 }
 
+.quiz-option-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
 .quiz-option-btn:disabled { cursor: default; }
 
 .quiz-option-btn.quiz-correct {
   background: var(--candy-green);
-  border-color: var(--candy-green);
+  border-color: #0f9d58; /* high-contrast outline for readability */
   color: white;
+  box-shadow: 0 0 0 3px rgba(29, 209, 161, 0.35), var(--shadow-pop);
+  animation: pop-in 0.3s ease;
 }
 
 .quiz-option-btn.quiz-wrong {
-  background: #ff6b6b;
-  border-color: #ff6b6b;
+  background: #ff5252;
+  border-color: #c62828;
   color: white;
+  box-shadow: 0 0 0 3px rgba(255, 82, 82, 0.35);
+  animation: shake 0.35s ease-in-out;
 }
 
 .quiz-option-btn.quiz-text-btn {
@@ -123,7 +138,7 @@
 }
 
 .quiz-big-emoji {
-  font-size: clamp(5rem, 18vw, 8rem);
+  font-size: clamp(4rem, 15vw, 7rem);
   margin-bottom: 1rem;
   animation: pop-in 0.4s ease;
   line-height: 1;
@@ -170,6 +185,9 @@
   text-align: center;
   border-radius: 14px;
   border: 3px solid #eee;
+  line-height: 1.3;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 /* Score bar inside champion screen */
