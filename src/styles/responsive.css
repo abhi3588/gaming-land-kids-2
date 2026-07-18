@@ -110,6 +110,33 @@
   .shape-fit-slot span:last-child {
     font-size: 0.74rem;
   }
+
+  /* Word Search & Pipe Connector: keep boards inside the viewport and
+     prevent horizontal scrolling on narrow phones. */
+  .ws-layout { gap: 0.9rem; }
+  .ws-board { gap: 3px; }
+  .ws-cell {
+    min-width: 34px;
+    min-height: 34px;
+    border-radius: 8px;
+    font-size: clamp(0.85rem, 3.6vw, 1.2rem);
+  }
+  .ws-words { gap: 0.4rem 0.8rem; padding: 0.65rem 0.8rem; }
+  .ws-word { font-size: 0.95rem; }
+  .ws-word .ws-emoji { font-size: 1.15rem; }
+
+  .pipe-board { gap: 5px; }
+  .pipe-cell {
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 10px;
+  }
+  .pipe-marker { font-size: 1.1rem; }
+}
+
+@media (max-width: 360px) {
+  .ws-cell { min-width: 28px; min-height: 28px; font-size: 0.8rem; }
+  .pipe-cell { min-width: 34px; min-height: 34px; }
 }
 
 @media (max-width: 576px) {

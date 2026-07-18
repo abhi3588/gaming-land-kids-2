@@ -212,3 +212,300 @@ export const getMemoryMatchLevel = (level) => {
   const deck = shuffleArray([...chosen, ...chosen], createPRNG(level * 677));
   return { deck, pairs };
 };
+
+// ===== Emoji Word Search =====
+// Child-friendly word lists grouped by theme. Each level picks one category
+// and hides a handful of its words (3 letters or more) inside a letter grid.
+const WORD_SEARCH_CATEGORIES = [
+  {
+    category: 'Animals',
+    icon: '🐾',
+    words: [
+      { word: 'CAT', emoji: '🐱' },
+      { word: 'DOG', emoji: '🐶' },
+      { word: 'COW', emoji: '🐮' },
+      { word: 'PIG', emoji: '🐷' },
+      { word: 'HEN', emoji: '🐔' },
+      { word: 'FOX', emoji: '🦊' },
+    ],
+  },
+  {
+    category: 'Colors',
+    icon: '🎨',
+    words: [
+      { word: 'RED', emoji: '🔴' },
+      { word: 'BLUE', emoji: '🔵' },
+      { word: 'GREEN', emoji: '🟢' },
+      { word: 'PINK', emoji: '🩷' },
+      { word: 'GOLD', emoji: '🟡' },
+      { word: 'CYAN', emoji: '🩵' },
+    ],
+  },
+  {
+    category: 'Nature',
+    icon: '🌿',
+    words: [
+      { word: 'SUN', emoji: '🌞' },
+      { word: 'SKY', emoji: '🌤️' },
+      { word: 'SEA', emoji: '🌊' },
+      { word: 'TREE', emoji: '🌳' },
+      { word: 'STAR', emoji: '⭐' },
+      { word: 'RAIN', emoji: '🌧️' },
+    ],
+  },
+  {
+    category: 'Shapes',
+    icon: '🔷',
+    words: [
+      { word: 'CIRCLE', emoji: '⭕' },
+      { word: 'SQUARE', emoji: '🟦' },
+      { word: 'HEART', emoji: '❤️' },
+      { word: 'MOON', emoji: '🌙' },
+      { word: 'STAR', emoji: '⭐' },
+      { word: 'CONE', emoji: '🔺' },
+    ],
+  },
+  {
+    category: 'Food',
+    icon: '🍎',
+    words: [
+      { word: 'CAKE', emoji: '🍰' },
+      { word: 'MILK', emoji: '🥛' },
+      { word: 'EGG', emoji: '🥚' },
+      { word: 'RICE', emoji: '🍚' },
+      { word: 'FISH', emoji: '🐟' },
+      { word: 'NUT', emoji: '🥜' },
+    ],
+  },
+];
+
+const WORD_SEARCH_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+export const getWordSearchLevel = (level) => {
+  const size = 8 + Math.floor((level - 1) / 2); // L1-2:8, L3-4:9, L5:10
+  const wordCount = Math.min(2 + level, 5);     // L1:3, L2:4, L3-5:5
+  const catIndex = (level - 1) % WORD_SEARCH_CATEGORIES.length;
+  const category = WORD_SEARCH_CATEGORIES[catIndex];
+  const prng = createPRNG(level * 241);
+  const chosen = shuffleArray(category.words, prng).slice(0, wordCount);
+
+  const grid = Array.from({ length: size }, () => Array(size).fill(null));
+  const placements = [];
+
+  const placeWord = (entry) => {
+    const word = entry.word;
+    const orientations = shuffleArray(
+      [
+        [0, 1],   // →
+        [1, 0],   // ↓
+        [0, -1],  // ←
+        [-1, 0],  // ↑
+      ],
+      prng,
+    );
+    for (let attempt = 0; attempt < 100; attempt += 1) {
+      const [dr, dc] = orientations[attempt % orientations.length];
+      const r0 = Math.floor(prng() * size);
+      const c0 = Math.floor(prng() * size);
+      const rEnd = r0 + dr * (word.length - 1);
+      const cEnd = c0 + dc * (word.length - 1);
+      if (rEnd < 0 || rEnd >= size || cEnd < 0 || cEnd >= size) continue;
+      const cells = [];
+      let ok = true;
+      for (let k = 0; k < word.length; k += 1) {
+        const r = r0 + dr * k;
+        const c = c0 + dc * k;
+        if (grid[r][c] !== null && grid[r][c] !== word[k]) { ok = false; break; }
+        cells.push([r, c]);
+      }
+      if (!ok) continue;
+      cells.forEach(([r, c], k) => { grid[r][c] = word[k]; });
+      placements.push({ word, emoji: entry.emoji, cells });
+      return true;
+    }
+    return false;
+  };
+
+  chosen.forEach((entry) => placeWord(entry));
+
+  for (let r = 0; r < size; r += 1) {
+    for (let c = 0; c < size; c += 1) {
+      if (grid[r][c] === null) {
+        grid[r][c] = WORD_SEARCH_ALPHABET[Math.floor(prng() * WORD_SEARCH_ALPHABET.length)];
+      }
+    }
+  }
+
+  return {
+    size,
+    category: category.category,
+    icon: category.icon,
+    grid,
+    words: placements,
+  };
+};
+
+// ===== Pipe Connector =====
+// A grid of rotatable pipe segments. The player taps a pipe to rotate it 90°
+// clockwise; the level is solved when water can flow from the inlet (start)
+// to the flower bucket (end) along connected openings.
+//
+// Directions: 0=N (up), 1=E (right), 2=S (down), 3=W (left).
+const PIPE_DIRS = [[-1, 0], [0, 1], [1, 0], [0, -1]]; // N, E, S, W
+const PIPE_OPP = (d) => (d + 2) % 4;
+
+// Open directions (toward edges) for each pipe type at rotation 0.
+const PIPE_OPEN = {
+  straight: [0, 2], // │
+  curve: [0, 1],    // └
+  tee: [0, 1, 2],   // ├
+  cross: [0, 1, 2, 3], // ┼
+  end: [0],         // ╨ (single outlet — used for inlet/outlet caps)
+};
+const PIPE_TYPES = ['straight', 'curve', 'tee', 'cross'];
+
+const rotateDirs = (dirs, rot) => dirs.map((d) => (d + rot) % 4);
+const openDirs = (cell) => rotateDirs(PIPE_OPEN[cell.type], cell.rot);
+
+export const getPipeOpenDirs = (cell) => openDirs(cell);
+
+const directionBetween = (from, to) => {
+  if (to[0] === from[0] - 1) return 0; // N
+  if (to[1] === from[1] + 1) return 1; // E
+  if (to[0] === from[0] + 1) return 2; // S
+  return 3; // W
+};
+
+const pipeTypeForDirs = (dirs) => {
+  const set = new Set(dirs);
+  if (set.size === 1) return 'end';
+  if (set.size === 2) {
+    const has = (a) => set.has(a);
+    if ((has(0) && has(2)) || (has(1) && has(3))) return 'straight';
+    return 'curve';
+  }
+  if (set.size === 3) return 'tee';
+  return 'cross';
+};
+
+// Find a rotation of `type` whose open edges exactly match `target` (as a set).
+const rotationFor = (type, target) => {
+  const tset = new Set(target);
+  for (let rot = 0; rot < 4; rot += 1) {
+    const open = rotateDirs(PIPE_OPEN[type], rot);
+    if (open.length === tset.size && open.every((d) => tset.has(d))) return rot;
+  }
+  return 0;
+};
+
+// Depth-first search for any simple path from `start` to `end` (randomized).
+const findPipePath = (size, start, end, prng) => {
+  const visited = Array.from({ length: size }, () => Array(size).fill(false));
+  const path = [];
+  const dfs = (r, c) => {
+    visited[r][c] = true;
+    path.push([r, c]);
+    if (r === end[0] && c === end[1]) return true;
+    const order = shuffleArray([0, 1, 2, 3], prng);
+    for (const d of order) {
+      const nr = r + PIPE_DIRS[d][0];
+      const nc = c + PIPE_DIRS[d][1];
+      if (nr < 0 || nr >= size || nc < 0 || nc >= size) continue;
+      if (visited[nr][nc]) continue;
+      if (dfs(nr, nc)) return true;
+    }
+    path.pop();
+    visited[r][c] = false;
+    return false;
+  };
+  dfs(start[0], start[1]);
+  return path.length ? path : null;
+};
+
+// Guaranteed staircase path (start → across → down/up to end) used only if the
+// randomized search somehow fails (extremely unlikely on an open grid).
+const buildFallbackPath = (size, start, end) => {
+  const cells = [];
+  const [sr, sc] = start;
+  const [er, ec] = end;
+  let r = sr;
+  let c = sc;
+  cells.push([r, c]);
+  while (c < ec) { c += 1; cells.push([r, c]); }
+  while (r < er) { r += 1; cells.push([r, c]); }
+  while (r > er) { r -= 1; cells.push([r, c]); }
+  return cells;
+};
+
+// Cells reachable from `start` by following mutually-open pipe edges.
+export const getPipeFilled = (board, start) => {
+  const size = board.length;
+  const visited = Array.from({ length: size }, () => Array(size).fill(false));
+  const filled = new Set();
+  const queue = [start];
+  visited[start[0]][start[1]] = true;
+  while (queue.length) {
+    const [r, c] = queue.shift();
+    filled.add(`${r},${c}`);
+    const open = new Set(openDirs(board[r][c]));
+    for (const d of open) {
+      const nr = r + PIPE_DIRS[d][0];
+      const nc = c + PIPE_DIRS[d][1];
+      if (nr < 0 || nr >= size || nc < 0 || nc >= size) continue;
+      if (visited[nr][nc]) continue;
+      if (openDirs(board[nr][nc]).includes(PIPE_OPP(d))) {
+        visited[nr][nc] = true;
+        queue.push([nr, nc]);
+      }
+    }
+  }
+  return filled;
+};
+
+export const getPipeConnectorLevel = (level) => {
+  const size = 4 + Math.floor((level - 1) / 2); // L1-2:4, L3-4:5, L5:6
+  const prng = createPRNG(level * 613);
+  const start = [Math.floor(prng() * size), 0];
+  const end = [Math.floor(prng() * size), size - 1];
+
+  let path = null;
+  for (let attempt = 0; attempt < 60 && !path; attempt += 1) {
+    path = findPipePath(size, start, end, prng);
+  }
+  if (!path) path = buildFallbackPath(size, start, end);
+
+  // Required open edges for each cell on the solution path.
+  const req = Array.from({ length: size }, () => Array(size).fill(null));
+  path.forEach((cell, i) => {
+    const dirs = [];
+    if (i > 0) dirs.push(directionBetween(cell, path[i - 1]));
+    if (i < path.length - 1) dirs.push(directionBetween(cell, path[i + 1]));
+    req[cell[0]][cell[1]] = dirs;
+  });
+
+  const board = Array.from({ length: size }, (_, r) =>
+    Array.from({ length: size }, (_, c) => {
+      const dirs = req[r][c];
+      if (dirs) {
+        const type = pipeTypeForDirs(dirs);
+        const solRot = rotationFor(type, dirs);
+        return { type, rot: solRot, solution: solRot };
+      }
+      const type = PIPE_TYPES[Math.floor(prng() * PIPE_TYPES.length)];
+      return { type, rot: Math.floor(prng() * 4), solution: null };
+    }),
+  );
+
+  // Scramble rotations so the puzzle starts unsolved, but avoid an instant win.
+  let tries = 0;
+  do {
+    for (let r = 0; r < size; r += 1) {
+      for (let c = 0; c < size; c += 1) {
+        board[r][c].rot = Math.floor(prng() * 4);
+      }
+    }
+    tries += 1;
+  } while (getPipeFilled(board, start).has(`${end[0]},${end[1]}`) && tries < 16);
+
+  return { size, board, start, end };
+};

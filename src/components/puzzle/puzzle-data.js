@@ -8,6 +8,8 @@ import ColorSortPuzzle from './ColorSortPuzzle.jsx';
 import MemoryMatchPuzzle from './MemoryMatchPuzzle.jsx';
 import ShadowMatchPuzzle from './ShadowMatchPuzzle.jsx';
 import PatternSequencePuzzle from './PatternSequencePuzzle.jsx';
+import WordSearchPuzzle from './WordSearchPuzzle.jsx';
+import PipeConnectorPuzzle from './PipeConnectorPuzzle.jsx';
 
 export const PUZZLE_CATEGORIES = [
   {
@@ -90,6 +92,22 @@ export const PUZZLE_CATEGORIES = [
     ageRange: '4–8',
     desc: 'Find out what comes next in the patterns!',
   },
+  {
+    id: 'word-search',
+    title: 'Emoji Word Search',
+    icon: '🔎',
+    color: 'word',
+    ageRange: '4–9',
+    desc: 'Find the hidden words matching the friendly emojis!',
+  },
+  {
+    id: 'pipe-connector',
+    title: 'Pipe Connector',
+    icon: '🔧',
+    color: 'sequence',
+    ageRange: '4–9',
+    desc: 'Rotate the pipes to help water flow to the flower!',
+  },
 ];
 
 export const PUZZLE_DATA = {
@@ -152,5 +170,17 @@ export const PUZZLE_DATA = {
     completionEmoji: '🔀',
     completionMessage: 'Pattern pro! You cracked every sequence!',
     component: PatternSequencePuzzle,
+  },
+  'word-search': {
+    title: 'Emoji Word Search',
+    completionEmoji: '🔎',
+    completionMessage: 'Word wizard! You spotted every hidden word!',
+    component: WordSearchPuzzle,
+  },
+  'pipe-connector': {
+    title: 'Pipe Connector',
+    completionEmoji: '🔧',
+    completionMessage: 'Plumbing pro! You watered every flower!',
+    component: PipeConnectorPuzzle,
   },
 };
