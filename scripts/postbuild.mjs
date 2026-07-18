@@ -40,7 +40,19 @@ Sitemap: ${sitemapPath}
   const indexFile = path.join(distDir, 'index.html');
   fs.copyFileSync(indexFile, path.join(distDir, '404.html'));
 
-  console.log('postbuild: sitemap.xml, robots.txt, and 404.html (SPA fallback) written to dist/');
+  // Count the URLs actually written into the sitemap so the build log reports
+  // how many pages crawlers will discover (activities, quizzes, puzzles, etc.
+  // are all auto-discovered from the content data by generate-sitemap.mjs).
+  const sitemapFile = path.join(distDir, 'sitemap.xml');
+  let pageCount = 0;
+  if (fs.existsSync(sitemapFile)) {
+    const sitemapContent = fs.readFileSync(sitemapFile, 'utf-8');
+    pageCount = (sitemapContent.match(/<loc>/g) || []).length;
+  }
+
+  console.log(
+    `postbuild: sitemap.xml generated with ${pageCount} crawled pages; robots.txt and 404.html (SPA fallback) written to dist/`
+  );
 }
 
 main().catch((err) => {

@@ -217,6 +217,50 @@ export const learningResourceSchema = (edu) => {
   };
 };
 
+// Build a BreadcrumbList schema from a hierarchical list of crumbs, each
+// `{ name, url }` (e.g. Home → Educational → Science → Float or Sink). Tells
+// search engines the site structure and powers breadcrumb rich snippets.
+export const breadcrumbSchema = (crumbs) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: crumbs.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.name,
+    item: c.url,
+  })),
+});
+
+// Derive the breadcrumb trail for a content item based on its type/category.
+const buildBreadcrumbs = (type, item, opts) => {
+  const lang = opts.lang || 'en';
+  const home = { name: 'Home', url: BASE_URL };
+  const sectionMap = {
+    game: { label: 'Games', path: ['games'] },
+    story: { label: 'Stories', path: ['stories'] },
+    quiz: { label: 'Quiz', path: ['quiz'] },
+    rhyme: { label: 'Rhymes', path: ['rhymes'] },
+    fun: { label: 'Fun Activities', path: ['fun'] },
+    educational: { label: 'Educational', path: ['educational'] },
+  };
+  const section = sectionMap[type];
+  if (!section) return [home];
+
+  const crumbs = [home, { name: section.label, url: joinUrl(BASE_URL, ...section.path) }];
+
+  if (type === 'educational') {
+    const cat = opts.category || item.category || 'science';
+    crumbs.push({
+      name: cat === 'moral' ? 'Moral Education' : 'Science',
+      url: joinUrl(BASE_URL, 'educational', cat),
+    });
+  }
+
+  const itemPath = lang === 'hi' ? [type, 'hi', item.id] : [type, item.id];
+  crumbs.push({ name: item.title, url: joinUrl(BASE_URL, ...itemPath) });
+  return crumbs;
+};
+
 // ------------------------------------------------------------------
 // Per-tab SEO config
 // ------------------------------------------------------------------
@@ -493,12 +537,13 @@ export const getItemSEO = (type, item, opts = {}) => {
     jsonLd: null,
   };
 
+  let itemSchema = null;
   switch (type) {
     case 'game':
-      base.jsonLd = gameSchema(item);
+      itemSchema = gameSchema(item);
       break;
     case 'story':
-      base.jsonLd = storySchema(item, lang);
+      itemSchema = storySchema(item, lang);
       base.hreflang = [
         { lang: 'en', href: joinUrl(BASE_URL, 'stories', item.id) },
         { lang: 'hi', href: joinUrl(BASE_URL, 'stories', 'hi', item.id) },
@@ -506,17 +551,26 @@ export const getItemSEO = (type, item, opts = {}) => {
       ];
       break;
     case 'quiz':
-      base.jsonLd = quizSchema(item);
+      itemSchema = quizSchema(item);
       break;
     case 'rhyme':
-      base.jsonLd = videoSchema(item);
+      itemSchema = videoSchema(item);
       break;
     case 'fun':
-      base.jsonLd = howToSchema(item);
+      itemSchema = howToSchema(item);
       break;
     case 'educational':
-      base.jsonLd = learningResourceSchema({ ...item, category: opts.category || item.category || 'science' });
+      itemSchema = learningResourceSchema({ ...item, category: opts.category || item.category || 'science' });
       break;
+  }
+
+  // Attach a BreadcrumbList alongside the item schema so search engines can
+  // render breadcrumb rich snippets for every content page.
+  if (itemSchema) {
+    base.jsonLd = {
+      '@context': 'https://schema.org',
+      '@graph': [itemSchema, breadcrumbSchema(buildBreadcrumbs(type, item, opts))],
+    };
   }
 
   return base;

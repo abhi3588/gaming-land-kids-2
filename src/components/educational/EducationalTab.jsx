@@ -33,7 +33,14 @@ export default function EducationalTab({ initialCategory }) {
     return (
       <div>
         <div className="section-header">
-          <h2>🧪 Educational Corner</h2>
+          {activity ? (
+            <>
+              <h1 className="edu-detail-title">{activity.title}</h1>
+              <h2 className="edu-detail-sub">🧪 Educational Corner</h2>
+            </>
+          ) : (
+            <h2>Activity not found</h2>
+          )}
           <p>Explore science and moral learning activities!</p>
         </div>
 
@@ -113,7 +120,7 @@ function ActivityCard({ activity, onSelect }) {
       onKeyDown={(e) => e.key === 'Enter' && onSelect()}
       aria-label={`Open ${activity.title} activity`}
     >
-      <span className="game-icon">{activity.icon}</span>
+      <span className="game-icon" role="img" aria-label={`${activity.title} icon`}>{activity.icon}</span>
       <h3>{activity.title}</h3>
       <div className="activity-subtitle">Ages {activity.ageRange}</div>
       <p className="game-desc">{activity.desc}</p>
