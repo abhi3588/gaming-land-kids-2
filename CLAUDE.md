@@ -110,6 +110,13 @@ Central data lives in `src/kids-data.js` and the `*/data*.js` files under each t
   `ageRange`, `coverImage`/`gradient`, emoji). EN and HI are parallel lists.
 - **`QUIZ_CATEGORIES` / `QUIZ_DATA`** (`quiz-data.js`) and **`PUZZLE_CATEGORIES` / `PUZZLE_DATA`**
   (`puzzle-data.js`) follow the same pattern (category meta + per-id content).
+  - **Quiz contract:** each of the 12 `QUIZ_DATA` categories has **exactly 20 questions**
+    (`{ id, emoji, question, answer, options[4] }`). The `answer` string must be one of the 4
+    `options`, ids must be unique within the category, and questions are static (already
+    deterministic — no PRNG needed). `QuizActivity.jsx` walks them in order (the "20 levels").
+    **Wrong answer = stop + notify + retry:** a wrong pick plays `wrong`, shows a "try again"
+    message, and does NOT advance or reveal the answer; the option buttons stay enabled so the
+    child keeps trying. Only a correct answer scores a point and advances (champion screen after Q20).
 
 ### Color-token system (IMPORTANT for visual consistency)
 Every card carries a `color` field (e.g. `'memory'`, `'patterns'`, `'shapfit'`). That string
@@ -195,7 +202,7 @@ gradient background**. Rules live in two places:
   consistent — do not reintroduce different column counts per tab.
 - **Card markup pattern** (used by every list tab):
   `<div className="game-card <color>">` containing `.game-icon`, an `<h3>` title,
-  optional `.activity-subtitle` (e.g. "Ages 3–10 · 10 Questions"), a `.game-desc`
+  optional `.activity-subtitle` (e.g. "Ages 3–10 · 20 Questions"), a `.game-desc`
   (2-line clamp), and a `.play-btn` (or `.read-btn` for stories).
   > **Gotcha:** card titles are `<h3>` (not `<h2>`). The CSS selectors are written as
   > `.game-card h2, .game-card h3` / `.rhyme-card h2, .rhyme-card h3`. If you change a card

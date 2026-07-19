@@ -3,26 +3,29 @@ import { playSound } from '../../utils/sounds';
 
 const QuizActivity = ({ quiz, onBack }) => {
   const [currentQ, setCurrentQ] = useState(0);
-  const [selected, setSelected]   = useState(null);
-  const [feedback, setFeedback]   = useState('');
-  const [score, setScore]         = useState(0);
+  const [selected, setSelected] = useState(null);
+  const [locked, setLocked]     = useState(false);
+  const [feedback, setFeedback] = useState('');
+  const [score, setScore]       = useState(0);
   const [completed, setCompleted] = useState(false);
 
   const question = quiz.questions[currentQ];
   const total    = quiz.questions.length;
 
   const handleOption = useCallback((option) => {
-    if (selected) return;
+    if (locked) return;
     setSelected(option);
 
     if (option === question.answer) {
       playSound('match');
       setFeedback('Correct! 🎉');
       setScore(s => s + 1);
+      setLocked(true);
       setTimeout(() => {
         if (currentQ < total - 1) {
           setCurrentQ(q => q + 1);
           setSelected(null);
+          setLocked(false);
           setFeedback('');
         } else {
           playSound('celebrate');
@@ -30,25 +33,17 @@ const QuizActivity = ({ quiz, onBack }) => {
         }
       }, 1200);
     } else {
+      // Wrong answer: notify, but do NOT advance. The child keeps trying.
       playSound('wrong');
-      setFeedback(`Oops! The answer is ${question.answer} 😊`);
-      setTimeout(() => {
-        if (currentQ < total - 1) {
-          setCurrentQ(q => q + 1);
-          setSelected(null);
-          setFeedback('');
-        } else {
-          playSound('celebrate');
-          setCompleted(true);
-        }
-      }, 1800);
+      setFeedback('Oops! That’s not quite right — try again! 💪');
     }
-  }, [selected, question, currentQ, total]);
+  }, [locked, question, currentQ, total]);
 
   const handleReset = () => {
     playSound('pop');
     setCurrentQ(0);
     setSelected(null);
+    setLocked(false);
     setFeedback('');
     setScore(0);
     setCompleted(false);
@@ -111,13 +106,12 @@ const QuizActivity = ({ quiz, onBack }) => {
           let stateClass   = '';
           if (isSelected && isCorrect)  stateClass = ' quiz-correct';
           if (isSelected && !isCorrect) stateClass = ' quiz-wrong shake';
-          if (selected && !isSelected && isCorrect) stateClass = ' quiz-correct'; // reveal correct
           return (
             <button
               key={opt}
               className={`quiz-option-btn quiz-option-text${stateClass}`}
               onClick={() => handleOption(opt)}
-              disabled={!!selected}
+              disabled={locked}
             >
               {opt}
             </button>

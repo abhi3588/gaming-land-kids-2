@@ -74,7 +74,7 @@ function QuizCard({ category, onSelect }) {
     >
       <span className="game-icon">{category.icon}</span>
       <h3>{category.title}</h3>
-      <div className="activity-subtitle">Ages {category.ageRange} · 10 Questions</div>
+      <div className="activity-subtitle">Ages {category.ageRange} · 20 Questions</div>
       <p className="game-desc">{category.desc}</p>
       <div style={{ display: 'flex', justifyContent: 'center', gap: '0.6rem', marginTop: '0.6rem' }}>
         <button

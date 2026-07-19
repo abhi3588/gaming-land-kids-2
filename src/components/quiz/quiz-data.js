@@ -114,7 +114,17 @@ export const QUIZ_DATA = {
       { id: 'watermelon', emoji: '🍉', question: 'What fruit is this?', answer: 'Watermelon', options: ['Melon', 'Watermelon', 'Cucumber', 'Papaya'] },
       { id: 'mango', emoji: '🥭', question: 'What fruit is this?', answer: 'Mango', options: ['Papaya', 'Peach', 'Mango', 'Guava'] },
       { id: 'cherry', emoji: '🍒', question: 'What fruit is this?', answer: 'Cherry', options: ['Cherry', 'Strawberry', 'Cranberry', 'Plum'] },
-      { id: 'kiwi', emoji: '🥝', question: 'What fruit is this?', answer: 'Kiwi', options: ['Avocado', 'Lime', 'Kiwi', 'Fig'] }
+      { id: 'kiwi', emoji: '🥝', question: 'What fruit is this?', answer: 'Kiwi', options: ['Avocado', 'Lime', 'Kiwi', 'Fig'] },
+      { id: 'pear', emoji: '🍐', question: 'Which fruit is shaped like a little bell?', answer: 'Pear', options: ['Pear', 'Apple', 'Peach', 'Squash'] },
+      { id: 'lemon', emoji: '🍋', question: 'Which sour yellow fruit is used to make lemonade?', answer: 'Lemon', options: ['Lemon', 'Lime', 'Banana', 'Corn'] },
+      { id: 'peach', emoji: '🍑', question: 'Which soft, fuzzy fruit has a stone inside?', answer: 'Peach', options: ['Peach', 'Plum', 'Apricot', 'Tomato'] },
+      { id: 'blueberry', emoji: '🫐', question: 'Which tiny blue fruit grows in clusters?', answer: 'Blueberry', options: ['Blueberry', 'Grape', 'Cherry', 'Plum'] },
+      { id: 'coconut', emoji: '🥥', question: 'Which fruit has a hairy shell and sweet white inside?', answer: 'Coconut', options: ['Coconut', 'Walnut', 'Melon', 'Peach'] },
+      { id: 'melon', emoji: '🍈', question: 'Which big round fruit is sweet and green inside?', answer: 'Melon', options: ['Melon', 'Watermelon', 'Pumpkin', 'Apple'] },
+      { id: 'greenapple', emoji: '🍏', question: 'Which apple is green and tangy?', answer: 'Green Apple', options: ['Green Apple', 'Lime', 'Pear', 'Kiwi'] },
+      { id: 'fruitsalad', emoji: '🥗', question: 'What do we call a bowl of mixed chopped fruits?', answer: 'Fruit Salad', options: ['Fruit Salad', 'Salad', 'Soup', 'Stew'] },
+      { id: 'juice', emoji: '🧃', question: 'What drink is made by squeezing fruits?', answer: 'Juice', options: ['Juice', 'Water', 'Milk', 'Soda'] },
+      { id: 'jam', emoji: '🍯', question: 'What sweet spread is made by cooking fruit with sugar?', answer: 'Jam', options: ['Jam', 'Honey', 'Butter', 'Sauce'] }
     ]
   },
   flowers: {
@@ -131,7 +141,17 @@ export const QUIZ_DATA = {
       { id: 'bouquet', emoji: '💐', question: 'What do we call a bunch of flowers?', answer: 'Bouquet', options: ['Wreath', 'Garland', 'Bouquet', 'Bunch'] },
       { id: 'daisy', emoji: '🌼', question: 'Which flower is this?', answer: 'Daisy', options: ['Chamomile', 'Daisy', 'Aster', 'Marigold'] },
       { id: 'herb', emoji: '🌿', question: 'What do we call sweet-smelling plants used in cooking?', answer: 'Herbs', options: ['Spices', 'Herbs', 'Weeds', 'Ferns'] },
-      { id: 'seed', emoji: '🌱', question: 'How does a flower start its life?', answer: 'As a Seed', options: ['As a Leaf', 'As a Fruit', 'As a Stem', 'As a Seed'] }
+      { id: 'seed', emoji: '🌱', question: 'How does a flower start its life?', answer: 'As a Seed', options: ['As a Leaf', 'As a Fruit', 'As a Stem', 'As a Seed'] },
+      { id: 'clover', emoji: '🍀', question: 'Which small plant has three lucky leaves?', answer: 'Clover', options: ['Clover', 'Grass', 'Fern', 'Moss'] },
+      { id: 'wheat', emoji: '🌾', question: 'Which golden plant do we grind into flour for bread?', answer: 'Wheat', options: ['Wheat', 'Rice', 'Corn', 'Grass'] },
+      { id: 'violet', emoji: '💜', question: 'Which tiny purple flower is known for its sweet smell?', answer: 'Violet', options: ['Violet', 'Rose', 'Tulip', 'Daisy'] },
+      { id: 'leaf', emoji: '🍃', question: 'What green part of a plant catches sunlight?', answer: 'Leaf', options: ['Leaf', 'Petal', 'Root', 'Stem'] },
+      { id: 'nectar', emoji: '🍯', question: 'What sweet liquid in flowers feeds the bees?', answer: 'Nectar', options: ['Nectar', 'Honey', 'Sap', 'Dew'] },
+      { id: 'pollen', emoji: '🟡', question: 'What powdery dust helps flowers make new seeds?', answer: 'Pollen', options: ['Pollen', 'Sand', 'Sugar', 'Salt'] },
+      { id: 'stem', emoji: '🪴', question: 'What part of a plant holds it up straight?', answer: 'Stem', options: ['Stem', 'Root', 'Leaf', 'Branch'] },
+      { id: 'garden', emoji: '🌳', question: 'Where do we plant flowers so they can grow?', answer: 'Garden', options: ['Garden', 'Forest', 'Pond', 'Desert'] },
+      { id: 'sunlight', emoji: '☀️', question: 'What bright thing does a flower need to open and grow?', answer: 'Sunlight', options: ['Sunlight', 'Moonlight', 'Wind', 'Rain'] },
+      { id: 'water', emoji: '💧', question: 'What do we give flowers to keep them alive?', answer: 'Water', options: ['Water', 'Milk', 'Juice', 'Sand'] }
     ]
   },
   shapes: {
@@ -148,7 +168,17 @@ export const QUIZ_DATA = {
       { id: 'octagon', emoji: '🔷', question: 'A stop sign is this shape. What is it?', answer: 'Octagon', options: ['Hexagon', 'Pentagon', 'Decagon', 'Octagon'] },
       { id: 'oval', emoji: '🥚', question: 'An egg is this shape. What do we call it?', answer: 'Oval', options: ['Circle', 'Oval', 'Sphere', 'Ellipse'] },
       { id: 'diamond', emoji: '💎', question: 'What shape is this?', answer: 'Diamond', options: ['Square', 'Rhombus', 'Diamond', 'Kite'] },
-      { id: 'rectangle', emoji: '🟦', question: 'A door is shaped like this. What shape?', answer: 'Rectangle', options: ['Square', 'Rectangle', 'Parallelogram', 'Trapezoid'] }
+      { id: 'rectangle', emoji: '🟦', question: 'A door is shaped like this. What shape?', answer: 'Rectangle', options: ['Square', 'Rectangle', 'Parallelogram', 'Trapezoid'] },
+      { id: 'crescent', emoji: '🌙', question: 'Which shape looks like a sliver of moon?', answer: 'Crescent', options: ['Crescent', 'Circle', 'Comma', 'Banana'] },
+      { id: 'cone', emoji: '🍦', question: 'Which shape is pointy on top and round at the bottom?', answer: 'Cone', options: ['Cone', 'Triangle', 'Pyramid', 'Teardrop'] },
+      { id: 'cube', emoji: '📦', question: 'Which shape is a box with six square faces?', answer: 'Cube', options: ['Cube', 'Square', 'Ball', 'Block'] },
+      { id: 'sphere', emoji: '🔵', question: 'Which round shape is like a ball?', answer: 'Sphere', options: ['Sphere', 'Circle', 'Bubble', 'Egg'] },
+      { id: 'pyramid', emoji: '⛰️', question: 'Which shape has a square base and a point at the top?', answer: 'Pyramid', options: ['Pyramid', 'Triangle', 'Cone', 'Mountain'] },
+      { id: 'semicircle', emoji: '🌓', question: 'Which shape is half of a circle?', answer: 'Semicircle', options: ['Semicircle', 'Circle', 'Moon', 'Arch'] },
+      { id: 'arrow', emoji: '➡️', question: 'Which shape points the way to go?', answer: 'Arrow', options: ['Arrow', 'Triangle', 'Spear', 'Pointer'] },
+      { id: 'cross', emoji: '➕', question: 'Which shape looks like a plus sign?', answer: 'Cross', options: ['Cross', 'Plus', 'Star', 'X'] },
+      { id: 'spiral', emoji: '🌀', question: 'Which shape curls round and round like a snail shell?', answer: 'Spiral', options: ['Spiral', 'Circle', 'Coil', 'Swirl'] },
+      { id: 'ring', emoji: '💍', question: 'Which shape is a circle with a hole in the middle?', answer: 'Ring', options: ['Ring', 'Circle', 'Donut', 'Belt'] }
     ]
   },
   animals: {
@@ -165,7 +195,17 @@ export const QUIZ_DATA = {
       { id: 'panda', emoji: '🐼', question: 'This black-and-white bear loves bamboo. What is it?', answer: 'Panda', options: ['Raccoon', 'Badger', 'Panda', 'Skunk'] },
       { id: 'frog', emoji: '🐸', question: 'Which animal starts life as a tadpole?', answer: 'Frog', options: ['Toad', 'Frog', 'Salamander', 'Newt'] },
       { id: 'penguin', emoji: '🐧', question: 'Which bird cannot fly but loves to swim in cold places?', answer: 'Penguin', options: ['Ostrich', 'Penguin', 'Emu', 'Kiwi'] },
-      { id: 'butterfly', emoji: '🦋', question: 'Which beautiful insect starts life as a caterpillar?', answer: 'Butterfly', options: ['Moth', 'Dragonfly', 'Bee', 'Butterfly'] }
+      { id: 'butterfly', emoji: '🦋', question: 'Which beautiful insect starts life as a caterpillar?', answer: 'Butterfly', options: ['Moth', 'Dragonfly', 'Bee', 'Butterfly'] },
+      { id: 'rabbit', emoji: '🐰', question: 'Which animal has long ears and loves carrots?', answer: 'Rabbit', options: ['Rabbit', 'Cat', 'Dog', 'Bear'] },
+      { id: 'cat', emoji: '🐱', question: 'Which animal says meow and purrs?', answer: 'Cat', options: ['Cat', 'Dog', 'Lion', 'Tiger'] },
+      { id: 'cow', emoji: '🐮', question: 'Which farm animal gives us milk?', answer: 'Cow', options: ['Cow', 'Horse', 'Pig', 'Sheep'] },
+      { id: 'horse', emoji: '🐴', question: 'Which animal neighs and loves to gallop?', answer: 'Horse', options: ['Horse', 'Donkey', 'Zebra', 'Camel'] },
+      { id: 'sheep', emoji: '🐑', question: 'Which animal is covered in fluffy wool?', answer: 'Sheep', options: ['Sheep', 'Goat', 'Cloud', 'Lamb'] },
+      { id: 'bear', emoji: '🐻', question: 'Which big animal loves honey and sleeps all winter?', answer: 'Bear', options: ['Bear', 'Wolf', 'Fox', 'Monkey'] },
+      { id: 'tiger', emoji: '🐯', question: 'Which big cat has orange stripes?', answer: 'Tiger', options: ['Tiger', 'Lion', 'Leopard', 'Cat'] },
+      { id: 'zebra', emoji: '🦓', question: 'Which animal has black-and-white stripes?', answer: 'Zebra', options: ['Zebra', 'Horse', 'Tiger', 'Cow'] },
+      { id: 'snake', emoji: '🐍', question: 'Which animal slides along without any legs?', answer: 'Snake', options: ['Snake', 'Worm', 'Lizard', 'Eel'] },
+      { id: 'whale', emoji: '🐳', question: 'Which huge animal sings songs in the ocean?', answer: 'Whale', options: ['Whale', 'Dolphin', 'Shark', 'Seal'] }
     ]
   },
   colors: {
@@ -182,7 +222,17 @@ export const QUIZ_DATA = {
       { id: 'purple', emoji: '🍇', question: 'What color are these sweet grapes?', answer: 'Purple', options: ['White', 'Yellow', 'Purple', 'Red'] },
       { id: 'brown', emoji: '🐻', question: 'What color is this cute teddy bear?', answer: 'Brown', options: ['Blue', 'Black', 'Orange', 'Brown'] },
       { id: 'white', emoji: '☃️', question: 'What color is this cold snowman?', answer: 'White', options: ['Green', 'White', 'Purple', 'Pink'] },
-      { id: 'black', emoji: '🐈‍⬛', question: 'What color is this little cat?', answer: 'Black', options: ['Red', 'Yellow', 'Blue', 'Black'] }
+      { id: 'black', emoji: '🐈‍⬛', question: 'What color is this little cat?', answer: 'Black', options: ['Red', 'Yellow', 'Blue', 'Black'] },
+      { id: 'gray', emoji: '🐘', question: 'What color is this big elephant?', answer: 'Gray', options: ['Gray', 'Pink', 'Green', 'Blue'] },
+      { id: 'gold', emoji: '⭐', question: 'What color is this shiny star?', answer: 'Gold', options: ['Gold', 'Silver', 'Blue', 'Red'] },
+      { id: 'silver', emoji: '🥈', question: 'What color is this second-place medal?', answer: 'Silver', options: ['Silver', 'Gold', 'Bronze', 'White'] },
+      { id: 'rainbow', emoji: '🌈', question: 'What do we call all the colors together in the sky?', answer: 'Rainbow', options: ['Rainbow', 'Cloud', 'Sun', 'Star'] },
+      { id: 'redheart', emoji: '❤️', question: 'What color is this love heart?', answer: 'Red', options: ['Red', 'Pink', 'Purple', 'Blue'] },
+      { id: 'greenheart', emoji: '💚', question: 'What color is this heart?', answer: 'Green', options: ['Green', 'Blue', 'Yellow', 'Red'] },
+      { id: 'blueheart', emoji: '💙', question: 'What color is this heart?', answer: 'Blue', options: ['Blue', 'Green', 'Purple', 'Black'] },
+      { id: 'orangeheart', emoji: '🧡', question: 'What color is this heart?', answer: 'Orange', options: ['Orange', 'Yellow', 'Red', 'Pink'] },
+      { id: 'sky', emoji: '🩵', question: 'What color is the clear daytime sky?', answer: 'Blue', options: ['Blue', 'Green', 'Pink', 'Gray'] },
+      { id: 'grass', emoji: '🌱', question: 'What color is fresh green grass?', answer: 'Green', options: ['Green', 'Brown', 'Blue', 'Yellow'] }
     ]
   },
   vehicles: {
@@ -199,7 +249,17 @@ export const QUIZ_DATA = {
       { id: 'rocket', emoji: '🚀', question: 'What powerful vehicle travels into outer space?', answer: 'Rocket', options: ['Submarine', 'Rocket', 'Train', 'Bus'] },
       { id: 'fireengine', emoji: '🚒', question: 'What red vehicle helps firefighters put out fires?', answer: 'Fire Engine', options: ['Ambulance', 'Police Car', 'Fire Engine', 'Tractor'] },
       { id: 'schoolbus', emoji: '🚌', question: 'What yellow vehicle takes children to school?', answer: 'School Bus', options: ['School Bus', 'Truck', 'Airplane', 'Car'] },
-      { id: 'tractor', emoji: '🚜', question: 'What vehicle does a farmer use on a field?', answer: 'Tractor', options: ['Bicycle', 'Boat', 'Submarine', 'Tractor'] }
+      { id: 'tractor', emoji: '🚜', question: 'What vehicle does a farmer use on a field?', answer: 'Tractor', options: ['Bicycle', 'Boat', 'Submarine', 'Tractor'] },
+      { id: 'ambulance', emoji: '🚑', question: 'Which vehicle rushes sick people to the hospital?', answer: 'Ambulance', options: ['Ambulance', 'Fire Engine', 'Police Car', 'Taxi'] },
+      { id: 'policecar', emoji: '🚓', question: 'Which vehicle do police officers drive to help keep us safe?', answer: 'Police Car', options: ['Police Car', 'Ambulance', 'Taxi', 'Bus'] },
+      { id: 'taxi', emoji: '🚕', question: 'Which yellow car do you pay to ride across the city?', answer: 'Taxi', options: ['Taxi', 'Bus', 'Car', 'Van'] },
+      { id: 'truck', emoji: '🚚', question: 'Which big vehicle carries heavy loads on the road?', answer: 'Truck', options: ['Truck', 'Car', 'Bicycle', 'Scooter'] },
+      { id: 'motorcycle', emoji: '🏍️', question: 'Which fast two-wheeled vehicle has an engine?', answer: 'Motorcycle', options: ['Motorcycle', 'Bicycle', 'Scooter', 'Car'] },
+      { id: 'submarine', emoji: '🤿', question: 'Which vehicle travels deep under the water?', answer: 'Submarine', options: ['Submarine', 'Ship', 'Boat', 'Rocket'] },
+      { id: 'sailboat', emoji: '⛵', question: 'Which boat uses the wind in its sails to move?', answer: 'Sailboat', options: ['Sailboat', 'Ship', 'Canoe', 'Ferry'] },
+      { id: 'balloon', emoji: '🎈', question: 'Which flying vehicle floats up using hot air?', answer: 'Hot Air Balloon', options: ['Hot Air Balloon', 'Airplane', 'Kite', 'Helicopter'] },
+      { id: 'scooter', emoji: '🛵', question: 'Which small two-wheeler is great for zipping around town?', answer: 'Scooter', options: ['Scooter', 'Truck', 'Train', 'Bus'] },
+      { id: 'van', emoji: '🚐', question: 'Which vehicle can carry a whole family and lots of bags?', answer: 'Van', options: ['Van', 'Bicycle', 'Motorcycle', 'Rocket'] }
     ]
   },
   birds: {
@@ -216,7 +276,17 @@ export const QUIZ_DATA = {
       { id: 'chick', emoji: '🐤', question: 'What do we call a baby chicken?', answer: 'Chick', options: ['Duckling', 'Chick', 'Cygnet', 'Kitten'] },
       { id: 'goose', emoji: '🪿', question: 'Which bird flies in a V and says "honk"?', answer: 'Goose', options: ['Duck', 'Swan', 'Goose', 'Crow'] },
       { id: 'rooster', emoji: '🐓', question: 'Which bird wakes us with "cock-a-doodle-doo"?', answer: 'Rooster', options: ['Hen', 'Turkey', 'Rooster', 'Peacock'] },
-      { id: 'peacock', emoji: '🦚', question: 'Which bird shows off a big fan of feathers?', answer: 'Peacock', options: ['Turkey', 'Pheasant', 'Ostrich', 'Peacock'] }
+      { id: 'peacock', emoji: '🦚', question: 'Which bird shows off a big fan of feathers?', answer: 'Peacock', options: ['Turkey', 'Pheasant', 'Ostrich', 'Peacock'] },
+      { id: 'penguin', emoji: '🐧', question: 'Which black-and-white bird waddles and swims in the cold?', answer: 'Penguin', options: ['Penguin', 'Puffin', 'Seal', 'Duck'] },
+      { id: 'flamingo', emoji: '🦩', question: 'Which tall pink bird stands on one leg?', answer: 'Flamingo', options: ['Flamingo', 'Crane', 'Stork', 'Heron'] },
+      { id: 'turkey', emoji: '🦃', question: 'Which big bird gobbles and fans its tail?', answer: 'Turkey', options: ['Turkey', 'Chicken', 'Peacock', 'Goose'] },
+      { id: 'dove', emoji: '🕊️', question: 'Which white bird is a symbol of peace?', answer: 'Dove', options: ['Dove', 'Seagull', 'Pigeon', 'Swan'] },
+      { id: 'ostrich', emoji: '🪶', question: 'Which is the biggest bird that runs but cannot fly?', answer: 'Ostrich', options: ['Ostrich', 'Emu', 'Eagle', 'Turkey'] },
+      { id: 'hen', emoji: '🐔', question: 'Which farm bird lays eggs and says "cluck"?', answer: 'Hen', options: ['Hen', 'Rooster', 'Duck', 'Goose'] },
+      { id: 'nest', emoji: '🪹', question: 'Where does a bird lay its eggs?', answer: 'Nest', options: ['Nest', 'Cage', 'Hole', 'Box'] },
+      { id: 'feather', emoji: '🪶', question: 'What soft, light thing covers a bird\'s body?', answer: 'Feathers', options: ['Feathers', 'Fur', 'Scales', 'Wool'] },
+      { id: 'wing', emoji: '🐦', question: 'Which body part helps a bird fly?', answer: 'Wings', options: ['Wings', 'Legs', 'Beak', 'Tail'] },
+      { id: 'egg', emoji: '🥚', question: 'What do birds hatch out of?', answer: 'Egg', options: ['Egg', 'Seed', 'Cocoon', 'Shell'] }
     ]
   },
   vegetables: {
@@ -233,7 +303,17 @@ export const QUIZ_DATA = {
       { id: 'onion', emoji: '🧅', question: 'Which vegetable makes you cry when you cut it?', answer: 'Onion', options: ['Garlic', 'Leek', 'Onion', 'Shallot'] },
       { id: 'lettuce', emoji: '🥬', question: 'Which leafy green vegetable goes in salads?', answer: 'Lettuce', options: ['Cabbage', 'Spinach', 'Lettuce', 'Kale'] },
       { id: 'pepper', emoji: '🫑', question: 'Which vegetable can be green, red, or yellow and is crunchy?', answer: 'Pepper', options: ['Chili', 'Pepper', 'Tomato', 'Carrot'] },
-      { id: 'eggplant', emoji: '🍆', question: 'Which purple vegetable is shaped like an egg?', answer: 'Eggplant', options: ['Plum', 'Beet', 'Eggplant', 'Grape'] }
+      { id: 'eggplant', emoji: '🍆', question: 'Which purple vegetable is shaped like an egg?', answer: 'Eggplant', options: ['Plum', 'Beet', 'Eggplant', 'Grape'] },
+      { id: 'peas', emoji: '🫛', question: 'Which little green balls grow in a pod?', answer: 'Peas', options: ['Peas', 'Beans', 'Grapes', 'Corn'] },
+      { id: 'mushroom', emoji: '🍄', question: 'Which vegetable grows with a little umbrella cap?', answer: 'Mushroom', options: ['Mushroom', 'Onion', 'Cabbage', 'Turnip'] },
+      { id: 'garlic', emoji: '🧄', question: 'Which white bulb makes food tasty and smells strong?', answer: 'Garlic', options: ['Garlic', 'Onion', 'Ginger', 'Radish'] },
+      { id: 'chili', emoji: '🌶️', question: 'Which red vegetable is very spicy and hot?', answer: 'Chili', options: ['Chili', 'Pepper', 'Tomato', 'Carrot'] },
+      { id: 'sweetpotato', emoji: '🍠', question: 'Which sweet orange vegetable grows underground?', answer: 'Sweet Potato', options: ['Sweet Potato', 'Potato', 'Carrot', 'Pumpkin'] },
+      { id: 'pumpkin', emoji: '🎃', question: 'Which big orange vegetable is carved at Halloween?', answer: 'Pumpkin', options: ['Pumpkin', 'Melon', 'Squash', 'Orange'] },
+      { id: 'spinach', emoji: '🥬', question: 'Which leafy green made Popeye strong?', answer: 'Spinach', options: ['Spinach', 'Lettuce', 'Cabbage', 'Kale'] },
+      { id: 'beet', emoji: '🫜', question: 'Which deep red root vegetable stains your fingers pink?', answer: 'Beetroot', options: ['Beetroot', 'Radish', 'Turnip', 'Carrot'] },
+      { id: 'ginger', emoji: '🫚', question: 'Which knobbly root adds a warm, zingy taste to food?', answer: 'Ginger', options: ['Ginger', 'Garlic', 'Potato', 'Onion'] },
+      { id: 'cabbage', emoji: '🥬', question: 'Which round leafy vegetable has many tight layers?', answer: 'Cabbage', options: ['Cabbage', 'Lettuce', 'Onion', 'Spinach'] }
     ]
   },
   insects: {
@@ -250,7 +330,17 @@ export const QUIZ_DATA = {
       { id: 'snail', emoji: '🐌', question: 'Which slow crawler carries its home on its back?', answer: 'Snail', options: ['Worm', 'Slug', 'Snail', 'Caterpillar'] },
       { id: 'caterpillar', emoji: '🐛', question: 'Which wiggly bug turns into a butterfly?', answer: 'Caterpillar', options: ['Worm', 'Caterpillar', 'Grub', 'Snail'] },
       { id: 'mosquito', emoji: '🦟', question: 'Which buzzing bug leaves an itchy bite?', answer: 'Mosquito', options: ['Fly', 'Bee', 'Mosquito', 'Beetle'] },
-      { id: 'cricket', emoji: '🦗', question: 'Which bug chirps at night with its legs?', answer: 'Cricket', options: ['Grasshopper', 'Cricket', 'Beetle', 'Ant'] }
+      { id: 'cricket', emoji: '🦗', question: 'Which bug chirps at night with its legs?', answer: 'Cricket', options: ['Grasshopper', 'Cricket', 'Beetle', 'Ant'] },
+      { id: 'grasshopper', emoji: '🦗', question: 'Which green bug hops far with its long back legs?', answer: 'Grasshopper', options: ['Grasshopper', 'Cricket', 'Frog', 'Locust'] },
+      { id: 'dragonfly', emoji: '🪰', question: 'Which insect has long see-through wings and hovers over ponds?', answer: 'Dragonfly', options: ['Dragonfly', 'Fly', 'Butterfly', 'Bee'] },
+      { id: 'fly', emoji: '🪰', question: 'Which buzzing insect lands on your food?', answer: 'Fly', options: ['Fly', 'Bee', 'Mosquito', 'Wasp'] },
+      { id: 'worm', emoji: '🪱', question: 'Which long, wiggly crawler lives in the soil?', answer: 'Worm', options: ['Worm', 'Snake', 'Caterpillar', 'Slug'] },
+      { id: 'firefly', emoji: '✨', question: 'Which bug glows and blinks with light at night?', answer: 'Firefly', options: ['Firefly', 'Moth', 'Beetle', 'Fly'] },
+      { id: 'moth', emoji: '🦋', question: 'Which night-time insect flutters toward lamps?', answer: 'Moth', options: ['Moth', 'Butterfly', 'Bee', 'Fly'] },
+      { id: 'wasp', emoji: '🐝', question: 'Which yellow-and-black insect can sting but makes no honey?', answer: 'Wasp', options: ['Wasp', 'Bee', 'Hornet', 'Fly'] },
+      { id: 'termite', emoji: '🐜', question: 'Which tiny insect builds tall mounds and eats wood?', answer: 'Termite', options: ['Termite', 'Ant', 'Beetle', 'Bug'] },
+      { id: 'cocoon', emoji: '🛡️', question: 'What silky case does a caterpillar make before becoming a moth?', answer: 'Cocoon', options: ['Cocoon', 'Nest', 'Web', 'Shell'] },
+      { id: 'honeycomb', emoji: '🍯', question: 'What waxy home do bees build to store honey?', answer: 'Honeycomb', options: ['Honeycomb', 'Web', 'Nest', 'Hive Hole'] }
     ]
   },
   space: {
@@ -267,7 +357,17 @@ export const QUIZ_DATA = {
       { id: 'earth', emoji: '🌍', question: 'Which blue and green planet is our home?', answer: 'Earth', options: ['Mars', 'Earth', 'Venus', 'Moon'] },
       { id: 'comet', emoji: '☄️', question: 'What streaks across the sky with a glowing tail?', answer: 'Comet', options: ['Meteor', 'Comet', 'Rocket', 'Star'] },
       { id: 'alien', emoji: '👽', question: 'What friendly being might live on another planet?', answer: 'Alien', options: ['Monster', 'Robot', 'Alien', 'Ghost'] },
-      { id: 'shooting-star', emoji: '🌠', question: 'What do we call a star that quickly falls through the sky?', answer: 'Shooting Star', options: ['Shooting Star', 'Comet', 'Spark', 'Moon'] }
+      { id: 'shooting-star', emoji: '🌠', question: 'What do we call a star that quickly falls through the sky?', answer: 'Shooting Star', options: ['Shooting Star', 'Comet', 'Spark', 'Moon'] },
+      { id: 'mars', emoji: '🔴', question: 'Which planet is known as the Red Planet?', answer: 'Mars', options: ['Mars', 'Jupiter', 'Venus', 'Mercury'] },
+      { id: 'jupiter', emoji: '🪐', question: 'Which is the biggest planet in our solar system?', answer: 'Jupiter', options: ['Jupiter', 'Saturn', 'Earth', 'Neptune'] },
+      { id: 'telescope', emoji: '🔭', question: 'What tool helps us see stars and planets up close?', answer: 'Telescope', options: ['Telescope', 'Microscope', 'Binoculars', 'Camera'] },
+      { id: 'satellite', emoji: '🛰️', question: 'What machine circles Earth to send TV and phone signals?', answer: 'Satellite', options: ['Satellite', 'Rocket', 'Star', 'Drone'] },
+      { id: 'galaxy', emoji: '🌌', question: 'What do we call a huge group of billions of stars?', answer: 'Galaxy', options: ['Galaxy', 'Planet', 'Comet', 'Cloud'] },
+      { id: 'spacesuit', emoji: '👨‍🚀', question: 'What special outfit keeps astronauts safe in space?', answer: 'Spacesuit', options: ['Spacesuit', 'Raincoat', 'Uniform', 'Costume'] },
+      { id: 'ufo', emoji: '🛸', question: 'What do we call a mysterious flying saucer in the sky?', answer: 'UFO', options: ['UFO', 'Plane', 'Kite', 'Rocket'] },
+      { id: 'crater', emoji: '🌑', question: 'What do we call the round dents and holes on the Moon?', answer: 'Craters', options: ['Craters', 'Hills', 'Ponds', 'Caves'] },
+      { id: 'orbit', emoji: '🔄', question: 'What do we call the path a planet takes around the Sun?', answer: 'Orbit', options: ['Orbit', 'Road', 'Track', 'Loop'] },
+      { id: 'planet', emoji: '🌎', question: 'What do we call a big round world that circles the Sun?', answer: 'Planet', options: ['Planet', 'Star', 'Moon', 'Comet'] }
     ]
   },
   dinosaurs: {
@@ -284,7 +384,17 @@ export const QUIZ_DATA = {
       { id: 'fossils', emoji: '🦴', question: 'What do we call the hardened remains of dinosaurs we dig up?', answer: 'Fossils', options: ['Fossils', 'Bones', 'Rocks', 'Shells'] },
       { id: 'dino-eggs', emoji: '🥚', question: 'What did baby dinosaurs hatch out of long ago?', answer: 'Dinosaur Eggs', options: ['Dinosaur Eggs', 'Nests', 'Seeds', 'Rocks'] },
       { id: 'herbivores', emoji: '🌿', question: 'What do we call dinosaurs that ate only plants?', answer: 'Herbivores', options: ['Herbivores', 'Carnivores', 'Omnivores', 'Mammals'] },
-      { id: 'velociraptor', emoji: '🐊', question: 'Which small, fast dinosaur hunted in packs with sharp claws?', answer: 'Velociraptor', options: ['Velociraptor', 'T-Rex', 'Crocodile', 'Compsognathus'] }
+      { id: 'velociraptor', emoji: '🐊', question: 'Which small, fast dinosaur hunted in packs with sharp claws?', answer: 'Velociraptor', options: ['Velociraptor', 'T-Rex', 'Crocodile', 'Compsognathus'] },
+      { id: 'spinosaurus', emoji: '🐊', question: 'Which dinosaur had a big sail on its back and loved water?', answer: 'Spinosaurus', options: ['Spinosaurus', 'Stegosaurus', 'T-Rex', 'Diplodocus'] },
+      { id: 'diplodocus', emoji: '🦕', question: 'Which very long dinosaur had a whip-like tail?', answer: 'Diplodocus', options: ['Diplodocus', 'Brachiosaurus', 'Triceratops', 'T-Rex'] },
+      { id: 'carnivore', emoji: '🥩', question: 'What do we call dinosaurs that ate meat?', answer: 'Carnivores', options: ['Carnivores', 'Herbivores', 'Omnivores', 'Insects'] },
+      { id: 'volcano', emoji: '🌋', question: 'Which fiery mountain erupted during the age of dinosaurs?', answer: 'Volcano', options: ['Volcano', 'Mountain', 'Hill', 'Cave'] },
+      { id: 'paleontologist', emoji: '🧑‍🔬', question: 'What do we call a scientist who digs up dinosaur bones?', answer: 'Paleontologist', options: ['Paleontologist', 'Astronaut', 'Zookeeper', 'Doctor'] },
+      { id: 'claws', emoji: '🦅', question: 'What sharp body part did raptors use to grab prey?', answer: 'Claws', options: ['Claws', 'Wings', 'Horns', 'Fins'] },
+      { id: 'extinct', emoji: '💫', question: 'What word means the dinosaurs all disappeared long ago?', answer: 'Extinct', options: ['Extinct', 'Sleeping', 'Hiding', 'Tiny'] },
+      { id: 'pteranodon', emoji: '🦇', question: 'Which flying reptile had a long crest on its head?', answer: 'Pteranodon', options: ['Pteranodon', 'Pterodactyl', 'Bat', 'Eagle'] },
+      { id: 'iguanodon', emoji: '🦎', question: 'Which plant-eating dinosaur had a spiky thumb?', answer: 'Iguanodon', options: ['Iguanodon', 'Iguana', 'Stegosaurus', 'T-Rex'] },
+      { id: 'dinofootprint', emoji: '🐾', question: 'What did dinosaurs leave in the mud that turned to stone?', answer: 'Footprints', options: ['Footprints', 'Feathers', 'Scales', 'Eggs'] }
     ]
   },
   'sea-creatures': {
@@ -301,7 +411,17 @@ export const QUIZ_DATA = {
       { id: 'jellyfish', emoji: '🪼', question: 'Which sea creature drifts with soft, stinging tentacles?', answer: 'Jellyfish', options: ['Jellyfish', 'Squid', 'Coral', 'Octopus'] },
       { id: 'dolphin', emoji: '🐬', question: 'Which smart, friendly sea animal loves to leap and click?', answer: 'Dolphin', options: ['Dolphin', 'Shark', 'Whale', 'Seal'] },
       { id: 'sea-turtle', emoji: '🐢', question: 'Which shelled reptile swims slowly in the ocean?', answer: 'Sea Turtle', options: ['Sea Turtle', 'Tortoise', 'Frog', 'Crab'] },
-      { id: 'fish', emoji: '🐠', question: 'Which colorful sea animal has scales and breathes through gills?', answer: 'Fish', options: ['Fish', 'Whale', 'Dolphin', 'Shrimp'] }
+      { id: 'fish', emoji: '🐠', question: 'Which colorful sea animal has scales and breathes through gills?', answer: 'Fish', options: ['Fish', 'Whale', 'Dolphin', 'Shrimp'] },
+      { id: 'lobster', emoji: '🦞', question: 'Which red sea creature has big claws and a long tail?', answer: 'Lobster', options: ['Lobster', 'Crab', 'Shrimp', 'Scorpion'] },
+      { id: 'shrimp', emoji: '🦐', question: 'Which tiny curled sea creature turns pink when cooked?', answer: 'Shrimp', options: ['Shrimp', 'Crab', 'Lobster', 'Snail'] },
+      { id: 'squid', emoji: '🦑', question: 'Which long sea creature has ten arms and squirts ink?', answer: 'Squid', options: ['Squid', 'Octopus', 'Eel', 'Jellyfish'] },
+      { id: 'seal', emoji: '🦭', question: 'Which flippered animal barks and slides on the beach?', answer: 'Seal', options: ['Seal', 'Walrus', 'Otter', 'Dolphin'] },
+      { id: 'coral', emoji: '🪸', question: 'What colorful reef do many sea animals call home?', answer: 'Coral', options: ['Coral', 'Seaweed', 'Rock', 'Sponge'] },
+      { id: 'clownfish', emoji: '🐡', question: 'Which orange-and-white fish lives among sea anemones?', answer: 'Clownfish', options: ['Clownfish', 'Goldfish', 'Pufferfish', 'Tuna'] },
+      { id: 'pufferfish', emoji: '🐡', question: 'Which fish puffs up into a spiky ball when scared?', answer: 'Pufferfish', options: ['Pufferfish', 'Clownfish', 'Blowfish', 'Sunfish'] },
+      { id: 'eel', emoji: '🐍', question: 'Which long, snake-like fish hides in ocean rocks?', answer: 'Eel', options: ['Eel', 'Snake', 'Worm', 'Seahorse'] },
+      { id: 'seaweed', emoji: '🌿', question: 'Which green plant sways underwater and feeds sea animals?', answer: 'Seaweed', options: ['Seaweed', 'Grass', 'Coral', 'Moss'] },
+      { id: 'walrus', emoji: '🦭', question: 'Which big sea animal has two long tusks and whiskers?', answer: 'Walrus', options: ['Walrus', 'Seal', 'Sea Lion', 'Whale'] }
     ]
   }
 };
