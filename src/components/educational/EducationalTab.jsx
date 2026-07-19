@@ -36,7 +36,6 @@ export default function EducationalTab({ initialCategory }) {
           {activity ? (
             <>
               <h1 className="edu-detail-title">{activity.title}</h1>
-              <h2 className="edu-detail-sub">🧪 Educational Corner</h2>
             </>
           ) : (
             <h2>Activity not found</h2>
