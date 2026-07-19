@@ -2,13 +2,6 @@ import { useMemo, useState } from 'react';
 import { playSound } from '../../utils/sounds';
 import { TOTAL_LEVELS, getShapeFitLevel, getThemeForLevel } from './puzzle-utils';
 
-const SHAPES = [
-  { id: 'circle', emoji: '🔴', label: 'Circle' },
-  { id: 'square', emoji: '🟦', label: 'Square' },
-  { id: 'triangle', emoji: '🔺', label: 'Triangle' },
-  { id: 'star', emoji: '⭐', label: 'Star' },
-];
-
 const ShapeFitPuzzle = ({ puzzle, onBack }) => {
   const [level, setLevel] = useState(1);
   const [gameWon, setGameWon] = useState(false);
@@ -29,7 +22,7 @@ const ShapeFitPuzzle = ({ puzzle, onBack }) => {
   const handlePlace = (slotId) => {
     if (!selectedId) return;
 
-    const selectedShape = shapes.find((shape) => shape.id === selectedId);
+    const selectedShape = shapes.order.find((shape) => shape.id === selectedId);
     if (!selectedShape) return;
 
     if (slotId === selectedShape.id) {
@@ -39,7 +32,7 @@ const ShapeFitPuzzle = ({ puzzle, onBack }) => {
       setSelectedId(null);
       setFeedback('Perfect fit!');
 
-      if (nextPlaced.length === SHAPES.length) {
+      if (nextPlaced.length === shapes.pool.length) {
         if (level >= TOTAL_LEVELS) {
           playSound('celebrate');
           setAllLevelsComplete(true);
@@ -94,7 +87,7 @@ const ShapeFitPuzzle = ({ puzzle, onBack }) => {
             <div className="shape-fit-side">
               <h3 className="shape-fit-side-title">Pick a Shape</h3>
               <div className="shape-fit-options">
-                {shapes.map((shape) => (
+                {shapes.order.map((shape) => (
                   <button
                     key={shape.id}
                     type="button"
@@ -115,7 +108,7 @@ const ShapeFitPuzzle = ({ puzzle, onBack }) => {
             <div className="shape-fit-side">
               <h3 className="shape-fit-side-title">Place It Here</h3>
               <div className="shape-fit-slots">
-                {SHAPES.map((slot) => (
+                {shapes.pool.map((slot) => (
                   <button
                     key={slot.id}
                     type="button"

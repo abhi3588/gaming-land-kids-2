@@ -1,34 +1,10 @@
 import { useState } from 'react';
 import { playSound } from '../../utils/sounds';
-
-const TOTAL_LEVELS = 5;
-
-const SYMBOLS = ['🍎', '🍌', '🍇', '🍊', '⭐', '🟩', '🔴', '🟦', '🐶', '🐱', '🌸', '🌟'];
-
-function shuffle(arr) {
-  return [...arr].sort(() => Math.random() - 0.5);
-}
-
-function buildPattern(level) {
-  const len = Math.min(4 + level, 6); // length of shown sequence (3 → 6)
-  const cycle = level <= 2 ? 2 : level <= 4 ? 3 : 4; // pattern rhythm length
-  const pool = shuffle(SYMBOLS).slice(0, cycle);
-  const seq = [];
-  for (let i = 0; i < len; i++) seq.push(pool[i % cycle]);
-  const correct = pool[len % cycle];
-
-  const opts = new Set([correct]);
-  const distractors = shuffle(SYMBOLS.filter((s) => !pool.includes(s)));
-  let k = 0;
-  while (opts.size < 4 && k < distractors.length) opts.add(distractors[k++]);
-  const options = shuffle([...opts]);
-
-  return { seq, correct, options };
-}
+import { TOTAL_LEVELS, getPatternSequenceLevel } from './puzzle-utils';
 
 const PatternSequencePuzzle = ({ puzzle, onBack }) => {
   const [level, setLevel] = useState(1);
-  const [data, setData] = useState(() => buildPattern(1));
+  const [data, setData] = useState(() => getPatternSequenceLevel(1));
   const [selected, setSelected] = useState(null);
   const [solved, setSolved] = useState(false);
   const [feedback, setFeedback] = useState('Look at the pattern and choose what comes next!');
@@ -37,7 +13,7 @@ const PatternSequencePuzzle = ({ puzzle, onBack }) => {
 
   const loadLevel = (nextLevel) => {
     setLevel(nextLevel);
-    setData(buildPattern(nextLevel));
+    setData(getPatternSequenceLevel(nextLevel));
     setSelected(null);
     setSolved(false);
     setFeedback('Look at the pattern and choose what comes next!');

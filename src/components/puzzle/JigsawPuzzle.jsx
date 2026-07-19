@@ -1,18 +1,19 @@
 import { useMemo, useState } from 'react';
 import { playSound } from '../../utils/sounds';
 import {
-  GRID_SIZE,
   TOTAL_LEVELS,
   createPRNG,
+  getJigsawSize,
   getThemeForLevel,
   getPieceBackgroundStyle,
   shuffleArray,
 } from './puzzle-utils';
 
 const createPieces = (level) => {
+  const size = getJigsawSize(level);
   const pieces = [];
-  for (let row = 0; row < GRID_SIZE; row += 1) {
-    for (let col = 0; col < GRID_SIZE; col += 1) {
+  for (let row = 0; row < size; row += 1) {
+    for (let col = 0; col < size; col += 1) {
       pieces.push({
         id: `${row}-${col}`,
         row,
@@ -31,12 +32,13 @@ const JigsawPuzzle = ({ puzzle, onBack }) => {
   const [feedback, setFeedback] = useState('Drag a piece to its matching spot on the board.');
   const [selectedPieceId, setSelectedPieceId] = useState(null);
   const theme = useMemo(() => getThemeForLevel(level), [level]);
-  const [board, setBoard] = useState(() => Array.from({ length: GRID_SIZE * GRID_SIZE }, () => null));
+  const gridSize = getJigsawSize(level);
+  const [board, setBoard] = useState(() => Array.from({ length: gridSize * gridSize }, () => null));
   const [tray, setTray] = useState(() => createPieces(1));
 
   const loadLevel = (nextLevel) => {
     setLevel(nextLevel);
-    setBoard(Array.from({ length: GRID_SIZE * GRID_SIZE }, () => null));
+    setBoard(Array.from({ length: getJigsawSize(nextLevel) * getJigsawSize(nextLevel) }, () => null));
     setTray(createPieces(nextLevel));
     setSelectedPieceId(null);
     setFeedback('Drag a piece to its matching spot on the board.');
@@ -48,8 +50,8 @@ const JigsawPuzzle = ({ puzzle, onBack }) => {
     const piece = tray.find((item) => item.id === pieceId && !item.placed);
     if (!piece || board[slotIndex]) return;
 
-    const targetRow = Math.floor(slotIndex / GRID_SIZE);
-    const targetCol = slotIndex % GRID_SIZE;
+    const targetRow = Math.floor(slotIndex / gridSize);
+    const targetCol = slotIndex % gridSize;
 
     if (piece.row === targetRow && piece.col === targetCol) {
       playSound('match');
@@ -63,7 +65,7 @@ const JigsawPuzzle = ({ puzzle, onBack }) => {
       setFeedback('Perfect fit! Keep going.');
 
       const placedCount = nextBoard.filter(Boolean).length;
-      if (placedCount === GRID_SIZE * GRID_SIZE) {
+      if (placedCount === gridSize * gridSize) {
         if (level >= TOTAL_LEVELS) {
           playSound('celebrate');
           setAllLevelsComplete(true);
@@ -102,7 +104,7 @@ const JigsawPuzzle = ({ puzzle, onBack }) => {
   const renderPieceContent = (row, col) => (
     <div
       className="puzzle-piece-content"
-      style={getPieceBackgroundStyle(theme, row, col)}
+      style={getPieceBackgroundStyle(theme, row, col, gridSize)}
     />
   );
 
@@ -147,10 +149,10 @@ const JigsawPuzzle = ({ puzzle, onBack }) => {
               <span>{theme.emoji}</span>
             </div>
 
-            <div className="puzzle-grid puzzle-grid-3">
-              {Array.from({ length: GRID_SIZE * GRID_SIZE }, (_, slotIndex) => {
-                const row = Math.floor(slotIndex / GRID_SIZE);
-                const col = slotIndex % GRID_SIZE;
+            <div className={`puzzle-grid puzzle-grid-${gridSize}`}>
+              {Array.from({ length: gridSize * gridSize }, (_, slotIndex) => {
+                const row = Math.floor(slotIndex / gridSize);
+                const col = slotIndex % gridSize;
                 const placedPieceId = board[slotIndex];
                 const placedPiece = tray.find((item) => item.id === placedPieceId);
 

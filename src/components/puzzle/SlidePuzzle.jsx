@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
 import { playSound } from '../../utils/sounds';
 import {
-  GRID_SIZE,
   TOTAL_LEVELS,
   createSolvableSlideBoard,
   getPieceBackgroundStyle,
+  getSlideSize,
   getThemeForLevel,
   isSlideSolved,
 } from './puzzle-utils';
@@ -15,9 +15,10 @@ const SlidePuzzle = ({ puzzle, onBack }) => {
   const [allLevelsComplete, setAllLevelsComplete] = useState(false);
   const [moves, setMoves] = useState(0);
   const theme = useMemo(() => getThemeForLevel(level), [level]);
+  const gridSize = getSlideSize(level);
   const [board, setBoard] = useState(() => createSolvableSlideBoard(1));
 
-  const emptyIndex = board.indexOf(GRID_SIZE * GRID_SIZE - 1);
+  const emptyIndex = board.indexOf(gridSize * gridSize - 1);
 
   const loadLevel = (nextLevel) => {
     setLevel(nextLevel);
@@ -26,7 +27,7 @@ const SlidePuzzle = ({ puzzle, onBack }) => {
   };
 
   const tryMove = (index) => {
-    const size = GRID_SIZE;
+    const size = gridSize;
     const emptyRow = Math.floor(emptyIndex / size);
     const emptyCol = emptyIndex % size;
     const row = Math.floor(index / size);
@@ -60,12 +61,12 @@ const SlidePuzzle = ({ puzzle, onBack }) => {
   };
 
   const renderTile = (value, index) => {
-    if (value === GRID_SIZE * GRID_SIZE - 1) {
+    if (value === gridSize * gridSize - 1) {
       return <div key={index} className="puzzle-cell puzzle-cell-empty" aria-hidden="true" />;
     }
 
-    const row = Math.floor(value / GRID_SIZE);
-    const col = value % GRID_SIZE;
+    const row = Math.floor(value / gridSize);
+    const col = value % gridSize;
 
     return (
       <button
@@ -77,7 +78,7 @@ const SlidePuzzle = ({ puzzle, onBack }) => {
       >
         <div
           className="puzzle-piece-content"
-          style={getPieceBackgroundStyle(theme, row, col)}
+          style={getPieceBackgroundStyle(theme, row, col, gridSize)}
         />
       </button>
     );
@@ -126,7 +127,7 @@ const SlidePuzzle = ({ puzzle, onBack }) => {
               <span>{theme.emoji}</span>
             </div>
 
-            <div className="puzzle-grid puzzle-grid-3">
+            <div className={`puzzle-grid puzzle-grid-${gridSize}`}>
               {board.map((value, index) => renderTile(value, index))}
             </div>
           </div>

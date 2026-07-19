@@ -24,7 +24,7 @@ const SpotDifferencePuzzle = ({ puzzle, onBack }) => {
       playSound('match');
       const nextFound = [...found, item.id];
       setFound(nextFound);
-      if (nextFound.length === 3) {
+      if (nextFound.length === scene.diffIndices.length) {
         if (level >= TOTAL_LEVELS) {
           playSound('celebrate');
           setAllLevelsComplete(true);

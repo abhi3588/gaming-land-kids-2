@@ -1,5 +1,16 @@
-export const TOTAL_LEVELS = 5;
-export const GRID_SIZE = 3;
+// ===== Puzzle global rules =====
+// Every puzzle has EXACTLY 10 levels. Each level's data is generated from a
+// level-seeded PRNG (never Math.random) so it is deterministic and unique per
+// level. Difficulty graduates across the 10 levels (more dots / larger grids /
+// more pieces / longer sequences, etc.). A wrong answer never advances the
+// level — the component plays the `wrong` sound, shows feedback, and lets the
+// child retry.
+export const TOTAL_LEVELS = 10;
+
+// Jigsaw & Slide picture grids grow at level 6 (3x3 -> 4x4) for a clear
+// difficulty step; the per-level shuffle still keeps every level unique.
+export const getJigsawSize = (level) => (level <= 5 ? 3 : 4);
+export const getSlideSize = (level) => (level <= 5 ? 3 : 4);
 
 export const PUZZLE_THEMES = [
   { id: 'lion', emoji: '🦁', gradient: 'linear-gradient(135deg, #ff9f43, #ff6b9d)' },
@@ -21,7 +32,7 @@ export const getThemeForLevel = (level) => PUZZLE_THEMES[(level - 1) % PUZZLE_TH
 
 // Builds a single "solution" image (gradient + the animal emoji) as an
 // inline SVG data URI. Every puzzle piece uses THIS same image, sliced
-// via background-position, so the 9 pieces reassemble into the picture.
+// via background-position, so the pieces reassemble into the picture.
 const buildSolutionImage = (theme) => {
   const colors = theme.gradient.match(/#[0-9a-fA-F]{3,6}/g) || ['#ff9f43', '#ff6b9d'];
   const c0 = colors[0];
@@ -36,12 +47,12 @@ const buildSolutionImage = (theme) => {
 };
 
 // Returns the styles to render ONE piece of the jigsaw: the full solution
-// image, scaled to 3x the piece and offset so this (row,col) cell
-// reveals exactly its third. background-position % is exact for this.
-export const getPieceBackgroundStyle = (theme, row, col) => ({
+// image, scaled to `size`x the piece and offset so this (row,col) cell
+// reveals exactly its slice. `size` is the grid dimension (3 or 4).
+export const getPieceBackgroundStyle = (theme, row, col, size) => ({
   backgroundImage: buildSolutionImage(theme),
-  backgroundSize: '300% 300%',
-  backgroundPosition: `${col === 0 ? '0%' : col === 1 ? '50%' : '100%'} ${row === 0 ? '0%' : row === 1 ? '50%' : '100%'}`,
+  backgroundSize: `${size * 100}% ${size * 100}%`,
+  backgroundPosition: `${(col / (size - 1)) * 100}% ${(row / (size - 1)) * 100}%`,
   backgroundRepeat: 'no-repeat',
 });
 
@@ -55,7 +66,7 @@ export const shuffleArray = (array, prng = Math.random) => {
 };
 
 export const createSolvableSlideBoard = (level) => {
-  const size = GRID_SIZE;
+  const size = getSlideSize(level);
   const total = size * size;
   const emptyIndex = total - 1;
   let board = Array.from({ length: total }, (_, i) => i);
@@ -89,7 +100,8 @@ export const isSlideSolved = (board) => {
 };
 
 export const generateMaze = (level) => {
-  const size = 7;
+  // Odd grid that grows every 3 levels: L1-3:5, L4-6:7, L7-9:9, L10:11.
+  const size = 5 + 2 * Math.floor((level - 1) / 3);
   const prng = createPRNG(level * 911);
   const grid = Array.from({ length: size }, () => Array(size).fill(1));
 
@@ -115,17 +127,35 @@ export const generateMaze = (level) => {
   carve(1, 1);
   grid[1][1] = 0;
   grid[size - 2][size - 2] = 0;
-  return { grid, start: [1, 1], goal: [size - 2, size - 2] };
+
+  // Place start/goal on distinct odd cells, chosen per-level so that even when
+  // the maze size repeats across the 10 levels every puzzle is unique.
+  const odd = [];
+  for (let r = 1; r <= size - 2; r += 2) {
+    for (let c = 1; c <= size - 2; c += 2) odd.push([r, c]);
+  }
+  const start = odd[(level - 1) % odd.length];
+  const goal = odd[(level - 1 + Math.ceil(odd.length / 2)) % odd.length];
+  return { grid, start, goal };
 };
 
 export const getConnectDotLayout = (level) => {
-  const count = 6 + (level % 3);
+  // Monotonic, graduated dot count: L1:5 ... L10:14.
+  const count = 4 + level;
   const prng = createPRNG(level * 503);
-  return Array.from({ length: count }, (_, index) => ({
-    id: index + 1,
-    x: 15 + (index % 3) * 30 + prng() * 8,
-    y: 12 + Math.floor(index / 3) * 28 + prng() * 8,
-  }));
+  const cols = Math.ceil(Math.sqrt(count));
+  const rows = Math.ceil(count / cols);
+  const xStep = 70 / (cols + 1);
+  const yStep = 70 / (rows + 1);
+  const dots = [];
+  for (let i = 0; i < count; i += 1) {
+    const r = Math.floor(i / cols);
+    const c = i % cols;
+    const x = 15 + (c + 1) * xStep + (prng() - 0.5) * 4;
+    const y = 15 + (r + 1) * yStep + (prng() - 0.5) * 4;
+    dots.push({ id: i + 1, x, y });
+  }
+  return dots;
 };
 
 export const getSpotDifferenceScene = (level) => {
@@ -138,7 +168,9 @@ export const getSpotDifferenceScene = (level) => {
     y: 30 + Math.floor(index / 4) * 40,
   }));
 
-  const diffIndices = shuffleArray([0, 1, 2, 3, 4, 5, 6, 7], prng).slice(0, 3);
+  // Number of differences grows with level: L1-2:2, L3-4:3, L5-6:4, L7-8:5, L9-10:6.
+  const diffCount = Math.min(2 + Math.floor((level - 1) / 2), 8);
+  const diffIndices = shuffleArray([0, 1, 2, 3, 4, 5, 6, 7], prng).slice(0, diffCount);
   const altEmojis = ['🌲', '🌙', '🏡', '🌺', '🐤', '🐝', '☁️', '💫'];
   const right = left.map((item, index) => ({
     ...item,
@@ -149,22 +181,34 @@ export const getSpotDifferenceScene = (level) => {
   return { left, right, diffIndices };
 };
 
+const SHAPE_POOL = [
+  { id: 'circle', emoji: '🔴', label: 'Circle' },
+  { id: 'square', emoji: '🟦', label: 'Square' },
+  { id: 'triangle', emoji: '🔺', label: 'Triangle' },
+  { id: 'star', emoji: '⭐', label: 'Star' },
+  { id: 'heart', emoji: '💜', label: 'Heart' },
+  { id: 'diamond', emoji: '🔷', label: 'Diamond' },
+];
+
 export const getShapeFitLevel = (level) => {
-  const shapes = [
-    { id: 'circle', emoji: '🔴', label: 'Circle' },
-    { id: 'square', emoji: '🟦', label: 'Square' },
-    { id: 'triangle', emoji: '🔺', label: 'Triangle' },
-    { id: 'star', emoji: '⭐', label: 'Star' },
-  ];
+  // More shapes in play as levels rise: L1-3:3, L4-6:4, L7-9:5, L10:6.
+  // The active subset is rotated by level so every level uses a distinct set
+  // of shapes (guaranteeing unique, non-repeating levels).
+  const n = Math.min(3 + Math.floor((level - 1) / 3), SHAPE_POOL.length);
+  const rotation = (level - 1) % SHAPE_POOL.length;
+  const pool = Array.from(
+    { length: n },
+    (_, i) => SHAPE_POOL[(rotation + i) % SHAPE_POOL.length],
+  );
   const prng = createPRNG(level * 719);
-  let order = shuffleArray(shapes, prng);
+  let order = shuffleArray(pool, prng);
   // Keep any shape from sitting directly above its matching slot.
   let guard = 0;
-  while (order.some((shape, index) => shape.id === shapes[index].id) && guard < 30) {
-    order = shuffleArray(shapes, prng);
+  while (order.some((shape, index) => shape.id === pool[index].id) && guard < 30) {
+    order = shuffleArray(pool, prng);
     guard += 1;
   }
-  return order;
+  return { pool, order };
 };
 
 // ===== Color Sort (ball sort) =====
@@ -175,7 +219,8 @@ const SORT_COLORS = ['#ff6b6b', '#4dabf7', '#51cf66', '#ffd43b', '#cc5de8', '#ff
 const SORT_CAPACITY = 4;
 
 export const getColorSortLevel = (level) => {
-  const colorCount = Math.min(2 + Math.floor((level - 1) / 2), SORT_COLORS.length); // L1-2:2, L3-4:3, L5:4
+  // L1-2:2, L3-4:3, L5-6:4, L7-8:5, L9-10:6 colours.
+  const colorCount = Math.min(2 + Math.floor((level - 1) / 2), SORT_COLORS.length);
   const prng = createPRNG(level * 827);
   const tubes = Array.from({ length: colorCount }, () => Array(SORT_CAPACITY).fill(0));
   // Start solved: tube i is filled with color i.
@@ -207,7 +252,8 @@ export const getColorSortLevel = (level) => {
 const MEMORY_EMOJIS = ['🍎', '🐶', '⭐', '🌈', '🚀', '🍉', '🐱', '🌸', '⚽', '🎈', '🐠', '🍔'];
 
 export const getMemoryMatchLevel = (level) => {
-  const pairs = level < 5 ? 2 + level : 8; // L1:3, L2:4, L3:5, L4:6, L5:8
+  // L1:3 ... L10:12 pairs (strictly increasing, all 12 emojis used by L10).
+  const pairs = Math.min(2 + level, 12);
   const chosen = MEMORY_EMOJIS.slice(0, pairs);
   const deck = shuffleArray([...chosen, ...chosen], createPRNG(level * 677));
   return { deck, pairs };
@@ -282,8 +328,9 @@ const WORD_SEARCH_CATEGORIES = [
 const WORD_SEARCH_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 export const getWordSearchLevel = (level) => {
-  const size = 8 + Math.floor((level - 1) / 2); // L1-2:8, L3-4:9, L5:10
-  const wordCount = Math.min(2 + level, 5);     // L1:3, L2:4, L3-5:5
+  // Grid grows every 2 levels: 8 -> 12. Word count 3 -> 5.
+  const size = 8 + Math.floor((level - 1) / 2);
+  const wordCount = Math.min(2 + level, 5);
   const catIndex = (level - 1) % WORD_SEARCH_CATEGORIES.length;
   const category = WORD_SEARCH_CATEGORIES[catIndex];
   const prng = createPRNG(level * 241);
@@ -463,7 +510,8 @@ export const getPipeFilled = (board, start) => {
 };
 
 export const getPipeConnectorLevel = (level) => {
-  const size = 4 + Math.floor((level - 1) / 2); // L1-2:4, L3-4:5, L5:6
+  // Grid grows every 2 levels: L1-2:4 ... L9-10:8.
+  const size = 4 + Math.floor((level - 1) / 2);
   const prng = createPRNG(level * 613);
   const start = [Math.floor(prng() * size), 0];
   const end = [Math.floor(prng() * size), size - 1];
@@ -508,4 +556,52 @@ export const getPipeConnectorLevel = (level) => {
   } while (getPipeFilled(board, start).has(`${end[0]},${end[1]}`) && tries < 16);
 
   return { size, board, start, end };
+};
+
+// ===== Shadow Match =====
+// Match each colourful toy to its dark shadow. Difficulty grows with the
+// number of toys (L1:3 ... L10:12). Fully deterministic per level.
+const SHADOW_POOL = [
+  { id: 'cat', emoji: '🐱', name: 'Cat' },
+  { id: 'dog', emoji: '🐶', name: 'Dog' },
+  { id: 'fish', emoji: '🐟', name: 'Fish' },
+  { id: 'star', emoji: '⭐', name: 'Star' },
+  { id: 'flower', emoji: '🌸', name: 'Flower' },
+  { id: 'sun', emoji: '☀️', name: 'Sun' },
+  { id: 'apple', emoji: '🍎', name: 'Apple' },
+  { id: 'ball', emoji: '⚽', name: 'Ball' },
+  { id: 'heart', emoji: '❤️', name: 'Heart' },
+  { id: 'tree', emoji: '🌳', name: 'Tree' },
+  { id: 'car', emoji: '🚗', name: 'Car' },
+  { id: 'bird', emoji: '🐦', name: 'Bird' },
+];
+
+export const getShadowMatchLevel = (level) => {
+  const count = Math.min(2 + level, SHADOW_POOL.length); // L1:3 ... L10:12
+  const items = shuffleArray(SHADOW_POOL, createPRNG(level * 193)).slice(0, count);
+  const shadows = shuffleArray(items, createPRNG(level * 397));
+  return { items, shadows };
+};
+
+// ===== Pattern Sequence =====
+// Find what comes next in a repeating emoji rhythm. Difficulty grows via a
+// longer sequence AND a longer rhythm cycle. Fully deterministic per level.
+const SEQ_SYMBOLS = ['🍎', '🍌', '🍇', '🍊', '⭐', '🟩', '🔴', '🟦', '🐶', '🐱', '🌸', '🌟'];
+
+export const getPatternSequenceLevel = (level) => {
+  const len = Math.min(3 + level, 10);                       // L1:4 ... L7-10:10
+  const cycle = Math.min(2 + Math.floor((level - 1) / 3), 5); // L1-3:2, L4-6:3, L7-9:4, L10:5
+  const prng = createPRNG(level * 211);
+  const pool = shuffleArray(SEQ_SYMBOLS, prng).slice(0, cycle);
+  const seq = [];
+  for (let i = 0; i < len; i += 1) seq.push(pool[i % cycle]);
+  const correct = pool[len % cycle];
+
+  const opts = new Set([correct]);
+  const distractors = shuffleArray(SEQ_SYMBOLS.filter((s) => !pool.includes(s)), prng);
+  let k = 0;
+  while (opts.size < 4 && k < distractors.length) opts.add(distractors[k++]);
+  const options = shuffleArray([...opts], prng);
+
+  return { seq, correct, options };
 };

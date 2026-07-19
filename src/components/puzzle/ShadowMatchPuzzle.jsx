@@ -1,36 +1,10 @@
 import { useState } from 'react';
 import { playSound } from '../../utils/sounds';
-
-const TOTAL_LEVELS = 5;
-
-const POOL = [
-  { id: 'cat', emoji: '🐱', name: 'Cat' },
-  { id: 'dog', emoji: '🐶', name: 'Dog' },
-  { id: 'fish', emoji: '🐟', name: 'Fish' },
-  { id: 'star', emoji: '⭐', name: 'Star' },
-  { id: 'flower', emoji: '🌸', name: 'Flower' },
-  { id: 'sun', emoji: '☀️', name: 'Sun' },
-  { id: 'apple', emoji: '🍎', name: 'Apple' },
-  { id: 'ball', emoji: '⚽', name: 'Ball' },
-  { id: 'heart', emoji: '❤️', name: 'Heart' },
-  { id: 'tree', emoji: '🌳', name: 'Tree' },
-  { id: 'car', emoji: '🚗', name: 'Car' },
-  { id: 'bird', emoji: '🐦', name: 'Bird' }
-];
-
-function shuffle(arr) {
-  return [...arr].sort(() => Math.random() - 0.5);
-}
-
-function pickItems(level) {
-  const count = Math.min(2 + level, 6); // 3 → 6 items across levels
-  return shuffle(POOL).slice(0, count);
-}
+import { TOTAL_LEVELS, getShadowMatchLevel } from './puzzle-utils';
 
 const ShadowMatchPuzzle = ({ puzzle, onBack }) => {
   const [level, setLevel] = useState(1);
-  const [items, setItems] = useState(() => pickItems(1));
-  const [shadows, setShadows] = useState(() => shuffle(items));
+  const [data, setData] = useState(() => getShadowMatchLevel(1));
   const [selectedId, setSelectedId] = useState(null);
   const [matched, setMatched] = useState([]);
   const [feedback, setFeedback] = useState('Tap a colourful toy, then tap its dark shadow!');
@@ -38,10 +12,9 @@ const ShadowMatchPuzzle = ({ puzzle, onBack }) => {
   const [allLevelsComplete, setAllLevelsComplete] = useState(false);
 
   const loadLevel = (nextLevel) => {
-    const its = pickItems(nextLevel);
+    const nd = getShadowMatchLevel(nextLevel);
     setLevel(nextLevel);
-    setItems(its);
-    setShadows(shuffle(its));
+    setData(nd);
     setMatched([]);
     setSelectedId(null);
     setFeedback('Tap a colourful toy, then tap its dark shadow!');
@@ -64,7 +37,7 @@ const ShadowMatchPuzzle = ({ puzzle, onBack }) => {
       setSelectedId(null);
       setFeedback('Perfect match! 🌟');
 
-      if (nextMatched.length === items.length) {
+      if (nextMatched.length === data.items.length) {
         if (level >= TOTAL_LEVELS) {
           playSound('celebrate');
           setAllLevelsComplete(true);
@@ -136,7 +109,7 @@ const ShadowMatchPuzzle = ({ puzzle, onBack }) => {
             <div className="shape-fit-side">
               <h3 className="shape-fit-side-title">Colourful Toys</h3>
               <div className="shape-fit-options">
-                {items.map((item) => {
+                {data.items.map((item) => {
                   const isMatched = matched.includes(item.id);
                   const classes =
                     'shape-fit-option' +
@@ -161,7 +134,7 @@ const ShadowMatchPuzzle = ({ puzzle, onBack }) => {
             <div className="shape-fit-side">
               <h3 className="shape-fit-side-title">Match the Shadow</h3>
               <div className="shape-fit-slots">
-                {shadows.map((shadowItem) => {
+                {data.shadows.map((shadowItem) => {
                   const isMatched = matched.includes(shadowItem.id);
                   return (
                     <button

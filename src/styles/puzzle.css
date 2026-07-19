@@ -51,6 +51,11 @@
   grid-template-columns: repeat(3, var(--piece));
 }
 
+.puzzle-grid-4 {
+  grid-template-columns: repeat(4, var(--piece));
+  width: calc(var(--piece) * 4 + var(--gap) * 3);
+}
+
 .puzzle-cell {
   border: none;
   border-radius: 16px;

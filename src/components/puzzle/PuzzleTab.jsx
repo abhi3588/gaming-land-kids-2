@@ -76,7 +76,7 @@ function PuzzleCard({ category, onSelect }) {
     >
       <span className="game-icon">{category.icon}</span>
       <h3>{category.title}</h3>
-      <div className="activity-subtitle">Ages {category.ageRange} · 5 Levels</div>
+      <div className="activity-subtitle">Ages {category.ageRange} · 10 Levels</div>
       <p className="game-desc">{category.desc}</p>
       <div style={{ display: 'flex', justifyContent: 'center', gap: '0.6rem', marginTop: '0.6rem' }}>
         <button
