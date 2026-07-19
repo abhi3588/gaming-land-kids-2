@@ -78,6 +78,8 @@ const FoodChainConnect = ({ onBack }) => {
   // Tap a filled slot to send its card back to the deck (lets kids fix mistakes).
   const handleSlotTap = (index) => {
     if (solved) return;
+    // Ignore taps on empty (numbered) slots — there is no card to return.
+    if (index >= chain.length || !chain[index]) return;
     if (checked) {
       // Only allow removing slots that were wrong, then re-check fresh.
       if (slotStatus[index] === 'wrong') {
@@ -93,6 +95,7 @@ const FoodChainConnect = ({ onBack }) => {
   const returnCard = (index) => {
     const nodeId = chain[index];
     const node = level.nodes.find((n) => n.id === nodeId);
+    if (!node) return; // nothing to return (empty slot) — never push undefined into the deck
     setChain((prev) => prev.filter((_, i) => i !== index));
     setDeck((prev) => [...prev, node].sort(() => Math.random() - 0.5));
   };
