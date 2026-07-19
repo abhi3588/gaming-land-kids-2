@@ -97,9 +97,7 @@ const ShapeFinder = ({ onBack }) => {
           <p>You found all {TOTAL_ROUNDS} shapes! Amazing!</p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <button className="btn btn-primary" onClick={resetGame}>Play Again</button>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => typeof onBack === 'function' && onBack()}>
-              Main Menu
-            </button>
+            <button className="btn btn-back" onClick={() => typeof onBack === 'function' && onBack()}>Main Menu</button>
           </div>
         </div>
       ) : (
@@ -152,10 +150,8 @@ const ShapeFinder = ({ onBack }) => {
           )}
 
           <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
-            <button className="btn btn-primary" style={{ background: '#eee', color: '#333' }}
-              onClick={() => typeof onBack === 'function' && onBack()}>
-              Main Menu
-            </button>
+            <button className="btn btn-back"
+              onClick={() => typeof onBack === 'function' && onBack()}>Main Menu</button>
           </div>
         </>
       )}

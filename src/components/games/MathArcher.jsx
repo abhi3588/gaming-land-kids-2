@@ -160,7 +160,7 @@ const MathArcher = ({ onBack }) => {
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <button className="btn btn-primary" onClick={handlePlayAgain}>Play Again</button>
-            <button className="btn" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </div>
       </div>
@@ -211,9 +211,7 @@ const MathArcher = ({ onBack }) => {
       </div>
 
       <div className="detail-back-container">
-        <button className="btn" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
-          Main Menu
-        </button>
+        <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
       </div>
     </div>
   );

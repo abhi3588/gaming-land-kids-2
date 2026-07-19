@@ -212,7 +212,7 @@ const SparkSequence = ({ onBack }) => {
           <p>You completed all 20 levels of Spark Sequence.</p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
             <button className="btn btn-primary" onClick={startGame}>Play Again</button>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </div>
       ) : (
@@ -258,11 +258,10 @@ const SparkSequence = ({ onBack }) => {
               </div>
               <div style={{ textAlign: 'center', marginTop: '1rem' }}>
                 <button
-                  className="btn"
-                  style={{ background: 'rgba(255,255,255,0.85)', color: '#555', fontSize: '0.9rem', padding: '0.55rem 1.2rem' }}
+                  className="btn btn-back"
                   onClick={() => { if (typeof onBack === 'function') onBack(); }}
                 >
-                  ← Main Menu
+                  Main Menu
                 </button>
               </div>
             </>
@@ -292,9 +291,7 @@ const SparkSequence = ({ onBack }) => {
                 <button className="btn btn-primary" style={{ flex: '1 1 120px', maxWidth: 200 }} onClick={startGame}>
                   {gameState === 'gameover' ? '🔄 Try Again' : '▶ Start Game'}
                 </button>
-                <button className="btn" style={{ background: '#eee', flex: '1 1 120px', maxWidth: 200 }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>
-                  ← Main Menu
-                </button>
+                <button className="btn btn-back" style={{ flex: '1 1 120px', maxWidth: 200 }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
               </div>
             </div>
           )}

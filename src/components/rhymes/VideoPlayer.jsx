@@ -45,9 +45,11 @@ export default function VideoPlayer({ rhyme, onBack }) {
         </video>
       </div>
 
-      <button className="btn btn-primary" onClick={handleBack} style={{ padding: '1rem 2rem', fontSize: '1.2rem' }}>
-        ← Back to Rhymes
-      </button>
+      <div className="detail-back-container">
+        <button className="btn btn-back" onClick={handleBack}>
+          Back to Rhymes
+        </button>
+      </div>
     </div>
   );
 }

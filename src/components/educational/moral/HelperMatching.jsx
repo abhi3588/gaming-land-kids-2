@@ -95,7 +95,7 @@ const HelperMatching = ({ onBack }) => {
             <button className="btn btn-primary" onClick={handleReset}>
               Play Again
             </button>
-            <button className="btn" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
               Back to Moral Education
             </button>
           </div>
@@ -169,7 +169,7 @@ const HelperMatching = ({ onBack }) => {
       </div>
 
       <div className="detail-back-container">
-        <button className="btn" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+        <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
           Back to Moral Education
         </button>
       </div>

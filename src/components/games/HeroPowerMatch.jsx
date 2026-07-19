@@ -94,7 +94,7 @@ const HeroPowerMatch = ({ onBack }) => {
           <p>You know every hero's superpower! Amazing!</p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <button className="btn btn-primary" onClick={resetGame}>Play Again</button>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => typeof onBack === 'function' && onBack()}>Main Menu</button>
+            <button className="btn btn-back" onClick={() => typeof onBack === 'function' && onBack()}>Main Menu</button>
           </div>
         </div>
       ) : (
@@ -135,7 +135,7 @@ const HeroPowerMatch = ({ onBack }) => {
           )}
 
           <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
-            <button className="btn" style={{ background: '#eee', color: '#333' }}
+            <button className="btn btn-back"
               onClick={() => typeof onBack === 'function' && onBack()}>Main Menu</button>
           </div>
         </>

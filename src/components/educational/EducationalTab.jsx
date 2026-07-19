@@ -54,7 +54,9 @@ export default function EducationalTab({ initialCategory }) {
           <div className="section-header" style={{ marginTop: '2rem' }}>
             <h3>Activity not found</h3>
             <p>We couldn't find the activity you were looking for.</p>
-            <button className="play-btn" onClick={goBack}>Back to Educational Corner</button>
+            <div className="detail-back-container">
+              <button className="btn btn-back" onClick={goBack}>Back to Educational Corner</button>
+            </div>
           </div>
         )}
       </div>

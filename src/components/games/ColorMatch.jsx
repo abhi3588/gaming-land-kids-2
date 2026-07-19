@@ -80,9 +80,7 @@ const ColorMatch = ({ onBack }) => {
             }}>
               Play Again
             </button>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>
-              Main Menu
-            </button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </div>
       ) : (
@@ -118,7 +116,7 @@ const ColorMatch = ({ onBack }) => {
           </div>
 
           <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <button className="btn btn-primary" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </>
       )}

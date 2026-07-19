@@ -22,9 +22,11 @@ export default function QuizTab() {
             <h2>📝 Quiz Corner</h2>
           </div>
           <p>Quiz not found.</p>
-          <button className="play-btn" onClick={() => navigate('/quiz')}>
-            ← Back to Quizzes
-          </button>
+          <div className="detail-back-container">
+            <button className="btn btn-back" onClick={() => navigate('/quiz')}>
+              Back to Quizzes
+            </button>
+          </div>
         </div>
       );
     }

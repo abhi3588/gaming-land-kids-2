@@ -66,7 +66,7 @@ const QuizActivity = ({ quiz, onBack }) => {
           <p style={{ fontSize: '1rem', color: '#666', marginTop: '0.75rem' }}>{quiz.completionMessage}</p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
             <button className="btn btn-primary" onClick={handleReset}>Try Again</button>
-            <button className="btn" onClick={onBack}>← Back to Quizzes</button>
+            <button className="btn btn-back" onClick={onBack}>Back to Quizzes</button>
           </div>
         </div>
       </div>

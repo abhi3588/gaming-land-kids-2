@@ -133,9 +133,7 @@ const WordScramble = ({ onBack }) => {
           <p>You unscrambled all {TOTAL_LEVELS} words! Incredible!</p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <button className="btn btn-primary" onClick={resetGame}>Play Again</button>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => typeof onBack === 'function' && onBack()}>
-              Main Menu
-            </button>
+            <button className="btn btn-back" onClick={() => typeof onBack === 'function' && onBack()}>Main Menu</button>
           </div>
         </div>
       ) : (
@@ -220,10 +218,8 @@ const WordScramble = ({ onBack }) => {
             <button className="btn" style={{ background: '#f3e8ff', color: '#7c3aed' }} onClick={handleClear}>
               🔄 Clear
             </button>
-            <button className="btn btn-primary" style={{ background: '#eee', color: '#333' }}
-              onClick={() => typeof onBack === 'function' && onBack()}>
-              Main Menu
-            </button>
+            <button className="btn btn-back"
+              onClick={() => typeof onBack === 'function' && onBack()}>Main Menu</button>
           </div>
         </>
       )}

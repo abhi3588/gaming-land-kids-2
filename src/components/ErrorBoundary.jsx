@@ -66,7 +66,7 @@ class ErrorBoundary extends Component {
             </pre>
           )}
           <button
-            className="btn btn-primary"
+            className="btn btn-back"
             onClick={this.handleReset}
             style={{ marginTop: '1rem' }}
           >

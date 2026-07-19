@@ -22,9 +22,11 @@ export default function PuzzleTab() {
         <div className="section-header">
           <h2>Puzzle not found</h2>
           <p>Sorry, we couldn't find that puzzle.</p>
-          <button className="btn" style={{ marginTop: '1rem' }} onClick={() => navigate('/puzzle')}>
-            Back to Puzzles
-          </button>
+          <div className="detail-back-container">
+            <button className="btn btn-back" onClick={() => navigate('/puzzle')}>
+              Back to Puzzles
+            </button>
+          </div>
         </div>
       );
     }

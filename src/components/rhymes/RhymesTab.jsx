@@ -27,7 +27,9 @@ export default function RhymesTab() {
       return (
         <div className="section-header">
           <h2>Rhyme not found</h2>
-          <button className="play-btn" onClick={handleBack}>← Back to Rhymes</button>
+          <div className="detail-back-container">
+            <button className="btn btn-back" onClick={handleBack}>Back to Rhymes</button>
+          </div>
         </div>
       );
     }

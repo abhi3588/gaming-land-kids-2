@@ -104,7 +104,7 @@ const PatternGame = ({ onBack }) => {
           <p>You cracked all 20 pattern puzzles.</p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
             <button className="btn btn-primary" onClick={() => loadLevel(1)}>Play Again</button>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </div>
       ) : (
@@ -138,7 +138,7 @@ const PatternGame = ({ onBack }) => {
           </div>
 
           <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-            <button className="btn btn-primary" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </>
       )}

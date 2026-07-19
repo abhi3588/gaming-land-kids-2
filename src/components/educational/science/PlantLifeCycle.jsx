@@ -47,7 +47,7 @@ const PlantLifeCycle = ({ onBack }) => {
             <button className="btn btn-primary" onClick={handleReset}>
               Learn Again
             </button>
-            <button className="btn"  onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+            <button className="btn btn-back"  onClick={() => { if (typeof onBack === 'function') onBack(); }}>
               Back to Science
             </button>
           </div>

@@ -45,12 +45,14 @@ export default function StoriesTab({ lang = 'en' }) {
         </div>
         <div className="category-container pop-in" style={{ textAlign: 'center', padding: '2rem' }}>
           <p style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>📚 Story not found</p>
-          <button
-            className="read-btn"
-            onClick={() => navigate(basePath)}
-          >
-            ← {lang === 'hi' ? 'कहानियों पर वापस' : 'Back to stories'}
-          </button>
+          <div className="detail-back-container">
+            <button
+              className="btn btn-back"
+              onClick={() => navigate(basePath)}
+            >
+              {lang === 'hi' ? 'कहानियों पर वापस' : 'Back to stories'}
+            </button>
+          </div>
         </div>
       </div>
     );

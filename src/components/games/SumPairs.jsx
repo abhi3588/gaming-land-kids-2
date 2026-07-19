@@ -99,7 +99,7 @@ const SumPairs = ({ onBack }) => {
           <p>You completed all 20 Sum Pairs levels.</p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
             <button className="btn btn-primary" onClick={resetGame}>Play Again</button>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </div>
       ) : (
@@ -142,14 +142,14 @@ const SumPairs = ({ onBack }) => {
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.5rem' }}>
             <div style={{ fontWeight: 800, color: 'var(--color-accent)' }}>Level: {level}</div>
             <div>
-              <button className="btn" style={{ background: '#eee' }} onClick={() => loadLevel(level)}>
+              <button className="btn" onClick={() => loadLevel(level)}>
                 Restart Level
               </button>
             </div>
           </div>
 
           <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <button className="btn btn-primary" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </>
       )}

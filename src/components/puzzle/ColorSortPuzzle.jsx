@@ -117,9 +117,7 @@ const ColorSortPuzzle = ({ puzzle, onBack }) => {
             <button className="btn btn-primary" onClick={() => { setGameWon(false); loadLevel(1); }}>
               Play Again
             </button>
-            <button className="btn" style={{ background: '#eee', color: '#333' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>
-              Main Menu
-            </button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </div>
       ) : (
@@ -145,9 +143,7 @@ const ColorSortPuzzle = ({ puzzle, onBack }) => {
           </div>
 
           <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <button className="btn btn-primary" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
-              Main Menu
-            </button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </>
       )}

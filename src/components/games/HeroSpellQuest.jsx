@@ -138,9 +138,7 @@ const HeroSpellQuest = ({ onBack }) => {
           <p>You spelled all {TOTAL_LEVELS} superheroes! You're a legend!</p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <button className="btn btn-primary" onClick={resetGame}>Play Again</button>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => typeof onBack === 'function' && onBack()}>
-              Main Menu
-            </button>
+            <button className="btn btn-back" onClick={() => typeof onBack === 'function' && onBack()}>Main Menu</button>
           </div>
         </div>
       ) : (
@@ -208,10 +206,8 @@ const HeroSpellQuest = ({ onBack }) => {
             <button className="btn" style={{ background: '#ffeaa7', color: '#7c3aed' }} onClick={handleClear}>
               🔄 Clear
             </button>
-            <button className="btn" style={{ background: '#eee', color: '#333' }}
-              onClick={() => typeof onBack === 'function' && onBack()}>
-              Main Menu
-            </button>
+            <button className="btn btn-back"
+              onClick={() => typeof onBack === 'function' && onBack()}>Main Menu</button>
           </div>
         </>
       )}

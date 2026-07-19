@@ -22,8 +22,8 @@ export default function FunTab() {
           <div className="page-wrapper">
             <div className="detail-back-container">
               <h2>Activity not found</h2>
-              <button className="btn btn-primary" onClick={() => navigate('/fun')}>
-                ← Back to Fun
+              <button className="btn btn-back" onClick={() => navigate('/fun')}>
+                Back to Fun
               </button>
             </div>
           </div>
@@ -127,8 +127,8 @@ function ActivityDetail({ activity, onBack }) {
           </div>
 
           <div className="detail-back-container">
-            <button className="btn btn-primary" onClick={onBack}>
-              ← Back to Fun
+            <button className="btn btn-back" onClick={onBack}>
+              Back to Fun
             </button>
           </div>
         </div>

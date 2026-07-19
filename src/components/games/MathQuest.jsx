@@ -290,7 +290,7 @@ const MathQuest = ({ onBack }) => {
 
           <div style={{ textAlign: 'center', marginTop: '1rem', color: 'var(--color-accent)', fontWeight: 700 }}>{message}</div>
           <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <button className="btn btn-primary" style={{ background: '#eee', color: '#333' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </>
       ) : (
@@ -311,7 +311,7 @@ const MathQuest = ({ onBack }) => {
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
             <button className="btn btn-primary" onClick={startGame}>Play Again</button>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </div>
       )}

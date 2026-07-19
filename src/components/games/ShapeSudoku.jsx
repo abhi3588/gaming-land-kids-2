@@ -226,7 +226,7 @@ const ShapeSudoku = ({ onBack }) => {
           <p>You completed all 20 shape Sudoku levels.</p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
             <button className="btn btn-primary" onClick={resetGame}>Play Again</button>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </div>
       ) : (
@@ -290,10 +290,10 @@ const ShapeSudoku = ({ onBack }) => {
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem' }}>
-            <button className="btn" style={{ background: '#eee' }} onClick={() => loadLevel(level)}>
+            <button className="btn" onClick={() => loadLevel(level)}>
               🔄 Restart Level
             </button>
-            <button className="btn btn-primary" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </>
       )}

@@ -129,9 +129,7 @@ const BalloonPop = ({ onBack }) => {
             }}>
               Play Again
             </button>
-            <button className="btn" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
-              Main Menu
-            </button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
           </div>
         </div>
       </div>
@@ -182,9 +180,7 @@ const BalloonPop = ({ onBack }) => {
       </div>
 
       <div className="detail-back-container">
-        <button className="btn" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
-          Main Menu
-        </button>
+        <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>Main Menu</button>
       </div>
     </div>
   );

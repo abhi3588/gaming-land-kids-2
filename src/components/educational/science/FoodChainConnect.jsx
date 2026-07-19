@@ -138,7 +138,7 @@ const FoodChainConnect = ({ onBack }) => {
             <button className="btn btn-primary" onClick={() => resetLevel(0)}>
               Play Again
             </button>
-            <button className="btn" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
               Back to Science
             </button>
           </div>
@@ -251,7 +251,7 @@ const FoodChainConnect = ({ onBack }) => {
             <button className="btn btn-primary" onClick={handleNext}>
               Next Chain ➡️
             </button>
-            <button className="btn" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
               Back to Science
             </button>
           </div>

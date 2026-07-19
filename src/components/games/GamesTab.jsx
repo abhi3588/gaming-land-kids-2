@@ -117,9 +117,11 @@ export default function GamesTab() {
       return (
         <div style={{ textAlign: 'center', padding: '3rem' }}>
           <p style={{ fontSize: '1.2rem', color: '#888' }}>Game coming soon! 🚧</p>
-          <button className="btn-back" onClick={handleBack} style={{ marginTop: '1rem' }}>
-            ← Back to Games
-          </button>
+          <div className="detail-back-container">
+            <button className="btn btn-back" onClick={handleBack}>
+              Back to Games
+            </button>
+          </div>
         </div>
       );
     }

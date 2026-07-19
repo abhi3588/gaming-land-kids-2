@@ -47,7 +47,7 @@ const WeatherWatcher = ({ onBack }) => {
             <button className="btn btn-primary" onClick={handleReset}>
               Explore Again
             </button>
-            <button className="btn" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
               Back to Science
             </button>
           </div>
