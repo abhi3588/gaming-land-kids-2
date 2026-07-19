@@ -135,12 +135,18 @@ const FloatOrSink = ({ onBack }) => {
           </button>
         </div>
       ) : (
-        <div className="detail-back-container">
+        <div className="detail-back-container" style={{ gap: '0.75rem', flexWrap: 'wrap' }}>
           <button className="btn btn-primary" onClick={handleNext}>
             {index < ITEMS.length - 1 ? 'Next Toy ➡️' : 'See Score 🏆'}
           </button>
         </div>
       )}
+
+      <div className="detail-back-container">
+        <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+          Back to Science
+        </button>
+      </div>
     </div>
   );
 };

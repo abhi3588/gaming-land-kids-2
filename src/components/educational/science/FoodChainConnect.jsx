@@ -224,18 +224,25 @@ const FoodChainConnect = ({ onBack }) => {
 
       {/* Controls */}
       {!solved ? (
-        <div className="detail-back-container" style={{ gap: '0.75rem', flexWrap: 'wrap' }}>
-          <button
-            className="btn btn-primary"
-            onClick={handleCheck}
-            disabled={chain.length !== level.nodes.length}
-          >
-            Check my chain ✅
-          </button>
-          <button className="btn" onClick={() => resetLevel(levelIndex)}>
-            Shuffle
-          </button>
-        </div>
+        <>
+          <div className="detail-back-container" style={{ gap: '0.75rem', flexWrap: 'wrap' }}>
+            <button
+              className="btn btn-primary"
+              onClick={handleCheck}
+              disabled={chain.length !== level.nodes.length}
+            >
+              Check my chain ✅
+            </button>
+            <button className="btn" onClick={() => resetLevel(levelIndex)}>
+              Shuffle
+            </button>
+          </div>
+          <div className="detail-back-container">
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+              Back to Science
+            </button>
+          </div>
+        </>
       ) : (
         <div className="fc-success">
           <div className="fc-success-badge">🌟 Correct chain! Energy flows this way!</div>
