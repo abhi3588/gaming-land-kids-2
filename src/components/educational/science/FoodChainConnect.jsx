@@ -1,7 +1,15 @@
 import { useState } from 'react';
 import { playSound } from '../../../utils/sounds';
 
-// Each level is an ordered energy chain (sun → plant → ... → top predator).
+// 10 graduated levels. Each level is an ordered energy chain
+// (sun → plant → ... → top predator). Chain length grows from 4 to 8 links.
+//  - Levels 1–3: 4 links
+//  - Levels 4–6: 5 links
+//  - Levels 7–8: 6 links
+//  - Level 9:    7 links
+//  - Level 10:   8 links
+// A wrong order stops the child (plays `wrong`, shows feedback) and lets them
+// tap the red cards back to the deck and try again — no advancing until correct.
 const LEVELS = [
   {
     title: 'Garden Chain',
@@ -24,6 +32,26 @@ const LEVELS = [
     fact: 'Bees drink flower nectar, and frogs love to snack on bees!'
   },
   {
+    title: 'Ocean Chain',
+    nodes: [
+      { id: 'sun', emoji: '☀️', label: 'Sun' },
+      { id: 'algae', emoji: '🌿', label: 'Algae' },
+      { id: 'fish', emoji: '🐟', label: 'Fish' },
+      { id: 'shark', emoji: '🦈', label: 'Shark' }
+    ],
+    fact: 'Tiny algae feed small fish, and big sharks rule the ocean!'
+  },
+  {
+    title: 'Farm Chain',
+    nodes: [
+      { id: 'sun', emoji: '☀️', label: 'Sun' },
+      { id: 'grass', emoji: '🌿', label: 'Grass' },
+      { id: 'mouse', emoji: '🐭', label: 'Mouse' },
+      { id: 'owl', emoji: '🦉', label: 'Owl' }
+    ],
+    fact: 'Mice nibble grass seeds, and owls swoop down to catch them!'
+  },
+  {
     title: 'Forest Chain',
     nodes: [
       { id: 'sun', emoji: '☀️', label: 'Sun' },
@@ -33,6 +61,63 @@ const LEVELS = [
       { id: 'snake', emoji: '🐍', label: 'Snake' }
     ],
     fact: 'Bigger animals eat smaller ones — that is how a food chain grows!'
+  },
+  {
+    title: 'Savanna Chain',
+    nodes: [
+      { id: 'sun', emoji: '☀️', label: 'Sun' },
+      { id: 'grass', emoji: '🌿', label: 'Grass' },
+      { id: 'zebra', emoji: '🦓', label: 'Zebra' },
+      { id: 'lion', emoji: '🦁', label: 'Lion' }
+    ],
+    fact: 'Zebras graze on grass, and lions are the kings who hunt them!'
+  },
+  {
+    title: 'Jungle Chain',
+    nodes: [
+      { id: 'sun', emoji: '☀️', label: 'Sun' },
+      { id: 'leaves', emoji: '🍃', label: 'Leaves' },
+      { id: 'monkey', emoji: '🐒', label: 'Monkey' },
+      { id: 'snake', emoji: '🐍', label: 'Snake' },
+      { id: 'eagle', emoji: '🦅', label: 'Eagle' }
+    ],
+    fact: 'Monkeys munch leaves, snakes chase monkeys, and eagles snatch from above!'
+  },
+  {
+    title: 'Desert Chain',
+    nodes: [
+      { id: 'sun', emoji: '☀️', label: 'Sun' },
+      { id: 'cactus', emoji: '🌵', label: 'Cactus' },
+      { id: 'mouse', emoji: '🐭', label: 'Mouse' },
+      { id: 'snake', emoji: '🐍', label: 'Snake' },
+      { id: 'hawk', emoji: '🦅', label: 'Hawk' }
+    ],
+    fact: 'Cactus feeds mice, snakes eat mice, and hawks swoop for snakes!'
+  },
+  {
+    title: 'Sea Chain',
+    nodes: [
+      { id: 'sun', emoji: '☀️', label: 'Sun' },
+      { id: 'plankton', emoji: '🦠', label: 'Plankton' },
+      { id: 'smallfish', emoji: '🐠', label: 'Small Fish' },
+      { id: 'bigfish', emoji: '🐟', label: 'Big Fish' },
+      { id: 'seal', emoji: '🦭', label: 'Seal' },
+      { id: 'orca', emoji: '🐋', label: 'Orca' }
+    ],
+    fact: 'From tiny plankton to the mighty orca, energy climbs up the sea!'
+  },
+  {
+    title: 'Woodland Chain',
+    nodes: [
+      { id: 'sun', emoji: '☀️', label: 'Sun' },
+      { id: 'acorn', emoji: '🌰', label: 'Acorn' },
+      { id: 'squirrel', emoji: '🐿️', label: 'Squirrel' },
+      { id: 'fox', emoji: '🦊', label: 'Fox' },
+      { id: 'wolf', emoji: '🐺', label: 'Wolf' },
+      { id: 'bear', emoji: '🐻', label: 'Bear' },
+      { id: 'eagle', emoji: '🦅', label: 'Eagle' }
+    ],
+    fact: 'A grand chain from acorns all the way up to the eagle in the sky!'
   }
 ];
 
