@@ -61,6 +61,46 @@ const SCENARIOS = [
       { id: 'help', text: 'Offer to help them', correct: true }
     ],
     lesson: 'Respect means being kind and helpful to everyone, especially elders!'
+  },
+  {
+    id: 'loud-place',
+    emoji: '🤫',
+    situation: 'Others are reading quietly in the library. What do you do?',
+    options: [
+      { id: 'whisper', text: 'Whisper or stay quiet', correct: true },
+      { id: 'shout', text: 'Shout to your friend', correct: false }
+    ],
+    lesson: 'Respect means being quiet where others need calm!'
+  },
+  {
+    id: 'different-food',
+    emoji: '🍜',
+    situation: 'A friend eats food you\'ve never seen before. What do you do?',
+    options: [
+      { id: 'curious', text: 'Ask about it kindly with interest', correct: true },
+      { id: 'gross', text: 'Say \'yuck\' and make faces', correct: false }
+    ],
+    lesson: 'Respect means being curious, not rude, about differences!'
+  },
+  {
+    id: 'wait-turn',
+    emoji: '🎢',
+    situation: 'You\'re in line and someone cuts in front. What do you do?',
+    options: [
+      { id: 'polite', text: 'Politely say you were next', correct: true },
+      { id: 'push', text: 'Shove them out of the way', correct: false }
+    ],
+    lesson: 'Respect means waiting your turn and speaking up kindly!'
+  },
+  {
+    id: 'apology',
+    emoji: '🙏',
+    situation: 'You accidentally bump into someone. What do you do?',
+    options: [
+      { id: 'sorry', text: 'Say sorry right away', correct: true },
+      { id: 'ignore', text: 'Walk away like nothing happened', correct: false }
+    ],
+    lesson: 'Respect means apologizing when we make a mistake!'
   }
 ];
 

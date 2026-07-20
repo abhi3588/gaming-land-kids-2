@@ -61,6 +61,46 @@ const SCENARIOS = [
       { id: 'forgive', text: 'Say it\'s okay and forgive them', correct: true }
     ],
     lesson: 'Kindness means forgiving others when they make mistakes!'
+  },
+  {
+    id: 'hold-door',
+    emoji: '🚪',
+    situation: 'A grown-up is carrying heavy bags behind you at the door. What do you do?',
+    options: [
+      { id: 'hold-door', text: 'Hold the door open for them', correct: true },
+      { id: 'let-close', text: 'Let it close in their face', correct: false }
+    ],
+    lesson: 'Small kind acts like holding a door make someone\'s day!'
+  },
+  {
+    id: 'new-student',
+    emoji: '🆕',
+    situation: 'A new student looks lost in the hallway. What do you do?',
+    options: [
+      { id: 'guide', text: 'Walk them to their classroom', correct: true },
+      { id: 'ignore', text: 'Walk past quickly', correct: false }
+    ],
+    lesson: 'Kindness is helping others find their way!'
+  },
+  {
+    id: 'dropped-books',
+    emoji: '📚',
+    situation: 'A classmate drops all their books in the hall. What do you do?',
+    options: [
+      { id: 'help-pick', text: 'Help them pick everything up', correct: true },
+      { id: 'laugh', text: 'Laugh and keep walking', correct: false }
+    ],
+    lesson: 'Helping in small moments shows a big kind heart!'
+  },
+  {
+    id: 'elder-cross',
+    emoji: '🦮',
+    situation: 'An elderly neighbor struggles to cross the street. What do you do?',
+    options: [
+      { id: 'assist', text: 'Offer your arm and cross slowly with them', correct: true },
+      { id: 'rush', text: 'Rush ahead and leave them', correct: false }
+    ],
+    lesson: 'Kindness means looking out for those who need help!'
   }
 ];
 

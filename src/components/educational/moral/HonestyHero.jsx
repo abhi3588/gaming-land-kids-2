@@ -61,6 +61,46 @@ const SCENARIOS = [
       { id: 'confess-sorry', text: 'Confess to your friend and apologize sincerely', correct: true }
     ],
     lesson: 'Telling the truth helps rebuild trust in friendships!'
+  },
+  {
+    id: 'library-book',
+    emoji: '📚',
+    situation: 'You accidentally ripped a library book\'s page. What do you do?',
+    options: [
+      { id: 'tell-librarian', text: 'Tell the librarian and offer to help', correct: true },
+      { id: 'hide', text: 'Tape it and hope no one notices', correct: false }
+    ],
+    lesson: 'Owning up to accidents is the honest thing to do!'
+  },
+  {
+    id: 'test-peek',
+    emoji: '📝',
+    situation: 'You can see a classmate\'s answers during a test. What do you do?',
+    options: [
+      { id: 'own-work', text: 'Cover your paper and do your own work', correct: true },
+      { id: 'peek', text: 'Copy their answers quietly', correct: false }
+    ],
+    lesson: 'Honest work is worth more than a high score!'
+  },
+  {
+    id: 'found-toy',
+    emoji: '🧸',
+    situation: 'You find a toy in the park that someone lost. What do you do?',
+    options: [
+      { id: 'turn-in', text: 'Leave it at the lost-and-found', correct: true },
+      { id: 'take', text: 'Take it home as yours', correct: false }
+    ],
+    lesson: 'Returning lost things shows you\'re trustworthy!'
+  },
+  {
+    id: 'broke-vase',
+    emoji: '🏺',
+    situation: 'You knocked over a vase while reaching for a book. What do you do?',
+    options: [
+      { id: 'admit', text: 'Tell your parents right away', correct: true },
+      { id: 'blame-cat', text: 'Blame the cat', correct: false }
+    ],
+    lesson: 'Telling the truth, even when scared, builds trust!'
   }
 ];
 
@@ -114,6 +154,7 @@ const HonestyHero = ({ onBack }) => {
       <div className="game-header">
         <div>Honesty Hero</div>
         <div>Scenario {currentScenario + 1} / {SCENARIOS.length}</div>
+        <div>Score: {score} / {SCENARIOS.length}</div>
         <div className="progress-container">
           <div className="progress-bar" style={{ width: `${((currentScenario + 1) / SCENARIOS.length) * 100}%` }} />
         </div>

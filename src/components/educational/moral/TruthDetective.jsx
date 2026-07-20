@@ -61,6 +61,46 @@ const SCENARIOS = [
       { id: 'keep-promise', text: 'Keep your promise and help', correct: true }
     ],
     lesson: 'Being honest means keeping your promises!'
+  },
+  {
+    id: 'late-back',
+    emoji: '🕐',
+    situation: 'You stayed up late playing and are tired at school. What do you tell your teacher?',
+    options: [
+      { id: 'honest-tired', text: 'Tell the truth about staying up late', correct: true },
+      { id: 'lie', text: 'Say you were sick', correct: false }
+    ],
+    lesson: 'Telling the truth about your choices helps you learn!'
+  },
+  {
+    id: 'broke-window',
+    emoji: '🪟',
+    situation: 'You accidentally broke a window with a ball. What do you do?',
+    options: [
+      { id: 'admit-window', text: 'Tell your parents and help fix it', correct: true },
+      { id: 'blame-wind', text: 'Blame the wind', correct: false }
+    ],
+    lesson: 'Owning up to accidents is the honest path!'
+  },
+  {
+    id: 'found-candy',
+    emoji: '🍬',
+    situation: 'You find candy that isn\'t yours on a desk. What do you do?',
+    options: [
+      { id: 'ask-candy', text: 'Ask who it belongs to', correct: true },
+      { id: 'take-candy', text: 'Eat it secretly', correct: false }
+    ],
+    lesson: 'Honesty means not taking what isn\'t yours!'
+  },
+  {
+    id: 'lied-friend',
+    emoji: '🤥',
+    situation: 'You accidentally told a small lie to a friend. What do you do?',
+    options: [
+      { id: 'confess-lie', text: 'Tell them the truth and say sorry', correct: true },
+      { id: 'stay-quiet', text: 'Stay quiet and hope they forget', correct: false }
+    ],
+    lesson: 'Coming clean repairs trust with friends!'
   }
 ];
 

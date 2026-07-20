@@ -64,6 +64,20 @@ const SCENARIOS = [
     text: 'A magician pulls a rabbit from an empty hat!',
     correct: 'surprised',
     why: 'Something unexpected makes us surprised!'
+  },
+  {
+    id: 'win',
+    emoji: '🏆',
+    text: 'You win a race and jump with joy!',
+    correct: 'happy',
+    why: 'Winning something we tried hard for makes us happy!'
+  },
+  {
+    id: 'lost-toy',
+    emoji: '😭',
+    text: 'Your favorite toy breaks and you feel like crying.',
+    correct: 'sad',
+    why: 'Losing something we love can make us very sad.'
   }
 ];
 

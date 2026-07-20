@@ -61,6 +61,46 @@ const SCENARIOS = [
       { id: 'quit', text: 'Quit because you might lose', correct: false }
     ],
     lesson: 'A team wins when everyone tries their best!'
+  },
+  {
+    id: 'music',
+    emoji: '🎵',
+    situation: 'Your class is learning a song and a friend forgets the words. What do you do?',
+    options: [
+      { id: 'help', text: 'Sing the words together and help them', correct: true },
+      { id: 'laugh', text: 'Laugh at them for forgetting', correct: false }
+    ],
+    lesson: 'Helping a friend learn makes the whole team shine!'
+  },
+  {
+    id: 'puzzle',
+    emoji: '🧩',
+    situation: 'You and a friend are stuck on a hard puzzle. What do you do?',
+    options: [
+      { id: 'work', text: 'Put your heads together to solve it', correct: true },
+      { id: 'quit', text: 'Give up and walk away', correct: false }
+    ],
+    lesson: 'Two minds working together can solve anything!'
+  },
+  {
+    id: 'playground',
+    emoji: '🧼',
+    situation: 'The playground is messy after recess. What do you do?',
+    options: [
+      { id: 'tidy', text: 'Team up with friends to tidy it', correct: true },
+      { id: 'ignore', text: 'Leave the mess for someone else', correct: false }
+    ],
+    lesson: 'Cooperating keeps our shared spaces clean!'
+  },
+  {
+    id: 'bike',
+    emoji: '🚴',
+    situation: 'A teammate falls during a bike ride. What do you do?',
+    options: [
+      { id: 'help', text: 'Stop and help them up', correct: true },
+      { id: 'leave', text: 'Ride off without them', correct: false }
+    ],
+    lesson: 'Real teammates look out for one another!'
   }
 ];
 

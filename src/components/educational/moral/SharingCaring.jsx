@@ -61,6 +61,46 @@ const SCENARIOS = [
       { id: 'eat-all', text: 'Eat the whole thing quickly', correct: false }
     ],
     lesson: 'Sharing a treat makes everyone smile!'
+  },
+  {
+    id: 'umbrella',
+    emoji: '☂️',
+    situation: 'It starts raining and a friend has no umbrella. What do you do?',
+    options: [
+      { id: 'share-umbrella', text: 'Share your umbrella together', correct: true },
+      { id: 'keep-dry', text: 'Keep it only for yourself', correct: false }
+    ],
+    lesson: 'Sharing keeps friends warm and dry!'
+  },
+  {
+    id: 'ball',
+    emoji: '⚽',
+    situation: 'You have one ball and two friends want to play. What do you do?',
+    options: [
+      { id: 'take-turns', text: 'Take turns so everyone plays', correct: true },
+      { id: 'keep-ball', text: 'Refuse to let anyone touch it', correct: false }
+    ],
+    lesson: 'Sharing a toy means everyone gets a turn!'
+  },
+  {
+    id: 'blanket',
+    emoji: '🛌',
+    situation: 'Your sibling is cold on the couch. What do you do?',
+    options: [
+      { id: 'share-blanket', text: 'Share your blanket with them', correct: true },
+      { id: 'keep', text: 'Keep it all to yourself', correct: false }
+    ],
+    lesson: 'Caring means sharing comfort with family!'
+  },
+  {
+    id: 'story-time',
+    emoji: '📖',
+    situation: 'Your little cousin wants to hear a story. What do you do?',
+    options: [
+      { id: 'read', text: 'Read it to them with a smile', correct: true },
+      { id: 'refuse', text: 'Tell them to go away', correct: false }
+    ],
+    lesson: 'Sharing your time is a wonderful way to care!'
   }
 ];
 

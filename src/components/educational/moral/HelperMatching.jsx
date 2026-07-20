@@ -2,17 +2,53 @@ import { useState } from 'react';
 import { playSound } from '../../../utils/sounds';
 
 const HELPERS = [
-  { id: 'firefighter', emoji: '👨‍🚒', name: 'Firefighter', tool: 'hose' },
+  { id: 'firefighter', emoji: '🧑‍🚒', name: 'Firefighter', tool: 'hose' },
   { id: 'doctor', emoji: '👩‍⚕️', name: 'Doctor', tool: 'stethoscope' },
   { id: 'teacher', emoji: '👩‍🏫', name: 'Teacher', tool: 'books' },
-  { id: 'gardener', emoji: '🧑‍🌾', name: 'Gardener', tool: 'wateringcan' }
+  { id: 'gardener', emoji: '🧑‍🌾', name: 'Gardener', tool: 'wateringcan' },
+  { id: 'chef', emoji: '👨‍🍳', name: 'Chef', tool: 'pan' },
+  { id: 'pilot', emoji: '🧑‍✈️', name: 'Pilot', tool: 'plane' },
+  { id: 'painter', emoji: '🧑‍🎨', name: 'Painter', tool: 'brush' },
+  { id: 'builder', emoji: '👷', name: 'Builder', tool: 'hammer' },
+  { id: 'police', emoji: '👮', name: 'Police Officer', tool: 'badge' },
+  { id: 'dentist', emoji: '🦷', name: 'Dentist', tool: 'toothbrush' },
+  { id: 'astronaut', emoji: '🧑‍🚀', name: 'Astronaut', tool: 'rocket' },
+  { id: 'mail', emoji: '📮', name: 'Mail Carrier', tool: 'envelope' }
 ];
 
 const TOOLS = [
   { id: 'hose', emoji: '🧯', label: 'Hose' },
   { id: 'stethoscope', emoji: '🩺', label: 'Stethoscope' },
   { id: 'books', emoji: '📚', label: 'Books' },
-  { id: 'wateringcan', emoji: '💧', label: 'Watering Can' }
+  { id: 'wateringcan', emoji: '💧', label: 'Watering Can' },
+  { id: 'pan', emoji: '🍳', label: 'Pan' },
+  { id: 'plane', emoji: '🛩️', label: 'Plane' },
+  { id: 'brush', emoji: '🖌️', label: 'Brush' },
+  { id: 'hammer', emoji: '🔨', label: 'Hammer' },
+  { id: 'badge', emoji: '🚓', label: 'Badge' },
+  { id: 'toothbrush', emoji: '🪥', label: 'Toothbrush' },
+  { id: 'rocket', emoji: '🚀', label: 'Rocket' },
+  { id: 'envelope', emoji: '✉️', label: 'Envelope' }
+];
+
+// 10 graduated rounds. Each round is a fresh matching board of helpers → tools.
+//  - Rounds 1–2: 3 helpers
+//  - Rounds 3–5: 4–5 helpers
+//  - Rounds 6–8: 5 helpers
+//  - Rounds 9–10: 6 helpers
+// A wrong tool stops the child (plays `wrong`) and lets them try again — no
+// advancing until every helper is matched correctly.
+const ROUNDS = [
+  ['firefighter', 'doctor', 'teacher'],
+  ['gardener', 'chef', 'pilot'],
+  ['painter', 'builder', 'police', 'dentist'],
+  ['astronaut', 'mail', 'firefighter', 'teacher'],
+  ['doctor', 'gardener', 'chef', 'pilot', 'painter'],
+  ['builder', 'police', 'dentist', 'astronaut', 'mail'],
+  ['firefighter', 'doctor', 'teacher', 'gardener', 'chef', 'pilot'],
+  ['painter', 'builder', 'police', 'dentist', 'astronaut', 'mail'],
+  ['doctor', 'teacher', 'police', 'dentist', 'astronaut', 'mail'],
+  ['firefighter', 'gardener', 'chef', 'painter', 'builder', 'pilot']
 ];
 
 const shuffle = (arr) => {
@@ -25,22 +61,32 @@ const shuffle = (arr) => {
 };
 
 const HelperMatching = ({ onBack }) => {
-  const [deck, setDeck] = useState(() => shuffle(TOOLS));
+  const [roundIndex, setRoundIndex] = useState(0);
+  const [deck, setDeck] = useState(() => {
+    const rh = HELPERS.filter((h) => ROUNDS[0].includes(h.id));
+    return shuffle(rh.map((h) => TOOLS.find((t) => t.id === h.tool)));
+  });
   const [selected, setSelected] = useState(null); // selected tool id from the deck
   const [assigned, setAssigned] = useState({}); // helperId -> toolId
   const [shakeHelper, setShakeHelper] = useState(null);
+  const [roundSolved, setRoundSolved] = useState(false);
   const [completed, setCompleted] = useState(false);
+
+  const roundHelpers = HELPERS.filter((h) => ROUNDS[roundIndex].includes(h.id));
+
+  // The board for each round is built in handleNext / handleReset (and seeded
+  // above for round 1), so no effect is needed to reset between rounds.
 
   const matchedCount = Object.keys(assigned).length;
 
   const handleToolTap = (toolId) => {
-    if (assigned[toolId]) return;
+    if (assigned[toolId] || roundSolved) return;
     playSound('pop');
     setSelected(selected === toolId ? null : toolId);
   };
 
   const handleHelperTap = (helper) => {
-    if (!selected) return;
+    if (!selected || roundSolved) return;
     if (assigned[helper.id]) return;
 
     if (helper.tool === selected) {
@@ -49,9 +95,9 @@ const HelperMatching = ({ onBack }) => {
       setAssigned(next);
       setDeck((prev) => prev.filter((t) => t.id !== selected));
       setSelected(null);
-      if (Object.keys(next).length === HELPERS.length) {
+      if (Object.keys(next).length === roundHelpers.length) {
         playSound('celebrate');
-        setCompleted(true);
+        setRoundSolved(true);
       }
     } else {
       playSound('wrong');
@@ -61,6 +107,7 @@ const HelperMatching = ({ onBack }) => {
   };
 
   const handleRemove = (helperId) => {
+    if (roundSolved) return;
     playSound('pop');
     const toolId = assigned[helperId];
     setAssigned((prev) => {
@@ -71,12 +118,31 @@ const HelperMatching = ({ onBack }) => {
     setDeck((prev) => [...prev, TOOLS.find((t) => t.id === toolId)]);
   };
 
+  const handleNext = () => {
+    if (roundIndex < ROUNDS.length - 1) {
+      const next = roundIndex + 1;
+      setRoundIndex(next);
+      const rh = HELPERS.filter((h) => ROUNDS[next].includes(h.id));
+      setDeck(shuffle(rh.map((h) => TOOLS.find((t) => t.id === h.tool))));
+      setAssigned({});
+      setSelected(null);
+      setShakeHelper(null);
+      setRoundSolved(false);
+    } else {
+      playSound('celebrate');
+      setCompleted(true);
+    }
+  };
+
   const handleReset = () => {
     playSound('pop');
-    setDeck(shuffle(TOOLS));
+    setRoundIndex(0);
+    const rh = HELPERS.filter((h) => ROUNDS[0].includes(h.id));
+    setDeck(shuffle(rh.map((h) => TOOLS.find((t) => t.id === h.tool))));
     setSelected(null);
     setAssigned({});
     setShakeHelper(null);
+    setRoundSolved(false);
     setCompleted(false);
   };
 
@@ -86,9 +152,9 @@ const HelperMatching = ({ onBack }) => {
         <div className="champion-screen">
           <div style={{ fontSize: '4rem' }}>🦸</div>
           <h2>Helper Hero!</h2>
-          <p>You matched every tool to the right community helper!</p>
+          <p>You matched every tool across all {ROUNDS.length} rounds — what a hero!</p>
           <p style={{ fontSize: '1.1rem', color: '#666', marginTop: '1rem' }}>
-            Firefighters, doctors, teachers, and gardeners all work hard to help
+            Firefighters, doctors, teachers, gardeners, and more all work hard to help
             us every day. Every job is important — let's respect them all! 💙
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
@@ -108,9 +174,10 @@ const HelperMatching = ({ onBack }) => {
     <div className="game-view pop-in">
       <div className="game-header">
         <div>Helper Matching 🦸</div>
-        <div>Matched {matchedCount} / {HELPERS.length}</div>
+        <div>Round {roundIndex + 1} / {ROUNDS.length}</div>
+        <div>Matched {matchedCount} / {roundHelpers.length}</div>
         <div className="progress-container">
-          <div className="progress-bar" style={{ width: `${(matchedCount / HELPERS.length) * 100}%` }} />
+          <div className="progress-bar" style={{ width: `${(matchedCount / roundHelpers.length) * 100}%` }} />
         </div>
       </div>
 
@@ -120,7 +187,7 @@ const HelperMatching = ({ onBack }) => {
 
       {/* Helpers as targets */}
       <div className="hm-helpers">
-        {HELPERS.map((helper) => {
+        {roundHelpers.map((helper) => {
           const toolId = assigned[helper.id];
           const tool = toolId ? TOOLS.find((t) => t.id === toolId) : null;
           const isSelectedTarget = selected && !tool;
@@ -168,11 +235,26 @@ const HelperMatching = ({ onBack }) => {
         )}
       </div>
 
-      <div className="detail-back-container">
-        <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
-          Back to Moral Education
-        </button>
-      </div>
+      {/* Success / controls */}
+      {roundSolved ? (
+        <div className="fc-success" style={{ marginTop: '1.5rem' }}>
+          <div className="fc-success-badge">🌟 Round complete! Every helper got their tool!</div>
+          <div className="detail-back-container" style={{ gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem' }}>
+            <button className="btn btn-primary" onClick={handleNext}>
+              {roundIndex < ROUNDS.length - 1 ? 'Next Round ➡️' : 'Finish! 🎉'}
+            </button>
+            <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+              Back to Moral Education
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="detail-back-container">
+          <button className="btn btn-back" onClick={() => { if (typeof onBack === 'function') onBack(); }}>
+            Back to Moral Education
+          </button>
+        </div>
+      )}
     </div>
   );
 };

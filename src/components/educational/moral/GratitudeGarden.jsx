@@ -61,6 +61,46 @@ const SCENARIOS = [
       { id: 'smile-thank', text: 'Smile, say thank you, and feel happy', correct: true }
     ],
     lesson: 'Accepting compliments with a warm thank you shows politeness!'
+  },
+  {
+    id: 'bus-driver',
+    emoji: '🚌',
+    situation: 'The school bus driver gets you home safely every day. What should you do?',
+    options: [
+      { id: 'thank-driver', text: 'Say thank you when you step off', correct: true },
+      { id: 'ignore', text: 'Run off without a word', correct: false }
+    ],
+    lesson: 'Thanking those who serve us shows a grateful heart!'
+  },
+  {
+    id: 'friend-help-homework',
+    emoji: '📖',
+    situation: 'A friend explains a tricky word to you. What should you do?',
+    options: [
+      { id: 'say-thanks', text: 'Thank them for their patience', correct: true },
+      { id: 'shrug', text: 'Shrug and say nothing', correct: false }
+    ],
+    lesson: 'Gratitude for small kindnesses builds strong friendships!'
+  },
+  {
+    id: 'mom-cooks-breakfast',
+    emoji: '🍳',
+    situation: 'Mom makes your favorite breakfast before work. What should you do?',
+    options: [
+      { id: 'appreciate', text: 'Hug her and say it was delicious', correct: true },
+      { id: 'complain', text: 'Complain it took too long', correct: false }
+    ],
+    lesson: 'Noticing others\' efforts fills the home with gratitude!'
+  },
+  {
+    id: 'sibling-share',
+    emoji: '🧣',
+    situation: 'Your sibling lets you wear their favorite jacket. What should you do?',
+    options: [
+      { id: 'thank-care', text: 'Thank them and return it clean', correct: true },
+      { id: 'keep', text: 'Keep it and never give it back', correct: false }
+    ],
+    lesson: 'Being thankful for sharing keeps siblings close!'
   }
 ];
 
@@ -114,6 +154,7 @@ const GratitudeGarden = ({ onBack }) => {
       <div className="game-header">
         <div>Gratitude Garden</div>
         <div>Scenario {currentScenario + 1} / {SCENARIOS.length}</div>
+        <div>Score: {score} / {SCENARIOS.length}</div>
         <div className="progress-container">
           <div className="progress-bar" style={{ width: `${((currentScenario + 1) / SCENARIOS.length) * 100}%` }} />
         </div>

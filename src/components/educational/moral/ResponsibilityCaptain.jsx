@@ -61,6 +61,46 @@ const SCENARIOS = [
       { id: 'do-share', text: 'Do your fair share of the work', correct: true }
     ],
     lesson: 'Responsibility means doing your part in teamwork!'
+  },
+  {
+    id: 'plants',
+    emoji: '🪴',
+    situation: 'Your classroom plant is wilting. What do you do?',
+    options: [
+      { id: 'water', text: 'Water it and care for it', correct: true },
+      { id: 'ignore', text: 'Let it dry up', correct: false }
+    ],
+    lesson: 'Responsibility means caring for living things around you!'
+  },
+  {
+    id: 'room-tidy',
+    emoji: '🧸',
+    situation: 'Your room is messy before bed. What do you do?',
+    options: [
+      { id: 'tidy', text: 'Tidy it so morning is easy', correct: true },
+      { id: 'leave', text: 'Leave it for tomorrow-you', correct: false }
+    ],
+    lesson: 'Responsibility means taking care of your own space!'
+  },
+  {
+    id: 'sibling-promise',
+    emoji: '🤞',
+    situation: 'You promised to play with your sibling later. What do you do?',
+    options: [
+      { id: 'keep', text: 'Keep your promise when the time comes', correct: true },
+      { id: 'forget', text: 'Pretend you never promised', correct: false }
+    ],
+    lesson: 'Responsibility means keeping the promises you make!'
+  },
+  {
+    id: 'save-money',
+    emoji: '🐷',
+    situation: 'You get some pocket money. What do you do?',
+    options: [
+      { id: 'save', text: 'Save some for something special', correct: true },
+      { id: 'spend-all', text: 'Spend it all at once', correct: false }
+    ],
+    lesson: 'Responsibility means planning ahead with your resources!'
   }
 ];
 
