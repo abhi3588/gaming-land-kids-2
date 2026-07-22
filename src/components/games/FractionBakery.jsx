@@ -123,7 +123,7 @@ export default function FractionBakery({ onBack }) {
   return (
     <div className="game-view pop-in">
       <div className="game-header">
-        <div>Fraction Bakery 🍕</div>
+        <h2 style={{ margin: 0, fontSize: 'inherit', fontWeight: 'inherit' }}>Fraction Bakery 🍕</h2>
         <div>Level {level} / {TOTAL_LEVELS}</div>
         <div className="progress-container">
           <div className="progress-bar" style={{ width: `${(level / TOTAL_LEVELS) * 100}%` }} />
@@ -207,6 +207,7 @@ export default function FractionBakery({ onBack }) {
                   className={`quiz-option-btn${stateClass}`}
                   onClick={() => handleSelectOption(opt)}
                   disabled={solved}
+                  aria-label={`${opt.fraction} — ${opt.label}`}
                   style={{
                     display: 'flex',
                     flexDirection: 'column',

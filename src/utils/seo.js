@@ -1,48 +1,26 @@
 // ============================================
 // SEO UTILITIES — Dynamic Meta Tags & JSON-LD
 // ============================================
-import { SITE_ORIGIN, BASE_URL, joinUrl } from '../seoConfig.js';
+import {
+  SITE_ORIGIN,
+  BASE_URL,
+  joinUrl,
+  absoluteUrl,
+  canonicalUrl,
+  defaultJsonLd,
+  organizationJsonLd,
+  breadcrumbJsonLd,
+  SITE_NAME,
+  SITE_DESCRIPTION,
+} from './seoConfig.js';
 
 // ------------------------------------------------------------------
 // Schema factory helpers (keep JSON-LD consistent everywhere)
 // ------------------------------------------------------------------
-export const websiteSchema = () => ({
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  '@id': joinUrl(SITE_ORIGIN, '#website'),
-  name: 'Gaming Land Kids',
-  url: SITE_ORIGIN,
-  description:
-    '30+ free educational games, bedtime stories, nursery rhymes, science activities, moral education, and fun activities for children ages 3-10.',
-  publisher: { '@id': joinUrl(SITE_ORIGIN, '#organization') },
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: `${joinUrl(SITE_ORIGIN, 'search')}?q={search_term_string}`,
-    },
-    'query-input': 'required name=search_term_string',
-  },
-});
+export const websiteSchema = () => defaultJsonLd;
 
-export const organizationSchema = () => ({
-  '@context': 'https://schema.org',
-  '@type': 'EducationalOrganization',
-  '@id': joinUrl(SITE_ORIGIN, '#organization'),
-  name: 'Gaming Land Kids',
-  url: SITE_ORIGIN,
-  logo: joinUrl(BASE_URL, 'icons', 'icon-512.png'),
-  description:
-    'A free learning platform for children featuring 30+ educational games, stories, rhymes, creative activities, interactive science experiments, and moral character-building activities for ages 3-10.',
-  educationalUse: 'Play-based learning',
-  educationalLevel: ['Preschool', 'Kindergarten', 'Elementary'],
-  targetAudience: { '@type': 'Audience', audienceType: 'Children ages 3-10' },
-  sameAs: [
-    'https://facebook.com/gaminglandkids',
-    'https://twitter.com/gaminglandkids',
-    'https://youtube.com/@gaminglandkids',
-  ],
-});
+export const organizationSchema = () => organizationJsonLd;
+
 
 export const gameSchema = (game) => ({
   '@context': 'https://schema.org',
@@ -102,7 +80,11 @@ const getGameTeaches = (gameId) => {
     sequence: ['Memory', 'Pattern Recognition', 'Sequencing'],
     wordscramble: ['Spelling', 'Anagrams', 'Vocabulary'],
     memorymatrix: ['Visual Memory', 'Spatial Memory', 'Concentration'],
-    operatorquest: ['Math Operators', 'Equation Solving', 'Arithmetic'],
+    operatorquest:     ['Math Operators', 'Equation Solving', 'Arithmetic'],
+    'emotion-express': ['Emotional Intelligence', 'Feelings Recognition', 'Empathy', 'Social Skills'],
+    'color-magic':     ['Color Theory', 'Primary Colors', 'Color Mixing', 'Creative Arts'],
+    'fraction-bakery': ['Fractions', 'Numeracy', 'Math Problem Solving', 'Pizza Slices'],
+    'globe-trotter':   ['World Geography', 'Landmarks', 'Countries', 'Capitals', 'Animal Habitats'],
   };
   return teachesMap[gameId] || ['Educational Concepts'];
 };
@@ -267,11 +249,11 @@ const buildBreadcrumbs = (type, item, opts) => {
 export const getTabSEO = (tab, extra = {}) => {
   const configs = {
     games: {
-      title: '🎮 30+ Educational Games for Kids Ages 3-10 | Gaming Land Kids',
+      title: '🎮 38+ Educational Games for Kids Ages 3-10 | Gaming Land Kids',
       description:
         'Free educational games: math, counting, alphabet, colors, shapes, patterns, memory, words, spelling, sudoku. Safe, ad-free learning through play!',
       canonical: joinUrl(BASE_URL, 'games'),
-      ogTitle: '🎮 30+ Educational Games for Kids Ages 3-10',
+      ogTitle: '🎮 38+ Educational Games for Kids Ages 3-10',
       ogDescription:
         'Free educational games: math, counting, alphabet, colors, shapes, patterns, memory, words, spelling. Safe, ad-free learning!',
       ogImage: joinUrl(BASE_URL, 'og-games.png'),
@@ -369,13 +351,13 @@ export const getTabSEO = (tab, extra = {}) => {
       },
     },
     fun: {
-      title: '🎉 Fun Activities for Kids — Hands-on Creative Ideas | Gaming Land Kids',
+      title: '🎉 12 Fun Activities for Kids — Hands-on Creative Ideas | Gaming Land Kids',
       description:
-        '8 hands-on fun activities: Rainbow Hunt, Story Dice, Shape Collage, Breathing Star, Kitchen Band, Kindness Coupons, Nature Journal, Sock Puppet Show. Ages 3-10.',
+        '12 hands-on fun activities: Rainbow Hunt, Story Dice, Shape Collage, Breathing Star, Kitchen Band, Kindness Coupons, Nature Journal, Sock Puppet Show, Shadow Puppets, Bubble Sculptures, Magical Milk Art, Solar Oven Smores. Ages 3-10.',
       canonical: joinUrl(BASE_URL, 'fun'),
-      ogTitle: '🎉 Fun Activities for Kids — Hands-on Creative Ideas',
+      ogTitle: '🎉 12 Fun Activities for Kids — Hands-on Creative Ideas',
       ogDescription:
-        '8 hands-on activities: Rainbow Hunt, Story Dice, Shape Collage, Breathing Star, Kitchen Band, and more. Ages 3-10.',
+        '12 hands-on activities including Magical Milk Art, Solar Oven Smores, Rainbow Hunt, Bubble Sculptures, and more! Ages 3-10.',
       ogImage: joinUrl(BASE_URL, 'og-fun.png'),
       ogUrl: joinUrl(BASE_URL, 'fun'),
       jsonLd: {

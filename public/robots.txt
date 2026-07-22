@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: /gaming-land-kids-2/sitemap.xml
+Sitemap: https://abhi3588.github.io/gaming-land-kids-2/sitemap.xml

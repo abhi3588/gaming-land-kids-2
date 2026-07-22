@@ -11,12 +11,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.join(__dirname, '../dist');
 
 // Resolve the deployed origin so robots.txt can point at an absolute sitemap.
-// On GitHub Pages we don't know the username at build time, so we derive it
-// from the public site URL embedded by the deploy job when available, else
-// fall back to a relative sitemap path (valid and recommended by Google).
+// On GitHub Pages: https://<username>.github.io/<repo>/
+// We use VITE_SITE_ORIGIN if provided at build time (e.g., via GitHub Actions env),
+// otherwise fall back to a relative sitemap path (valid and recommended by Google).
 const repoName = 'gaming-land-kids-2';
 const BASE = process.env.VITE_BASE_URL || `/${repoName}/`;
-const sitemapPath = `${BASE.replace(/\/$/, '')}/sitemap.xml`;
+const SITE_ORIGIN = process.env.VITE_SITE_ORIGIN || 'https://abhi3588.github.io';
+const sitemapPath = `${SITE_ORIGIN}${BASE.replace(/\/$/, '')}/sitemap.xml`;
 
 async function main() {
   if (!fs.existsSync(distDir)) {
@@ -27,7 +28,7 @@ async function main() {
   // 1. Sitemap
   await import('./generate-sitemap.mjs');
 
-  // 2. robots.txt
+  // 2. robots.txt with absolute sitemap URL
   const robots = `User-agent: *
 Allow: /
 

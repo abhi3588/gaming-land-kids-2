@@ -122,7 +122,7 @@ export default function EmotionExpress({ onBack }) {
   return (
     <div className="game-view pop-in">
       <div className="game-header">
-        <div>Emotion Express 😊</div>
+        <h2 style={{ margin: 0, fontSize: 'inherit', fontWeight: 'inherit' }}>Emotion Express 😊</h2>
         <div>Level {level} / {TOTAL_LEVELS}</div>
         <div className="progress-container">
           <div className="progress-bar" style={{ width: `${(level / TOTAL_LEVELS) * 100}%` }} />
@@ -192,6 +192,7 @@ export default function EmotionExpress({ onBack }) {
                   className={`quiz-option-btn${stateClass}`}
                   onClick={() => handleSelectOption(opt)}
                   disabled={solved}
+                  aria-label={`${opt.label} ${opt.emoji}`}
                   style={{
                     display: 'flex',
                     flexDirection: 'column',

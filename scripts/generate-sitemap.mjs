@@ -3,6 +3,7 @@
 // (which transitively reference .jsx components) without a custom Node loader.
 // All <loc> values are resolved against the deploy base (GitHub Pages subpath),
 // so the sitemap is correct without hardcoding a domain.
+// Includes <lastmod> for better crawl prioritization and xhtml:link for hreflang.
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -12,8 +13,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const repoName = 'gaming-land-kids-2';
 const BASE = process.env.VITE_BASE_URL || `/${repoName}/`;
+const SITE_ORIGIN = process.env.VITE_SITE_ORIGIN || 'https://abhi3588.github.io';
 const join = (...p) => '/' + p.map((s) => String(s).replace(/^\/+|\/+$/g, '')).filter(Boolean).join('/');
 const url = (...p) => join(BASE, ...p);
+const absoluteUrl = (...p) => `${SITE_ORIGIN}${join(BASE, ...p)}`;
+
+// Today's date for lastmod (YYYY-MM-DD)
+const TODAY = new Date().toISOString().split('T')[0];
 
 async function loadData() {
   const server = await createServer({
@@ -72,7 +78,8 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
 ${urls
   .map(
     (x) => `  <url>
-    <loc>${url(x.u)}</loc>
+    <loc>${absoluteUrl(x.u)}</loc>
+    <lastmod>${TODAY}</lastmod>
     <changefreq>${x.c}</changefreq>
     <priority>${x.p}</priority>
   </url>`

@@ -107,7 +107,7 @@ export default function GlobeTrotter({ onBack }) {
   return (
     <div className="game-view pop-in">
       <div className="game-header">
-        <div>Globe Trotter 🌍</div>
+        <h2 style={{ margin: 0, fontSize: 'inherit', fontWeight: 'inherit' }}>Globe Trotter 🌍</h2>
         <div>Level {level} / {TOTAL_LEVELS}</div>
         <div className="progress-container">
           <div className="progress-bar" style={{ width: `${(level / TOTAL_LEVELS) * 100}%` }} />
@@ -174,6 +174,7 @@ export default function GlobeTrotter({ onBack }) {
                   className={`quiz-option-btn${stateClass}`}
                   onClick={() => handleSelectOption(opt)}
                   disabled={solved}
+                  aria-label={opt}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
