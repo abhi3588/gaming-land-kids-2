@@ -153,7 +153,7 @@ const CodingQuestPuzzle = ({ puzzle, onBack }) => {
           </div>
 
           {/* Arrow sequence options */}
-          <div className="quiz-options quiz-options-grid" style={{ maxWidth: '520px', margin: '0 auto' }}>
+          <div className="quiz-options puzzle-options-grid" style={{ maxWidth: '520px', margin: '0 auto' }}>
             {data.options.map((opt, idx) => {
               const isSelected = selectedIdx === idx;
               const isCorrect = idx === data.correctIndex;

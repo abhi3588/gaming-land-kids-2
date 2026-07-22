@@ -598,3 +598,27 @@
 }
 .pipe-marker.start { top: 2px; left: 3px; }
 .pipe-marker.end { bottom: 2px; right: 3px; }
+
+/* Responsive 2-column option layout for new puzzles */
+.puzzle-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  max-width: 520px;
+  margin: 1.25rem auto;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  .puzzle-options-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem;
+  }
+  
+  .puzzle-options-grid .quiz-option-btn {
+    font-size: clamp(0.75rem, 3.2vw, 0.95rem) !important;
+    padding: 0.5rem 0.6rem !important;
+    min-height: 44px !important;
+  }
+}
