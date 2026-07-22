@@ -10,6 +10,8 @@ export const ACTIVITY_IMAGES = {
   'sock-puppet-show': 'images/Sock_Puppet_Show.png',
   'shadow-puppets': 'images/Fun-ShadowPuppets.png',
   'bubble-sculptures': 'images/Fun-BubbleSculptures.png',
+  'magic-milk-art': 'images/Fun-MagicalMilkArt.png',
+  'solar-oven-maker': 'images/Fun-SolarOven.png',
 };
 
 export function getActivityImageUrl(id) {

@@ -259,6 +259,38 @@ export const funActivities = [
       'Stack or connect bubbles to build a shape.',
       'Watch how light makes rainbow colors on the bubbles.'
     ]
+  },
+  {
+    id: 'magic-milk-art',
+    title: 'Magical Milk Art',
+    icon: '🥛',
+    color: 'colormagic',
+    ageRange: '3-10',
+    time: '15 min',
+    desc: 'Create swirling rainbow magic art using milk, food coloring, and a drop of dish soap!',
+    materials: ['A shallow dish or plate', 'Whole milk', 'Food coloring drops (red, blue, yellow)', 'Dish soap and cotton swabs'],
+    steps: [
+      'Pour milk onto the shallow plate until the bottom is covered.',
+      'Add 3-4 drops of different food colors near the center.',
+      'Dip a cotton swab into dish soap and touch the milk center.',
+      'Watch the colors burst and dance into magical swirling art!'
+    ]
+  },
+  {
+    id: 'solar-oven-maker',
+    title: 'Solar Oven S\'mores',
+    icon: '☀️',
+    color: 'fractions',
+    ageRange: '5-10',
+    time: '25 min',
+    desc: 'Build your own miniature solar oven using a cardboard box to melt delicious s\'mores in the sun!',
+    materials: ['Small cardboard or pizza box', 'Aluminum foil and plastic wrap', 'Black construction paper', 'Graham crackers, chocolate, and marshmallows'],
+    steps: [
+      'Line the bottom of the box with black paper to trap sun heat.',
+      'Cover the inner lid flap with shiny aluminum foil.',
+      'Place graham crackers, chocolate, and marshmallows inside.',
+      'Cover the box opening with plastic wrap and set it in warm sunlight!'
+    ]
   }
 ];
 
