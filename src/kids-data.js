@@ -494,4 +494,8 @@ export const gamesMeta = [
   { id: 'feed-animals', title: 'Feed the Animals', icon: '🦁', color: 'sorting',   ageGroup: 'preschool', desc: 'Feed the right food to each hungry animal friend!' },
   { id: 'math-archer', title: 'Math Archer',    icon: '🎯', color: 'math',         ageGroup: 'junior',    desc: 'Solve equations and shoot the target with the right answer!' },
   { id: 'word-search', title: 'Word Search',    icon: '🔍', color: 'word',         ageGroup: 'junior',    desc: 'Find all the hidden words in the letter grid!' },
+  { id: 'emotion-express', title: 'Emotion Express', icon: '😊', color: 'emotions',  ageGroup: 'preschool', desc: 'Match animal situations to their feelings and expressions!' },
+  { id: 'color-magic', title: 'Color Magic',    icon: '🎨', color: 'colormagic',   ageGroup: 'preschool', desc: 'Mix primary colors in a potion cauldron to paint the pictures!' },
+  { id: 'fraction-bakery', title: 'Fraction Bakery', icon: '🍕', color: 'fractions', ageGroup: 'junior',    desc: 'Serve pizza and pie slices by solving fraction order tickets!' },
+  { id: 'globe-trotter', title: 'Globe Trotter', icon: '🌍', color: 'globetrotter', ageGroup: 'junior',   desc: 'Explore world landmarks, animals, flags, and famous capitals!' },
 ];

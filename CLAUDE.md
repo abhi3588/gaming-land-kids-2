@@ -154,6 +154,10 @@ gradient background**. Rules live in two places:
     20 deterministic levels (6×6 H-only → 9×9 all directions). `createPRNG(level*503+11)` seeds grid
     placement. 4 word-tier pools (easy/medium/hard/expert). Styles: `.wsearch-board`, `.wsearch-cell`,
     `.wsearch-cell.sel`, `.wsearch-cell.found`, `.wsearch-words`, `.wsearch-word.found`, `.wsearch-feedback`.
+  - **Emotion Express** (`EmotionExpress.jsx`) — preschool (ages 3–5). Match animal scenarios to feelings and face emojis. 20 levels (2 choices L1-5 → 3 choices L6-12 → 4 choices L13-20). Deterministic via `createPRNG(level*107+19)`.
+  - **Color Magic** (`ColorMagic.jsx`) — preschool (ages 3–5). Mix primary colors in a potion cauldron to paint the pictures. 20 levels (2 choices L1-5 → 3 choices L6-12 → 4 choices L13-20). Deterministic via `createPRNG(level*233+7)`.
+  - **Fraction Bakery** (`FractionBakery.jsx`) — junior (ages 6–10). Serve pizza and pie slices by solving fraction order tickets. 20 levels (unit fractions L1-5 → proper fractions L6-12 → equivalent & sum fractions L13-20). Deterministic via `createPRNG(level*419+13)`.
+  - **Globe Trotter** (`GlobeTrotter.jsx`) — junior (ages 6–10). Explore world geography landmarks, animal habitats, national flags, and capital cities. 20 levels (animals L1-5 → landmarks L6-12 → capitals L13-20). Deterministic via `createPRNG(level*607+29)`.
 - `src/styles/games-shared.css` — game-wide chrome (`.game-view`, `.game-header`, `.btn`,
   `.champion-screen`, progress/level banners) plus the interactive styles for the classic games whose
   `.game-card.<token>` gradient lives in `layout.css` (Memory, Sorting, Patterns, Counting, Word, MathQuest).

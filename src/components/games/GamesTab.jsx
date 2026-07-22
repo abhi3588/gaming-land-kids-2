@@ -49,6 +49,10 @@ import BalloonPop      from '../games/BalloonPop.jsx';
 import FeedAnimals     from '../games/FeedAnimals.jsx';
 import MathArcher      from '../games/MathArcher.jsx';
 import WordSearch      from '../games/WordSearch.jsx';
+import EmotionExpress  from '../games/EmotionExpress.jsx';
+import ColorMagic      from '../games/ColorMagic.jsx';
+import FractionBakery  from '../games/FractionBakery.jsx';
+import GlobeTrotter    from '../games/GlobeTrotter.jsx';
 
 const COMPONENT_MAP = {
   memory:       MemoryGame,
@@ -87,6 +91,10 @@ const COMPONENT_MAP = {
   'feed-animals':   FeedAnimals,
   'math-archer':    MathArcher,
   'word-search':    WordSearch,
+  'emotion-express': EmotionExpress,
+  'color-magic':     ColorMagic,
+  'fraction-bakery': FractionBakery,
+  'globe-trotter':   GlobeTrotter,
 };
 
 export default function GamesTab() {
