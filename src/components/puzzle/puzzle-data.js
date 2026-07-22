@@ -10,6 +10,8 @@ import ShadowMatchPuzzle from './ShadowMatchPuzzle.jsx';
 import PatternSequencePuzzle from './PatternSequencePuzzle.jsx';
 import WordSearchPuzzle from './WordSearchPuzzle.jsx';
 import PipeConnectorPuzzle from './PipeConnectorPuzzle.jsx';
+import CodingQuestPuzzle from './CodingQuestPuzzle.jsx';
+import ScaleBalancePuzzle from './ScaleBalancePuzzle.jsx';
 
 export const PUZZLE_CATEGORIES = [
   {
@@ -108,6 +110,22 @@ export const PUZZLE_CATEGORIES = [
     ageRange: '4–9',
     desc: 'Rotate the pipes to help water flow to the flower!',
   },
+  {
+    id: 'coding-quest',
+    title: 'Robot Coding Quest',
+    icon: '🤖',
+    color: 'sequence',
+    ageRange: '5–10',
+    desc: 'Code the arrow sequences to guide the robot to the star!',
+  },
+  {
+    id: 'scale-balance',
+    title: 'Scale Balance',
+    icon: '⚖️',
+    color: 'math',
+    ageRange: '4–9',
+    desc: 'Find the right weight or emoji to balance the scales perfectly!',
+  },
 ];
 
 export const PUZZLE_DATA = {
@@ -182,5 +200,17 @@ export const PUZZLE_DATA = {
     completionEmoji: '🔧',
     completionMessage: 'Plumbing pro! You watered every flower!',
     component: PipeConnectorPuzzle,
+  },
+  'coding-quest': {
+    title: 'Robot Coding Quest',
+    completionEmoji: '🤖',
+    completionMessage: 'Coding Master! You guided the robot safely home!',
+    component: CodingQuestPuzzle,
+  },
+  'scale-balance': {
+    title: 'Scale Balance',
+    completionEmoji: '⚖️',
+    completionMessage: 'Balance Champion! You matched every weight perfectly!',
+    component: ScaleBalancePuzzle,
   },
 };

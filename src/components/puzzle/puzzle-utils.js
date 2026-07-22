@@ -605,3 +605,235 @@ export const getPatternSequenceLevel = (level) => {
 
   return { seq, correct, options };
 };
+
+// ===== Coding Quest =====
+// Help the robot navigate a grid to reach the star.
+// N increases: L1-3:3, L4-7:4, L8-10:5.
+export const getCodingQuestLevel = (level) => {
+  const size = level <= 3 ? 3 : level <= 7 ? 4 : 5;
+  const prng = createPRNG(level * 359);
+  
+  const start = [size - 1, 0];
+  const goal = [0, size - 1];
+  
+  // Find a path from start to goal going Up or Right (to keep it solvable and simple)
+  // At level 8+ we can allow some Down/Left for more complexity.
+  let path = [];
+  let current = [...start];
+  path.push([...current]);
+  
+  while (current[0] !== goal[0] || current[1] !== goal[1]) {
+    const nextCandidates = [];
+    const [r, c] = current;
+    
+    // Primary candidates that get closer to goal
+    if (r > goal[0]) nextCandidates.push([r - 1, c, '⬆️']);
+    if (c < goal[1]) nextCandidates.push([r, c + 1, '➡️']);
+    
+    // Choose one randomly
+    if (nextCandidates.length > 0) {
+      const choice = nextCandidates[Math.floor(prng() * nextCandidates.length)];
+      current = [choice[0], choice[1]];
+      path.push([...current]);
+    } else {
+      break;
+    }
+  }
+  
+  // Map path to arrow directions
+  const directions = [];
+  for (let i = 0; i < path.length - 1; i += 1) {
+    const from = path[i];
+    const to = path[i + 1];
+    if (to[0] === from[0] - 1) directions.push('⬆️');
+    else if (to[0] === from[0] + 1) directions.push('⬇️');
+    else if (to[1] === from[1] + 1) directions.push('➡️');
+    else if (to[1] === from[1] - 1) directions.push('⬅️');
+  }
+  
+  // Place obstacles in cells NOT in the path
+  const obstacles = [];
+  const maxObstacles = level <= 3 ? 1 : level <= 7 ? 2 : 3;
+  const pathSet = new Set(path.map(([r, c]) => `${r},${c}`));
+  
+  const allCells = [];
+  for (let r = 0; r < size; r += 1) {
+    for (let c = 0; c < size; c += 1) {
+      const key = `${r},${c}`;
+      if (!pathSet.has(key) && !(r === start[0] && c === start[1]) && !(r === goal[0] && c === goal[1])) {
+        allCells.push([r, c]);
+      }
+    }
+  }
+  
+  const shuffledCells = shuffleArray(allCells, prng);
+  const obstacleCount = Math.min(maxObstacles, shuffledCells.length);
+  for (let i = 0; i < obstacleCount; i += 1) {
+    obstacles.push(shuffledCells[i]);
+  }
+  
+  // Generate options (correct + 3 distractors)
+  const correctOption = directions;
+  const options = [correctOption];
+  
+  const arrowPool = ['⬆️', '➡️', '⬇️', '⬅️'];
+  while (options.length < 4) {
+    const distractor = [];
+    for (let i = 0; i < correctOption.length; i += 1) {
+      distractor.push(arrowPool[Math.floor(prng() * arrowPool.length)]);
+    }
+    // Ensure it's unique
+    if (!options.some(opt => opt.join(',') === distractor.join(','))) {
+      options.push(distractor);
+    }
+  }
+  
+  // Shuffle options
+  const shuffledOptions = shuffleArray(options, prng);
+  const correctIndex = shuffledOptions.findIndex(opt => opt.join(',') === correctOption.join(','));
+  
+  return {
+    size,
+    start,
+    goal,
+    obstacles,
+    path,
+    options: shuffledOptions,
+    correctIndex,
+  };
+};
+
+// ===== Scale Balance =====
+// Select the correct item/weight to balance the scale.
+const WEIGHT_ITEMS = [
+  { id: 'apple', emoji: '🍎', weight: 1, name: 'Apple' },
+  { id: 'banana', emoji: '🍌', weight: 2, name: 'Banana' },
+  { id: 'melon', emoji: '🍉', weight: 5, name: 'Melon' },
+  { id: 'teddy', emoji: '🧸', weight: 8, name: 'Teddy Bear' },
+];
+
+export const getScaleBalanceLevel = (level) => {
+  const prng = createPRNG(level * 487);
+  
+  let leftSide;
+  let rightSide;
+  let correctOption;
+  let options;
+  let mode = 'emoji'; // 'emoji' or 'weight'
+  
+  if (level <= 2) {
+    // Level 1-2: Simple counting balance (apples, weight 1)
+    const total = 2 + level; // L1: 3, L2: 4
+    leftSide = Array(total).fill(WEIGHT_ITEMS[0]);
+    const rightCount = total - 2;
+    rightSide = Array(rightCount).fill(WEIGHT_ITEMS[0]);
+    correctOption = { emoji: '🍎 🍎', weight: 2, label: '2 Apples' };
+    
+    options = [
+      correctOption,
+      { emoji: '🍎', weight: 1, label: '1 Apple' },
+      { emoji: '🍎 🍎 🍎', weight: 3, label: '3 Apples' },
+      { emoji: '🍎 🍎 🍎 🍎', weight: 4, label: '4 Apples' },
+    ];
+  } else if (level <= 4) {
+    // Level 3-4: Fruit mixed balance
+    if (level === 3) {
+      // Left: Melon (5). Right: 2 Bananas (4) + ? (Apple: 1)
+      leftSide = [WEIGHT_ITEMS[2]];
+      rightSide = [WEIGHT_ITEMS[1], WEIGHT_ITEMS[1]];
+      correctOption = { emoji: '🍎', weight: 1, label: 'Apple (1)' };
+      options = [
+        correctOption,
+        { emoji: '🍌', weight: 2, label: 'Banana (2)' },
+        { emoji: '🍎 🍎', weight: 2, label: '2 Apples (2)' },
+        { emoji: '🍉', weight: 5, label: 'Melon (5)' },
+      ];
+    } else {
+      // Left: Teddy (8). Right: Melon (5) + ? (3x Apple: 3)
+      leftSide = [WEIGHT_ITEMS[3]];
+      rightSide = [WEIGHT_ITEMS[2]];
+      correctOption = { emoji: '🍎 🍎 🍎', weight: 3, label: '3 Apples' };
+      options = [
+        correctOption,
+        { emoji: '🍎 🍎', weight: 2, label: '2 Apples' },
+        { emoji: '🍌', weight: 2, label: 'Banana' },
+        { emoji: '🍌 🍌', weight: 4, label: '2 Bananas' },
+      ];
+    }
+  } else if (level <= 6) {
+    // Level 5-6: Fruit & animal mixed
+    if (level === 5) {
+      // Left: 3 Bananas (6). Right: Melon (5) + ? (Apple: 1)
+      leftSide = [WEIGHT_ITEMS[1], WEIGHT_ITEMS[1], WEIGHT_ITEMS[1]];
+      rightSide = [WEIGHT_ITEMS[2]];
+      correctOption = { emoji: '🍎', weight: 1, label: 'Apple' };
+      options = [
+        correctOption,
+        { emoji: '🍌', weight: 2, label: 'Banana' },
+        { emoji: '🍎 🍎', weight: 2, label: '2 Apples' },
+        { emoji: '🍉', weight: 5, label: 'Melon' },
+      ];
+    } else {
+      // Left: Teddy + Apple (9). Right: Melon (5) + ? (2 Bananas: 4)
+      leftSide = [WEIGHT_ITEMS[3], WEIGHT_ITEMS[0]];
+      rightSide = [WEIGHT_ITEMS[2]];
+      correctOption = { emoji: '🍌 🍌', weight: 4, label: '2 Bananas' };
+      options = [
+        correctOption,
+        { emoji: '🍌', weight: 2, label: '1 Banana' },
+        { emoji: '🍎 🍎 🍎', weight: 3, label: '3 Apples' },
+        { emoji: '🍉', weight: 5, label: 'Melon' },
+      ];
+    }
+  } else {
+    // Level 7-10: Mathematical weights (g)
+    mode = 'weight';
+    let target;
+    let rightBase;
+    
+    if (level === 7) {
+      target = 10;
+      rightBase = 4;
+      leftSide = [{ weight: 10, label: '10g' }];
+      rightSide = [{ weight: 4, label: '4g' }];
+    } else if (level === 8) {
+      target = 15;
+      rightBase = 6;
+      leftSide = [{ weight: 10, label: '10g' }, { weight: 5, label: '5g' }];
+      rightSide = [{ weight: 6, label: '6g' }];
+    } else if (level === 9) {
+      target = 20;
+      rightBase = 12;
+      leftSide = [{ weight: 10, label: '10g' }, { weight: 10, label: '10g' }];
+      rightSide = [{ weight: 10, label: '10g' }, { weight: 2, label: '2g' }];
+    } else {
+      target = 30;
+      rightBase = 15;
+      leftSide = [{ weight: 20, label: '20g' }, { weight: 10, label: '10g' }];
+      rightSide = [{ weight: 10, label: '10g' }, { weight: 5, label: '5g' }];
+    }
+    
+    const correctVal = target - rightBase;
+    correctOption = { emoji: '⚖️', weight: correctVal, label: `${correctVal}g` };
+    
+    options = [
+      correctOption,
+      { emoji: '⚖️', weight: correctVal - 2, label: `${correctVal - 2}g` },
+      { emoji: '⚖️', weight: correctVal + 2, label: `${correctVal + 2}g` },
+      { emoji: '⚖️', weight: correctVal - 4, label: `${correctVal - 4}g` },
+    ];
+  }
+  
+  const shuffledOptions = shuffleArray(options, prng);
+  const correctIndex = shuffledOptions.findIndex(opt => opt.weight === correctOption.weight && opt.label === correctOption.label);
+  
+  return {
+    mode,
+    leftSide,
+    rightSide,
+    leftWeight: leftSide.reduce((sum, item) => sum + item.weight, 0),
+    rightWeight: rightSide.reduce((sum, item) => sum + item.weight, 0),
+    options: shuffledOptions,
+    correctIndex,
+  };
+};

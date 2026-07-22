@@ -597,6 +597,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>/gaming-land-kids-2/puzzle/coding-quest</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>/gaming-land-kids-2/puzzle/scale-balance</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>/gaming-land-kids-2/quiz/fruits</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
