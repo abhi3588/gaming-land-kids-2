@@ -278,11 +278,11 @@ export const getTabSEO = (tab, extra = {}) => {
     stories: {
       title: '📖 Bedtime Stories for Kids — English & Hindi | Gaming Land Kids',
       description:
-        'Read 12 bedtime stories with pictures in English and Hindi. Moral lessons, ages 3-6, 3 min reads. Perfect for bedtime!',
+        'Read 14 bedtime stories with pictures in English and Hindi. Moral lessons, ages 3-6, 3 min reads. Perfect for bedtime!',
       canonical: joinUrl(BASE_URL, 'stories'),
       ogTitle: '📖 Bedtime Stories for Kids — English & Hindi',
       ogDescription:
-        'Read 12 bedtime stories with pictures in English and Hindi. Moral lessons, ages 3-6, 3 min reads.',
+        'Read 14 bedtime stories with pictures in English and Hindi. Moral lessons, ages 3-6, 3 min reads.',
       ogImage: joinUrl(BASE_URL, 'og-stories.png'),
       ogUrl: joinUrl(BASE_URL, 'stories'),
       jsonLd: {
@@ -294,8 +294,8 @@ export const getTabSEO = (tab, extra = {}) => {
             '@type': 'ItemList',
             '@id': joinUrl(SITE_ORIGIN, 'stories#storylist'),
             name: 'Bedtime Stories for Kids',
-            description: '12 bedtime stories with moral lessons in English and Hindi',
-            numberOfItems: extra.stories?.length || 12,
+            description: '14 bedtime stories with moral lessons in English and Hindi',
+            numberOfItems: extra.stories?.length || 14,
             itemListElement: (extra.stories || []).map((s, i) => ({
               '@type': 'ListItem',
               position: i + 1,

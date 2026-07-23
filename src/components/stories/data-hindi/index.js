@@ -10,6 +10,8 @@ import pipFindsAFriend from './pip-finds-a-friend.js';
 import zaraZebraStripes from './zara-zebra-stripes.js';
 import oliverOwl from './oliver-owl.js';
 import sammySquirrel from './sammy-squirrel.js';
+import leoLittleDragon from './leo-little-dragon.js';
+import pennyPenguinPaint from './penny-penguin-paint.js';
 
 export const storiesHindi = [
   bunnyShares,
@@ -24,4 +26,6 @@ export const storiesHindi = [
   zaraZebraStripes,
   oliverOwl,
   sammySquirrel,
+  leoLittleDragon,
+  pennyPenguinPaint,
 ];

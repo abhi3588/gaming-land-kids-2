@@ -3,7 +3,7 @@ const story = {
   title: 'Lily, the Little Star',
   subtitle: 'A bedtime tale about being yourself',
   emoji: '⭐',
-  coverImage: 'images/story-star.jpg',
+  coverImage: 'images/story-lily-little-star.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: "You don't have to be the biggest to shine. Just be yourself!",

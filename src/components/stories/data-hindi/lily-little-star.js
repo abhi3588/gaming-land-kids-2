@@ -3,7 +3,7 @@ const story = {
   title: 'लिली, छोटा तारा',
   subtitle: 'स्वयं होने के बारे में सोने के समय की कहानी',
   emoji: '⭐',
-  coverImage: 'images/story-star.jpg',
+  coverImage: 'images/story-lily-little-star.svg',
   ageRange: '3-6',
   minutesToRead: 3,
   moral: 'चमकने के लिए आपका सबसे बड़ा होना जरूरी नहीं है। बस स्वयं बनें!',
