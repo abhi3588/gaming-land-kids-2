@@ -60,7 +60,7 @@ Tab views are **lazy-loaded** in `App.jsx` for smaller initial bundle.
 | Rhymes | `src/components/rhymes/RhymesTab.jsx` | `rhymes` (video URLs) + `VideoPlayer` |
 | Fun | `src/components/fun/FunTab.jsx` | `funActivities` (materials/steps) |
 | Educational | `src/components/educational/EducationalTab.jsx` | `scienceActivities` + `moralActivities` (interactive components) |
-| Quiz | `src/components/quiz/QuizTab.jsx` | `QUIZ_CATEGORIES` + `QUIZ_DATA` |
+| Quiz | `src/components/quiz/QuizTab.jsx` | `QUIZ_CATEGORIES` + `QUIZ_DATA` (14 quiz categories with 20 levels each) |
 | Puzzle | `src/components/puzzle/PuzzleTab.jsx` | `PUZZLE_CATEGORIES` + `PUZZLE_DATA` (8 puzzle components) |
 
 ---

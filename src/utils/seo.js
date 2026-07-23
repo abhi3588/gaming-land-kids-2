@@ -5,13 +5,8 @@ import {
   SITE_ORIGIN,
   BASE_URL,
   joinUrl,
-  absoluteUrl,
-  canonicalUrl,
   defaultJsonLd,
   organizationJsonLd,
-  breadcrumbJsonLd,
-  SITE_NAME,
-  SITE_DESCRIPTION,
 } from './seoConfig.js';
 
 // ------------------------------------------------------------------
@@ -419,12 +414,12 @@ export const getTabSEO = (tab, extra = {}) => {
       },
     },
     quiz: {
-      title: '📝 Quiz Corner — 6 Educational Quizzes for Kids | Gaming Land Kids',
+      title: '📝 Quiz Corner — 14 Educational Quizzes for Kids | Gaming Land Kids',
       description:
-        'Test knowledge with 6 fun quizzes: Fruits, Flowers, Shapes, Animals, Colors, Vehicles. 10 questions each, ages 3-9. Free!',
+        'Test knowledge with 14 fun quizzes: Fruits, Flowers, Shapes, Animals, Colors, Vehicles, Birds, Veggies, Bugs, Space, Dinosaurs, Sea Creatures, World Wonders, Inventions. 20 questions each, ages 3-10. Free!',
       canonical: joinUrl(BASE_URL, 'quiz'),
-      ogTitle: '📝 Quiz Corner — 6 Educational Quizzes for Kids',
-      ogDescription: '6 fun quizzes: Fruits, Flowers, Shapes, Animals, Colors, Vehicles. 10 questions each, ages 3-9.',
+      ogTitle: '📝 Quiz Corner — 14 Educational Quizzes for Kids',
+      ogDescription: '14 fun quizzes covering animals, science, world wonders, inventions, space, and more. 20 questions each, ages 3-10.',
       ogImage: joinUrl(BASE_URL, 'og-quiz.png'),
       ogUrl: joinUrl(BASE_URL, 'quiz'),
       jsonLd: {

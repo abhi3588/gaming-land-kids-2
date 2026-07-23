@@ -96,6 +96,22 @@ export const QUIZ_CATEGORIES = [
     color: 'sky',
     desc: 'Dive deep under the sea and find sharks, crabs, and whales!',
     ageRange: '3–8'
+  },
+  {
+    id: 'world-wonders',
+    title: 'World Wonders',
+    icon: '🏛️',
+    color: 'sorting',
+    desc: 'Journey across continents to test your knowledge of famous landmarks!',
+    ageRange: '5–10'
+  },
+  {
+    id: 'inventions',
+    title: 'Inventions & Discoveries',
+    icon: '💡',
+    color: 'counting',
+    desc: 'Who invented the light bulb or telephone? Test your invention knowledge!',
+    ageRange: '5–10'
   }
 ];
 
@@ -422,6 +438,60 @@ export const QUIZ_DATA = {
       { id: 'eel', emoji: '🐍', question: 'Which long, snake-like fish hides in ocean rocks?', answer: 'Eel', options: ['Eel', 'Snake', 'Worm', 'Seahorse'] },
       { id: 'seaweed', emoji: '🌿', question: 'Which green plant sways underwater and feeds sea animals?', answer: 'Seaweed', options: ['Seaweed', 'Grass', 'Coral', 'Moss'] },
       { id: 'walrus', emoji: '🦭', question: 'Which big sea animal has two long tusks and whiskers?', answer: 'Walrus', options: ['Walrus', 'Seal', 'Sea Lion', 'Whale'] }
+    ]
+  },
+  'world-wonders': {
+    title: 'World Wonders Quiz',
+    completionEmoji: '🏛️',
+    completionMessage: 'You are a master world explorer! 🌍✈️',
+    questions: [
+      { id: 'great-wall', emoji: '🧱', question: 'Which giant wall stretches across northern China?', answer: 'Great Wall of China', options: ['Berlin Wall', 'Great Wall of China', 'Hadrian’s Wall', 'Western Wall'] },
+      { id: 'eiffel-tower', emoji: '🗼', question: 'In which city can you visit the famous Eiffel Tower?', answer: 'Paris', options: ['London', 'Rome', 'Paris', 'Madrid'] },
+      { id: 'pyramids', emoji: '🔺', question: 'Which ancient stone structures were built in Egypt for Pharaohs?', answer: 'Pyramids of Giza', options: ['Ziggurats', 'Parthenon', 'Colosseum', 'Pyramids of Giza'] },
+      { id: 'taj-mahal', emoji: '🕌', question: 'Which famous white marble mausoleum is located in Agra, India?', answer: 'Taj Mahal', options: ['Red Fort', 'Taj Mahal', 'Lotus Temple', 'Hawa Mahal'] },
+      { id: 'statue-of-liberty', emoji: '🗽', question: 'Which famous green statue stands in New York Harbor?', answer: 'Statue of Liberty', options: ['Little Mermaid', 'Christ the Redeemer', 'Statue of Liberty', 'Sphinx'] },
+      { id: 'colosseum', emoji: '🏛️', question: 'Which ancient amphitheater was used for gladiator games in Rome?', answer: 'Colosseum', options: ['Colosseum', 'Parthenon', 'Pantheon', 'Acropolis'] },
+      { id: 'big-ben', emoji: '🕰️', question: 'Which famous clock tower stands near Parliament in London?', answer: 'Big Ben', options: ['Eiffel Tower', 'Pisa Tower', 'Big Ben', 'Clock Tower'] },
+      { id: 'machu-picchu', emoji: '⛰️', question: 'Which ancient Inca citadel sits high in the Andes mountains of Peru?', answer: 'Machu Picchu', options: ['Chichen Itza', 'Machu Picchu', 'Tikal', 'Petra'] },
+      { id: 'everest', emoji: '🏔️', question: 'What is the highest mountain peak above sea level in the world?', answer: 'Mount Everest', options: ['K2', 'Kilimanjaro', 'Mont Blanc', 'Mount Everest'] },
+      { id: 'sydney-opera', emoji: '🎭', question: 'Which famous building in Australia looks like white sails on the harbor?', answer: 'Sydney Opera House', options: ['Harbour Bridge', 'Sydney Opera House', 'Sky Tower', 'Tower Bridge'] },
+      { id: 'leaning-tower', emoji: '🏗️', question: 'Which famous bell tower in Italy is known for leaning to one side?', answer: 'Leaning Tower of Pisa', options: ['Colosseum', 'Leaning Tower of Pisa', 'Florence Duomo', 'St. Mark Campanile'] },
+      { id: 'amazon-rainforest', emoji: '🌳', question: 'What is the largest tropical rainforest in the world?', answer: 'Amazon Rainforest', options: ['Congo Basin', 'Daintree', 'Amazon Rainforest', 'Boreal Forest'] },
+      { id: 'grand-canyon', emoji: '🏜️', question: 'Which massive red-rock canyon was carved by the Colorado River in the USA?', answer: 'Grand Canyon', options: ['Grand Canyon', 'Bryce Canyon', 'Zion Canyon', 'Fish River Canyon'] },
+      { id: 'christ-redeemer', emoji: '🗿', question: 'Which giant statue of Jesus stands atop Mount Corcovado in Rio de Janeiro?', answer: 'Christ the Redeemer', options: ['Statue of Liberty', 'Christ the Redeemer', 'Moai Statues', 'Sphinx'] },
+      { id: 'niagara-falls', emoji: '🌊', question: 'Which massive waterfalls straddle the border of Canada and the USA?', answer: 'Niagara Falls', options: ['Victoria Falls', 'Iguazu Falls', 'Niagara Falls', 'Angel Falls'] },
+      { id: 'stonehenge', emoji: '🪨', question: 'Which prehistoric circle of giant standing stones is located in England?', answer: 'Stonehenge', options: ['Easter Island', 'Stonehenge', 'Carnac Stones', 'Gobekli Tepe'] },
+      { id: 'barrier-reef', emoji: '🐠', question: 'What is the world’s largest coral reef system off Australia’s coast?', answer: 'Great Barrier Reef', options: ['Mesoamerican Reef', 'Red Sea Reef', 'Fiji Reef', 'Great Barrier Reef'] },
+      { id: 'fuji', emoji: '🌋', question: 'Which iconic snow-capped volcano is the highest mountain in Japan?', answer: 'Mount Fuji', options: ['Mount Vesuvius', 'Mount Fuji', 'Mount Etna', 'Kilauea'] },
+      { id: 'tower-bridge', emoji: '🌉', question: 'Which famous bascule bridge crosses the River Thames in London?', answer: 'Tower Bridge', options: ['Golden Gate Bridge', 'Brooklyn Bridge', 'Tower Bridge', 'Sydney Harbour Bridge'] },
+      { id: 'golden-gate', emoji: '🌉', question: 'Which iconic orange suspension bridge connects San Francisco to Marin County?', answer: 'Golden Gate Bridge', options: ['Golden Gate Bridge', 'Brooklyn Bridge', 'Akashi Kaikyo', 'Tower Bridge'] }
+    ]
+  },
+  inventions: {
+    title: 'Inventions & Discoveries Quiz',
+    completionEmoji: '💡',
+    completionMessage: 'You are a genius inventor! 🧠⚙️',
+    questions: [
+      { id: 'light-bulb', emoji: '💡', question: 'Who is famous for inventing the practical electric light bulb?', answer: 'Thomas Edison', options: ['Nikola Tesla', 'Thomas Edison', 'Alexander Bell', 'Benjamin Franklin'] },
+      { id: 'airplane', emoji: '✈️', question: 'Which brothers built and flew the first successful motor airplane in 1903?', answer: 'Wright Brothers', options: ['Montgolfier Brothers', 'McDonald Brothers', 'Wright Brothers', 'Warner Brothers'] },
+      { id: 'telephone', emoji: '📞', question: 'Who invented the first practical telephone to speak across distances?', answer: 'Alexander Graham Bell', options: ['Alexander Graham Bell', 'Thomas Edison', 'Guglielmo Marconi', 'Samuel Morse'] },
+      { id: 'gravity', emoji: '🍎', question: 'Which scientist discovered the law of gravity after watching an apple fall?', answer: 'Isaac Newton', options: ['Albert Einstein', 'Galileo Galilei', 'Isaac Newton', 'Charles Darwin'] },
+      { id: 'computer', emoji: '💻', question: 'Who is considered the "Father of the Computer" for designing the Mechanical Engine?', answer: 'Charles Babbage', options: ['Alan Turing', 'Charles Babbage', 'Bill Gates', 'Steve Jobs'] },
+      { id: 'printing-press', emoji: '📰', question: 'Who invented the movable type printing press in Europe around 1440?', answer: 'Johannes Gutenberg', options: ['Leonardo da Vinci', 'Marco Polo', 'Johannes Gutenberg', 'Benjamin Franklin'] },
+      { id: 'telescope', emoji: '🔭', question: 'Which astronomer improved the telescope to discover Jupiter’s four moons?', answer: 'Galileo Galilei', options: ['Galileo Galilei', 'Nicolaus Copernicus', 'Johannes Kepler', 'Isaac Newton'] },
+      { id: 'electricity', emoji: '⚡', question: 'Who flew a kite during a thunderstorm to prove lightning is electricity?', answer: 'Benjamin Franklin', options: ['Thomas Edison', 'Benjamin Franklin', 'Nikola Tesla', 'Michael Faraday'] },
+      { id: 'penicillin', emoji: '💊', question: 'Who discovered penicillin, the world’s first life-saving antibiotic?', answer: 'Alexander Fleming', options: ['Louis Pasteur', 'Robert Koch', 'Edward Jenner', 'Alexander Fleming'] },
+      { id: 'steam-engine', emoji: '🚂', question: 'Who improved the steam engine, paving the way for the Industrial Revolution?', answer: 'James Watt', options: ['George Stephenson', 'James Watt', 'Robert Fulton', 'Eli Whitney'] },
+      { id: 'automobile', emoji: '🚗', question: 'Who built the first modern gasoline-powered automobile in 1886?', answer: 'Karl Benz', options: ['Henry Ford', 'Karl Benz', 'Gottlieb Daimler', 'Ferdinand Porsche'] },
+      { id: 'radio', emoji: '📻', question: 'Who developed long-distance radio communication and wireless telegraphy?', answer: 'Guglielmo Marconi', options: ['Nikola Tesla', 'Samuel Morse', 'Guglielmo Marconi', 'Heinrich Hertz'] },
+      { id: 'www', emoji: '🌐', question: 'Who invented the World Wide Web (WWW) in 1989 while working at CERN?', answer: 'Tim Berners-Lee', options: ['Tim Berners-Lee', 'Vint Cerf', 'Marc Andreessen', 'Bill Gates'] },
+      { id: 'wheel', emoji: '🛞', question: 'Which ancient civilization is credited with inventing the wheel for pottery and carts?', answer: 'Ancient Mesopotamia', options: ['Ancient Egypt', 'Ancient Mesopotamia', 'Ancient Greece', 'Ancient Rome'] },
+      { id: 'battery', emoji: '🔋', question: 'Who created the first electric battery (the Voltaic Pile) in 1800?', answer: 'Alessandro Volta', options: ['Luigi Galvani', 'Michael Faraday', 'Alessandro Volta', 'Nikola Tesla'] },
+      { id: 'xray', emoji: '🩵', question: 'Who discovered X-rays in 1895 and won the first Nobel Prize in Physics?', answer: 'Wilhelm Röntgen', options: ['Wilhelm Röntgen', 'Marie Curie', 'Henri Becquerel', 'Ernest Rutherford'] },
+      { id: 'microscope', emoji: '🔬', question: 'Who built powerful microscopes to discover bacteria and microscopic life?', answer: 'Antonie van Leeuwenhoek', options: ['Robert Hooke', 'Antonie van Leeuwenhoek', 'Louis Pasteur', 'Gregor Mendel'] },
+      { id: 'dynamite', emoji: '🧨', question: 'Who invented dynamite and created the Nobel Prizes in his will?', answer: 'Alfred Nobel', options: ['Dmitri Mendeleev', 'Antoine Lavoisier', 'Alfred Nobel', 'Louis Nobel'] },
+      { id: 'clock', emoji: '⏰', question: 'Who invented the pendulum clock in 1656 for accurate timekeeping?', answer: 'Christiaan Huygens', options: ['Galileo Galilei', 'Christiaan Huygens', 'Robert Hooke', 'Isaac Newton'] },
+      { id: 'thermometer', emoji: '🌡️', question: 'Who invented the mercury-in-glass thermometer and scale named after him?', answer: 'Daniel Fahrenheit', options: ['Anders Celsius', 'Lord Kelvin', 'Galileo Galilei', 'Daniel Fahrenheit'] }
     ]
   }
 };
