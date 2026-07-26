@@ -837,3 +837,289 @@ export const getScaleBalanceLevel = (level) => {
     correctIndex,
   };
 };
+
+// ===== Weather Wizard =====
+// Pick the correct clothing / gear for the given weather scene.
+// Levels 1-3: single item, obvious distractors.
+// Levels 4-6: best outfit combo out of 4 options.
+// Levels 7-9: weather + activity context, 4 choices.
+// Level 10:   hardest compound scene, 3 clues in prompt, 4 tricky choices.
+const WEATHER_LEVELS = [
+  // L1
+  {
+    skyGradient: 'linear-gradient(160deg,#6ec6ff 0%,#b3e5fc 100%)',
+    weatherEmoji: '☀️',
+    question: 'It is a bright sunny day! What should you wear outside?',
+    options: [
+      { emoji: '🕶️', label: 'Sunglasses' },
+      { emoji: '🧥', label: 'Heavy Coat' },
+      { emoji: '☂️', label: 'Umbrella' },
+      { emoji: '🧤', label: 'Gloves' },
+    ],
+    correctIndex: 0,
+    successMsg: 'Great choice! Sunglasses protect your eyes on sunny days! 🕶️☀️',
+    wrongMsg: 'Hmm, think about what you need on a hot sunny day and try again!',
+  },
+  // L2
+  {
+    skyGradient: 'linear-gradient(160deg,#b0bec5 0%,#cfd8dc 100%)',
+    weatherEmoji: '🌧️',
+    question: 'It is raining outside! What will keep you dry?',
+    options: [
+      { emoji: '🏖️', label: 'Swimsuit' },
+      { emoji: '☂️', label: 'Umbrella' },
+      { emoji: '🕶️', label: 'Sunglasses' },
+      { emoji: '🧢', label: 'Sun Hat' },
+    ],
+    correctIndex: 1,
+    successMsg: 'Correct! An umbrella keeps you dry in the rain! ☂️',
+    wrongMsg: 'Think about what stops the rain from reaching you and try again!',
+  },
+  // L3
+  {
+    skyGradient: 'linear-gradient(160deg,#e3f2fd 0%,#b3d4f0 100%)',
+    weatherEmoji: '❄️',
+    question: 'It is snowing and very cold! What should you put on?',
+    options: [
+      { emoji: '🩱', label: 'Swimsuit' },
+      { emoji: '🩴', label: 'Flip Flops' },
+      { emoji: '🧥', label: 'Winter Coat' },
+      { emoji: '🕶️', label: 'Sunglasses' },
+    ],
+    correctIndex: 2,
+    successMsg: 'Warm choice! A winter coat keeps you cozy in snow! 🧥❄️',
+    wrongMsg: 'Brrr! Think about what keeps you warm and try again!',
+  },
+  // L4
+  {
+    skyGradient: 'linear-gradient(160deg,#fffde7 0%,#fff9c4 100%)',
+    weatherEmoji: '🌤️',
+    question: 'It is a warm spring day with a light breeze. Pick the BEST outfit!',
+    options: [
+      { emoji: '👕🩳', label: 'T-shirt + Shorts' },
+      { emoji: '🧥🧤', label: 'Coat + Gloves' },
+      { emoji: '🏖️⛱️', label: 'Swimsuit + Parasol' },
+      { emoji: '🥾🧣', label: 'Boots + Scarf' },
+    ],
+    correctIndex: 0,
+    successMsg: 'Perfect! Light clothes are ideal on a warm, breezy spring day! 👕🩳',
+    wrongMsg: 'Not quite — it\'s warm with a light breeze. Think light layers and try again!',
+  },
+  // L5
+  {
+    skyGradient: 'linear-gradient(160deg,#90caf9 0%,#64b5f6 100%)',
+    weatherEmoji: '⛈️',
+    question: 'There is a thunderstorm with heavy rain and wind! What is the BEST plan?',
+    options: [
+      { emoji: '☂️🧥', label: 'Umbrella + Raincoat' },
+      { emoji: '🩴🩱', label: 'Flip Flops + Swimsuit' },
+      { emoji: '🕶️👒', label: 'Sunglasses + Sun Hat' },
+      { emoji: '🛷⛸️', label: 'Sled + Ice Skates' },
+    ],
+    correctIndex: 0,
+    successMsg: 'Smart! A raincoat and umbrella are your best friends in a storm! ⛈️',
+    wrongMsg: 'A thunderstorm means heavy rain and wind — think waterproof gear and try again!',
+  },
+  // L6
+  {
+    skyGradient: 'linear-gradient(160deg,#f3e5f5 0%,#e1bee7 100%)',
+    weatherEmoji: '🌫️',
+    question: 'It is a foggy morning with cold temperatures. Best outfit?',
+    options: [
+      { emoji: '👗🌂', label: 'Summer dress + Parasol' },
+      { emoji: '🧥🧣', label: 'Warm jacket + Scarf' },
+      { emoji: '🏊🥽', label: 'Swimsuit + Goggles' },
+      { emoji: '🩱🌂', label: 'Swimsuit + Umbrella' },
+    ],
+    correctIndex: 1,
+    successMsg: 'Excellent! On a foggy cold morning a warm jacket and scarf are perfect! 🧥🧣',
+    wrongMsg: 'Foggy and cold means warm layers! Pick the cosy option and try again!',
+  },
+  // L7
+  {
+    skyGradient: 'linear-gradient(160deg,#fff8e1 0%,#ffecb3 100%)',
+    weatherEmoji: '☀️🏃',
+    question: 'You are going for a jog on a scorching hot day (38°C / 100°F). What do you pick?',
+    options: [
+      { emoji: '🧥🧣', label: 'Thick coat + Scarf' },
+      { emoji: '👟🧢', label: 'Trainers + Cap' },
+      { emoji: '🥾⛑️', label: 'Heavy boots + Helmet' },
+      { emoji: '🩱🧤', label: 'Swimsuit + Gloves' },
+    ],
+    correctIndex: 1,
+    successMsg: 'Awesome! Lightweight trainers and a cap keep you cool while jogging in the heat! 🏃☀️',
+    wrongMsg: 'Scorching heat + jogging = light & breathable! Think again and try!',
+  },
+  // L8
+  {
+    skyGradient: 'linear-gradient(160deg,#e8f5e9 0%,#c8e6c9 100%)',
+    weatherEmoji: '🌨️🏔️',
+    question: 'You are hiking up a snowy mountain in a blizzard. What is the safest gear?',
+    options: [
+      { emoji: '🩴🕶️', label: 'Flip Flops + Sunglasses' },
+      { emoji: '🧥🥾🧤', label: 'Insulated Jacket + Boots + Gloves' },
+      { emoji: '👗🎀', label: 'Summer Dress + Ribbon' },
+      { emoji: '🩱☂️', label: 'Swimsuit + Parasol' },
+    ],
+    correctIndex: 1,
+    successMsg: 'Perfect mountaineer! Insulated jacket, boots, and gloves are essential in a blizzard! 🏔️',
+    wrongMsg: 'A blizzard on a mountain is very dangerous — you need serious warm layers! Try again!',
+  },
+  // L9
+  {
+    skyGradient: 'linear-gradient(160deg,#fce4ec 0%,#f8bbd0 100%)',
+    weatherEmoji: '🌦️🚲',
+    question: 'You are cycling to school — it is drizzling now but sun is forecast later. Best combo?',
+    options: [
+      { emoji: '🧥🕶️', label: 'Raincoat + Sunglasses' },
+      { emoji: '🩱🛟', label: 'Swimsuit + Floatie' },
+      { emoji: '🧤⛸️', label: 'Gloves + Ice Skates' },
+      { emoji: '🏖️🎑', label: 'Beach towel + Lantern' },
+    ],
+    correctIndex: 0,
+    successMsg: 'Clever! A raincoat handles the drizzle, and sunglasses are ready for the sun! 🚲🌦️',
+    wrongMsg: 'Drizzle now, sun later — pack something for rain AND sun! Try again!',
+  },
+  // L10
+  {
+    skyGradient: 'linear-gradient(160deg,#263238 0%,#455a64 100%)',
+    weatherEmoji: '🌩️🌊💨',
+    question: 'Hurricane warning! Gale-force winds, torrential rain, and storm surges. You must go out briefly — what do you wear?',
+    options: [
+      { emoji: '🩴🩱', label: 'Flip Flops + Swimsuit' },
+      { emoji: '🧥🧤🥾', label: 'Heavy waterproof jacket + Gloves + Rubber boots' },
+      { emoji: '👗👒', label: 'Light Dress + Sun Hat' },
+      { emoji: '🕶️🏖️', label: 'Sunglasses + Beach Bag' },
+    ],
+    correctIndex: 1,
+    successMsg: 'Expert choice! Heavy waterproof gear and rubber boots protect you in a hurricane! 🌩️',
+    wrongMsg: 'This is a hurricane — you need maximum waterproof protection! Think carefully and try again!',
+  },
+];
+
+export const getWeatherWizardLevel = (level) => {
+  const prng = createPRNG(level * 557 + 3);
+  const levelData = WEATHER_LEVELS[level - 1];
+  // Shuffle options but keep correctIndex tracking
+  const indexed = levelData.options.map((opt, i) => ({ opt, isCorrect: i === levelData.correctIndex }));
+  const shuffled = shuffleArray(indexed, prng);
+  const correctIndex = shuffled.findIndex(item => item.isCorrect);
+  return {
+    ...levelData,
+    options: shuffled.map(item => item.opt),
+    correctIndex,
+  };
+};
+
+// ===== Emoji Cipher =====
+// Decode an emoji sequence to find the hidden word or phrase.
+// L1-3:  1 emoji = 1 word (shown in legend), 4 choices
+// L4-6:  2-emoji phrase, legend shown for ONE emoji only
+// L7-9:  3-emoji phrase, no legend
+// L10:   3-4 emoji idiomatic phrase, no legend, tricky distractors
+const EMOJI_CIPHER_LEVELS = [
+  // L1 — single emoji, full legend
+  {
+    emojiSequence: ['🐱'],
+    legend: [{ emoji: '🐱', word: 'CAT' }],
+    options: ['CAT', 'DOG', 'SUN', 'BEE'],
+    correctIndex: 0,
+    successMsg: '🐱 = CAT! Great decoding! 🌟',
+    wrongMsg: 'Look at the legend and try again!',
+  },
+  // L2 — single emoji, full legend
+  {
+    emojiSequence: ['⭐'],
+    legend: [{ emoji: '⭐', word: 'STAR' }],
+    options: ['MOON', 'STAR', 'FIRE', 'RAIN'],
+    correctIndex: 1,
+    successMsg: '⭐ = STAR! You are a star decoder! 🌟',
+    wrongMsg: 'Check the legend — what does ⭐ mean? Try again!',
+  },
+  // L3 — single emoji, full legend
+  {
+    emojiSequence: ['🌊'],
+    legend: [{ emoji: '🌊', word: 'WAVE' }],
+    options: ['LAKE', 'SNOW', 'WAVE', 'WIND'],
+    correctIndex: 2,
+    successMsg: '🌊 = WAVE! Fantastic! 🌟',
+    wrongMsg: 'Use the legend to decode the emoji and try again!',
+  },
+  // L4 — two emojis, one legend hint
+  {
+    emojiSequence: ['🐶', '🏃'],
+    legend: [{ emoji: '🏃', word: 'RUNS' }],
+    options: ['CAT WALKS', 'DOG RUNS', 'BIRD FLIES', 'FISH SWIMS'],
+    correctIndex: 1,
+    successMsg: '🐶🏃 = DOG RUNS! Brilliant! 🐕',
+    wrongMsg: '🐶 is a well-known pet and 🏃 means RUNS. Decode together and try again!',
+  },
+  // L5 — two emojis, one legend hint
+  {
+    emojiSequence: ['☀️', '😊'],
+    legend: [{ emoji: '😊', word: 'HAPPY' }],
+    options: ['MOON SAD', 'RAIN COLD', 'SUN HAPPY', 'STAR BRIGHT'],
+    correctIndex: 2,
+    successMsg: '☀️😊 = SUN HAPPY! The sun makes us happy! 🌟',
+    wrongMsg: '☀️ shines in the sky — what is that bright object? Try again!',
+  },
+  // L6 — two emojis, one legend hint
+  {
+    emojiSequence: ['🍎', '🌳'],
+    legend: [{ emoji: '🌳', word: 'TREE' }],
+    options: ['ORANGE BUSH', 'APPLE TREE', 'BANANA VINE', 'CHERRY BUSH'],
+    correctIndex: 1,
+    successMsg: '🍎🌳 = APPLE TREE! You found it! 🌳',
+    wrongMsg: '🍎 is a red fruit — what is it called? Try again!',
+  },
+  // L7 — three emojis, NO legend
+  {
+    emojiSequence: ['🐸', '🌿', '💧'],
+    legend: null,
+    options: ['FROG ON LEAF IN RAIN', 'FISH IN WATER', 'BIRD ON TREE', 'BUG IN GRASS'],
+    correctIndex: 0,
+    successMsg: '🐸🌿💧 = FROG ON LEAF IN RAIN! Incredible decoding! 🐸',
+    wrongMsg: 'No hints this time! 🐸 = frog, 🌿 = leaf/plant, 💧 = water/rain. Try again!',
+  },
+  // L8 — three emojis, NO legend
+  {
+    emojiSequence: ['🚀', '⭐', '🌌'],
+    legend: null,
+    options: ['ROCKET TO THE STARS IN SPACE', 'CAR ON THE ROAD', 'BOAT ON THE SEA', 'PLANE IN THE CLOUDS'],
+    correctIndex: 0,
+    successMsg: '🚀⭐🌌 = ROCKET TO THE STARS IN SPACE! Superstar! 🚀',
+    wrongMsg: 'Think: 🚀 travels to ⭐ stars through 🌌 the galaxy. Try again!',
+  },
+  // L9 — three emojis, NO legend
+  {
+    emojiSequence: ['🎂', '🎁', '🎉'],
+    legend: null,
+    options: ['A SAD GOODBYE', 'A BIRTHDAY PARTY', 'A SCHOOL LESSON', 'A RAINY AFTERNOON'],
+    correctIndex: 1,
+    successMsg: '🎂🎁🎉 = A BIRTHDAY PARTY! What a celebration! 🎉',
+    wrongMsg: 'Cake, gifts, and confetti — what kind of event is that? Try again!',
+  },
+  // L10 — four emojis, NO legend, idiomatic
+  {
+    emojiSequence: ['💡', '📚', '🏆', '🌟'],
+    legend: null,
+    options: ['PLAYING GAMES ALL DAY', 'SMART STUDYING WINS GLORY', 'BUYING BOOKS AT A STORE', 'SLEEPING UNDER THE STARS'],
+    correctIndex: 1,
+    successMsg: '💡📚🏆🌟 = SMART STUDYING WINS GLORY! You are a Cipher Master! 🏆🌟',
+    wrongMsg: 'A lightbulb (idea/smart), books (studying), trophy (winning), star (glory). Try again!',
+  },
+];
+
+export const getEmojiCipherLevel = (level) => {
+  const prng = createPRNG(level * 613 + 7);
+  const levelData = EMOJI_CIPHER_LEVELS[level - 1];
+  // Shuffle options while tracking correct answer
+  const indexed = levelData.options.map((opt, i) => ({ opt, isCorrect: i === levelData.correctIndex }));
+  const shuffled = shuffleArray(indexed, prng);
+  const correctIndex = shuffled.findIndex(item => item.isCorrect);
+  return {
+    ...levelData,
+    options: shuffled.map(item => item.opt),
+    correctIndex,
+  };
+};

@@ -271,6 +271,8 @@
 .game-card.colormagic { border-color: var(--candy-purple); background: linear-gradient(145deg, var(--white) 60%, #f5eefb); }
 .game-card.fractions { border-color: var(--candy-orange); background: linear-gradient(145deg, var(--white) 60%, #fff8eb); }
 .game-card.globetrotter { border-color: var(--candy-teal); background: linear-gradient(145deg, var(--white) 60%, #e6fafc); }
+.game-card.weatherwiz   { border-color: #29b6f6; background: linear-gradient(145deg, var(--white) 60%, #e1f5fe); }
+.game-card.emojicipher  { border-color: #ffd54f; background: linear-gradient(145deg, var(--white) 60%, #fffde7); }
 
 .game-icon {
   font-size: 3.5rem;

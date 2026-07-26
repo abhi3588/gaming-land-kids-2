@@ -12,6 +12,8 @@ import WordSearchPuzzle from './WordSearchPuzzle.jsx';
 import PipeConnectorPuzzle from './PipeConnectorPuzzle.jsx';
 import CodingQuestPuzzle from './CodingQuestPuzzle.jsx';
 import ScaleBalancePuzzle from './ScaleBalancePuzzle.jsx';
+import WeatherWizardPuzzle from './WeatherWizardPuzzle.jsx';
+import EmojiCipherPuzzle from './EmojiCipherPuzzle.jsx';
 
 export const PUZZLE_CATEGORIES = [
   {
@@ -126,6 +128,22 @@ export const PUZZLE_CATEGORIES = [
     ageRange: '4–9',
     desc: 'Find the right weight or emoji to balance the scales perfectly!',
   },
+  {
+    id: 'weather-wizard',
+    title: 'Weather Wizard',
+    icon: '🌦️',
+    color: 'weatherwiz',
+    ageRange: '4–9',
+    desc: 'Dress for the weather! Match the perfect outfit to every sky!',
+  },
+  {
+    id: 'emoji-cipher',
+    title: 'Emoji Cipher',
+    icon: '🔤',
+    color: 'emojicipher',
+    ageRange: '5–10',
+    desc: 'Crack the code! Decode emoji sequences to reveal secret words!',
+  },
 ];
 
 export const PUZZLE_DATA = {
@@ -212,5 +230,17 @@ export const PUZZLE_DATA = {
     completionEmoji: '⚖️',
     completionMessage: 'Balance Champion! You matched every weight perfectly!',
     component: ScaleBalancePuzzle,
+  },
+  'weather-wizard': {
+    title: 'Weather Wizard',
+    completionEmoji: '🌦️',
+    completionMessage: 'Weather Wizard! You dressed perfectly for every forecast!',
+    component: WeatherWizardPuzzle,
+  },
+  'emoji-cipher': {
+    title: 'Emoji Cipher',
+    completionEmoji: '🔤',
+    completionMessage: 'Cipher Master! You decoded every secret emoji message!',
+    component: EmojiCipherPuzzle,
   },
 };
