@@ -112,6 +112,22 @@ export const QUIZ_CATEGORIES = [
     color: 'counting',
     desc: 'Who invented the light bulb or telephone? Test your invention knowledge!',
     ageRange: '5–10'
+  },
+  {
+    id: 'musical-instruments',
+    title: 'Musical Instruments',
+    icon: '🎵',
+    color: 'word',
+    desc: 'From drums to pianos, can you name all these instruments?',
+    ageRange: '3–9'
+  },
+  {
+    id: 'good-habits',
+    title: 'Good Habits & Hygiene',
+    icon: '🧼',
+    color: 'counting',
+    desc: 'Learn daily good habits from brushing teeth to washing hands!',
+    ageRange: '3–8'
   }
 ];
 

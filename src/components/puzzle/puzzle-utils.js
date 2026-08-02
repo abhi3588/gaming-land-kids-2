@@ -1123,3 +1123,376 @@ export const getEmojiCipherLevel = (level) => {
     correctIndex,
   };
 };
+
+// ===== Constellation Finder =====
+const CONSTELLATION_LEVELS = [
+  // L1 - Triangle (3 stars)
+  {
+    constellationName: "Triangle Constellation",
+    emoji: "📐",
+    hint: "Connect stars 1, 2, 3 to form a bright celestial triangle!",
+    stars: [
+      { id: 1, x: 160, y: 70 },
+      { id: 2, x: 80, y: 230 },
+      { id: 3, x: 240, y: 230 },
+    ],
+    successMsg: "Fantastic! You revealed the celestial Triangle! 📐✨",
+  },
+  // L2 - Little Dipper Handle (4 stars)
+  {
+    constellationName: "Little Dipper Handle",
+    emoji: "🌟",
+    hint: "Connect stars 1 to 4 along the tail of the Little Bear!",
+    stars: [
+      { id: 1, x: 60, y: 100 },
+      { id: 2, x: 120, y: 130 },
+      { id: 3, x: 180, y: 160 },
+      { id: 4, x: 240, y: 220 },
+    ],
+    successMsg: "Wonderful! You tracked the Little Dipper's handle! 🌟✨",
+  },
+  // L3 - Cassiopeia (5 stars)
+  {
+    constellationName: "Cassiopeia's W",
+    emoji: "👑",
+    hint: "Connect stars 1 to 5 to form Queen Cassiopeia's starry crown W!",
+    stars: [
+      { id: 1, x: 50, y: 100 },
+      { id: 2, x: 110, y: 220 },
+      { id: 3, x: 160, y: 130 },
+      { id: 4, x: 220, y: 240 },
+      { id: 5, x: 270, y: 110 },
+    ],
+    successMsg: "Majestic! Cassiopeia's Crown shines brightly! 👑✨",
+  },
+  // L4 - Orion's Belt & Sword (5 stars)
+  {
+    constellationName: "Orion's Belt",
+    emoji: "🏹",
+    hint: "Connect stars 1 to 5 to align Orion the Hunter's belt & sword!",
+    stars: [
+      { id: 1, x: 70, y: 160 },
+      { id: 2, x: 150, y: 160 },
+      { id: 3, x: 230, y: 160 },
+      { id: 4, x: 150, y: 210 },
+      { id: 5, x: 150, y: 260 },
+    ],
+    successMsg: "Bullseye! Orion's Belt is completely connected! 🏹✨",
+  },
+  // L5 - Northern Cross / Cygnus (6 stars)
+  {
+    constellationName: "Cygnus the Swan",
+    emoji: "🦢",
+    hint: "Connect stars 1 to 6 to outline Cygnus soaring through the Milky Way!",
+    stars: [
+      { id: 1, x: 160, y: 50 },
+      { id: 2, x: 160, y: 130 },
+      { id: 3, x: 60, y: 130 },
+      { id: 4, x: 260, y: 130 },
+      { id: 5, x: 160, y: 210 },
+      { id: 6, x: 160, y: 270 },
+    ],
+    successMsg: "Graceful! Cygnus the Swan spreads its wings! 🦢✨",
+  },
+  // L6 - Big Dipper (7 stars)
+  {
+    constellationName: "The Big Dipper",
+    emoji: "🐻",
+    hint: "Connect stars 1 to 7 to form the famous Great Bear scoop!",
+    stars: [
+      { id: 1, x: 40, y: 100 },
+      { id: 2, x: 90, y: 130 },
+      { id: 3, x: 140, y: 150 },
+      { id: 4, x: 180, y: 200 },
+      { id: 5, x: 180, y: 260 },
+      { id: 6, x: 270, y: 260 },
+      { id: 7, x: 270, y: 200 },
+    ],
+    successMsg: "Superb! The Big Dipper is glowing in the night sky! 🐻✨",
+  },
+  // L7 - Scorpius (8 stars)
+  {
+    constellationName: "Scorpius the Scorpion",
+    emoji: "🦂",
+    hint: "Connect stars 1 to 8 to trace the curving tail of Scorpius!",
+    stars: [
+      { id: 1, x: 240, y: 60 },
+      { id: 2, x: 200, y: 100 },
+      { id: 3, x: 180, y: 150 },
+      { id: 4, x: 160, y: 200 },
+      { id: 5, x: 120, y: 240 },
+      { id: 6, x: 70, y: 230 },
+      { id: 7, x: 60, y: 180 },
+      { id: 8, x: 90, y: 150 },
+    ],
+    successMsg: "Stunning! The Scorpion's tail is fully illuminated! 🦂✨",
+  },
+  // L8 - Pegasus Square (8 stars)
+  {
+    constellationName: "Pegasus Great Square",
+    emoji: "🐴",
+    hint: "Connect stars 1 to 8 to build the Great Square of Pegasus!",
+    stars: [
+      { id: 1, x: 80, y: 80 },
+      { id: 2, x: 240, y: 80 },
+      { id: 3, x: 240, y: 220 },
+      { id: 4, x: 80, y: 220 },
+      { id: 5, x: 80, y: 80 },
+      { id: 6, x: 40, y: 270 },
+      { id: 7, x: 280, y: 270 },
+      { id: 8, x: 280, y: 40 },
+    ],
+    successMsg: "Legendary! Pegasus taking flight among the stars! 🐴✨",
+  },
+  // L9 - Leo the Lion (9 stars)
+  {
+    constellationName: "Leo the Lion",
+    emoji: "🦁",
+    hint: "Connect stars 1 to 9 to draw Leo's majestic mane and body!",
+    stars: [
+      { id: 1, x: 250, y: 80 },
+      { id: 2, x: 220, y: 50 },
+      { id: 3, x: 170, y: 70 },
+      { id: 4, x: 180, y: 130 },
+      { id: 5, x: 240, y: 140 },
+      { id: 6, x: 120, y: 150 },
+      { id: 7, x: 60, y: 220 },
+      { id: 8, x: 140, y: 220 },
+      { id: 9, x: 180, y: 130 },
+    ],
+    successMsg: "Roaring success! Leo the Lion shines in glory! 🦁✨",
+  },
+  // L10 - Draco the Dragon (10 stars)
+  {
+    constellationName: "Draco the Dragon",
+    emoji: "🐉",
+    hint: "Connect all 10 stars to unlock the ancient Dragon of the North Pole!",
+    stars: [
+      { id: 1, x: 270, y: 60 },
+      { id: 2, x: 230, y: 40 },
+      { id: 3, x: 200, y: 80 },
+      { id: 4, x: 230, y: 110 },
+      { id: 5, x: 170, y: 130 },
+      { id: 6, x: 120, y: 110 },
+      { id: 7, x: 90, y: 160 },
+      { id: 8, x: 130, y: 210 },
+      { id: 9, x: 190, y: 230 },
+      { id: 10, x: 250, y: 260 },
+    ],
+    successMsg: "UNBELIEVABLE! You mastered Draco the Celestial Dragon! 🐉✨",
+  },
+];
+
+export const getConstellationLevel = (level) => {
+  const prng = createPRNG(level * 701 + 11);
+  const baseData = CONSTELLATION_LEVELS[level - 1];
+  
+  // Generate 6 ambient background stars
+  const ambientStars = Array.from({ length: 6 }, () => ({
+    x: Math.floor(prng() * 280 + 20),
+    y: Math.floor(prng() * 280 + 20),
+    r: Number((prng() * 1.5 + 1).toFixed(1)),
+    opacity: Number((prng() * 0.5 + 0.3).toFixed(2)),
+  }));
+
+  return {
+    ...baseData,
+    ambientStars,
+  };
+};
+
+// ===== Gear Gears =====
+const GEAR_LEVELS = [
+  // L1
+  {
+    question: "Gear A turns CLOCKWISE (➡️). Which way will Gear B turn?",
+    gears: [
+      { x: 100, y: 80, r: 40, label: "A (cw)", color: "#ff7043", dir: "cw" },
+      { x: 180, y: 80, r: 40, label: "B (?)", color: "#42a5f5", dir: "ccw" },
+    ],
+    options: [
+      { emoji: "🔄", label: "Counter-Clockwise (⬅️)" },
+      { emoji: "🔁", label: "Clockwise (➡️)" },
+      { emoji: "⏹️", label: "It Won't Move" },
+      { emoji: "⬆️", label: "Straight Up" },
+    ],
+    correctIndex: 0,
+    successMsg: "Correct! Adjacent meshed gears always turn in OPPOSITE directions! ⚙️",
+    wrongMsg: "Remember: when teeth mesh together, one gear pushes the other in reverse! Try again.",
+  },
+  // L2
+  {
+    question: "Gear A turns COUNTER-CLOCKWISE (⬅️). Which way will Gear B turn?",
+    gears: [
+      { x: 100, y: 80, r: 40, label: "A (ccw)", color: "#ab47bc", dir: "ccw" },
+      { x: 180, y: 80, r: 40, label: "B (?)", color: "#26a69a", dir: "cw" },
+    ],
+    options: [
+      { emoji: "🔁", label: "Clockwise (➡️)" },
+      { emoji: "🔄", label: "Counter-Clockwise (⬅️)" },
+      { emoji: "⏹️", label: "Stays Still" },
+      { emoji: "⬇️", label: "Straight Down" },
+    ],
+    correctIndex: 0,
+    successMsg: "Spot on! If Gear A goes left, Gear B must go right! ⚙️",
+    wrongMsg: "Opposites attract! Left-turning gear pushes right-turning gear. Try again.",
+  },
+  // L3
+  {
+    question: "Gear A turns CLOCKWISE (➡️). Which way will the last gear C turn?",
+    gears: [
+      { x: 70, y: 80, r: 35, label: "A (cw)", color: "#ef5350", dir: "cw" },
+      { x: 140, y: 80, r: 35, label: "B", color: "#ffa726", dir: "ccw" },
+      { x: 210, y: 80, r: 35, label: "C (?)", color: "#66bb6a", dir: "cw" },
+    ],
+    options: [
+      { emoji: "🔁", label: "Clockwise (➡️)" },
+      { emoji: "🔄", label: "Counter-Clockwise (⬅️)" },
+      { emoji: "⏹️", label: "No Motion" },
+      { emoji: "↔️", label: "Wobble Back & Forth" },
+    ],
+    correctIndex: 0,
+    successMsg: "Genius! With 3 gears in a row, Gear 1 & Gear 3 turn in the SAME direction! ⚙️",
+    wrongMsg: "Trace A -> B (opposite) -> C (opposite again!). Try again.",
+  },
+  // L4
+  {
+    question: "Gear A (cw) drives B, which drives C. Which direction does Gear C turn?",
+    gears: [
+      { x: 70, y: 80, r: 35, label: "A", color: "#8d6e63", dir: "cw" },
+      { x: 140, y: 80, r: 35, label: "B", color: "#26c6da", dir: "ccw" },
+      { x: 210, y: 80, r: 35, label: "C (?)", color: "#ec407a", dir: "cw" },
+    ],
+    options: [
+      { emoji: "🔁", label: "Clockwise (➡️)" },
+      { emoji: "🔄", label: "Counter-Clockwise (⬅️)" },
+      { emoji: "⏹️", label: "Locked" },
+      { emoji: "🔀", label: "Randomly" },
+    ],
+    correctIndex: 0,
+    successMsg: "Brilliant! An odd number of gears in a chain means start & end spin together! ⚙️",
+    wrongMsg: "A is CW ➡️ B is CCW ⬅️ C is CW ➡️! Try again.",
+  },
+  // L5
+  {
+    question: "4 gears in a row! A turns CLOCKWISE (➡️). Which way does Gear D turn?",
+    gears: [
+      { x: 50, y: 80, r: 30, label: "A (cw)", color: "#78909c", dir: "cw" },
+      { x: 110, y: 80, r: 30, label: "B", color: "#5c6bc0", dir: "ccw" },
+      { x: 170, y: 80, r: 30, label: "C", color: "#26a69a", dir: "cw" },
+      { x: 230, y: 80, r: 30, label: "D (?)", color: "#ffca28", dir: "ccw" },
+    ],
+    options: [
+      { emoji: "🔄", label: "Counter-Clockwise (⬅️)" },
+      { emoji: "🔁", label: "Clockwise (➡️)" },
+      { emoji: "⏹️", label: "Stuck" },
+      { emoji: "🔄🔁", label: "Both Ways" },
+    ],
+    correctIndex: 0,
+    successMsg: "Fantastic! 4 gears (even number) flips the end gear direction! ⚙️",
+    wrongMsg: "Odd count = same direction; Even count = opposite direction! Try again.",
+  },
+  // L6
+  {
+    question: "BIG Gear A turns 1 full spin. SMALL Gear B is half its size. How many spins does B make?",
+    gears: [
+      { x: 100, y: 80, r: 45, label: "A (Big)", color: "#ff7043", dir: "cw" },
+      { x: 170, y: 80, r: 25, label: "B (Small)", color: "#29b6f6", dir: "ccw" },
+    ],
+    options: [
+      { emoji: "2️⃣", label: "2 Full Spins" },
+      { emoji: "1️⃣", label: "1 Full Spin" },
+      { emoji: "0️⃣", label: "Half a Spin" },
+      { emoji: "4️⃣", label: "4 Full Spins" },
+    ],
+    correctIndex: 0,
+    successMsg: "Super mechanical logic! Small gear has half as many teeth, so it spins TWICE as fast! ⚙️⚡",
+    wrongMsg: "Smaller gears have fewer teeth, so they must turn FASTER to keep up! Try again.",
+  },
+  // L7
+  {
+    question: "SMALL Gear A makes 2 spins. BIG Gear B is twice its size. How many spins does B make?",
+    gears: [
+      { x: 90, y: 80, r: 25, label: "A (Small)", color: "#66bb6a", dir: "cw" },
+      { x: 160, y: 80, r: 45, label: "B (Big)", color: "#ab47bc", dir: "ccw" },
+    ],
+    options: [
+      { emoji: "1️⃣", label: "1 Full Spin" },
+      { emoji: "2️⃣", label: "2 Full Spins" },
+      { emoji: "4️⃣", label: "4 Full Spins" },
+      { emoji: "0️⃣", label: "Zero Spins" },
+    ],
+    correctIndex: 0,
+    successMsg: "Nailed it! Big gear takes twice as long, so 2 small spins = 1 big spin! ⚙️",
+    wrongMsg: "Larger gear takes more teeth to rotate around once. Think slower and try again!",
+  },
+  // L8
+  {
+    question: "Gear A turns CCW (⬅️). Gear B is above A. Which way does B turn?",
+    gears: [
+      { x: 150, y: 110, r: 35, label: "A (ccw)", color: "#ef5350", dir: "ccw" },
+      { x: 150, y: 45, r: 35, label: "B (?)", color: "#ffa726", dir: "cw" },
+    ],
+    options: [
+      { emoji: "🔁", label: "Clockwise (➡️)" },
+      { emoji: "🔄", label: "Counter-Clockwise (⬅️)" },
+      { emoji: "⏹️", label: "No Movement" },
+      { emoji: "⬆️", label: "Moves Upwards" },
+    ],
+    correctIndex: 0,
+    successMsg: "Awesome! Vertical gear stacks work the exact same way — opposite direction! ⚙️",
+    wrongMsg: "Direction flipping applies whether gears are side-by-side or stacked vertically! Try again.",
+  },
+  // L9
+  {
+    question: "3 gears in a triangle mesh: A touches B, B touches C, C touches A! What happens when A turns?",
+    gears: [
+      { x: 100, y: 110, r: 30, label: "A", color: "#26c6da", dir: "cw" },
+      { x: 180, y: 110, r: 30, label: "B", color: "#ab47bc", dir: "ccw" },
+      { x: 140, y: 50, r: 30, label: "C", color: "#ff7043", dir: "cw" },
+    ],
+    options: [
+      { emoji: "🔒", label: "The Gears JAM & Lock Up!" },
+      { emoji: "🚀", label: "They Spin Super Fast" },
+      { emoji: "🔁", label: "All Spin Clockwise" },
+      { emoji: "🔄", label: "All Spin Counter-Clockwise" },
+    ],
+    correctIndex: 0,
+    successMsg: "WOW! You spotted the gear lock! An odd ring of 3 meshed gears locks up solid! 🔒⚙️",
+    wrongMsg: "Trace A (CW) -> B (CCW) -> C (CW). But A and C touch each other too! What happens when two CW gears touch? Try again!",
+  },
+  // L10
+  {
+    question: "MASTER ENGINEER: 5-gear chain (A, B, C, D, E). Gear A turns CLOCKWISE. Which way does E turn?",
+    gears: [
+      { x: 40, y: 80, r: 25, label: "A", color: "#ef5350", dir: "cw" },
+      { x: 90, y: 80, r: 25, label: "B", color: "#ffa726", dir: "ccw" },
+      { x: 140, y: 80, r: 25, label: "C", color: "#66bb6a", dir: "cw" },
+      { x: 190, y: 80, r: 25, label: "D", color: "#42a5f5", dir: "ccw" },
+      { x: 240, y: 80, r: 25, label: "E (?)", color: "#ab47bc", dir: "cw" },
+    ],
+    options: [
+      { emoji: "🔁", label: "Clockwise (➡️)" },
+      { emoji: "🔄", label: "Counter-Clockwise (⬅️)" },
+      { emoji: "🔒", label: "System Locks Up" },
+      { emoji: "⏹️", label: "Stops at D" },
+    ],
+    correctIndex: 0,
+    successMsg: "MASTER ENGINEER UNLOCKED! 5 gears (odd) = Gear 1 and 5 spin in the EXACT SAME direction! ⚙️🏆🌟",
+    wrongMsg: "Count the flips: 1 (CW) -> 2 (CCW) -> 3 (CW) -> 4 (CCW) -> 5 (?); try again!",
+  },
+];
+
+export const getGearGearsLevel = (level) => {
+  const prng = createPRNG(level * 823 + 19);
+  const baseData = GEAR_LEVELS[level - 1];
+  const indexed = baseData.options.map((opt, i) => ({ opt, isCorrect: i === baseData.correctIndex }));
+  const shuffled = shuffleArray(indexed, prng);
+  const correctIndex = shuffled.findIndex(item => item.isCorrect);
+
+  return {
+    ...baseData,
+    options: shuffled.map(item => item.opt),
+    correctIndex,
+  };
+};

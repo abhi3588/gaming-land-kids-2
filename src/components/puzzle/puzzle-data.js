@@ -14,6 +14,8 @@ import CodingQuestPuzzle from './CodingQuestPuzzle.jsx';
 import ScaleBalancePuzzle from './ScaleBalancePuzzle.jsx';
 import WeatherWizardPuzzle from './WeatherWizardPuzzle.jsx';
 import EmojiCipherPuzzle from './EmojiCipherPuzzle.jsx';
+import ConstellationFinderPuzzle from './ConstellationFinderPuzzle.jsx';
+import GearGearsPuzzle from './GearGearsPuzzle.jsx';
 
 export const PUZZLE_CATEGORIES = [
   {
@@ -144,6 +146,22 @@ export const PUZZLE_CATEGORIES = [
     ageRange: '5–10',
     desc: 'Crack the code! Decode emoji sequences to reveal secret words!',
   },
+  {
+    id: 'constellation-finder',
+    title: 'Constellation Finder',
+    icon: '✨',
+    color: 'constellation',
+    ageRange: '4–10',
+    desc: 'Connect glowing stars in sequence to uncover magical night constellations!',
+  },
+  {
+    id: 'gear-gears',
+    title: 'Gear Gears',
+    icon: '⚙️',
+    color: 'geargears',
+    ageRange: '5–10',
+    desc: 'Master mechanical logic! Trace spinning meshed gears to solve mechanical puzzles!',
+  },
 ];
 
 export const PUZZLE_DATA = {
@@ -242,5 +260,17 @@ export const PUZZLE_DATA = {
     completionEmoji: '🔤',
     completionMessage: 'Cipher Master! You decoded every secret emoji message!',
     component: EmojiCipherPuzzle,
+  },
+  'constellation-finder': {
+    title: 'Constellation Finder',
+    completionEmoji: '✨',
+    completionMessage: 'Stargazer Champion! You revealed all 10 night sky constellations!',
+    component: ConstellationFinderPuzzle,
+  },
+  'gear-gears': {
+    title: 'Gear Gears',
+    completionEmoji: '⚙️',
+    completionMessage: 'Master Mechanical Engineer! You solved every gear puzzle perfectly!',
+    component: GearGearsPuzzle,
   },
 };

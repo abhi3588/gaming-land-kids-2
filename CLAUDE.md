@@ -187,6 +187,8 @@ gradient background**. Rules live in two places:
     level data from `getCodingQuestLevel` (grid grows 3x3→5x5).
   - **Scale Balance** (`ScaleBalancePuzzle.jsx`) — find the right item or weight to balance a scale;
     level data from `getScaleBalanceLevel` (emoji counting/fruit matching → mathematical weights).
+  - **Constellation Finder** (`ConstellationFinderPuzzle.jsx`) — connect glowing stars in sequence (3→10 stars across 10 levels) to reveal starry constellations; level data from `getConstellationLevel` in `puzzle-utils.js`.
+  - **Gear Gears** (`GearGearsPuzzle.jsx`) — master mechanical logic by tracing meshed gear rotations and gear speeds across 10 levels; level data from `getGearGearsLevel` in `puzzle-utils.js`.
 
 > **Puzzle Rules (distinct from the Game Rules Contract):** every puzzle has **exactly 10 levels**
 > (`TOTAL_LEVELS = 10` in `puzzle-utils.js`), not 20. Each level's data must be **unique and
