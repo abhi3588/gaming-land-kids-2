@@ -10,6 +10,8 @@ import MagnetMagic from './components/educational/science/MagnetMagic.jsx';
 import StatesOfMatter from './components/educational/science/StatesOfMatter.jsx';
 import FoodChainConnect from './components/educational/science/FoodChainConnect.jsx';
 import FloatOrSink from './components/educational/science/FloatOrSink.jsx';
+import AnimalSoundsLab from './components/educational/science/AnimalSoundsLab.jsx';
+import GreenEnergyHero from './components/educational/science/GreenEnergyHero.jsx';
 import TruthDetective from './components/educational/moral/TruthDetective.jsx';
 import KindnessHelper from './components/educational/moral/KindnessHelper.jsx';
 import RespectRanger from './components/educational/moral/RespectRanger.jsx';
@@ -18,6 +20,8 @@ import HonestyHero from './components/educational/moral/HonestyHero.jsx';
 import GratitudeGarden from './components/educational/moral/GratitudeGarden.jsx';
 import SharingCaring from './components/educational/moral/SharingCaring.jsx';
 import CooperationCaptain from './components/educational/moral/CooperationCaptain.jsx';
+import EmpathyExplorer from './components/educational/moral/EmpathyExplorer.jsx';
+import PeaceCaptain from './components/educational/moral/PeaceCaptain.jsx';
 import HelperMatching from './components/educational/moral/HelperMatching.jsx';
 import EmotionMatcher from './components/educational/moral/EmotionMatcher.jsx';
 
@@ -385,6 +389,24 @@ export const scienceActivities = [
     ageRange: '3-10',
     desc: 'Drop cute toys into a water tub and guess if they float or sink!',
     component: FloatOrSink
+  },
+  {
+    id: 'animal-sounds-lab',
+    title: 'Animal Sounds Lab',
+    icon: '🔊',
+    color: 'sky',
+    ageRange: '3-10',
+    desc: 'Identify how animals use barks, hoots, and clicks to communicate!',
+    component: AnimalSoundsLab
+  },
+  {
+    id: 'green-energy-hero',
+    title: 'Green Energy Hero',
+    icon: '🌱',
+    color: 'garden',
+    ageRange: '4-10',
+    desc: 'Harness solar, wind, and hydro power to protect planet Earth!',
+    component: GreenEnergyHero
   }
 ];
 
@@ -474,11 +496,29 @@ export const moralActivities = [
   {
     id: 'emotion-matcher',
     title: 'Emotion Matcher',
-    icon: '😊',
+    icon: '🎭',
     color: 'word',
     ageRange: '3-10',
     desc: 'Help your animal friends match their emotions to the situation!',
     component: EmotionMatcher
+  },
+  {
+    id: 'empathy-explorer',
+    title: 'Empathy Explorer',
+    icon: '💖',
+    color: 'patterns',
+    ageRange: '3-10',
+    desc: 'Practice understanding feelings and cheering up friends!',
+    component: EmpathyExplorer
+  },
+  {
+    id: 'peace-captain',
+    title: 'Peace Captain',
+    icon: '🕊️',
+    color: 'sorting',
+    ageRange: '4-10',
+    desc: 'Learn peaceful conflict resolution and fair teamwork!',
+    component: PeaceCaptain
   }
 ];
 

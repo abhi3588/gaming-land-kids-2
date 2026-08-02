@@ -81,7 +81,7 @@ src/
     rhymes/         RhymesTab, VideoPlayer
     fun/            FunTab
     educational/    EducationalTab, ScienceTab, MoralTab,
-                    science/*.jsx (6), moral/*.jsx (6)
+                    science/*.jsx (12), moral/*.jsx (12)
     quiz/           QuizTab, QuizActivity, quiz-data.js
     puzzle/         PuzzleTab, puzzle-data.js, puzzle-utils.js,
                     JigsawPuzzle, SlidePuzzle, ConnectDotsPuzzle,
